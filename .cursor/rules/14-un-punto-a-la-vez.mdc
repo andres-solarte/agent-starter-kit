@@ -1,0 +1,51 @@
+# Un punto a la vez (carga del agente)
+
+En proyectos multi-repo o multi-módulo, **no** acometer un bloque entero (DB + varias APIs + varias UIs + tests) en un solo turno. Trabajar **un punto concreto**, cerrarlo o dejarlo verificable, y recién entonces el siguiente.
+
+**Subagentes:** el rol líder **siempre** delega el punto a subagente(s); el ahorro de tokens viene del **scope chico**, no de omitir roles.
+
+## Qué es "un punto"
+
+Un entregable acotado, por ejemplo:
+
+- una migración / seed
+- un motor o servicio compartido
+- **una** API (o un endpoint)
+- **una** superficie UI
+- un paquete de un solo dominio (ej. emails, notificaciones)
+- verify/smoke de lo tocado
+
+No mezclar "y de paso" el resto del plan en el mismo turno.
+
+## Cómo ejecutar
+
+1. Nombrar al inicio el **único** punto del turno (una frase).
+2. Ejecutar ese punto con **subagente(s)** de rol/skill — **siempre**, no improvisar monolítico.
+3. Scope del subagente = **solo ese punto** (prompt corto: rutas, contrato, done-when). Prohibido pegar el plan entero del bloque.
+4. En paralelo solo si son subtareas **independientes del mismo punto**; no abrir varias superficies grandes a la vez.
+5. Al terminar: 2–4 frases (qué quedó) + **un** siguiente punto sugerido.
+6. Si el plan del bloque tiene N pasos → N turnos; cada turno = 1 punto + subagente(s) acotados.
+
+## Subagentes — menos tokens en exploración
+
+1. **Preferir implementar** con prompt cerrado (rutas, contrato, done-when). No pedir "explora el repo entero".
+2. Si hace falta contexto: el rol líder hace 1–3 greps/reads **acotados** y **pasa paths concretos** al subagente. El subagente no redescubre lo ya conocido.
+3. Explore: solo si no se sabe dónde está algo. Usar thoroughness **`quick`** por defecto; `medium` solo si quick falló; **nunca `very thorough`** en un punto de entrega.
+4. Un explore = **una pregunta**, no "mapa completo del dominio".
+5. No lanzar explore + implement en paralelo sobre el mismo área (doble lectura).
+6. Prompt del subagente: ≤ ~15–25 líneas útiles. Enlaces a archivos existentes > pegar plan del bloque.
+
+## Qué evitar (caro en tokens)
+
+- Releer transcript/JSONL completo "por si acaso"
+- Un solo subagente que porte varias APIs + varias UIs
+- Prompts enormes con todo el plan del bloque
+- Re-explorar el repo cuando ya hay rutas conocidas
+- Varios `Task` "very thorough" en paralelo para dominios distintos
+- Explore "very thorough" como primer paso de un punto ya acotado
+
+## Relación con otras reglas
+
+- Fuera de alcance / aparcar → regla `09-foco-alcance` + skill `backlog`
+- Tras código → verificar el stack local **solo sobre lo tocado en este punto** (definir regla propia del proyecto, ver `13-verificar-apps-tras-cambios.mdc` de Marketplace-Repuestos como referencia)
+- Plan multi-paso: el plan puede listar varios pasos; la **ejecución** sigue siendo un punto por turno tras el «sí»

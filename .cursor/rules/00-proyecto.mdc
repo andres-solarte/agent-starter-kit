@@ -1,0 +1,16 @@
+# {{PROJECT_NAME}}
+
+{{Descripción corta del producto y su alcance actual (MVP, módulos, etc.)}}. Código en {{repos hermanos, si el proyecto es multi-repo}}.
+
+## Idioma
+
+- Código, commits, nombres técnicos y **rutas URL**: **{{idioma técnico, ej. inglés}}**
+- Comunicación con el usuario: **{{idioma de comunicación, ej. español}}**
+
+## Documentación
+
+→ SoT: `agent-knowledge/` (`AGENTS.md`, `knowledge/`)
+→ Proceso: `knowledge/delivery/PROCESS.md` · qué sigue: `knowledge/delivery/NEXT.md`
+→ Specs: `knowledge/delivery/specs/` · constitution: `knowledge/delivery/specify/memory/constitution.md`
+
+Sin commits ni PRs salvo que el usuario lo pida explícitamente.

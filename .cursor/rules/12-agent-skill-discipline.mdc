@@ -1,0 +1,29 @@
+# Entrada de usuario + disciplina de skills
+
+## Para el usuario
+
+| Slash | Para |
+|----|---|
+| `/requerimiento` | Trabajo de producto/código ahora |
+| `/backlog` | Aparcar idea sin cortar el foco |
+
+Si el proyecto tiene entorno local propio (Docker/PM2/etc.), sumar aquí sus slash commands siguiendo el mismo patrón (ej. `/bootstrap`, `/start-local`, `/stop-local`) y documentarlos en un skill `local-env-shared` propio del proyecto.
+
+- No pedirle al usuario que elija entre skills internos (`/speckit-*`, `/orquestar-*`, detalles de framework, etc.).
+- Esos skills son **agent-only** (`disable-model-invocation: true`); el orquestador los invoca.
+
+## Pack compartido (agentes)
+
+| Skill | Para |
+|----|---|
+| `agent-skill-discipline` | No improvisar; gaps; automejora |
+| `git-proyecto` | Commits, ramas, PRs, multi-repo |
+| `agent-knowledge` | Puntero a `agent-knowledge/AGENTS.md` |
+
+Si falta un compartido → `GAP DE SKILL` → crear/ampliar skill + actualizar la doc de roles del proyecto (si existe).
+
+## Disciplina
+
+- Todo procedimiento → skill existente (compartido o de rol).
+- No saber → declarar gap y mejorar el skill.
+- Detalle: `.cursor/skills/agent-skill-discipline/SKILL.md`

@@ -1,0 +1,38 @@
+# Comunicación con el usuario
+
+Prioridad: que el usuario **entienda a la primera** qué pasó y qué se pide.
+
+## Estilo (MUST)
+
+- Frases cortas. Una idea por frase.
+- Lenguaje cotidiano. Explica el *qué* sin asumir contexto.
+- **Habla menos.** Si basta con 2–3 frases, no escribas un informe.
+- Sé **concreto**: describe la acción real ("avisar al cliente cuando se confirma el pedido"), no la abstracción interna ("alinear la matriz del dominio de notificaciones").
+- Si nombras un documento o archivo, di **para qué sirve** en una frase; no uses solo el nombre o un código.
+
+## Prohibido en el chat (salvo que el usuario lo use primero)
+
+- Códigos internos sueltos (IDs de spec, de work item, de decisión, etc.)
+- Cadenas de IDs, emojis de estado (⏸️ 📋 🚧 ✅) y jerga de proceso interno ("tier normal", "verify bar", "run-next")
+- Remisiones vagas: "como dijimos en §2", "según el borrador" — di el contenido
+
+| Evitar | Preferir |
+|-----|----|
+| «Item-0056 aceptado · Decisión-0043 confirmada» | «Quedó acordado cómo funcionan los avisos.» |
+| «Ver §7 / celda confirmed» | «Cuando se confirma el pedido, el cliente no recibe correo.» |
+| «Siguiente: plan técnico prefs/defaults» | «Siguiente: diseñar cómo cada usuario activa o apaga sus avisos.» |
+
+Si hace falta dejar rastro técnico (ruta, ID), **después** de la frase clara, en una línea aparte o entre paréntesis — nunca como único mensaje.
+
+## Cierres de turno
+
+2–4 frases como máximo:
+
+1. Qué se hizo (en palabras normales).
+2. Qué queda pendiente (qué es, no su código).
+3. Un solo siguiente paso, si aplica.
+
+## Excepciones
+
+- Rutas, comandos y nombres de archivo cuando el usuario deba copiarlos o abrirlos.
+- Dentro de documentos técnicos internos, los IDs siguen siendo válidos.

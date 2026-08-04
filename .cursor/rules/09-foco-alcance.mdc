@@ -1,0 +1,28 @@
+# Foco de sesión — fuera de alcance
+
+Si el usuario pide o comenta algo **fuera del alcance** de la tarea actual, **no lo ejecutes**. Apárcalo y sigue con lo que está en curso.
+
+## Qué cuenta como fuera de alcance
+
+- Bug, feature o refactor no requerido para terminar el trabajo activo
+- "De paso…" / "después…" / idea paralela sin "hazlo ahora"
+- Cambio de tema no relacionado con el plan o ítem en curso
+
+## Qué hacer
+
+1. Seguir el skill **`backlog`** (`.cursor/skills/backlog/SKILL.md`): viñeta en [`.cursor/fuera-de-alcance.md`](.cursor/fuera-de-alcance.md).
+2. Acusar recibo en **una frase** (qué se aparcó).
+3. Continuar solo con la tarea en foco.
+4. No abrir PRs, no migrar, no "arreglo rápido" del lado.
+
+Si el usuario escribió `/backlog …`, aplicar ese skill de inmediato (mismo resultado).
+
+## Cuándo sí ejecutar de inmediato
+
+- El usuario dice explícitamente que lo haga **ahora** / en esta sesión
+- Es bloqueante para terminar la tarea actual
+- Es solo una aclaración o decisión sobre el trabajo en curso
+
+## Al cerrar o cuando lo pida
+
+Ofrecer revisar la lista aparcada o atacar un ítem concreto — no vaciarla sola.

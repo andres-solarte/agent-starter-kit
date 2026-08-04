@@ -1,0 +1,65 @@
+schema_version: 1
+repo: agent-knowledge
+locale_content: es
+locale_paths: en
+
+roots:
+  knowledge: knowledge
+  users: users
+  consolidation: consolidation
+
+agent:
+  entrypoints:
+    - AGENTS.md
+    - knowledge/architecture/agent-knowledge-operating-contract.md
+  max_index_lines: 200
+  write_policy:
+    knowledge: human_or_pr
+    users/knowledge: agent_delta_ok
+    users/work-log: agent_append_ok_local
+    consolidation: agent_ok_with_confirm
+
+users:
+  id_source: git_user_email
+  path_template: "users/{email}/"
+  # Directory name = lowercase email literally (keep "@"). No _at_ substitution.
+  email_dirname:
+    lowercase: true
+    keep_at: true
+  knowledge_mirror:
+    root: knowledge
+    delta_naming: same_basename
+    # same_point = path relative to knowledge/ including filename
+    relpaths:
+      - product
+      - decisions/business
+      - decisions/architecture
+      - domain
+      - design
+      - architecture
+      - conventions
+      - delivery/specs
+      - delivery/specify
+      - archive
+  deltas_index: DELTAS.md
+  identity_file: IDENTITY.md
+  # Tracked in git: knowledge/**, DELTAS.md, IDENTITY.md
+  # Local only (gitignore): work-log/**, MEMORY.md, preferences.md
+  work_log:
+    path: work-log
+    # Keep day files small: year / month / day
+    layout: "YYYY/MM/DD.md"
+    day_file_pattern: "YYYY/MM/DD.md"
+    index: INDEX.md
+    privacy: local_gitignore
+    required_fields:
+      - what
+      - why
+
+consolidation:
+  queue: consolidation/QUEUE.md
+  modes:
+    - promote
+    - merge
+    - discard
+  group_by: same_point
