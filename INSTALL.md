@@ -184,7 +184,7 @@ Same outcomes as the contracts. Uninstall = reverse the chosen pieces only (see 
 - [ ] Product `.cursor/` has `ask-*` skills; `00-project.mdc` filled
 - [ ] `agent-knowledge/` is a **separate** git repo (own remote when you add it)
 - [ ] User `preferences.yaml` set
-- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-install`, `/ask-update`, `/ask-uninstall` known
+- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall` known
 
 ## Contributing back to the kit
 

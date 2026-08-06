@@ -14,7 +14,7 @@ Does not include stack skills or `speckit-*` — those are added per project.
 ```text
 .cursor/
   rules/     — process rules
-  skills/    — ask-install, ask-update, ask-uninstall, ask-requirement, …
+  skills/    — ask-install, ask-update, ask-uninstall, ask-question, …
 agent-knowledge-template/
   — skeleton for a NEW product git repo (global + per-user memory)
 INSTALL.md   — dependency install + update contracts
@@ -41,6 +41,7 @@ INSTALL.md   — dependency install + update contracts
 | `/ask-install` | First-time wire-up (asks for directories) |
 | `/ask-update` | Pull kit + safe re-merge |
 | `/ask-uninstall` | Remove wiring (asks what to delete) |
+| `/ask-question` | Ask the framework (paths, how-to) |
 | `/ask-requirement` | Product work |
 | `/ask-backlog` | Park ideas |
 
