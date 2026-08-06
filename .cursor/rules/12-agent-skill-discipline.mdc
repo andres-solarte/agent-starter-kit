@@ -4,21 +4,22 @@
 
 | Slash | For |
 |-------|-----|
-| `/requirement` | Product/code work now |
-| `/backlog` | Park an idea without cutting focus |
+| `/ask-install` | Install this kit into the product workspace (see `INSTALL.md`) |
+| `/ask-requirement` | Product/code work now |
+| `/ask-backlog` | Park an idea without cutting focus |
 
-If the project has its own local environment (Docker/PM2/etc.), add its slash commands here following the same pattern (e.g. `/bootstrap`, `/start-local`, `/stop-local`) and document them in a project-owned `local-env-shared` skill.
+If the project has its own local environment (Docker/PM2/etc.), add its slash commands here following the same pattern with the `ask-` prefix (e.g. `/ask-bootstrap`, `/ask-start-local`, `/ask-stop-local`) and document them in a project-owned `ask-local-env-shared` skill.
 
-- Do not ask the user to choose among internal skills (`/speckit-*`, `/orchestrate-*`, framework details, etc.).
+- Do not ask the user to choose among internal skills (`/speckit-*`, `/ask-orchestrate-*`, framework details, etc.).
 - Those skills are **agent-only** (`disable-model-invocation: true`); the orchestrator invokes them.
 
 ## Shared pack (agents)
 
 | Skill | For |
 |-------|-----|
-| `agent-skill-discipline` | Do not improvise; gaps; self-improve |
-| `git-project` | Commits, branches, PRs, multi-repo |
-| `agent-knowledge` | Pointer to `agent-knowledge/AGENTS.md` |
+| `ask-agent-skill-discipline` | Do not improvise; gaps; self-improve |
+| `ask-git-project` | Commits, branches, PRs, multi-repo |
+| `ask-agent-knowledge` | Pointer to `agent-knowledge/AGENTS.md` |
 
 If a shared skill is missing → `SKILL GAP` → create/extend the skill + update the project's role docs (if any).
 
@@ -26,4 +27,4 @@ If a shared skill is missing → `SKILL GAP` → create/extend the skill + updat
 
 - Every procedure → an existing skill (shared or role).
 - Don't know → declare a gap and improve the skill.
-- Detail: `.cursor/skills/agent-skill-discipline/SKILL.md`
+- Detail: `.cursor/skills/ask-agent-skill-discipline/SKILL.md`

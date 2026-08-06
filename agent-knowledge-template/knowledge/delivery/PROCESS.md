@@ -16,8 +16,8 @@ What to resume: [NEXT.md](./NEXT.md).
 
 | Who | What |
 |-----|------|
-| Human | `/requirement` (work now) · `/backlog` (parked) |
-| Agents | `orchestrate-requirement` + role skills (agent-only) |
+| Human | `/ask-requirement` (work now) · `/ask-backlog` (parked) |
+| Agents | `ask-orchestrate-requirement` + role skills (agent-only) |
 
 Do not offer a Spec Kit skill menu to the user.
 

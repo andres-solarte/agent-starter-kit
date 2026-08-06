@@ -1,5 +1,5 @@
 ---
-name: git-project
+name: ask-git-project
 description: >-
   Shared Git practices for this project (single repo or sibling multi-repo
   layout). Use whenever committing, branching, opening PRs, staging, or
@@ -19,7 +19,7 @@ User/workspace commit safety rules still apply (no force-push to main, no amend 
 
 ## Shared skill — who loads it
 
-**Every** agent role MUST use this skill for any Git operation. It is part of the **shared pack** (see `agent-skill-discipline`).
+**Every** agent role MUST use this skill for any Git operation. It is part of the **shared pack** (see `ask-agent-skill-discipline`).
 
 ## Multi-repo layout (if applicable)
 
@@ -69,4 +69,4 @@ Run `git status` / `git diff` / commits **inside the repo that owns the files**.
 
 ## Gap / self-improve
 
-If a Git practice needed is not covered here → follow `agent-skill-discipline`: declare `SKILL GAP`, then create/amplify **this** skill (and update `agent-knowledge/knowledge/conventions/git.md` if the norm is project-wide).
+If a Git practice needed is not covered here → follow `ask-agent-skill-discipline`: declare `SKILL GAP`, then create/amplify **this** skill (and update `agent-knowledge/knowledge/conventions/git.md` if the norm is project-wide).

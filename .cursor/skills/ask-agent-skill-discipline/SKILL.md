@@ -1,5 +1,5 @@
 ---
-name: agent-skill-discipline
+name: ask-agent-skill-discipline
 description: >-
   Mandatory discipline for all project agents: every action must follow an
   existing project skill; shared skills (git, etc.) apply to every role; on
@@ -22,9 +22,9 @@ disable-model-invocation: true
 
 | Skill | Required when | Source / notes |
 |-------|---------------|----------------|
-| `agent-skill-discipline` | Always | This skill |
-| `git-project` | Any commit, branch, PR, stage, amend | `agent-knowledge/knowledge/conventions/git.md` (create if missing) |
-| `agent-knowledge` | Block close-out / recalling why | Pointer → `agent-knowledge/AGENTS.md` |
+| `ask-agent-skill-discipline` | Always | This skill |
+| `ask-git-project` | Any commit, branch, PR, stage, amend | `agent-knowledge/knowledge/conventions/git.md` (create if missing) |
+| `ask-agent-knowledge` | Block close-out / recalling why | Pointer → `agent-knowledge/AGENTS.md` |
 
 When delegating or acting, the orchestrator MUST remember the shared pack **plus** the role skill.
 
@@ -39,7 +39,7 @@ If a pack skill is missing (or a common practice not listed is discovered):
 
 | Question | If the answer is no |
 |----------|---------------------|
-| Is it Git? → did I load `git-project`? | Load or GAP + create |
+| Is it Git? → did I load `ask-git-project`? | Load or GAP + create |
 | Which role skill covers this? | Declare gap |
 | Did I already read the skill + sources? | Read first |
 | Am I inventing a step? | Stop; extend skill |
@@ -68,14 +68,14 @@ For **shared pack** gaps, prefer (a): the skill must exist for all agents.
 
 | Valid | Invalid |
 |-------|---------|
-| Create `git-project` / extend pack | Commit "my style" without skill |
+| Create `ask-git-project` / extend pack | Commit "my style" without skill |
 | Extend role skill + cite project source | Improvise unanchored conventions |
 | Declare gap in time | Stay silent and continue |
 | `npx skills find` only as a base | External skill overrides ADR/constitution |
 
 ## Orchestrator
 
-`orchestrate-requirement` MUST:
+`ask-orchestrate-requirement` MUST:
 
 1. Assume shared pack on every subtask.
 2. Assign **at least one role skill** (or Spec Kit) per subtask.

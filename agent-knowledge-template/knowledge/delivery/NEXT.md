@@ -16,4 +16,4 @@ Living. Update when closing or pausing a work block.
 | Active feature | (none) |
 | Last closed | — |
 | Paused | — |
-| Next step | Define the first requirement with `/requirement` |
+| Next step | Define the first requirement with `/ask-requirement` |

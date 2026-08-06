@@ -40,6 +40,6 @@ Identity: literal email (`users/<email>/`). See [users/README.md](./users/README
 ## How to maintain
 
 1. Deltas: same basename as global.
-2. Close-out via skill `agent-knowledge`.
+2. Close-out via skill `ask-agent-knowledge`.
 3. Consolidate only with confirmation.
 4. Wikilinks: normalize when touching ([WIKILINKS.md](./knowledge/WIKILINKS.md)).

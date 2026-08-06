@@ -1,5 +1,5 @@
 ---
-name: agent-knowledge
+name: ask-agent-knowledge
 description: >-
   Thin pointer to agent-knowledge/AGENTS.md (work-log, deltas, consolidation).
   Protocol SoT is that repo — not this skill file.

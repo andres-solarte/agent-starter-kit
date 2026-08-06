@@ -1,14 +1,14 @@
 ---
-name: requirement
+name: ask-requirement
 description: >-
   Single user entry for requesting work: describe the requirement, clarify in
   Q&A, then the orchestrator assigns and implements. Use when the user says
-  /requirement, wants a feature or fix, or starts with a product request.
+  /ask-requirement, wants a feature or fix, or starts with a product request.
 ---
 
-# /requirement — single entry (user)
+# /ask-requirement — single entry (user)
 
-You speak **only** with this skill. Other skills (Spec Kit, role skills, `orchestrate-requirement`, etc.) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
+You speak **only** with this skill. Other skills (Spec Kit, role skills, `ask-orchestrate-requirement`, etc.) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
 
 ## Flow (MUST)
 
@@ -27,7 +27,7 @@ If work is split into **several blocks**: **each block** repeats steps 4→5→6
 
 Take the user's text (`$ARGUMENTS` or the message). If empty, ask in one sentence: «What do you need?»
 
-Do not invent scope. Apply focus (rule `09`): park "while we're at it…" with skill **`backlog`** (`.cursor/skills/backlog/SKILL.md`).
+Do not invent scope. Apply focus (rule `09`): park "while we're at it…" with skill **`ask-backlog`** (`.cursor/skills/ask-backlog/SKILL.md`).
 
 ## Step 2 — Q&A (clarification session)
 
@@ -123,7 +123,7 @@ Do you accept the plan?
 
 ## Step 5 — Execute in loop until resolved
 
-After the plan is accepted, follow `.cursor/skills/orchestrate-requirement/SKILL.md` in **loop mode**:
+After the plan is accepted, follow `.cursor/skills/ask-orchestrate-requirement/SKILL.md` in **loop mode**:
 
 1. Execute the next plan step (delegate to the relevant role).
 2. Verify that step.
@@ -141,7 +141,7 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 
 ## MUST NOT (toward the user)
 
-- Ask them to run internal skills (`/speckit-*`, `/orchestrate-*`, etc.).
+- Ask them to run internal skills (`/speckit-*`, `/ask-orchestrate-*`, etc.).
 - Show a menu of internal skills.
 - Start code in step 2 or **without an accepted plan** (step 4).
 - Skip Q&A when there are real blockers.
@@ -149,7 +149,7 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 
 ## Internal references (agents)
 
-- Orchestration: `orchestrate-requirement`
-- Discipline: `agent-skill-discipline` + rule `12`
-- Git: `git-project`
+- Orchestration: `ask-orchestrate-requirement`
+- Discipline: `ask-agent-skill-discipline` + rule `12`
+- Git: `ask-git-project`
 - Roles / RACI / loop: project doc in `agent-knowledge/knowledge/architecture/agents/` (create if missing)

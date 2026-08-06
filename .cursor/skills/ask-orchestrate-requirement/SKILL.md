@@ -1,22 +1,22 @@
 ---
-name: orchestrate-requirement
+name: ask-orchestrate-requirement
 description: >-
   [agent-only] Tech Lead orchestration with tiering; usually started after
-  /requirement Q&A. Delegates to role skills. Not for end-user slash use.
+  /ask-requirement Q&A. Delegates to role skills. Not for end-user slash use.
 disable-model-invocation: true
 ---
 
 # Orchestrate requirement (Tech Lead)
 
-**Preferred user entry:** `/requirement` (Q&A first). This skill is **agent-only** (`disable-model-invocation`): it runs when `/requirement` chains to it or an agent reads it explicitly.
+**Preferred user entry:** `/ask-requirement` (Q&A first). This skill is **agent-only** (`disable-model-invocation`): it runs when `/ask-requirement` chains to it or an agent reads it explicitly.
 
 ## Shared pack reminder
 
-Every delegated role also follows shared skills: `agent-skill-discipline` + `git-project`. Role skill is **additional**, not a replacement.
+Every delegated role also follows shared skills: `ask-agent-skill-discipline` + `ask-git-project`. Role skill is **additional**, not a replacement.
 
 ## Mandatory companion skill
 
-MUST follow `.cursor/skills/agent-skill-discipline/SKILL.md` (do not improvise; declare gaps).
+MUST follow `.cursor/skills/ask-agent-skill-discipline/SKILL.md` (do not improvise; declare gaps).
 
 ## Source of truth
 
@@ -33,8 +33,8 @@ This skill is the **orchestrator procedure**. It does not replace Product for BD
 
 ## Experience (MUST)
 
-1. User provides a **requirement** via `/requirement` Q&A.
-2. **Execution plan gate** (from `/requirement` step 4): objective, steps, **agents/roles**, how each participates, **order**, done-when. **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
+1. User provides a **requirement** via `/ask-requirement` Q&A.
+2. **Execution plan gate** (from `/ask-requirement` step 4): objective, steps, **agents/roles**, how each participates, **order**, done-when. **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
 3. **Classify tier** (below); may appear *inside* the plan (not instead of it).
 4. Review scope, repos, risks (Step 0).
 5. Delegate in the **accepted order** (subagents and/or role skills).
@@ -53,7 +53,7 @@ Classify **before** coding. Default when unsure: **normal** (safer). User may ov
 
 | Tier | Use when **all** true (or user forces) | Path | Skip |
 |------|----------------------------------------|------|------|
-| **micro** | See criteria below | Orchestrate → role skill(s) → verify light → `git-project` if commit asked | Full Spec Kit |
+| **micro** | See criteria below | Orchestrate → role skill(s) → verify light → `ask-git-project` if commit asked | Full Spec Kit |
 | **normal** | Default for features | `git-feature` → specify → [clarify] → plan → tasks → analyze → implement | Shortcuts that skip specify/plan/tasks |
 | **ambiguous** | Scope/product unclear or needs BDR/ADR | Product / clarify / BDR draft **before** code | Implementation until resolved |
 
@@ -71,7 +71,7 @@ If any criterion fails → **normal** (or **ambiguous**).
 
 ### Normal — when to use
 
-- User asks for a feature (via `/requirement`).
+- User asks for a feature (via `/ask-requirement`).
 - New endpoint, schema change, multi-surface UI, new E2E journey.
 - Anything that should leave `knowledge/delivery/specs/NNN-*`.
 - Security/money/auth paths.
@@ -99,7 +99,7 @@ Path: (Spec Kit core / roles / stop for BDR)
 | In scope / accepted BDR? | Stop or hand to Product / open question — do not invent scope |
 | Needs new BDR/ADR? | Tier **ambiguous**; draft proposal; **do not** implement until accepted (or user says proceed) |
 | Which repos? | List explicitly |
-| Out of scope side ideas | Park via `/backlog` / `.cursor/out-of-scope.md` (rule 09) |
+| Out of scope side ideas | Park via `/ask-backlog` / `.cursor/out-of-scope.md` (rule 09) |
 | Schema change? | Plan MUST include **existing-data migration** (treat current rows as production) |
 
 Output a short **plan** before heavy work when tier is **normal** or **ambiguous** (unless user already said "execute / do it").
@@ -191,7 +191,7 @@ After any code change: verify boot/health of affected apps **before** declaring 
 
 1. Cite verification run.
 2. Update tracking item/progress when applicable.
-3. Commits: user ask or project auto-commit rule — one commit per sibling repo; `git-project`; no push unless asked.
+3. Commits: user ask or project auto-commit rule — one commit per sibling repo; `ask-git-project`; no push unless asked.
 4. Summary in the user's language: tier used, what shipped, what's left, one next step.
 
 ## MUST NOT

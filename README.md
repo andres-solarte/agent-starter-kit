@@ -4,17 +4,17 @@ Reusable process engine for coding agents (Cursor, Claude Code, etc.): skill dis
 
 Does not include stack skills or `speckit-*` — those are added per project.
 
-> Installation and adoption (new or existing project): **[ADOPTION.md](ADOPTION.md)**.
+> **Install into a product workspace:** clone this repo, add it as a workspace folder, then `/ask-install` (or ask in plain language). Full guide: **[INSTALL.md](INSTALL.md)**.
 
 ## What's here
 
 ```text
 .cursor/
   rules/     — process rules
-  skills/    — shared pack (requirement, backlog, git, discipline, …)
+  skills/    — shared pack (ask-install, ask-requirement, ask-backlog, …)
 agent-knowledge-template/
   — skeleton to clone as an independent git repo
-ADOPTION.md  — installation and adoption guide
+INSTALL.md   — human setup + agent install contract
 ```
 
 ## Language
@@ -23,11 +23,12 @@ ADOPTION.md  — installation and adoption guide
 - **Project-global content language:** `agent-knowledge/config.yaml` → `locale.content` / `locale.paths` (defaults `en` / `en`).
 - **Per-user chat language:** `users/<email>/preferences.yaml` → `communication_language` (default `en` if missing). See rule `08-user-communication`.
 
-## Adoption (summary)
+## Install (summary)
 
-1. Follow [ADOPTION.md](ADOPTION.md).
-2. If you also adopt the engineering standard: first `ai-dev-standard`, then this kit — see [ai-dev-standard ADOPTION](../ai-dev-standard/ADOPTION.md) (sibling repo) for combined order.
-3. First use in the project: `/requirement`.
+1. Clone + add this repo to the Cursor workspace.
+2. Run `/ask-install` (or “install this kit into my working environment”).
+3. If you also adopt the engineering standard: first `ai-dev-standard` (`ADOPTION.md`), then this kit.
+4. Day-to-day: `/ask-requirement` and `/ask-backlog`.
 
 ## Maintenance
 
