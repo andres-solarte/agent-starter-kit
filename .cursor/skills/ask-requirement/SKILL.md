@@ -28,7 +28,11 @@ If work is split into **several blocks**: **each block** repeats steps 4→5→6
 
 Take the user's text (`$ARGUMENTS` or the message). If empty, ask in one sentence: «What do you need?»
 
+If this turn started via **`ask-question` handoff** (rule `16`) and the announcement was already shown, continue from Q&A. If somehow entered without announcement, open with the same two-line requirement notice (chat language) before questions.
+
 Do not invent scope. Apply focus (rule `09`): park "while we're at it…" with skill **`ask-backlog`** (`.cursor/skills/ask-backlog/SKILL.md`).
+
+When starting Q&A, prefer a short cue that this phase is **requirement clarification** (not documentation/coding yet), so it does not feel like an open-ended FAQ.
 
 ## Step 2 — Q&A (clarification session)
 

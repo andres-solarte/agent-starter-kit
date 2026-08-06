@@ -30,13 +30,29 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 | Signal | Action |
 |--------|--------|
 | How/where about kit, agent-knowledge, work-log, prefs, slashes, install/update | **Answer here** |
-| Wants a feature, bugfix, refactor, product doc/spec change, “build/change/add…” on the product | **Hand off → `ask-requirement`** (follow that skill from step 1; one short line: “Treating this as a product requirement.”) |
-| Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** |
+| Wants a feature, bugfix, refactor, product doc/spec change, “build/change/add/document…” on the product | **Hand off → `ask-requirement`** — see **Visible handoff (MUST)** below |
+| Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** — one clear line that it was parked |
 | Explicit `/ask-requirement` or `/ask-backlog` | Honor that skill |
 | Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` | Those skills (not this one) |
 | Ambiguous | One clarifying question: framework fact vs product work? |
 
-**Hand off means:** read and execute `.cursor/skills/ask-requirement/SKILL.md` (or backlog) — including its Q&A and plan gates. Do not skip gates.
+### Visible handoff (MUST)
+
+Before following `ask-requirement`, the **first** user-visible lines of the reply MUST say, in the user’s chat language (not only English), that:
+
+1. This is being treated as a **product requirement** (not a framework FAQ).
+2. Next come **clarifying questions and an agreed plan** — no implementing/documenting yet until those gates pass.
+
+Example shape (adapt language from `preferences.yaml`):
+
+```text
+I'm taking this as a product requirement.
+Next I'll clarify scope and get a short plan accepted — I won't start documenting/coding until then.
+```
+
+Do **not** bury this after a long FAQ. Do **not** skip it because the user “should know” the flow.
+
+**Hand off means:** after that announcement, read and execute `.cursor/skills/ask-requirement/SKILL.md` (or backlog) — including Q&A and plan gates. Do not skip gates.
 
 ## Resolve context (framework answers)
 
@@ -70,9 +86,10 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 - Invent install paths.
 - Implement product work while claiming it is “just a question”.
 - Skip `ask-requirement` plan gates after triage says product work.
+- Hand off to requirement **silently** (no visible announcement).
 - Expose secrets from env files.
 
 ## Close
 
 Framework: answer (+ optional one related path/slash).  
-Handoff: continue under the target skill; no duplicate long answer here.
+Handoff: announcement first → then the target skill owns the rest.

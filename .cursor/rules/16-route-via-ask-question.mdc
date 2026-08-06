@@ -7,14 +7,15 @@ After this kit is installed (or updated), **every user turn that is a question o
 1. Read and follow `.cursor/skills/ask-question/SKILL.md`.
 2. Let **`ask-question` triage**:
    - Framework / how / where / kit wiring → answer there.
-   - Product work (feature, fix, change code/docs of the product, multi-step delivery) → **hand off to `ask-requirement`** (same turn is OK after a one-line triage note if useful).
+   - Product work (feature, fix, change or document the product, multi-step delivery) → **hand off to `ask-requirement`**.
    - Park-for-later side idea → **`ask-backlog`** (rule `09`).
-3. If the user already invoked `/ask-requirement` or `/ask-backlog` explicitly, honor that slash (still OK to peek at ask-question router if unsure).
-4. If the user invoked `/ask-install`, `/ask-update`, or `/ask-uninstall`, run those skills directly (not ask-question).
+3. On hand off to requirement or backlog: the **first** lines of the user-visible reply MUST announce the triage in the user’s chat language (see `ask-question` → Visible handoff). Silent handoff is forbidden.
+4. If the user already invoked `/ask-requirement` or `/ask-backlog` explicitly, honor that slash (still OK to peek at ask-question router if unsure).
+5. If the user invoked `/ask-install`, `/ask-update`, or `/ask-uninstall`, run those skills directly (not ask-question).
 
 ## Why
 
-Users forget slash commands. This rule keeps triage and the requirement gate in the loop by default.
+Users forget slash commands. Triage must stay in the loop, and the user must **see** when a message became a requirement (Q&A/plan gates are not “just chatting”).
 
 ## Source
 
