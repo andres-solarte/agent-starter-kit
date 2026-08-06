@@ -1,53 +1,40 @@
 ---
 name: ask-update
 description: >-
-  Update an installed agent-starter-kit: git pull the kit clone, then safely
-  re-merge .cursor rules/skills into the product home without wiping
-  agent-knowledge. Use when the user says /ask-update, "update the kit", or
-  "pull agent-starter-kit changes".
+  Update an installed agent-starter-kit: resolve kit and product .cursor
+  directories (ask if unknown), git pull the kit clone, safely re-merge skills/rules
+  without wiping agent-knowledge. Use when the user says /ask-update, "update
+  the kit", or "pull agent-starter-kit changes".
 ---
 
 # /ask-update — update kit dependency (user)
 
 Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 
-## When to use
-
-- Kit already installed (`/ask-install` done).
-- User wants upstream process changes without losing product memory.
-
 ## Flow (MUST)
 
 ```text
-1. Resolve kit root + product home
-2. git status in kit; warn if dirty
-3. git pull (or fetch+merge per user)
-4. Re-merge .cursor/ → product home (same policy as install)
-5. Do not overwrite agent-knowledge content
-6. Summarize new/changed skills and rules
+1. Resolve kit directory + product .cursor/ home (+ agent-knowledge dir to avoid)
+2. Ask if paths not recorded / ambiguous
+3. git pull in kit directory
+4. Re-merge .cursor/ → product .cursor/ home
+5. Leave agent-knowledge untouched; summarize
 ```
 
 ## Resolve paths
 
-- Kit root: folder with `INSTALL.md` + `agent-knowledge-template/` (often still in the workspace).
-- Product home: where product `.cursor/` and `agent-knowledge/` live — ask if unclear.
+| Path | How |
+|------|-----|
+| Kit directory | From `00-project.mdc` / `ask-kit-paths.mdc`, or ask |
+| Product `.cursor/` home | Same, or ask |
+| agent-knowledge directory | Confirm only to **not** overwrite; ask if unclear |
 
-## Merge policy (MUST)
+Do not assume defaults that differ from the original install choices.
 
-Same as install: copy missing; on conflict keep product overlays (`00-project.mdc`, stack skills, `out-of-scope.md` content); merge critical MUSTS only if missing.
+## Merge policy / MUST NOT
 
-## agent-knowledge (MUST NOT wipe)
-
-- Never re-copy the full template over an existing `agent-knowledge/`.
-- Never delete `knowledge/` or `users/` data.
-- Optional: add **new** empty dirs from an upstream template only with user OK.
-
-## MUST NOT
-
-- `rm -rf` kit `.git` or product `agent-knowledge/.git`.
-- Force-push.
-- Commit unless asked.
+Same as `INSTALL.md` update contract: no wipe of agent-knowledge; no overwrite of product overlays; no force-push; no commit unless asked.
 
 ## Close
 
-Kit revision pulled (short hash/message if available); what was merged into product `.cursor/`; confirm memory untouched.
+Kit revision; what merged into product `.cursor/`; memory path untouched.

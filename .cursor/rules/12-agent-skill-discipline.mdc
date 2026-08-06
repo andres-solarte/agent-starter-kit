@@ -6,6 +6,7 @@
 |-------|-----|
 | `/ask-install` | Install kit as updatable dependency (see `INSTALL.md`) |
 | `/ask-update` | Pull kit upstream + safe re-merge into product |
+| `/ask-uninstall` | Remove kit wiring (asks what to delete; safe defaults keep memory) |
 | `/ask-requirement` | Product/code work now |
 | `/ask-backlog` | Park an idea without cutting focus |
 
