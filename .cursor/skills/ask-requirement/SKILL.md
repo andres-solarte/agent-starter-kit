@@ -1,14 +1,15 @@
 ---
 name: ask-requirement
 description: >-
-  Single user entry for requesting work: describe the requirement, clarify in
-  Q&A, then the orchestrator assigns and implements. Use when the user says
-  /ask-requirement, wants a feature or fix, or starts with a product request.
+  Single user entry for requesting product work: describe the requirement,
+  clarify in Q&A, then the orchestrator assigns and implements. Use when the
+  user says /ask-requirement, wants a feature or fix, starts with a product
+  request, or when ask-question triages the turn as product work (rule 16).
 ---
 
 # /ask-requirement — single entry (user)
 
-You speak **only** with this skill. Other skills (Spec Kit, role skills, `ask-orchestrate-requirement`, etc.) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
+You speak **only** with this skill once it is active (user typed `/ask-requirement` **or** `ask-question` handed off under rule `16`). Other skills (Spec Kit, role skills, `ask-orchestrate-requirement`, etc.) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
 
 ## Flow (MUST)
 

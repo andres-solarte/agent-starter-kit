@@ -1,64 +1,78 @@
 ---
 name: ask-question
 description: >-
-  Answer questions about this agent framework / kit layout (where is my
-  work-log, preferences, kit path, how install/update works, which slash to
-  use). Use when the user says /ask-question, asks "where is…", "how do I…",
-  or has a how/where question about agent-knowledge or the starter kit.
+  Default entry for user questions and unclear intents: triage framework
+  how/where questions vs product work. Answers kit/agent-knowledge questions
+  (e.g. where is my work-log); hands off to ask-requirement when the user wants
+  product changes. Use for /ask-question, "where is…", "how do I…", or any
+  user message that is not already an explicit /ask-install|/ask-update|
+  /ask-uninstall|/ask-requirement|/ask-backlog (rule 16).
 ---
 
-# /ask-question — ask the framework (user)
+# /ask-question — ask the framework + triage (user)
 
-Short Q&A about **how this kit and agent-knowledge are wired** — not product feature work (that is `/ask-requirement`).
+Default router for user messages (see rule `16-route-via-ask-question`).  
+Also used explicitly as `/ask-question …`.
 
-Answer in the user’s chat language (`users/<email>/preferences.yaml` → `communication_language`, default `en`). Be concrete: give **real paths** when known.
+Answer framework questions in the user’s chat language (`preferences.yaml` → `communication_language`, default `en`). Be concrete: **real paths** when known.
 
 ## Flow (MUST)
 
 ```text
-1. Capture the question ($ARGUMENTS or message)
-2. Resolve paths (kit / agent-knowledge / .cursor home / user email)
-3. Answer from SoT docs + resolved paths (2–6 short sentences)
-4. If unknown: say what is missing and how to find it (do not invent paths)
+1. Capture message ($ARGUMENTS or user turn)
+2. Triage (below) → answer | hand off ask-requirement | hand off ask-backlog | ask one clarifier
+3. If framework: resolve paths + answer (2–6 short sentences)
+4. If product work: continue with ask-requirement (do not improvise a mini-implement here)
 ```
 
-## Resolve context (MUST)
+## Triage (MUST)
+
+| Signal | Action |
+|--------|--------|
+| How/where about kit, agent-knowledge, work-log, prefs, slashes, install/update | **Answer here** |
+| Wants a feature, bugfix, refactor, product doc/spec change, “build/change/add…” on the product | **Hand off → `ask-requirement`** (follow that skill from step 1; one short line: “Treating this as a product requirement.”) |
+| Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** |
+| Explicit `/ask-requirement` or `/ask-backlog` | Honor that skill |
+| Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` | Those skills (not this one) |
+| Ambiguous | One clarifying question: framework fact vs product work? |
+
+**Hand off means:** read and execute `.cursor/skills/ask-requirement/SKILL.md` (or backlog) — including its Q&A and plan gates. Do not skip gates.
+
+## Resolve context (framework answers)
 
 1. **User id:** `git config user.email` → lowercase as-is (keep `@`).
-2. **Paths** (in order): recorded install (`00-project.mdc`, `ask-kit-paths.mdc`, or similar) → workspace folders that look like kit (`INSTALL.md` + `agent-knowledge-template/`) or agent-knowledge (`AGENTS.md` + `users/`) → **ask** if still ambiguous.
-3. Read only what you need: `agent-knowledge/AGENTS.md`, `config.yaml`, `users/<email>/preferences.yaml`, `INSTALL.md` (kit).
+2. **Paths:** install record (`00-project.mdc`, `ask-kit-paths.mdc`) → workspace kit/agent-knowledge folders → **ask** if ambiguous.
+3. Read only what you need: `AGENTS.md`, `config.yaml`, `preferences.yaml`, kit `INSTALL.md`.
 
 ## Question router (common)
 
 | User asks about… | Answer from |
 |------------------|-------------|
-| Work-log / “dónde queda mi worklog” | `<agent-knowledge>/users/<email>/work-log/YYYY/MM/DD.md` (local/gitignored). Layout in `AGENTS.md` + `config.yaml` `work_log`. |
-| Preferences / chat language | `<agent-knowledge>/users/<email>/preferences.yaml` → `communication_language` |
-| Identity / user folder | `<agent-knowledge>/users/<email>/` + `IDENTITY.md` |
-| Global knowledge | `<agent-knowledge>/knowledge/…` |
-| Personal deltas | `<agent-knowledge>/users/<email>/knowledge/…` + `DELTAS.md` |
-| Kit location / upstream | Kit directory from install record; update via `/ask-update` |
-| Product `.cursor/` | Product `.cursor/` home from install record |
-| Install / update / uninstall | `INSTALL.md` + `/ask-install`, `/ask-update`, `/ask-uninstall` |
+| Work-log | `<agent-knowledge>/users/<email>/work-log/YYYY/MM/DD.md` |
+| Preferences / chat language | `users/<email>/preferences.yaml` |
+| Identity / user folder | `users/<email>/` + `IDENTITY.md` |
+| Global knowledge | `knowledge/…` |
+| Personal deltas | `users/<email>/knowledge/…` + `DELTAS.md` |
+| Kit / `.cursor/` paths | Install record; `/ask-update` for upgrades |
+| Install / update / uninstall | `INSTALL.md` + matching `/ask-*` |
 | Which slash for work vs park | `/ask-requirement` vs `/ask-backlog` |
-| Out of scope list | Product `.cursor/out-of-scope.md` |
-| Locale for docs the agent writes | `agent-knowledge/config.yaml` → `locale.content` |
-
-For other framework questions: search `INSTALL.md`, `AGENTS.md`, `INDEX.md`, then answer with citations (path + one-line why).
+| Out of scope list | `.cursor/out-of-scope.md` |
+| Doc locale | `config.yaml` → `locale.content` |
 
 ## Style (MUST)
 
-- Plain language; one idea per sentence (rule `08-user-communication`).
-- Prefer absolute or workspace-clear paths the user can open.
-- Do **not** start implementing product features.
-- Do **not** dump whole docs — answer the question; offer one follow-up if useful.
+- Rule `08-user-communication`.
+- Framework answers: no product implementation in this skill.
+- After hand off to requirement: the requirement skill owns the rest of the turn/flow.
 
 ## MUST NOT
 
-- Invent install paths when none are recorded — ask or say “not installed / path unknown”.
-- Treat this as `/ask-requirement` (no plans, no code changes unless the user switches intent).
-- Expose secrets from env files if somehow adjacent.
+- Invent install paths.
+- Implement product work while claiming it is “just a question”.
+- Skip `ask-requirement` plan gates after triage says product work.
+- Expose secrets from env files.
 
 ## Close
 
-Answer first. Optional one line: “Related: …” with one slash or path only if it helps.
+Framework: answer (+ optional one related path/slash).  
+Handoff: continue under the target skill; no duplicate long answer here.

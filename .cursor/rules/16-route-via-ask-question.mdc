@@ -1,0 +1,21 @@
+# Route user messages via ask-question
+
+After this kit is installed (or updated), **every user turn that is a question or a work request** must be handled through the **`ask-question`** skill first, even if the user did not type `/ask-question` or `/ask-requirement`.
+
+## MUST
+
+1. Read and follow `.cursor/skills/ask-question/SKILL.md`.
+2. Let **`ask-question` triage**:
+   - Framework / how / where / kit wiring → answer there.
+   - Product work (feature, fix, change code/docs of the product, multi-step delivery) → **hand off to `ask-requirement`** (same turn is OK after a one-line triage note if useful).
+   - Park-for-later side idea → **`ask-backlog`** (rule `09`).
+3. If the user already invoked `/ask-requirement` or `/ask-backlog` explicitly, honor that slash (still OK to peek at ask-question router if unsure).
+4. If the user invoked `/ask-install`, `/ask-update`, or `/ask-uninstall`, run those skills directly (not ask-question).
+
+## Why
+
+Users forget slash commands. This rule keeps triage and the requirement gate in the loop by default.
+
+## Source
+
+Skill: `ask-question`. Related: `ask-requirement`, `ask-backlog`, rule `12-agent-skill-discipline`.

@@ -41,7 +41,7 @@ INSTALL.md   — dependency install + update contracts
 | `/ask-install` | First-time wire-up (asks for directories) |
 | `/ask-update` | Pull kit + safe re-merge |
 | `/ask-uninstall` | Remove wiring (asks what to delete) |
-| `/ask-question` | Ask the framework (paths, how-to) |
+| `/ask-question` | Ask the framework / default triage (may become a requirement) |
 | `/ask-requirement` | Product work |
 | `/ask-backlog` | Park ideas |
 

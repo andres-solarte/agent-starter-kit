@@ -35,6 +35,8 @@ Do not assume defaults that differ from the original install choices.
 
 Same as `INSTALL.md` update contract: no wipe of agent-knowledge; no overwrite of product overlays; no force-push; no commit unless asked.
 
+After merge, verify product `.cursor/` includes rule `16-route-via-ask-question.mdc` and skill `ask-question` (add if missing — process-critical).
+
 ## Close
 
 Kit revision; what merged into product `.cursor/`; memory path untouched.

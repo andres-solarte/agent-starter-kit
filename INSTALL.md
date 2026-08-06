@@ -87,7 +87,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 1. **Ensure kit at kit directory:** clone if needed; verify `INSTALL.md` + `agent-knowledge-template/`; keep `.git` + upstream.
 2. Inventory product `.cursor/` home.
-3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Ensure `out-of-scope.md` exists. Record **kit directory** and **agent-knowledge directory** in `00-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`.
+3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Ensure `out-of-scope.md` exists. Record **kit directory** and **agent-knowledge directory** in `00-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `16-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage).
 4. Instantiate **agent-knowledge** at the chosen path (new git repo; product remote later; user + prefs).
 5. Fill `00-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `15-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed).
 6. No commit/push unless asked.
@@ -122,7 +122,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 1. In **kit directory**: `git status`. If dirty, warn and ask before pull.
 2. `git pull` (or fetch + merge/rebase per user preference; default pull).
-3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**.
+3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `16-route-via-ask-question.mdc` and `ask-question` are present.
 4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template stubs with user OK.
 5. Summarize what changed in the user’s chat language.
 
