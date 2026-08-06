@@ -1,31 +1,38 @@
 # agent-knowledge
 
-Conocimiento compartido del proyecto **optimizado para agentes**, en git independiente.
+Shared project knowledge **optimized for agents**, in an independent git repo.
 
-Contrato: [knowledge/architecture/agent-knowledge-operating-contract.md](./knowledge/architecture/agent-knowledge-operating-contract.md).
+Contract: [knowledge/architecture/agent-knowledge-operating-contract.md](./knowledge/architecture/agent-knowledge-operating-contract.md).
 
-## Uso rápido
+## Quick use
 
-1. Agentes: [AGENTS.md](./AGENTS.md) (SoT). Adapters opcionales: [adapters/](./adapters/).
-2. Humanos: [INDEX.md](./INDEX.md).
-3. Config: [config.yaml](./config.yaml).
+1. Agents: [AGENTS.md](./AGENTS.md) (SoT). Optional adapters: [adapters/](./adapters/).
+2. Humans: [INDEX.md](./INDEX.md).
+3. Config: [config.yaml](./config.yaml) — including nested `locale.content` / `locale.paths`.
 
-Carga en `.cursor` / `.claude`: **mínima** (solo punteros). El protocolo no se duplica ahí.
+Load in `.cursor` / `.claude`: **minimal** (pointers only). The protocol is not duplicated there.
 
-## Capas
+## Layers
 
 - `knowledge/` — global
-- `users/<email>/knowledge/` — deltas (mismo basename)
-- `users/<email>/work-log/` — local (no se pushea por defecto)
+- `users/<email>/knowledge/` — deltas (same basename)
+- `users/<email>/work-log/` — local (not pushed by default)
+- `users/<email>/preferences.yaml` — local chat prefs (`communication_language`)
 - `consolidation/` — promote / merge
 
-## Identidad
+## Identity
 
-Carpeta = `git config user.email` en minúsculas **tal cual** (ej. `dev@example.com`).
+Folder = `git config user.email` lowercase **as-is** (e.g. `dev@example.com`).
 
-## Al usar este template en un proyecto nuevo
+## Language
 
-1. Renombrar/completar `config.yaml` (`repo:` field) y este `README.md`.
-2. Dejar vacías las carpetas de `knowledge/` hasta que haya contenido real del proyecto (no inventar).
-3. Crear el primer usuario copiando `users/_template/` → `users/<email>/`.
-4. Ver checklist completo en el `README.md` raíz del starter kit.
+- Durable docs: `locale.content` (default `en`)
+- Paths: `locale.paths` (always `en`)
+- Chat: per-user `preferences.yaml` → `communication_language`
+
+## When using this template in a new project
+
+1. Rename/complete `config.yaml` (`repo:`, `locale:`) and this `README.md`.
+2. Leave `knowledge/` folders empty until there is real project content (do not invent).
+3. Create the first user by copying `users/_template/` → `users/<email>/`.
+4. See the full checklist in `ADOPTION.md` at the starter-kit root.

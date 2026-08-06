@@ -1,12 +1,12 @@
 # delivery/
 
-Entrega: proceso propio + artefactos Spec Kit (núcleo, opcional).
+Delivery: own process + Spec Kit artifacts (core, optional).
 
-| Path | Rol |
-|------|-----|
-| [PROCESS.md](./PROCESS.md) | **Cómo** entregamos (tiers, paths, núcleo) |
-| [NEXT.md](./NEXT.md) | **Qué** retomar |
-| [specs/](./specs/) | Features `NNN-slug/` (SoT global) |
-| [specify/](./specify/) | Constitution, plantillas, scripts (si se usa Spec Kit) |
+| Path | Role |
+|------|------|
+| [PROCESS.md](./PROCESS.md) | **How** we deliver (tiers, paths, core) |
+| [NEXT.md](./NEXT.md) | **What** to resume |
+| [specs/](./specs/) | Features `NNN-slug/` (global SoT) |
+| [specify/](./specify/) | Constitution, templates, scripts (if using Spec Kit) |
 
-Ruteo: [AGENTS.md](../../AGENTS.md).
+Routing: [AGENTS.md](../../AGENTS.md).

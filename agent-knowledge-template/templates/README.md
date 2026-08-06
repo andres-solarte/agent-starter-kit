@@ -1,12 +1,12 @@
 # templates/
 
-| Archivo | Uso |
-|---------|-----|
-| [delta.md](./delta.md) | Delta `users/<email>/knowledge/<same_point>` (mismo basename) |
-| [work-log-day.md](./work-log-day.md) | Día de work-log local |
-| [decision-business.md](./decision-business.md) | BDR global |
-| [decision-architecture.md](./decision-architecture.md) | ADR global |
-| [note.md](./note.md) | Guía / nota global |
+| File | Use |
+|------|-----|
+| [delta.md](./delta.md) | Delta `users/<email>/knowledge/<same_point>` (same basename) |
+| [work-log-day.md](./work-log-day.md) | Local work-log day |
+| [decision-business.md](./decision-business.md) | Global BDR |
+| [decision-architecture.md](./decision-architecture.md) | Global ADR |
+| [note.md](./note.md) | Global guide / note |
 | [pattern.md](./pattern.md) | Deprecated — prefer delta + consolidation |
 
-Ver [AGENTS.md](../AGENTS.md).
+See [AGENTS.md](../AGENTS.md).

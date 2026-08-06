@@ -8,79 +8,79 @@ description: >-
 disable-model-invocation: true
 ---
 
-# Disciplina de skills (todos los agentes)
+# Skill discipline (all agents)
 
-## Principio rector
+## Guiding principle
 
-1. **Todo acto con procedimiento** pertenece a un **skill existente** (`.cursor/skills/`) o a una **rule/doc** que un skill cita como fuente.
-2. **Prohibido improvisar** flujos o convenciones no ancladas.
-3. **Mejora = crear/ampliar skills** (y docs que citan), no magia de un solo chat.
-4. Si el agente **no sabe** o **no hay skill**: **decirlo** (`GAP DE SKILL`) y **añadir/ampliar el skill** (con OK del usuario si el default es parar).
-5. Hay un **pack de skills compartidos** que **todos** los roles cargan; el resto son skills de rol.
+1. **Every procedural act** belongs to an **existing skill** (`.cursor/skills/`) or a **rule/doc** that a skill cites as source.
+2. **Forbidden to improvise** unanchored flows or conventions.
+3. **Improvement = create/extend skills** (and docs they cite), not one-chat magic.
+4. If the agent **does not know** or **there is no skill**: **say so** (`SKILL GAP`) and **add/extend the skill** (with user OK if the default is to stop).
+5. There is a **shared skill pack** that **every** role loads; the rest are role skills.
 
-## Skills compartidos (pack — todos los agentes)
+## Shared skills (pack — all agents)
 
-| Skill | Obligatorio cuando | Fuente / notas |
-|-------|-------------------|----------------|
-| `agent-skill-discipline` | Siempre | Este skill |
-| `git-proyecto` | Cualquier commit, rama, PR, stage, amend | `agent-knowledge/knowledge/conventions/git.md` (crear si no existe) |
-| `agent-knowledge` | Cierre de bloque / recall de porqués | Pointer → `agent-knowledge/AGENTS.md` |
+| Skill | Required when | Source / notes |
+|-------|---------------|----------------|
+| `agent-skill-discipline` | Always | This skill |
+| `git-project` | Any commit, branch, PR, stage, amend | `agent-knowledge/knowledge/conventions/git.md` (create if missing) |
+| `agent-knowledge` | Block close-out / recalling why | Pointer → `agent-knowledge/AGENTS.md` |
 
-Al delegar o actuar, el orquestador MUST recordar el pack compartido **más** el skill de rol.
+When delegating or acting, the orchestrator MUST remember the shared pack **plus** the role skill.
 
-Si falta un skill del pack (o se descubre una práctica común no listada):
+If a pack skill is missing (or a common practice not listed is discovered):
 
-1. `GAP DE SKILL` — pack compartido.
-2. Crear/ampliar el skill compartido en `.cursor/skills/`.
-3. Actualizar la doc de roles del proyecto (si existe, ej. `agent-knowledge/knowledge/architecture/agentes/roles.md`) § Skills compartidos.
-4. Actualizar esta sección del skill.
+1. `SKILL GAP` — shared pack.
+2. Create/extend the shared skill under `.cursor/skills/`.
+3. Update the project's role docs (if any, e.g. `agent-knowledge/knowledge/architecture/agents/roles.md`) § Shared skills.
+4. Update this section of the skill.
 
-## Antes de actuar
+## Before acting
 
-| Pregunta | Si la respuesta es no |
-|----------|----------------------|
-| ¿Es Git? → ¿cargué `git-proyecto`? | Cargar o GAP + crear |
-| ¿Qué skill de rol cubre esto? | Declarar gap |
-| ¿Ya leí el skill + fuentes? | Leer primero |
-| ¿Estoy inventando un paso? | Parar; ampliar skill |
+| Question | If the answer is no |
+|----------|---------------------|
+| Is it Git? → did I load `git-project`? | Load or GAP + create |
+| Which role skill covers this? | Declare gap |
+| Did I already read the skill + sources? | Read first |
+| Am I inventing a step? | Stop; extend skill |
 
-Skills de rol típicos (ejemplo — depende del stack del proyecto): skills de framework backend/frontend, testing E2E, migraciones de base de datos, Spec Kit (`speckit-*`). Bases externas no anulan normas del monorepo.
+Typical role skills (example — depends on project stack): backend/frontend framework skills, E2E testing, DB migrations, Spec Kit (`speckit-*`). External bases do not override monorepo norms.
 
-## Protocolo de gap (MUST — visible al usuario)
+## Gap protocol (MUST — visible to the user)
 
 ```text
-GAP DE SKILL — me estoy mejorando (no improvisaré)
-- Qué necesitaba hacer: …
-- Pack: compartido | rol
-- Qué busqué / leí: …
-- Qué falta: skill inexistente | skill incompleto | doc sin skill
-- Propuesta: crear/ampliar skill `nombre` con estos MUST: …
-- Mientras tanto: (a) crear/ampliar skill ahora  (b) aparcar  (c) excepción explícita
+SKILL GAP — improving myself (I will not improvise)
+- What I needed to do: …
+- Pack: shared | role
+- What I searched / read: …
+- What is missing: nonexistent skill | incomplete skill | doc without skill
+- Proposal: create/extend skill `name` with these MUSTs: …
+- Meanwhile: (a) create/extend skill now  (b) park  (c) explicit exception
 ```
 
-- **Default:** no continuar esa parte.
-- **(a):** crear/ampliar `SKILL.md` (+ doc del proyecto si es norma) **antes o junto** al trabajo.
-- **(c):** anotar en `.cursor/fuera-de-alcance.md`.
+- **Default:** do not continue that part.
+- **(a):** create/extend `SKILL.md` (+ project doc if it is a norm) **before or alongside** the work.
+- **(c):** note in `.cursor/out-of-scope.md`.
 
-Para gaps del **pack compartido**, preferir (a): el skill debe existir para todos los agentes.
+For **shared pack** gaps, prefer (a): the skill must exist for all agents.
 
-## Automejora válida vs inválida
+## Valid vs invalid self-improvement
 
-| Válida | Inválida |
-|--------|----------|
-| Crear `git-proyecto` / ampliar pack | Commit "a mi estilo" sin skill |
-| Ampliar skill de rol + citar la fuente del proyecto | Improvisar convenciones no ancladas |
-| Decir gap a tiempo | Callar y seguir |
-| `npx skills find` solo como base | Skill externo pisa ADR/constitution |
+| Valid | Invalid |
+|-------|---------|
+| Create `git-project` / extend pack | Commit "my style" without skill |
+| Extend role skill + cite project source | Improvise unanchored conventions |
+| Declare gap in time | Stay silent and continue |
+| `npx skills find` only as a base | External skill overrides ADR/constitution |
 
-## Orquestador
+## Orchestrator
 
-`orquestar-requerimiento` MUST:
+`orchestrate-requirement` MUST:
 
-1. Asumir pack compartido en cada subtarea.
-2. Asignar **al menos un skill de rol** (o Spec Kit) por subtarea.
-3. Si no puede mapear → gap **antes** de delegar.
+1. Assume shared pack on every subtask.
+2. Assign **at least one role skill** (or Spec Kit) per subtask.
+3. If it cannot map → gap **before** delegating.
 
-## Cierre de turno (gap o mejora)
+## Turn close-out (gap or improvement)
 
-Qué skills se usaron (compartidos + rol), si se creó/amplió alguno, qué gap quedó abierto.
+Which skills were used (shared + role), whether any were created/extended, which gap remains open.

@@ -7,56 +7,56 @@ tags: [delivery, process, spec-kit, loop-engineering]
 updated: YYYY-MM-DD
 ---
 
-# PROCESS — entrega (proceso propio)
+# PROCESS — delivery (own process)
 
-Fuente viva del **cómo** entregamos. Si el proyecto documenta esta decisión como ADR, enlazarlo aquí.
-Qué retomar: [NEXT.md](./NEXT.md).
+Living source of **how** we deliver. If the project documents this decision as an ADR, link it here.
+What to resume: [NEXT.md](./NEXT.md).
 
-## Entrada
+## Entry
 
-| Quién | Qué |
-|-------|-----|
-| Humano | `/requerimiento` (trabajo ahora) · `/backlog` (aparcado) |
-| Agentes | `orquestar-requerimiento` + skills de rol (agent-only) |
+| Who | What |
+|-----|------|
+| Human | `/requirement` (work now) · `/backlog` (parked) |
+| Agents | `orchestrate-requirement` + role skills (agent-only) |
 
-No ofrecer menú de skills Spec Kit al usuario.
+Do not offer a Spec Kit skill menu to the user.
 
 ## Paths (SoT)
 
-| Qué | Path |
-|-----|------|
-| Specs (globales) | `knowledge/delivery/specs/NNN-slug/` |
-| Plantillas + constitution | `knowledge/delivery/specify/` |
-| Runtime markers (symlinks, si se usa Spec Kit) | `agent-knowledge/.specify` → `knowledge/delivery/specify` · `agent-knowledge/specs` → `knowledge/delivery/specs` |
-| Qué sigue | `knowledge/delivery/NEXT.md` |
+| What | Path |
+|------|------|
+| Specs (global) | `knowledge/delivery/specs/NNN-slug/` |
+| Templates + constitution | `knowledge/delivery/specify/` |
+| Runtime markers (symlinks, if using Spec Kit) | `agent-knowledge/.specify` → `knowledge/delivery/specify` · `agent-knowledge/specs` → `knowledge/delivery/specs` |
+| What's next | `knowledge/delivery/NEXT.md` |
 
 ## Tiers
 
-| Tier | Cuándo | Camino |
-|------|--------|--------|
-| **micro** | Criterios del orquestador (pocos repos, sin alcance/API/tabla nueva, sin auth/pagos, …) | Roles + verify light — **sin** Spec Kit |
-| **normal** | Default features | Núcleo Spec Kit (abajo) |
-| **ambiguous** | Falta producto / BDR | Product / clarify — **sin código** hasta resolver |
+| Tier | When | Path |
+|------|------|------|
+| **micro** | Orchestrator criteria (few repos, no new scope/API/table, no auth/payments, …) | Roles + verify light — **no** Spec Kit |
+| **normal** | Default features | Spec Kit core (below) |
+| **ambiguous** | Missing product / BDR | Product / clarify — **no code** until resolved |
 
-## Núcleo Spec Kit (tier normal, si el proyecto lo instaló)
+## Spec Kit core (normal tier, if the project installed it)
 
-Orden:
+Order:
 
-1. `speckit-git-feature` (si aplica rama)
+1. `speckit-git-feature` (if branch applies)
 2. `speckit-specify`
-3. `speckit-clarify` (solo si el spec está ambiguo)
+3. `speckit-clarify` (only if the spec is ambiguous)
 4. `speckit-plan`
 5. `speckit-tasks`
 6. `speckit-analyze` (gate)
 7. `speckit-implement`
 
-Scripts bash (si se usan): ejecutar desde `agent-knowledge/` (encuentra `.specify`).
+Bash scripts (if used): run from `agent-knowledge/` (finds `.specify`).
 
-## Loop engineering (resumen)
+## Loop engineering (summary)
 
-1. Plan de ejecución del bloque + validación con roles → usuario acepta.
-2. Ejecutar según tier.
-3. Verify bar: maker ≠ checker (analyze / E2E / smoke según tier).
-4. Cerrar: work-log; actualizar `NEXT.md` si cambió el foco; commits solo si se piden / reglas de proyecto.
+1. Block execution plan + role validation → user accepts.
+2. Execute per tier.
+3. Verify bar: maker ≠ checker (analyze / E2E / smoke per tier).
+4. Close: work-log; update `NEXT.md` if focus changed; commits only if asked / project rules.
 
-Detalle de roles: doc propia del proyecto en `knowledge/architecture/agentes/roles.md` (crear si no existe).
+Role detail: project doc at `knowledge/architecture/agents/roles.md` (create if missing).

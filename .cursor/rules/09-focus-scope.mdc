@@ -1,0 +1,28 @@
+# Session focus — out of scope
+
+If the user asks for or mentions something **outside the scope** of the current task, **do not execute it**. Park it and continue with what is in progress.
+
+## What counts as out of scope
+
+- A bug, feature, or refactor not required to finish the active work
+- "While we're at it…" / "later…" / a parallel idea without "do it now"
+- A topic change unrelated to the current plan or item
+
+## What to do
+
+1. Follow the **`backlog`** skill (`.cursor/skills/backlog/SKILL.md`): bullet in [`.cursor/out-of-scope.md`](.cursor/out-of-scope.md).
+2. Acknowledge in **one sentence** (what was parked).
+3. Continue only with the focused task.
+4. Do not open PRs, migrate, or do a "quick fix" on the side.
+
+If the user wrote `/backlog …`, apply that skill immediately (same outcome).
+
+## When to execute immediately
+
+- The user explicitly says to do it **now** / in this session
+- It blocks finishing the current task
+- It is only a clarification or decision about the work in progress
+
+## At close-out or when asked
+
+Offer to review the parked list or tackle a specific item — do not clear it on your own.

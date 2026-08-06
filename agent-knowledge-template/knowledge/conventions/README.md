@@ -1,7 +1,7 @@
 # conventions/
 
-Convenciones técnicas del proyecto: git, naming, estilo de código, testing.
+Project technical conventions: git, naming, code style, testing.
 
-Sugerido al empezar: `git.md` (referenciado desde el skill `git-proyecto`).
+Suggested to start: `git.md` (referenced from the `git-project` skill).
 
-Vacío por defecto.
+Empty by default.

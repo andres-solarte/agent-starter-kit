@@ -1,28 +1,28 @@
 # consolidation/
 
-Subir deltas individuales → `knowledge/` global.
+Promote individual deltas → global `knowledge/`.
 
-## Detección (snippet)
+## Detection (snippet)
 
 ```bash
-# Deltas tracked (mismo basename que global)
+# Tracked deltas (same basename as global)
 find users -path '*/knowledge/*' -name '*.md' ! -name 'README.md'
 
-# Agrupar por same_point (= path relativo bajo knowledge/)
-# Ej.: users/alice@x.com/knowledge/architecture/foo.md
+# Group by same_point (= relative path under knowledge/)
+# e.g. users/alice@x.com/knowledge/architecture/foo.md
 #   → same_point=architecture/foo.md
 ```
 
-También: `users/*/DELTAS.md` con `status: open|proposed`.
+Also: `users/*/DELTAS.md` with `status: open|proposed`.
 
-## Modos
+## Modes
 
-| Modo | Acción |
+| Mode | Action |
 |------|--------|
-| **Promote** | 1 delta maduro → integrar en `knowledge/<same_point>` |
-| **Merge** | N usuarios mismo `same_point` → una redacción → global |
+| **Promote** | 1 mature delta → integrate into `knowledge/<same_point>` |
+| **Merge** | N users same `same_point` → one write-up → global |
 | **Discard** | `status: discarded` |
 
-Confirmación humana MUST antes de escribir `knowledge/**`.
+Human confirmation MUST before writing `knowledge/**`.
 
-Ver [QUEUE.md](./QUEUE.md) · contrato en `knowledge/architecture/agent-knowledge-operating-contract.md`.
+See [QUEUE.md](./QUEUE.md) · contract in `knowledge/architecture/agent-knowledge-operating-contract.md`.

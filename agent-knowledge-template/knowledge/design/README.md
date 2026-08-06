@@ -1,7 +1,7 @@
 # design/
 
-Diseño: tokens, componentes, guías de UX/UI si aplica.
+Design: tokens, components, UX/UI guides if applicable.
 
-`PRODUCT.md` / `DESIGN.md` (si el proyecto los usa como fuente visual) suelen vivir en la raíz del workspace, no aquí — este directorio es para documentación de soporte (tokens, componentes, decisiones de diseño).
+`PRODUCT.md` / `DESIGN.md` (if the project uses them as visual source) usually live at the workspace root, not here — this directory is for supporting docs (tokens, components, design decisions).
 
-Vacío por defecto.
+Empty by default.

@@ -1,22 +1,22 @@
 ---
 id: BDR-NNNN
 type: decision
-status: propuesta
+status: proposed
 scope: product
 tags: []
 updated: YYYY-MM-DD
 ---
 
-# BDR-NNNN — Título
+# BDR-NNNN — Title
 
-## Contexto
+## Context
 
-## Decisión
+## Decision
 
-## Alternativas descartadas
+## Alternatives discarded
 
-## Consecuencias
+## Consequences
 
-## Enlaces
+## Links
 
-- Spec / MVP / guía relacionada
+- Related spec / MVP / guide

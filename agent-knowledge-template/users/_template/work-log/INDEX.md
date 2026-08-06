@@ -7,10 +7,10 @@ tags: [work-log]
 updated: YYYY-MM-DD
 ---
 
-# Work log — índice
+# Work log — index
 
-Máx. ~30 filas. Path del día: `YYYY/MM/DD.md`.
+Max ~30 rows. Day path: `YYYY/MM/DD.md`.
 
-| Fecha | Título | Por qué (una línea) | Archivo |
-|-------|--------|---------------------|---------|
+| Date | Title | Why (one line) | File |
+|------|-------|----------------|------|
 | — | — | — | — |

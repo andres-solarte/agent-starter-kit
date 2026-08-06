@@ -7,13 +7,13 @@ tags: [delivery, next]
 updated: YYYY-MM-DD
 ---
 
-# NEXT — qué retomar
+# NEXT — what to resume
 
-Vivo. Actualizar al cerrar o pausar un bloque de trabajo.
+Living. Update when closing or pausing a work block.
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| Feature activa | (ninguna) |
-| Última cerrada | — |
-| Pausada | — |
-| Siguiente paso | Definir el primer requerimiento con `/requerimiento` |
+| Active feature | (none) |
+| Last closed | — |
+| Paused | — |
+| Next step | Define the first requirement with `/requirement` |

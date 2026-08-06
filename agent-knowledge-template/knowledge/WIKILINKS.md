@@ -7,12 +7,12 @@ tags: [wikilinks]
 updated: YYYY-MM-DD
 ---
 
-# Wikilinks — política
+# Wikilinks — policy
 
-El SoT de `agent-knowledge` es Git/Markdown plano, no Obsidian.
+The SoT of `agent-knowledge` is plain Git/Markdown, not Obsidian.
 
-## Regla
+## Rule
 
-1. Enlaces relativos Markdown `[texto](./ruta.md)` (o path del repo absoluto en skills/rules) — no `[[wikilinks]]`.
-2. Si se migra contenido desde otra herramienta (Obsidian, Notion, etc.) que use wikilinks, normalizar al tocar el archivo — no hace falta un big-bang.
-3. No introducir `[[…]]` en índices vivos (`INDEX.md`, `PROCESS.md`, `decisions/README.md`).
+1. Relative Markdown links `[text](./path.md)` (or absolute repo path in skills/rules) — not `[[wikilinks]]`.
+2. If migrating content from another tool (Obsidian, Notion, etc.) that uses wikilinks, normalize when touching the file — no big-bang required.
+3. Do not introduce `[[…]]` in living indexes (`INDEX.md`, `PROCESS.md`, `decisions/README.md`).

@@ -1,5 +1,5 @@
 # architecture/
 
-Arquitectura técnica: stack, integraciones, diagramas, `stack-versiones.md` (fuente de verdad de versiones — ver rule `03-versiones-stack.mdc`).
+Technical architecture: stack, integrations, diagrams, `stack-versions.md` (version source of truth — see rule `03-stack-versions.mdc`).
 
-El contrato de operación de este propio repo vive aquí: [agent-knowledge-operating-contract.md](./agent-knowledge-operating-contract.md).
+This repo's own operating contract lives here: [agent-knowledge-operating-contract.md](./agent-knowledge-operating-contract.md).

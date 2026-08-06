@@ -1,5 +1,5 @@
 ---
-name: git-proyecto
+name: git-project
 description: >-
   Shared Git practices for this project (single repo or sibling multi-repo
   layout). Use whenever committing, branching, opening PRs, staging, or
@@ -7,13 +7,13 @@ description: >-
 disable-model-invocation: true
 ---
 
-# Git del proyecto (skill compartido)
+# Project Git (shared skill)
 
 ## Source of truth
 
 1. This skill
-2. `agent-knowledge/knowledge/conventions/git.md` (crear si no existe)
-3. Spec Kit hooks (`.cursor/skills/speckit-git-*`) — solo dentro de flujos Spec Kit, si el proyecto los usa
+2. `agent-knowledge/knowledge/conventions/git.md` (create if missing)
+3. Spec Kit hooks (`.cursor/skills/speckit-git-*`) — only inside Spec Kit flows, if the project uses them
 
 User/workspace commit safety rules still apply (no force-push to main, no amend of others' commits, etc.).
 
@@ -21,9 +21,9 @@ User/workspace commit safety rules still apply (no force-push to main, no amend 
 
 **Every** agent role MUST use this skill for any Git operation. It is part of the **shared pack** (see `agent-skill-discipline`).
 
-## Multi-repo layout (si aplica)
+## Multi-repo layout (if applicable)
 
-Si el proyecto es multi-repo (repos hermanos bajo un mismo workspace), trabajar así:
+If the project is multi-repo (sibling repos under one workspace), work as follows:
 
 Run `git status` / `git diff` / commits **inside the repo that owns the files**. One logical change may need **one commit per repo**.
 
@@ -69,4 +69,4 @@ Run `git status` / `git diff` / commits **inside the repo that owns the files**.
 
 ## Gap / self-improve
 
-If a Git practice needed is not covered here → follow `agent-skill-discipline`: declare `GAP DE SKILL`, then create/amplify **this** skill (and update `agent-knowledge/knowledge/conventions/git.md` if the norm is project-wide).
+If a Git practice needed is not covered here → follow `agent-skill-discipline`: declare `SKILL GAP`, then create/amplify **this** skill (and update `agent-knowledge/knowledge/conventions/git.md` if the norm is project-wide).

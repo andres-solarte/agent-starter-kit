@@ -1,7 +1,7 @@
 # product/
 
-Producto: alcance/MVP, roadmap, backlog de mejoras, open questions.
+Product: scope/MVP, roadmap, improvement backlog, open questions.
 
-Sugerido al empezar: `alcance/mvp.md` (qué entra y qué no en la primera versión).
+Suggested to start: `scope/mvp.md` (what is in and out of the first version).
 
-Vacío por defecto — llenar con contenido real del proyecto, no plantillas genéricas.
+Empty by default — fill with real project content, not generic templates.

@@ -1,0 +1,18 @@
+# {{PROJECT_NAME}}
+
+{{Short description of the product and its current scope (MVP, modules, etc.)}}. Code in {{sibling repos, if multi-repo}}.
+
+## Language (technical)
+
+- Code, commits, technical names, and **URL paths**: **English by default**
+- Durable agent-written knowledge/docs follow `agent-knowledge/config.yaml` → `locale.content` (default `en`)
+- Paths and identifiers: `locale.paths` (always `en`)
+- Chat language with the user is **per-user**, not project-wide — see rule `08-user-communication` and `users/<email>/preferences.yaml`
+
+## Documentation
+
+→ SoT: `agent-knowledge/` (`AGENTS.md`, `knowledge/`)
+→ Process: `knowledge/delivery/PROCESS.md` · what's next: `knowledge/delivery/NEXT.md`
+→ Specs: `knowledge/delivery/specs/` · constitution: `knowledge/delivery/specify/memory/constitution.md`
+
+No commits or PRs unless the user explicitly asks.

@@ -1,40 +1,40 @@
 ---
-name: orquestar-requerimiento
+name: orchestrate-requirement
 description: >-
   [agent-only] Tech Lead orchestration with tiering; usually started after
-  /requerimiento Q&A. Delegates to role skills. Not for end-user slash use.
+  /requirement Q&A. Delegates to role skills. Not for end-user slash use.
 disable-model-invocation: true
 ---
 
-# Orquestar requerimiento (Tech Lead)
+# Orchestrate requirement (Tech Lead)
 
-**Entrada de usuario preferida:** `/requerimiento` (Q&A primero). Este skill es **agent-only** (`disable-model-invocation`): se ejecuta cuando `/requerimiento` lo encadena o un agente lo lee explícitamente.
+**Preferred user entry:** `/requirement` (Q&A first). This skill is **agent-only** (`disable-model-invocation`): it runs when `/requirement` chains to it or an agent reads it explicitly.
 
 ## Shared pack reminder
 
-Every delegated role also follows shared skills: `agent-skill-discipline` + `git-proyecto`. Role skill is **additional**, not a replacement.
+Every delegated role also follows shared skills: `agent-skill-discipline` + `git-project`. Role skill is **additional**, not a replacement.
 
 ## Mandatory companion skill
 
-MUST follow `.cursor/skills/agent-skill-discipline/SKILL.md` (no improvisar; declarar gaps).
+MUST follow `.cursor/skills/agent-skill-discipline/SKILL.md` (do not improvise; declare gaps).
 
 ## Source of truth
 
-1. `agent-knowledge/knowledge/architecture/agentes/roles.md` (crear si no existe) — roles, RACI, pipeline, loop engineering
-2. `agent-knowledge/knowledge/delivery/PROCESS.md` — proceso de entrega
-3. `agent-knowledge/knowledge/product/alcance/` + BDR/ADR en `knowledge/decisions/`
-4. `agent-knowledge/knowledge/delivery/NEXT.md` — qué sigue
-5. Rules: foco (`09`), docs (`01`), decisiones (`02`)
-6. Spec Kit when tier = **normal** y el proyecto lo tiene instalado: núcleo specify→…→implement
+1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create if missing) — roles, RACI, pipeline, loop engineering
+2. `agent-knowledge/knowledge/delivery/PROCESS.md` — delivery process
+3. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
+4. `agent-knowledge/knowledge/delivery/NEXT.md` — what follows
+5. Rules: focus (`09`), docs (`01`), decisions (`02`)
+6. Spec Kit when tier = **normal** and the project has it installed: specify→…→implement core
 
-**Spec Kit to invoke (keep lean, si el proyecto usa Spec Kit):** `git-feature` → `specify` → optional `clarify` → `plan` → `tasks` → `analyze` → `implement`.
+**Spec Kit to invoke (keep lean, if the project uses Spec Kit):** `git-feature` → `specify` → optional `clarify` → `plan` → `tasks` → `analyze` → `implement`.
 
 This skill is the **orchestrator procedure**. It does not replace Product for BDR acceptance or human approval on sensitive flows (payments/auth/PII).
 
 ## Experience (MUST)
 
-1. User provides a **requirement** via `/requerimiento` Q&A.
-2. **Execution plan gate** (from `/requerimiento` paso 4): objective, steps, **agents/roles**, how each participates, **order**, done-when. **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
+1. User provides a **requirement** via `/requirement` Q&A.
+2. **Execution plan gate** (from `/requirement` step 4): objective, steps, **agents/roles**, how each participates, **order**, done-when. **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
 3. **Classify tier** (below); may appear *inside* the plan (not instead of it).
 4. Review scope, repos, risks (Step 0).
 5. Delegate in the **accepted order** (subagents and/or role skills).
@@ -47,13 +47,13 @@ This skill is the **orchestrator procedure**. It does not replace Product for BD
 
 ## Tiering (loop engineering — MUST)
 
-Classify **before** coding. Default when unsure: **normal** (safer). User may override ("hazlo micro" / "full Spec Kit").
+Classify **before** coding. Default when unsure: **normal** (safer). User may override ("make it micro" / "full Spec Kit").
 
 ### Tier decision table
 
 | Tier | Use when **all** true (or user forces) | Path | Skip |
 |------|----------------------------------------|------|------|
-| **micro** | See criteria below | Orquestar → role skill(s) → verify light → `git-proyecto` if commit asked | Full Spec Kit |
+| **micro** | See criteria below | Orchestrate → role skill(s) → verify light → `git-project` if commit asked | Full Spec Kit |
 | **normal** | Default for features | `git-feature` → specify → [clarify] → plan → tasks → analyze → implement | Shortcuts that skip specify/plan/tasks |
 | **ambiguous** | Scope/product unclear or needs BDR/ADR | Product / clarify / BDR draft **before** code | Implementation until resolved |
 
@@ -63,7 +63,7 @@ Classify **before** coding. Default when unsure: **normal** (safer). User may ov
 2. **≤ 2 sibling repos** touched (e.g. one UI, or one API, or UI+copy; not schema+3 APIs+3 UIs).
 3. **No new public API contract** (no new endpoint/resource shape) **or** only a trivial additive field already agreed in an existing spec.
 4. **No new DB table** and no destructive migration. Additive column only if already specified in an open Spec/item.
-5. **Fit in one session** — bugfix, typo, test flake, i18n string, wiring to existing primitive, doc sync, small refactor inside one module.
+5. **Fit in one session** — bug fix, typo, test flake, i18n string, wiring to existing primitive, doc sync, small refactor inside one module.
 6. **Acceptance is obvious** — one or two checks (unit/lint/single e2e file), not a new journey.
 7. **Not** auth, payments, settlements, PII, or security-sensitive behavior (those → **normal** minimum).
 
@@ -71,7 +71,7 @@ If any criterion fails → **normal** (or **ambiguous**).
 
 ### Normal — when to use
 
-- User asks for a feature (via `/requerimiento`).
+- User asks for a feature (via `/requirement`).
 - New endpoint, schema change, multi-surface UI, new E2E journey.
 - Anything that should leave `knowledge/delivery/specs/NNN-*`.
 - Security/money/auth paths.
@@ -79,15 +79,15 @@ If any criterion fails → **normal** (or **ambiguous**).
 ### Ambiguous — when to use
 
 - Conflicts with the project's accepted scope / open question / missing BDR.
-- User goal not verifiable ("mejorar UX" without acceptance).
+- User goal not verifiable ("improve UX" without acceptance).
 - Run `clarify` or Product path; do not start Data/Backend.
 
 ### Announce format (MUST)
 
 ```text
 Tier: micro | normal | ambiguous
-Motivo: (1–2 criteria)
-Camino: (núcleo Spec Kit / roles / stop for BDR)
+Reason: (1–2 criteria)
+Path: (Spec Kit core / roles / stop for BDR)
 ```
 
 ---
@@ -99,10 +99,10 @@ Camino: (núcleo Spec Kit / roles / stop for BDR)
 | In scope / accepted BDR? | Stop or hand to Product / open question — do not invent scope |
 | Needs new BDR/ADR? | Tier **ambiguous**; draft proposal; **do not** implement until accepted (or user says proceed) |
 | Which repos? | List explicitly |
-| Out of scope side ideas | Park via `/backlog` / `.cursor/fuera-de-alcance.md` (rule 09) |
+| Out of scope side ideas | Park via `/backlog` / `.cursor/out-of-scope.md` (rule 09) |
 | Schema change? | Plan MUST include **existing-data migration** (treat current rows as production) |
 
-Output a short **plan** before heavy work when tier is **normal** or **ambiguous** (unless user already said "ejecuta / hazlo").
+Output a short **plan** before heavy work when tier is **normal** or **ambiguous** (unless user already said "execute / do it").
 
 ---
 
@@ -116,7 +116,7 @@ Role skill(s) for touched frontier only
   → Close (update NEXT.md if needed; commit if asked)
 ```
 
-Still name skills explicitly. Still `GAP DE SKILL` if uncovered.
+Still name skills explicitly. Still `SKILL GAP` if uncovered.
 
 ### Normal
 
@@ -141,11 +141,11 @@ Stop coding → Product / clarify / BDR-ADR → re-tier when resolved
 ## Default specialist order (normal / when micro needs several roles)
 
 ```text
-Data (schema/migrations)     [skill de rol de datos, si existe]
-  → Backend (una API)         [skill de rol backend, si existe]
-  → Frontend (una UI)         [skill de rol frontend, si existe]
-  → Design system             [si existe design system / storybook]
-  → QA automation              [skill de e2e, si existe]
+Data (schema/migrations)     [data role skill, if any]
+  → Backend (one API)         [backend role skill, if any]
+  → Frontend (one UI)         [frontend role skill, if any]
+  → Design system             [if design system / storybook exists]
+  → QA automation              [e2e skill, if any]
   → QA review / Docs / DevOps if needed
   → Close
 ```
@@ -175,7 +175,7 @@ Only after a stable contract (e.g. two UIs). Never parallelize Data + Backend ag
 2. Name **shared pack** + role **skill(s)**.
 3. Pass contracts / AC.
 4. Short handoff (what changed, how to verify).
-5. Missing skill → `GAP DE SKILL` — do not improvise.
+5. Missing skill → `SKILL GAP` — do not improvise.
 
 ## Verify bar (before close)
 
@@ -185,20 +185,20 @@ Only after a stable contract (e.g. two UIs). Never parallelize Data + Backend ag
 | **normal** | `speckit-analyze` clean of CRITICAL (when Spec Kit ran) + relevant E2E if UI/API journey changed; **plus** touched apps boot and respond |
 | **ambiguous** | No code close |
 
-Tras cualquier cambio de código: verificar boot/health de las apps afectadas **antes** de declarar el bloque cerrado (definir esta regla en el proyecto, ver ejemplo en `agent-knowledge/knowledge/conventions/` si existe).
+After any code change: verify boot/health of affected apps **before** declaring the block closed (define this rule in the project; see example in `agent-knowledge/knowledge/conventions/` if present).
 
 ## Close
 
 1. Cite verification run.
 2. Update tracking item/progress when applicable.
-3. Commits: user ask or project auto-commit rule — one commit per sibling repo; `git-proyecto`; no push unless asked.
+3. Commits: user ask or project auto-commit rule — one commit per sibling repo; `git-project`; no push unless asked.
 4. Summary in the user's language: tier used, what shipped, what's left, one next step.
 
 ## MUST NOT
 
 - Call **micro** to dodge Spec Kit on a real feature.
 - Implement alone while skipping frontiers on **normal**.
-- Expand scope without parking or "hazlo ahora".
+- Expand scope without parking or "do it now".
 - New stacks without ADR.
 - Community skills overriding monorepo conventions.
 - Mark done without the verify bar for that tier.

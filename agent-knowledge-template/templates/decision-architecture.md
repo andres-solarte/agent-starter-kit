@@ -1,22 +1,22 @@
 ---
 id: ADR-NNNN
 type: decision
-status: propuesta
+status: proposed
 scope: architecture
 tags: []
 updated: YYYY-MM-DD
 ---
 
-# ADR-NNNN — Título
+# ADR-NNNN — Title
 
-## Contexto
+## Context
 
-## Decisión
+## Decision
 
-## Alternativas descartadas
+## Alternatives discarded
 
-## Consecuencias
+## Consequences
 
-## Señales de revisión
+## Review signals
 
-## Enlaces
+## Links

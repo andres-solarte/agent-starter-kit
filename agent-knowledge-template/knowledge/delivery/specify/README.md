@@ -1,3 +1,3 @@
 # specify/
 
-Constitution, plantillas y scripts propios de Spec Kit. Se puebla al instalar `github-spec-kit` en este repo (no a mano).
+Spec Kit constitution, templates, and scripts. Populated when installing `github-spec-kit` in this repo (not by hand).

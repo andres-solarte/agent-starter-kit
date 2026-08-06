@@ -1,10 +1,10 @@
 # users/
 
-Una carpeta por persona. Id = **`git config user.email` en minúsculas**, tal cual (se conserva `@`).
+One folder per person. Id = **`git config user.email` lowercase**, as-is (`@` kept).
 
-Ejemplo: `devsolarte@gmail.com` → `users/devsolarte@gmail.com/`.
+Example: `dev@example.com` → `users/dev@example.com/`.
 
-`knowledge/` dentro del usuario **espeja** el global con **mismo basename** (deltas). Work-log/prefs son locales (gitignore).
+`knowledge/` inside the user **mirrors** global with the **same basename** (deltas). Work-log/prefs are local (gitignore).
 
 ## Layout
 
@@ -14,14 +14,15 @@ users/<email>/
   DELTAS.md                 # tracked
   knowledge/                # tracked — deltas only, same paths as global
   work-log/                 # LOCAL — YYYY/MM/DD.md
-  preferences.md            # LOCAL gitignore
+  preferences.yaml          # LOCAL gitignore — communication_language, detail_level, …
   MEMORY.md                 # LOCAL gitignore
 ```
 
-## Crear usuario
+## Create a user
 
 1. `git config --get user.email`
-2. Copiar `_template/` → `users/<email>/`
-3. Completar `IDENTITY.md`
+2. Copy `_template/` → `users/<email>/`
+3. Complete `IDENTITY.md`
+4. Set `preferences.yaml` → `communication_language` (chat language for this user; default `en`)
 
-Detalle: [../knowledge/architecture/agent-knowledge-operating-contract.md](../knowledge/architecture/agent-knowledge-operating-contract.md) · [AGENTS.md](../AGENTS.md)
+Detail: [../knowledge/architecture/agent-knowledge-operating-contract.md](../knowledge/architecture/agent-knowledge-operating-contract.md) · [AGENTS.md](../AGENTS.md)

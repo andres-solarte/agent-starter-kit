@@ -11,22 +11,22 @@ tags: []
 updated: YYYY-MM-DD
 ---
 
-# Delta — título corto
+# Delta — short title
 
-## Relación con el global
+## Relation to global
 
-- Global: `knowledge/<same_point>` (existe / no existe)
-- Tipo: `add` | `override` | `question` | `correction`
+- Global: `knowledge/<same_point>` (exists / does not exist)
+- Type: `add` | `override` | `question` | `correction`
 
-## Contenido del delta
+## Delta content
 
-Solo la diferencia. **Mismo basename** que el archivo global (`users/<email>/knowledge/<same_point>`).
+Diff only. **Same basename** as the global file (`users/<email>/knowledge/<same_point>`).
 
-## Por qué
+## Why
 
-Enlazar `work-log/` si aplica.
+Link `work-log/` if applicable.
 
-## Candidato a consolidación
+## Consolidation candidate
 
 - [ ] Promote (1 → global)
-- [ ] Merge (N usuarios, mismo `same_point`) → `consolidation/QUEUE.md`
+- [ ] Merge (N users, same `same_point`) → `consolidation/QUEUE.md`

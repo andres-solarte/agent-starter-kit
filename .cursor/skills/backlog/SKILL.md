@@ -1,72 +1,72 @@
 ---
 name: backlog
 description: >-
-  Aparcar ideas, bugs o pedidos para después sin interrumpir el trabajo en curso.
-  Use when the user says /backlog, "apunta esto", "después", "de paso", or wants to
-  save something for later while staying on the current task.
+  Park ideas, bugs, or requests for later without interrupting work in progress.
+  Use when the user says /backlog, "note this", "later", "while we're at it", or
+  wants to save something for later while staying on the current task.
 ---
 
-# /backlog — aparcar para después (usuario)
+# /backlog — park for later (user)
 
-Puerta **rápida** para no perder ideas. **No** ejecuta el trabajo. **No** sustituye `/requerimiento` (eso es para hacer algo ahora).
+**Fast** door so ideas are not lost. **Does not** execute the work. **Does not** replace `/requirement` (that is for doing something now).
 
-Lista viva: `.cursor/fuera-de-alcance.md`
-(Si el proyecto tiene un backlog de producto formal, moverlo ahí solo cuando el usuario confirme promover un ítem.)
+Living list: `.cursor/out-of-scope.md`
+(If the project has a formal product backlog, move items there only when the user confirms promoting an item.)
 
-## Flujo (MUST)
+## Flow (MUST)
 
 ```text
-1. Capturar el texto (idea / bug / "después…")
-2. Escribir viñeta en fuera-de-alcance.md
-3. Acusar recibo en UNA frase
-4. Volver al foco actual (no Q&A largo, no plan, no código de esa idea)
+1. Capture the text (idea / bug / "later…")
+2. Write a bullet in out-of-scope.md
+3. Acknowledge in ONE sentence
+4. Return to current focus (no long Q&A, no plan, no code for that idea)
 ```
 
-## Comandos
+## Commands
 
-| Entrada | Acción |
-|---------|--------|
-| `/backlog` + texto | Aparcar ese texto |
-| `/backlog` sin texto | Preguntar en una frase: «¿Qué apuntamos?» |
-| `/backlog list` o «muéstrame el backlog» | Listar solo la sección **Abiertos** (resumen corto; no vaciar) |
-| `/backlog done …` / «ya hicimos X» | Mover la viñeta a **Hechos / descartados** si se identifica claro |
+| Input | Action |
+|-------|--------|
+| `/backlog` + text | Park that text |
+| `/backlog` with no text | Ask in one sentence: «What should we note?» |
+| `/backlog list` or «show me the backlog» | List only the **Open** section (short summary; do not clear) |
+| `/backlog done …` / «we already did X» | Move the bullet to **Done / discarded** if clearly identified |
 
-Sinónimos que disparan el mismo flujo (aunque no diga `/backlog`): «apunta», «después», «de paso», «para más tarde», «no ahora pero…».
+Synonyms that trigger the same flow (even without `/backlog`): «note this», «later», «while we're at it», «for later», «not now but…».
 
-## Formato de viñeta
+## Bullet format
 
 ```markdown
-- YYYY-MM-DD — resumen corto en lenguaje claro (contexto opcional si ayuda)
+- YYYY-MM-DD — short summary in plain language (optional context if helpful)
 ```
 
-- Fecha = hoy (zona del usuario si se conoce).
-- Sin códigos internos sueltos en el chat al acusar recibo; en el archivo sí puedes dejar un ID entre paréntesis si ya existía.
-- No duplicar: si ya hay viñeta casi igual, no añadas otra; di «Ya estaba apuntado» en una frase.
+- Date = today (user's timezone if known).
+- No loose internal codes in chat when acknowledging; in the file you may leave an ID in parentheses if it already existed.
+- Do not duplicate: if a nearly identical bullet exists, do not add another; say «Already noted» in one sentence.
 
-## Comunicación (MUST)
+## Communication (MUST)
 
-- **Una frase** al usuario: qué se aparcó.
-- Luego **continuar** con la tarea en foco (si hay una).
-- No pedir confirmación larga. No ofrecer menú de skills. No empezar a implementar lo aparcado.
+- **One sentence** to the user: what was parked.
+- Then **continue** with the focused task (if there is one).
+- Do not ask for long confirmation. Do not offer a skill menu. Do not start implementing the parked item.
 
-Ejemplo: «Aparcado: preferencias de notificaciones. Seguimos con el pedido actual.»
+Example: «Parked: notification preferences. Continuing with the current request.»
 
 ## MUST NOT
 
-- Ejecutar, especificar o planificar a fondo lo aparcado.
-- Cambiar de foco al ítem nuevo.
-- Meter en un backlog de producto formal sin que el usuario diga que lo quiere como mejora confirmada.
-- Vaciar la lista «por limpieza» sin pedirlo.
+- Execute, specify, or deeply plan the parked item.
+- Switch focus to the new item.
+- Put it in a formal product backlog unless the user says they want it as a confirmed improvement.
+- Clear the list «for cleanup» without being asked.
 
-## Relación con otras piezas
+## Relation to other pieces
 
-| Pieza | Rol |
-|-------|-----|
-| Rule `09-foco-alcance` | Misma política; este skill es el procedimiento explícito |
-| `/requerimiento` | Cuando quiera **hacer** un ítem del backlog: sacar de la lista y tratarlo como requerimiento |
-| `git-proyecto` | No aplica (no hay commit obligatorio al aparcar) |
+| Piece | Role |
+|-------|------|
+| Rule `09-focus-scope` | Same policy; this skill is the explicit procedure |
+| `/requirement` | When they want to **do** a backlog item: take it off the list and treat it as a requirement |
+| `git-project` | Does not apply (no required commit when parking) |
 
-## Al usuario: cómo usarlo
+## For the user: how to use it
 
-1. En medio de otra tarea: `/backlog que también pueda…`
-2. Cuando quieras atacarlo: `/requerimiento` con ese tema (o «saquemos del backlog lo de …»).
+1. Mid other work: `/backlog that we can also…`
+2. When you want to tackle it: `/requirement` with that topic (or «pull from the backlog the one about …»).

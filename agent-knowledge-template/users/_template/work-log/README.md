@@ -1,33 +1,33 @@
 # work-log/
 
-Log personal: **cuándo / qué / por qué**, archivos chicos.
+Personal log: **when / what / why**, small files.
 
 ## Layout
 
 ```text
 work-log/
-  INDEX.md           # índice corto (opcional)
+  INDEX.md           # short index (optional)
   YYYY/
     MM/
-      DD.md          # un día = un archivo (ej. 2026/07/27.md)
+      DD.md          # one day = one file (e.g. 2026/07/27.md)
 ```
 
-| Path | Rol |
-|------|-----|
-| [INDEX.md](./INDEX.md) | Resumen de entradas recientes |
-| `YYYY/MM/DD.md` | Log del día (append-only) |
+| Path | Role |
+|------|------|
+| [INDEX.md](./INDEX.md) | Summary of recent entries |
+| `YYYY/MM/DD.md` | Day log (append-only) |
 
-Plantilla: [../../templates/work-log-day.md](../../templates/work-log-day.md).
+Template: [../../templates/work-log-day.md](../../templates/work-log-day.md).
 
-## Cómo escribir (agentes)
+## How to write (agents)
 
-1. Path del día: `work-log/<year>/<month>/<day>.md` (mes y día con **dos dígitos**: `07`, `27`).
-2. Si no existe el archivo o carpetas, crearlos.
-3. Append al final: título **sin hora** + **Qué** + **Por qué** (+ Dónde / Sigue).
-4. Si es notable, actualizar `INDEX.md` (enlace a `YYYY/MM/DD.md`).
+1. Day path: `work-log/<year>/<month>/<day>.md` (month and day **two digits**: `07`, `27`).
+2. If the file or folders do not exist, create them.
+3. Append at the end: title **without time** + **What** + **Why** (+ Where / Next).
+4. If notable, update `INDEX.md` (link to `YYYY/MM/DD.md`).
 
-## Cómo leer
+## How to read
 
 1. `INDEX.md`
-2. Últimos días bajo el año/mes actuales
-3. Buscar en `work-log/` si preguntan “por qué…”
+2. Recent days under the current year/month
+3. Search `work-log/` if asked “why…”

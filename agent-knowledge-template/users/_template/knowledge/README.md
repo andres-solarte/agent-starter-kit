@@ -4,7 +4,7 @@ This tree **mirrors** repo-root `knowledge/` with the **same relative paths**.
 
 | Global | Individual delta |
 |--------|------------------|
-| `knowledge/product/foo.md` | `users/<name>/knowledge/product/foo.md` |
+| `knowledge/product/foo.md` | `users/<email>/knowledge/product/foo.md` |
 
 ## Rules
 
@@ -14,4 +14,4 @@ This tree **mirrors** repo-root `knowledge/` with the **same relative paths**.
 - Register open deltas in `../DELTAS.md`.
 - Cross-user merges: see repo `consolidation/`.
 
-Not a mirror of global: `../work-log/`, `../preferences.md`, `../MEMORY.md`.
+Not a mirror of global: `../work-log/`, `../preferences.yaml`, `../MEMORY.md`.

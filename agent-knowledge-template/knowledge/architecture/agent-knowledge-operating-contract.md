@@ -4,62 +4,69 @@ type: guide
 status: active
 scope: architecture
 tags: [agent-knowledge, deltas, consolidation]
-updated: 2026-07-27
+updated: 2026-08-05
 ---
 
 # Operating contract — agent-knowledge
 
-Normas operativas del repo `agent-knowledge`. Fuente corta para agentes; detalle de ruteo en `AGENTS.md`.
+Operating norms for the `agent-knowledge` repo. Short source for agents; routing detail in `AGENTS.md`.
 
-## 1. Identidad de usuario
+## 1. User identity
 
-- Carpeta: `users/<email>/` — **el email literal** en minúsculas (se conserva `@`)
-- Fuente: `git config user.email` (no `user.name`)
-- Ejemplo: `devsolarte@gmail.com` → `users/devsolarte@gmail.com/`
-- No reemplazar `@` por `_at_` (legibilidad > escape innecesario en macOS/Linux)
-- Archivo `users/<email>/IDENTITY.md` MUST existir y listar el email canónico
-- Si el email es `*.local` / vacío: avisar al humano; no inventar otro id a mitad de sesión
+- Folder: `users/<email>/` — **literal email** lowercase (keep `@`)
+- Source: `git config user.email` (not `user.name`)
+- Example: `dev@example.com` → `users/dev@example.com/`
+- Do not replace `@` with `_at_` (readability > unnecessary escape on macOS/Linux)
+- File `users/<email>/IDENTITY.md` MUST exist and list the canonical email
+- If the email is `*.local` / empty: warn the human; do not invent another id mid-session
 - Prefer the same email as the GitHub account used for this org's remotes
 
-## 2. Convención de archivo delta (basename idéntico)
+## 2. Language
 
-| Global | Delta individual |
+- Durable agent-written content: `config.yaml` → `locale.content` (default `en`)
+- Paths/identifiers: `locale.paths` (always `en`)
+- Chat with this user: `users/<email>/preferences.yaml` → `communication_language` (default `en` if missing)
+- Nested keys only (`locale.content` / `locale.paths`); do not use flat `locale_content` / `locale_paths`
+
+## 3. Delta file convention (identical basename)
+
+| Global | Individual delta |
 |--------|------------------|
 | `knowledge/<relpath>/<file>.md` | `users/<email>/knowledge/<relpath>/<file>.md` |
 
-- **Mismo basename y misma ruta relativa.** Eso es el `same_point`.
-- Un solo archivo delta por usuario por punto (se edita; no `foo.delta.md` ni `foo-andres.md`).
-- Contenido = **solo la diferencia** (add / override / question / correction), no copia del global.
-- Frontmatter MUST: `type: delta`, `status`, `delta_of`, `same_point` (relpath sin prefijo `knowledge/`, p.ej. `architecture/foo.md`).
-- Net-new: crear el path que **será** el global; `delta_of: null` hasta el promote.
-- Registrar en `users/<email>/DELTAS.md`.
+- **Same basename and same relative path.** That is the `same_point`.
+- One delta file per user per point (edit in place; no `foo.delta.md` or `foo-andres.md`).
+- Content = **diff only** (add / override / question / correction), not a copy of global.
+- Frontmatter MUST: `type: delta`, `status`, `delta_of`, `same_point` (relpath without `knowledge/` prefix, e.g. `architecture/foo.md`).
+- Net-new: create the path that **will be** global; `delta_of: null` until promote.
+- Register in `users/<email>/DELTAS.md`.
 
-## 3. Árbol de decisión (dónde escribir)
+## 4. Decision tree (where to write)
 
 ```text
-¿Es preferencia personal / scratch?     → users/<email>/preferences.md | MEMORY.md
-¿Cuándo/qué/por qué de este bloque?    → users/<email>/work-log/YYYY/MM/DD.md
-¿Aprendizaje durable no (aún) global?  → users/<email>/knowledge/<relpath>/<file>.md (delta)
-¿Listo para el equipo / ya acordado?   → knowledge/<relpath>/ (vía consolidation promote|merge)
+Personal preference / scratch?           → users/<email>/preferences.yaml | MEMORY.md
+When / what / why for this block?        → users/<email>/work-log/YYYY/MM/DD.md
+Durable learning not (yet) global?       → users/<email>/knowledge/<relpath>/<file>.md (delta)
+Ready for the team / already agreed?     → knowledge/<relpath>/ (via consolidation promote|merge)
 ```
 
-No hay tercera capa `memory/` para hechos durables.
+There is no third `memory/` layer for durable facts.
 
-## 4. Cierre de bloque (MUST)
+## 5. Block close-out (MUST)
 
-1. Append work-log en `users/<email>/work-log/YYYY/MM/DD.md` (**Qué** + **Por qué**).
-2. Si hay aprendizaje reutilizable → crear/actualizar delta + `DELTAS.md`.
-3. Si varios usuarios o delta maduro → proponer fila en `consolidation/QUEUE.md` (no consolidar sin confirmación).
+1. Append work-log in `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**).
+2. If there is reusable learning → create/update delta + `DELTAS.md`.
+3. If several users or a mature delta → propose a row in `consolidation/QUEUE.md` (do not consolidate without confirmation).
 
-## 5. Tool-agnostic first
+## 6. Tool-agnostic first
 
-- Protocol SoT = this repo (`AGENTS.md` + this contract).  
-- Cursor / Claude Code / others: **thin adapters only** (`adapters/`).  
-- Do not grow `.cursor/`, `.claude/`, etc. with duplicated close-out or delta rules.  
+- Protocol SoT = this repo (`AGENTS.md` + this contract).
+- Cursor / Claude Code / others: **thin adapters only** (`adapters/`).
+- Do not grow `.cursor/`, `.claude/`, etc. with duplicated close-out or delta rules.
 - Workspace MUST make this repo visible to the agent (container folder or multi-root).
 
-## 6. Privacidad
+## 7. Privacy
 
-- `work-log/`, `MEMORY.md`, `preferences.md` son **locales por defecto** (gitignore en el repo).  
-- En git compartido SÍ van: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`.  
-- Nunca pegar secretos, tokens ni PII en logs ni deltas.
+- `work-log/`, `MEMORY.md`, `preferences.yaml` are **local by default** (gitignore in the repo).
+- Shared git **does** include: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`.
+- Never paste secrets, tokens, or PII into logs or deltas.

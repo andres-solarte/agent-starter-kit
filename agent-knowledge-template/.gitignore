@@ -15,6 +15,6 @@ users/*/work-log/**
 !users/*/work-log/README.md
 !users/_template/work-log/**
 users/*/MEMORY.md
-users/*/preferences.md
+users/*/preferences.yaml
 !users/_template/MEMORY.md
-!users/_template/preferences.md
+!users/_template/preferences.yaml

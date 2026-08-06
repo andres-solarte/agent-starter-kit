@@ -1,0 +1,3 @@
+# Local (gitignored) personal prefs — not shared team SoT
+communication_language: en  # language for agent ↔ this user in chat
+detail_level: normal        # optional: concise | normal | verbose

@@ -7,14 +7,14 @@ tags: []
 updated: YYYY-MM-DD
 ---
 
-# Título
+# Title
 
-## Propósito
+## Purpose
 
-Una frase: para qué existe este doc.
+One sentence: why this doc exists.
 
-## Contenido
+## Content
 
-## Fuera de alcance
+## Out of scope
 
-Qué no va aquí (enlazar al hogar correcto).
+What does not belong here (link to the correct home).

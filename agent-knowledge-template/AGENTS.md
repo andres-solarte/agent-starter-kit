@@ -5,12 +5,22 @@ Tool-agnostic instructions for any coding agent (Cursor, Claude Code, Codex, Cop
 
 **Operating contract (MUST):** [knowledge/architecture/agent-knowledge-operating-contract.md](./knowledge/architecture/agent-knowledge-operating-contract.md)
 
+## Language
+
+| Kind | Source | Default |
+|------|--------|---------|
+| Durable knowledge/docs the agent writes | `config.yaml` → `locale.content` | `en` |
+| Paths / identifiers | `locale.paths` | `en` |
+| Chat with this user | `users/<email>/preferences.yaml` → `communication_language` | `en` if missing |
+
+Do not use flat keys `locale_content` / `locale_paths` — use nested `locale.content` / `locale.paths`.
+
 ## Resolve user id (MUST first)
 
 1. Read `git config user.email` (repo or global).
 2. Directory name = email **lowercase as-is** (keep `@`). Example: `dev@example.com`.
 3. Path = `users/<email>/` (under this repo).
-4. If missing: copy `users/_template/` → `users/<email>/` and fill `IDENTITY.md`.
+4. If missing: copy `users/_template/` → `users/<email>/` and fill `IDENTITY.md` (+ `preferences.yaml` for chat language).
 5. If email is `*.local` or empty: warn once (provisional identity).
 
 ## Scopes (path-aligned)
@@ -20,7 +30,7 @@ Tool-agnostic instructions for any coding agent (Cursor, Claude Code, Codex, Cop
 | Global | `knowledge/<relpath>/<file>.md` |
 | Individual delta | `users/<email>/knowledge/<relpath>/<file>.md` (**same basename**) |
 
-Also under each user (not mirrors): `work-log/` (local), `preferences.md` (local), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked).
+Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (local), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked).
 
 ## Read order
 
@@ -28,8 +38,9 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.md` (local
 2. `INDEX.md`
 3. `knowledge/<relpath>/…`
 4. `users/<email>/knowledge/<same relpath>/…` + `DELTAS.md`
-5. `users/<email>/work-log/` (local when/what/why)
-6. `consolidation/QUEUE.md` if consolidating
+5. `users/<email>/preferences.yaml` (chat language)
+6. `users/<email>/work-log/` (local when/what/why)
+7. `consolidation/QUEUE.md` if consolidating
 
 ## Delta naming (locked)
 
@@ -42,14 +53,14 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.md` (local
 
 | Need | Write |
 |------|-------|
-| Prefs / scratch | `users/<email>/preferences.md` / `MEMORY.md` (local) |
+| Prefs / scratch | `users/<email>/preferences.yaml` / `MEMORY.md` (local) |
 | When / what / why | `users/<email>/work-log/` (local) |
 | Durable not-yet-global | delta under `users/<email>/knowledge/…` |
 | Team SoT | `knowledge/…` via consolidation only |
 
 ## Close-out (MUST every meaningful block)
 
-1. Append work-log at `users/<email>/work-log/YYYY/MM/DD.md` (**Qué** + **Por qué**). Create year/month dirs if needed (zero-padded `MM`/`DD`).
+1. Append work-log at `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**). Create year/month dirs if needed (zero-padded `MM`/`DD`).
 2. If reusable learning → delta + `DELTAS.md`.
 3. If mature / multi-user → propose `consolidation/QUEUE.md` (confirm before writing global).
 
@@ -69,6 +80,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.md` (local
 | Delta index | `users/<email>/DELTAS.md` |
 | Consolidation | `consolidation/` |
 | Work log | `users/<email>/work-log/YYYY/MM/DD.md` (gitignored) |
+| User prefs | `users/<email>/preferences.yaml` (gitignored) |
 | Tool wiring | `adapters/` |
 
 ## Write rules
@@ -89,8 +101,8 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.md` (local
 
 ## First use in a new project
 
-1. Rename/fill this repo's `README.md`, `config.yaml` (`repo:` field) for the new project.
-2. Fill `knowledge/product/`, `knowledge/domain/`, `knowledge/architecture/stack-versiones.md` as the project takes shape — these start empty on purpose.
+1. Rename/fill this repo's `README.md`, `config.yaml` (`repo:` and `locale:` fields) for the new project.
+2. Fill `knowledge/product/`, `knowledge/domain/`, `knowledge/architecture/stack-versions.md` as the project takes shape — these start empty on purpose.
 3. Create the first `users/<email>/` from `users/_template/`.
 4. If the project wants a Spec Kit–based delivery process, install `github-spec-kit` and populate `knowledge/delivery/specify/` — see `knowledge/delivery/PROCESS.md`.
 5. Wikilinks policy: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).

@@ -1,3 +1,3 @@
 # business/
 
-Un archivo por decisión de negocio: `BDR-NNNN-titulo-corto.md`. Plantilla: `templates/decision-business.md`. Índice: `../README.md`.
+One file per business decision: `BDR-NNNN-short-title.md`. Template: `templates/decision-business.md`. Index: `../README.md`.

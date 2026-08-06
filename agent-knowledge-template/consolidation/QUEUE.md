@@ -9,6 +9,6 @@ updated: YYYY-MM-DD
 
 # Consolidation queue
 
-| same_point | usuarios con delta | modo | status | notas |
-|------------|--------------------|------|--------|-------|
+| same_point | users with delta | mode | status | notes |
+|------------|------------------|------|--------|-------|
 | — | — | — | — | — |

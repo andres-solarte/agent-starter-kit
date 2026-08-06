@@ -7,86 +7,86 @@ tags: [decisions, bdr, adr]
 updated: YYYY-MM-DD
 ---
 
-# Registro de decisiones
+# Decision records
 
-Índice central de decisiones de **negocio** (BDR) y **arquitectura** (ADR).
+Central index of **business** (BDR) and **architecture** (ADR) decisions.
 
-Negocio → [business/](./business/) · Arquitectura → [architecture/](./architecture/)
+Business → [business/](./business/) · Architecture → [architecture/](./architecture/)
 
-## Negocio (BDR)
+## Business (BDR)
 
-| ID | Estado | Título |
-|----|--------|--------|
+| ID | Status | Title |
+|----|--------|-------|
 | — | — | — |
 
-## Arquitectura (ADR)
+## Architecture (ADR)
 
-| ID | Estado | Título |
-|----|--------|--------|
+| ID | Status | Title |
+|----|--------|-------|
 | — | — | — |
 
 ---
 
-## Plantilla BDR (negocio)
+## BDR template (business)
 
-Archivo: `business/BDR-NNNN-titulo-corto.md` (plantilla completa: `templates/decision-business.md`)
-
-```markdown
-# BDR NNNN: Título
-
-**Estado:** propuesta | aceptada | deprecada
-**Fecha:** YYYY-MM-DD
-
-## Contexto
-
-¿Qué problema de negocio o producto resolvemos?
-
-## Decisión
-
-¿Qué elegimos?
-
-## Consecuencias
-
-Impacto en usuarios, operación, alcance o monetización.
-
-## Alternativas consideradas
-
-| Alternativa | Por qué no |
-|-------------|------------|
-```
-
-## Plantilla ADR (arquitectura)
-
-Archivo: `architecture/ADR-NNNN-titulo-corto.md` (plantilla completa: `templates/decision-architecture.md`)
+File: `business/BDR-NNNN-short-title.md` (full template: `templates/decision-business.md`)
 
 ```markdown
-# ADR NNNN: Título
+# BDR NNNN: Title
 
-**Estado:** propuesta | aceptada | deprecada
-**Fecha:** YYYY-MM-DD
+**Status:** proposed | accepted | deprecated
+**Date:** YYYY-MM-DD
 
-## Contexto
+## Context
 
-Restricciones técnicas y requisitos que motivan la decisión.
+What business or product problem are we solving?
 
-## Opciones evaluadas
+## Decision
 
-| Opción | Pros | Contras |
-|--------|------|---------|
+What did we choose?
 
-## Decisión
+## Consequences
 
-¿Qué elegimos?
+Impact on users, operations, scope, or monetization.
 
-## Consecuencias
+## Alternatives considered
 
-Impacto en desarrollo, operación, costos y evolución futura.
+| Alternative | Why not |
+|-------------|---------|
 ```
 
-## Convenciones
+## ADR template (architecture)
 
-- Numeración independiente por tipo (BDR y ADR cada uno desde 0001)
-- Un archivo por decisión; título claro y fecha
-- Enlazar decisiones relacionadas con links relativos Markdown, no wikilinks
-- Al aceptar una decisión, actualizar docs afectados (`mvp.md`, `overview.md`, etc.)
-- Al adoptar o cambiar tecnología → actualizar `knowledge/architecture/stack-versiones.md` con versión verificada y fecha
+File: `architecture/ADR-NNNN-short-title.md` (full template: `templates/decision-architecture.md`)
+
+```markdown
+# ADR NNNN: Title
+
+**Status:** proposed | accepted | deprecated
+**Date:** YYYY-MM-DD
+
+## Context
+
+Technical constraints and requirements that motivate the decision.
+
+## Options evaluated
+
+| Option | Pros | Cons |
+|--------|------|------|
+
+## Decision
+
+What did we choose?
+
+## Consequences
+
+Impact on development, operations, cost, and future evolution.
+```
+
+## Conventions
+
+- Independent numbering per type (BDR and ADR each from 0001)
+- One file per decision; clear title and date
+- Link related decisions with relative Markdown links, not wikilinks
+- When accepting a decision, update affected docs (`mvp.md`, `overview.md`, etc.)
+- When adopting or changing technology → update `knowledge/architecture/stack-versions.md` with verified version and date

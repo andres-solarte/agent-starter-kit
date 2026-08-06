@@ -1,7 +1,8 @@
 schema_version: 1
 repo: agent-knowledge
-locale_content: es
-locale_paths: en
+locale:
+  content: en   # language for agent-written durable knowledge/docs (global)
+  paths: en     # paths/identifiers always English
 
 roots:
   knowledge: knowledge
@@ -44,7 +45,7 @@ users:
   deltas_index: DELTAS.md
   identity_file: IDENTITY.md
   # Tracked in git: knowledge/**, DELTAS.md, IDENTITY.md
-  # Local only (gitignore): work-log/**, MEMORY.md, preferences.md
+  # Local only (gitignore): work-log/**, MEMORY.md, preferences.yaml
   work_log:
     path: work-log
     # Keep day files small: year / month / day

@@ -1,5 +1,5 @@
 # domain/
 
-Modelo de dominio: entidades, reglas de negocio, glosario.
+Domain model: entities, business rules, glossary.
 
-Vacío por defecto — llenar con contenido real del proyecto.
+Empty by default — fill with real project content.

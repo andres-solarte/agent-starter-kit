@@ -7,20 +7,20 @@ tags: []
 updated: YYYY-MM-DD
 ---
 
-# Título corto del patrón
+# Short pattern title
 
-## Contexto
+## Context
 
-Cuándo aplica (repo, superficie, stack).
+When it applies (repo, surface, stack).
 
-## Patrón
+## Pattern
 
-Qué hacer / qué evitar. Ejemplos de código solo si aportan.
+What to do / what to avoid. Code examples only if they help.
 
-## Evidencia
+## Evidence
 
-Confirmaciones, correcciones, tickets o sesiones relevantes.
+Confirmations, corrections, tickets, or relevant sessions.
 
-## No confundir con
+## Do not confuse with
 
-Enlaces a docs institucionales si existen (`knowledge/...`).
+Links to institutional docs if any (`knowledge/...`).

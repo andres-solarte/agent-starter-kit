@@ -7,12 +7,12 @@ tags: [delta, consolidation]
 updated: YYYY-MM-DD
 ---
 
-# DELTAS — índice personal
+# DELTAS — personal index
 
-Deltas abiertos bajo `knowledge/` (espejo del global). Actualizar al crear/cerrar un delta.
+Open deltas under `knowledge/` (mirror of global). Update when creating/closing a delta.
 
-| same_point / path relativo | status | resumen (1 línea) | archivo |
-|----------------------------|--------|-------------------|---------|
+| same_point / relative path | status | summary (1 line) | file |
+|----------------------------|--------|------------------|------|
 | — | — | — | — |
 
 `status`: `open` · `proposed` · `consolidated` · `discarded`
