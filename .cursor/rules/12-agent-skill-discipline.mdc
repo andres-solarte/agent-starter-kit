@@ -4,7 +4,8 @@
 
 | Slash | For |
 |-------|-----|
-| `/ask-install` | Install this kit into the product workspace (see `INSTALL.md`) |
+| `/ask-install` | Install kit as updatable dependency (see `INSTALL.md`) |
+| `/ask-update` | Pull kit upstream + safe re-merge into product |
 | `/ask-requirement` | Product/code work now |
 | `/ask-backlog` | Park an idea without cutting focus |
 

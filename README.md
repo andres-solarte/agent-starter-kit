@@ -1,35 +1,47 @@
 # agent-starter-kit
 
-Reusable process engine for coding agents (Cursor, Claude Code, etc.): skill discipline, communication, focus/scope, requirement orchestration, and the **agent-knowledge** skeleton (memory separate from code).
+Reusable process engine for coding agents (Cursor, Claude Code, etc.): skill discipline, communication, focus/scope, requirement orchestration, and the **agent-knowledge** template (memory separate from the kit).
 
 Does not include stack skills or `speckit-*` — those are added per project.
 
-> **Install into a product workspace:** clone this repo, add it as a workspace folder, then `/ask-install` (or ask in plain language). Full guide: **[INSTALL.md](INSTALL.md)**.
+> **Install:** clone this repo (keep git/upstream), add it to the workspace, then `/ask-install`.  
+> **Update later:** `git pull` in the kit + `/ask-update`.  
+> Guide: **[INSTALL.md](INSTALL.md)**.
 
 ## What's here
 
 ```text
 .cursor/
   rules/     — process rules
-  skills/    — shared pack (ask-install, ask-requirement, ask-backlog, …)
+  skills/    — ask-install, ask-update, ask-requirement, ask-backlog, …
 agent-knowledge-template/
-  — skeleton to clone as an independent git repo
-INSTALL.md   — human setup + agent install contract
+  — skeleton for a NEW product git repo (global + per-user memory)
+INSTALL.md   — dependency install + update contracts
 ```
+
+## Layout after install
+
+| Piece | Updates via |
+|-------|-------------|
+| Kit clone in workspace | `git pull` + `/ask-update` |
+| Product `.cursor/` | Merged from kit; overlays stay local |
+| `agent-knowledge/` | Product’s own remote; not replaced by kit updates |
 
 ## Language
 
-- **Default English** for code, commits, paths, and durable docs the agent writes.
-- **Project-global content language:** `agent-knowledge/config.yaml` → `locale.content` / `locale.paths` (defaults `en` / `en`).
-- **Per-user chat language:** `users/<email>/preferences.yaml` → `communication_language` (default `en` if missing). See rule `08-user-communication`.
+- Default English for code, commits, paths, durable docs.
+- `agent-knowledge/config.yaml` → `locale.content` / `locale.paths`.
+- Per-user chat: `users/<email>/preferences.yaml` → `communication_language`.
 
-## Install (summary)
+## Commands
 
-1. Clone + add this repo to the Cursor workspace.
-2. Run `/ask-install` (or “install this kit into my working environment”).
-3. If you also adopt the engineering standard: first `ai-dev-standard` (`ADOPTION.md`), then this kit.
-4. Day-to-day: `/ask-requirement` and `/ask-backlog`.
+| Slash | For |
+|-------|-----|
+| `/ask-install` | First-time wire-up |
+| `/ask-update` | Pull kit + safe re-merge |
+| `/ask-requirement` | Product work |
+| `/ask-backlog` | Park ideas |
 
-## Maintenance
+## Contributing upstream
 
-A template that is **copied**, not a linked dependency. Useful improvements from a consuming project are brought back by hand, without business content.
+Process improvements without business/personal content → PR to this repo. Product memory stays in `agent-knowledge` only.

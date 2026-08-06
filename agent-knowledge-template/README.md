@@ -35,4 +35,4 @@ Folder = `git config user.email` lowercase **as-is** (e.g. `dev@example.com`).
 1. Rename/complete `config.yaml` (`repo:`, `locale:`) and this `README.md`.
 2. Leave `knowledge/` folders empty until there is real project content (do not invent).
 3. Create the first user by copying `users/_template/` → `users/<email>/`.
-4. See the full checklist in `INSTALL.md` at the starter-kit root (or run `/ask-install`).
+4. See `INSTALL.md` at the starter-kit root (or run `/ask-install` / `/ask-update`).

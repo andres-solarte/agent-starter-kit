@@ -1,148 +1,160 @@
 # Installing the kit
 
-How to install this kit into a product workspace. This repo is a **template you copy**, not a linked dependency.
+How to wire this kit into a product workspace as an **updatable dependency** (git clone with upstream), while product memory lives in a **separate** `agent-knowledge` repo.
 
-**Preferred path:** clone this repo, add it to the Cursor workspace, then ask the agent to install it (`/ask-install` or plain language). Details below.
+**Preferred path:** clone this repo, add it to the Cursor workspace, then `/ask-install`. Later: `/ask-update` after pulling new kit versions.
 
-## What gets installed
+## Mental model
 
-| Piece | Destination in the product workspace | Role |
-|-------|--------------------------------------|------|
-| `.cursor/rules/` | product home (workspace hub or chosen root) | Agent process rules |
-| `.cursor/skills/` | product home | Shared pack (`ask-install`, `ask-requirement`, `ask-backlog`, …) |
-| `agent-knowledge-template/` | copy as `agent-knowledge/` (path adjustable) | Project memory / SoT (**separate** git repo) |
+```text
+workspace/
+  agent-starter-kit/     ← this repo (keep .git + origin upstream; git pull to update)
+  agent-knowledge/       ← NEW product git repo (own remote; global + per-user memory)
+  .cursor/               ← product overlay + merged copy of kit rules/skills
+  repo-api/ …
+```
 
-Does not include stack skills (framework, testing, DB) or `speckit-*`; those are added per project.
+| Piece | Role | Git |
+|-------|------|-----|
+| **Kit clone** | Canonical process engine (rules/skills templates, INSTALL, updates) | Keep `.git`; `origin` = upstream kit (e.g. `andres-solarte/agent-starter-kit`). **Do not** `rm -rf .git` on the kit. |
+| **Product `.cursor/`** | Working copy of kit process rules/skills + product overlays (`00-project.mdc`, stack skills, `out-of-scope.md`) | Usually part of a hub/product repo, or untracked — your choice |
+| **`agent-knowledge/`** | Global knowledge (`knowledge/`) + per-user (`users/<email>/`) | **New** repo: copy from `agent-knowledge-template/`, `git init`, add **product** remote. Not the kit remote. |
 
-**Naming:** all kit skills use the `ask-` prefix (folders, `name:` frontmatter, and user slash commands) to avoid colliding with other skills in the product workspace.
+Does not include stack skills (framework, testing, DB) or `speckit-*`; those are added per project under product `.cursor/skills/` with the `ask-` prefix when user-facing.
 
-## Human setup (once per machine / workspace)
+**Naming:** all kit skills use the `ask-` prefix to avoid colliding with other skills.
 
-This kit is an external library: the agent cannot install what it cannot see.
+## What `/ask-install` does
 
-1. **Clone** (example):
+1. Leaves the **kit clone** intact (updatable dependency).
+2. Merges kit `.cursor/rules` + `.cursor/skills` into **product home** (safe merge).
+3. Instantiates **`agent-knowledge/`** as a **new** git repository (own history/remote).
+4. Fills product placeholders and per-user `preferences.yaml`.
+
+## What `/ask-update` does
+
+1. `git fetch` / `git pull` in the **kit clone** (or report if dirty/conflicts).
+2. Re-merges kit `.cursor/` → product home **without** overwriting product overlays or stack skills.
+3. Does **not** reset or replace `agent-knowledge/` content (memory stays put). Optionally copies **new** template files that are missing only (never overwrite existing knowledge files).
+
+## Human setup (once)
+
+1. **Clone the kit** (keep as dependency):
    ```bash
    git clone git@github.com:andres-solarte/agent-starter-kit.git
    ```
-   Put the clone where you keep tooling, or inside the product workspace folder as a sibling of your app repos.
-2. **Add the clone as a folder** in the Cursor workspace (File → Add Folder to Workspace…), same as any other repo.
-3. **Ask the agent** (with this kit folder in context), for example:
-   - `/ask-install`
-   - “Install this kit into my working environment”
-   - “Adopt agent-starter-kit in this workspace”
-
-The agent follows **Agent contract** below (and the `/ask-install` skill).
-
-You can still install by hand using the checklists further down; the agent path is the default.
+2. **Add the clone as a folder** in the Cursor workspace.
+3. Run **`/ask-install`** (or: “install this kit into my working environment”).
+4. When the kit releases changes: in the kit folder `git pull`, then **`/ask-update`**.
 
 ## Order when also using ai-dev-standard
 
-1. **ai-dev-standard first** — adopt core (and matching profiles) and create the product adoption document. Guide: `ADOPTION.md` in the `ai-dev-standard` repo.
-2. **This kit after** — `/ask-install` (or manual install); link the standard from the product adoption document or from `agent-knowledge/knowledge/conventions/`.
-
-If you only want the agent protocol, install this kit alone.
+1. **ai-dev-standard first** — `ADOPTION.md` in that repo.
+2. **This kit after** — `/ask-install`; link the standard from `agent-knowledge` or product docs.
 
 ## Language configuration
 
 | Layer | Where | Default |
 |-------|-------|---------|
-| Durable content (knowledge, decisions, specs the agent writes) | `agent-knowledge/config.yaml` → `locale.content` | `en` |
+| Durable agent-written content | `agent-knowledge/config.yaml` → `locale.content` | `en` |
 | Paths / identifiers | `locale.paths` | `en` |
 | Chat with this user | `users/<email>/preferences.yaml` → `communication_language` | `en` if missing |
 
-Code, commits, and technical names are English by default. Chat language is **per-user** (rule `08-user-communication`).
-
 ---
 
-## Agent contract (MUST)
-
-When the user asks to install/ask-install this kit into their working environment (or runs `/ask-install`):
+## Agent contract — install (`/ask-install`) (MUST)
 
 ### Preconditions
 
-1. This kit repo is visible in the workspace (cloned + added as a folder). If not: tell the user to clone and add it; do **not** invent a silent install from the network unless they explicitly gave a URL **and** asked you to clone.
-2. Identify **kit root** = directory that contains this `INSTALL.md` and `agent-knowledge-template/`.
-3. Identify **product home** = where `.cursor/` and `agent-knowledge/` should live for the product (often a multi-repo workspace hub, not inside this kit folder).
+1. Kit repo visible in the workspace (cloned + added). If not: ask user to clone/add; only clone yourself if they gave a URL and asked.
+2. **Kit root** = directory with this `INSTALL.md` and `agent-knowledge-template/`.
+3. **Product home** = where product `.cursor/` and `agent-knowledge/` live (not inside the kit folder).
+4. Kit must retain its `.git` and upstream `origin` (dependency). Never delete kit `.git` during install.
 
-### Q&A before copying (max 4 questions; skip any already known)
+### Q&A (max 4; skip known)
 
-1. **Product home path** (absolute or workspace-relative) — required if ambiguous.
-2. **Product / project name** for `00-project.mdc`.
-3. **Sibling app repos** in this workspace (names/paths) — for `00-project.mdc`.
-4. **`communication_language`** for this user (`en`, `es`, …) — default `en` if they decline.
+1. Product home path — required if ambiguous.
+2. Product / project name for `00-project.mdc`.
+3. Sibling app repos.
+4. `communication_language` — default `en`.
 
-Show a one-screen summary and get a short “yes” before writing files.
+Summary → user **yes** before writing.
 
 ### Install steps (after yes)
 
-1. **Inventory** product home: existing `.cursor/rules`, `.cursor/skills`, `.claude`, docs/memory folders.
-2. **Merge `.cursor/` from kit → product home** (never delete the user’s stack rules/skills):
-   - Copy rules/skills that do **not** already exist.
-   - On name conflict: keep the product file; if the kit rule is process-critical (focus, communication, skill discipline, one-point-at-a-time, agent-knowledge pointer), merge missing MUST bullets into the product file or add a clearly named kit rule alongside — do **not** blindly overwrite.
-   - Always ensure `out-of-scope.md` exists (create empty Open / Done sections if missing).
-3. **Instantiate `agent-knowledge`:**
-   - If missing: copy `agent-knowledge-template/` → `<product-home>/agent-knowledge/` (or agreed path).
-   - `git init` inside `agent-knowledge/` if not already a git repo.
-   - Set `config.yaml` `repo:` and keep `locale.content` / `locale.paths` (default `en`).
-   - Create `users/<git-email>/` from `_template/`; fill `IDENTITY.md`; set `preferences.yaml` `communication_language`.
-   - If docs already live elsewhere: do not force a full migrate; point thin adapters or ask whether to use `agent-knowledge` as SoT going forward.
-4. **Fill `00-project.mdc`** placeholders (name, description stub, sibling repos, language pointers). Leave no `{{…}}` placeholders.
-5. **Fix pointers** if `agent-knowledge` path ≠ `<product-home>/agent-knowledge`: update `15-agent-knowledge.mdc`, `skills/ask-agent-knowledge/SKILL.md`, and note `adapters/cursor.md`.
-6. **Do not** commit or push unless the user asks.
-7. **Close** in the user’s chat language: what was installed, where, how to use `/ask-requirement` and `/ask-backlog`, and that this kit folder can stay in the workspace as the upstream reference (product copies are independent).
+1. Inventory product home (`.cursor`, docs/memory).
+2. Merge kit `.cursor/` → product home:
+   - Copy missing rules/skills.
+   - On conflict: keep product; merge missing critical MUSTS if needed — no blind overwrite.
+   - Ensure `out-of-scope.md` exists.
+   - Record kit root path in `00-project.mdc` or a short `ask-kit-source.mdc` note so `/ask-update` can find upstream.
+3. Instantiate `agent-knowledge`:
+   - If missing: copy `agent-knowledge-template/` → `<product-home>/agent-knowledge/`.
+   - Ensure it is a **new** git repo (`git init` if no `.git`). **Do not** keep the kit’s git history inside `agent-knowledge`.
+   - Tell the user they should add a **product** remote when ready (`git remote add origin …`) — do not push unless asked.
+   - Configure `config.yaml`; create `users/<git-email>/` + `IDENTITY.md` + `preferences.yaml`.
+4. Fill `00-project.mdc` (no `{{…}}` left). Include sibling repos + pointer that process upstream is the kit clone.
+5. Fix path pointers if `agent-knowledge` is not at the default relative path.
+6. No commit/push unless asked.
+7. Close: where kit / `.cursor` / `agent-knowledge` live; `/ask-requirement`, `/ask-backlog`; later `/ask-update`.
 
 ### MUST NOT
 
-- Overwrite product stack skills/rules without explicit ask.
-- Install into the kit repo itself as if it were the product.
-- Paste the full operating protocol into `.cursor/` (SoT remains `agent-knowledge/AGENTS.md`).
-- Require the user to run a long manual checklist if you can perform these steps.
+- `rm -rf` the kit’s `.git` or re-init the kit as the product remote.
+- Put global/per-user memory inside the kit clone.
+- Overwrite product stack rules/skills without explicit ask.
+- Install into the kit folder as product home.
 
 ### Done when
 
-- [ ] Product home has kit process rules/skills (merged)
-- [ ] `agent-knowledge/` exists as its own git repo with user + `preferences.yaml`
-- [ ] `00-project.mdc` has no placeholders
-- [ ] Pointers to `AGENTS.md` match the real path
-- [ ] User knows `/ask-requirement`, `/ask-backlog`, and `/ask-install` (re-run safe / merge)
+- [ ] Kit clone still has upstream git
+- [ ] Product `.cursor/` merged
+- [ ] `agent-knowledge/` is its own git repo with user prefs
+- [ ] User knows `/ask-update` for kit upgrades
 
 ---
 
-## Manual install (new project)
+## Agent contract — update (`/ask-update`) (MUST)
 
-Same outcomes as the agent contract; useful without an agent.
+### Preconditions
 
-1. Copy `.cursor/` to product home.
-2. Fill `00-project.mdc`.
-3. Copy `agent-knowledge-template/` → `agent-knowledge/`, `git init`, configure `config.yaml`, create `users/<email>/`.
-4. Fix path pointers if needed.
-5. First use: `/ask-requirement`.
+1. Kit root and product home known (from prior install or Q&A).
+2. User asked to update / ran `/ask-update`.
 
-## Manual install (existing project)
+### Steps
 
-1. Inventory existing `.cursor` / docs.
-2. Merge (do not overwrite stack rules).
-3. Instantiate or point `agent-knowledge`.
-4. Fill placeholders; set `preferences.yaml`.
-5. Smoke: `/ask-requirement` trivial + `/ask-backlog` → `.cursor/out-of-scope.md`.
+1. In **kit root**: `git status`. If dirty with local hacks, warn and ask before pull.
+2. `git pull` (or fetch + merge/rebase per user preference; default pull).
+3. Re-merge kit `.cursor/rules` + `skills` → product home with the **same merge policy as install**.
+4. Never delete or overwrite files under `agent-knowledge/knowledge/` or `users/` except creating **missing** empty template stubs if the upstream template added new optional dirs (ask first if unsure).
+5. Summarize what changed (new skills/rules) in the user’s chat language.
+
+### MUST NOT
+
+- Reset `agent-knowledge` from template.
+- Force-push kit or product repos.
+- Overwrite `00-project.mdc` or product stack skills.
+
+---
+
+## Manual install / update
+
+Same outcomes as the contracts. Update = `git pull` in kit + re-copy/merge `.cursor/` skills/rules into product home.
 
 ## Post-install checklist
 
-- [ ] `.cursor/rules/` and `.cursor/skills/` present; `00-project.mdc` without placeholders
-- [ ] `agent-knowledge/` is its own git repo; user under `users/<email>/` with `preferences.yaml`
-- [ ] `config.yaml` uses nested `locale.content` / `locale.paths`
-- [ ] Pointers to `agent-knowledge/AGENTS.md` match the real path
-- [ ] `/ask-requirement`, `/ask-backlog`, and `/ask-install` work when this kit (or the product copy) is in the workspace
-- [ ] (Optional) `ai-dev-standard` adoption document linked
-- [ ] Project stack skills added or listed as gaps
+- [ ] Kit clone tracks upstream; `.git` present
+- [ ] Product `.cursor/` has `ask-*` skills; `00-project.mdc` filled
+- [ ] `agent-knowledge/` is a **separate** git repo (own remote when you add it)
+- [ ] User `preferences.yaml` set
+- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-install`, `/ask-update` known
 
-## Maintenance
+## Contributing back to the kit
 
-Improvements in a consuming project are **copied by hand** back into this kit (no business content). Each product carries its own copy of `.cursor/` + `agent-knowledge/`.
+Process improvements without business/personal content can be proposed upstream (PR to the canonical kit). Product memory stays in `agent-knowledge` only.
 
 ## Quick verification
 
-- [ ] Agent reads `agent-knowledge/AGENTS.md` (not a protocol only in `.cursor/`)
-- [ ] Out of scope is parked; not executed “while at it”
-- [ ] Commits/PRs only if the user asks
-- [ ] Chat language follows `preferences.yaml`; durable docs follow `locale.content`
+- [ ] Agent reads `agent-knowledge/AGENTS.md` for memory protocol
+- [ ] Kit updates do not wipe `agent-knowledge`
+- [ ] Chat language from `preferences.yaml`; durable docs from `locale.content`

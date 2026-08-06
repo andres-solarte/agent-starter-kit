@@ -1,66 +1,56 @@
 ---
 name: ask-install
 description: >-
-  Install this agent-starter-kit into the product workspace: merge .cursor
-  rules/skills, instantiate agent-knowledge, fill placeholders and per-user
-  prefs. Use when the user says /ask-install, "install this kit", "adopt
-  agent-starter-kit", or wants to wire the kit into their working environment.
+  Install agent-starter-kit as an updatable dependency: keep kit git/upstream,
+  merge .cursor into product home, instantiate agent-knowledge as a NEW product
+  git repo. Use when the user says /ask-install, "install this kit", or wants
+  to wire the kit into their working environment.
 ---
 
-# /ask-install — install kit into product workspace (user)
+# /ask-install — install kit (updatable dependency)
 
-Single entry to **install** this kit into the product environment. Follow **`INSTALL.md` at the kit repository root** — especially **Agent contract**.
+Follow **`INSTALL.md` at the kit root** → **Agent contract — install**.
 
-This skill lives in the **kit** repo. After install, a copy also exists under the product’s `.cursor/skills/ask-install/` so re-runs (merge / repair) stay available.
+## Model (MUST)
 
-## When to use
+| Path | Action |
+|------|--------|
+| Kit clone | Keep `.git` + upstream `origin`. Never re-init as product remote. |
+| Product `.cursor/` | Merge kit rules/skills (safe merge). |
+| `agent-knowledge/` | Copy template → **new** `git init` (product memory remote later). |
 
-- User cloned this repo and added it to the Cursor workspace.
-- User asks to adopt/install the kit into “this workspace” / “my working environment”.
-- User runs `/ask-install`.
+Global knowledge → `agent-knowledge/knowledge/`. Per-user → `agent-knowledge/users/<email>/`.
 
 ## Flow (MUST)
 
 ```text
-1. Resolve kit root (folder with INSTALL.md + agent-knowledge-template/)
-2. Resolve product home (where .cursor/ and agent-knowledge/ should live)
-3. Q&A (max 4) + short summary → user yes
-4. Merge .cursor/ ; instantiate agent-knowledge ; fill 00-project + prefs
-5. Close: paths + how to use /ask-requirement and /ask-backlog
+1. Resolve kit root + product home
+2. Q&A (max 4) + summary → yes
+3. Merge .cursor/; instantiate agent-knowledge as new git repo; fill 00-project + prefs
+4. Close: paths + /ask-requirement, /ask-backlog, later /ask-update
 ```
 
-Do **not** start copying before the user’s yes on the summary.
-
-## Q&A (blocking)
-
-Ask only what is unknown:
+## Q&A
 
 | Ask | Default if skipped |
 |-----|--------------------|
-| Product home path | Fail — must be unambiguous |
-| Project name | Folder name of product home |
-| Sibling repos in workspace | Empty list |
+| Product home path | Fail if ambiguous |
+| Project name | Product home folder name |
+| Sibling repos | Empty |
 | `communication_language` | `en` |
 
-## Merge policy (MUST)
+## Merge policy
 
-- Never install *into* the kit repo as the product.
-- Never overwrite product stack rules/skills without explicit ask.
-- Copy missing kit files; on conflict keep product and merge critical process MUSTS if absent.
-- SoT for protocol remains `agent-knowledge/AGENTS.md` after instantiate.
-
-## Source of truth
-
-1. This skill  
-2. Kit root `INSTALL.md` → **Agent contract**  
-3. After install: product `agent-knowledge/AGENTS.md`
+- Do not install into the kit folder as product home.
+- Do not overwrite product stack skills/rules without explicit ask.
+- Do not delete kit `.git`.
 
 ## MUST NOT
 
-- Long manual dump to the user instead of performing the install.
+- Long manual instead of performing install.
 - Commit/push unless asked.
-- Adopt `ai-dev-standard` in this skill (mention only; separate doc).
+- Reset or replace an existing `agent-knowledge` with personal data — ask first.
 
-## Close (user chat language)
+## Close
 
-2–4 sentences: what was installed and where; `/ask-requirement` for work; `/ask-backlog` to park; optional “you can keep this kit folder in the workspace as upstream.”
+Where kit / product `.cursor` / `agent-knowledge` live; how to `/ask-update`.
