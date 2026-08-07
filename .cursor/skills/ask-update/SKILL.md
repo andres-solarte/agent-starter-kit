@@ -3,9 +3,9 @@ name: ask-update
 description: >-
   Update an installed agent-starter-kit: resolve kit and product .cursor
   directories (ask if unknown), git pull the kit clone, safely re-merge skills/rules
-  without wiping agent-knowledge, then offer an optional workspace doc scan
-  (/ask-centralize-docs). Use when the user says /ask-update, "update the kit",
-  or "pull agent-starter-kit changes".
+  without wiping agent-knowledge. Use when the user says /ask-update, "update
+  the kit", or "pull agent-starter-kit changes". Does not offer doc scan —
+  use /ask-centralize-docs for that.
 ---
 
 # /ask-update — update kit dependency (user)
@@ -18,10 +18,9 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 1. Resolve kit directory + product .cursor/ home (+ agent-knowledge dir to avoid)
 2. Ask if paths not recorded / ambiguous
 3. git pull in kit directory
-4. Re-merge .cursor/ → product .cursor/ home (include ask-centralize-docs if new)
-5. Leave agent-knowledge content untouched
-6. Offer gated doc scan → if yes, run ask-centralize-docs; if no, skip
-7. Summarize
+4. Re-merge .cursor/ → product .cursor/ home (include new ask-* skills/rules)
+5. Leave agent-knowledge content untouched (except missing template stubs / backlog migrate)
+6. Summarize — do NOT offer /ask-centralize-docs
 ```
 
 ## Resolve paths
@@ -30,19 +29,13 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 |------|-----|
 | Kit directory | From `ask-project.mdc` / `ask-kit-paths.mdc`, or ask |
 | Product `.cursor/` home | Same, or ask |
-| agent-knowledge directory | Confirm only to **not** overwrite; needed if user accepts doc scan |
+| agent-knowledge directory | Confirm only to **not** overwrite; needed for backlog migrate |
 
 Do not assume defaults that differ from the original install choices.
 
-## Doc scan offer (MUST after merge)
+## Doc centralization
 
-Ask in the user’s chat language whether to scan the **entire workspace** and centralize docs into agent-knowledge (same as install).
-
-- **Yes** → follow `.cursor/skills/ask-centralize-docs/SKILL.md` (authorize details, inventory, copy, recommend cleanup).
-- **No** → skip; mention `/ask-centralize-docs` for later.
-- Never start a recursive doc scan without this **yes**.
-
-Useful for workspaces that installed the kit before this step existed.
+**Do not** prompt for a workspace doc scan on update. If the user wants that, they run `/ask-centralize-docs` themselves.
 
 ## Merge policy / MUST NOT
 
@@ -58,4 +51,4 @@ If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask
 
 ## Close
 
-Kit revision; what merged into product `.cursor/`; memory path untouched; whether doc scan ran or was deferred.
+Kit revision; what merged into product `.cursor/`; memory path untouched. Optional one line: docs scan is `/ask-centralize-docs` if they ask.

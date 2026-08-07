@@ -5,7 +5,7 @@
 | Slash | For |
 |-------|-----|
 | `/ask-install` | Install kit as updatable dependency (see `INSTALL.md`) |
-| `/ask-update` | Pull kit upstream + safe re-merge; offers `/ask-centralize-docs` |
+| `/ask-update` | Pull kit upstream + safe re-merge |
 | `/ask-uninstall` | Remove kit wiring (asks what to delete; safe defaults keep memory) |
 | `/ask-centralize-docs` | Scan workspace docs → copy into agent-knowledge → recommend cleanup |
 | `/ask-question` | Ask the framework / default triage (rule `16`; may hand off to requirement) |

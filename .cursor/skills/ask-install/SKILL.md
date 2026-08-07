@@ -3,9 +3,9 @@ name: ask-install
 description: >-
   Install agent-starter-kit as an updatable dependency: ask where the kit and
   agent-knowledge directories should live, merge .cursor into the chosen product
-  home, instantiate agent-knowledge as a NEW git repo, then offer an authorized
-  full-workspace doc scan (/ask-centralize-docs). Use when the user says
-  /ask-install, "install this kit", or wants to wire the kit into their workspace.
+  home, instantiate agent-knowledge as a NEW git repo. Doc scan is separate
+  (/ask-centralize-docs). Use when the user says /ask-install, "install this
+  kit", or wants to wire the kit into their workspace.
 ---
 
 # /ask-install — install kit (updatable dependency)
@@ -27,9 +27,8 @@ Global knowledge → `…/knowledge/`. Per-user → `…/users/<email>/`.
 ```text
 1. Q&A: kit dir + agent-knowledge dir (+ .cursor home if needed)
 2. Summary of paths → yes
-3. Ensure kit; merge .cursor/; create agent-knowledge; fill prefs
-4. Offer full-workspace doc scan (authorize?) → if yes, run ask-centralize-docs
-5. Record paths; close
+3. Ensure kit; merge .cursor/; create agent-knowledge; fill prefs + session-backlog
+4. Record paths; close — do NOT prompt for doc scan
 ```
 
 ## Q&A (MUST — directories first)
@@ -43,7 +42,9 @@ Global knowledge → `…/knowledge/`. Per-user → `…/users/<email>/`.
 | Sibling repos | Empty |
 | `communication_language` | `en` |
 
-After core install: **ask** whether to scan all workspace folders for docs (see `ask-centralize-docs`). Default if skipped: **skip scan**.
+## Doc centralization
+
+**Do not** prompt for a workspace doc scan during install. Mention `/ask-centralize-docs` once in the close if useful. Always merge the `ask-centralize-docs` skill so it is available.
 
 ## Merge policy
 
@@ -56,9 +57,9 @@ After core install: **ask** whether to scan all workspace folders for docs (see 
 
 - Long manual instead of performing install.
 - Commit/push unless asked.
-- Scan the workspace for docs without explicit authorization.
+- Start a doc scan unless the user explicitly runs `/ask-centralize-docs`.
 - Wipe an existing agent-knowledge with data — ask first.
 
 ## Close
 
-Echo the three directories; whether docs were centralized; `/ask-centralize-docs` if skipped; `/ask-requirement`, `/ask-update`.
+Echo the three directories; optional one line that docs scan is `/ask-centralize-docs`; `/ask-requirement`, `/ask-update`.
