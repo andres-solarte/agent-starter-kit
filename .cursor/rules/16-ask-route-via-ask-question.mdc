@@ -19,4 +19,4 @@ Users forget slash commands. Triage must stay in the loop, and the user must **s
 
 ## Source
 
-Skill: `ask-question`. Related: `ask-requirement`, `ask-backlog`, rule `12-agent-skill-discipline`.
+Skill: `ask-question`. Related: `ask-requirement`, `ask-backlog`, rule `12-ask-agent-skill-discipline`.

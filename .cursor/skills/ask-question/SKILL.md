@@ -11,7 +11,7 @@ description: >-
 
 # /ask-question — ask the framework + triage (user)
 
-Default router for user messages (see rule `16-route-via-ask-question`).  
+Default router for user messages (see rule `16-ask-route-via-ask-question`).  
 Also used explicitly as `/ask-question …`.
 
 Answer framework questions in the user’s chat language (`preferences.yaml` → `communication_language`, default `en`). Be concrete: **real paths** when known.
@@ -57,7 +57,7 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 ## Resolve context (framework answers)
 
 1. **User id:** `git config user.email` → lowercase as-is (keep `@`).
-2. **Paths:** install record (`00-project.mdc`, `ask-kit-paths.mdc`) → workspace kit/agent-knowledge folders → **ask** if ambiguous.
+2. **Paths:** install record (`00-ask-project.mdc`, `ask-kit-paths.mdc`) → workspace kit/agent-knowledge folders → **ask** if ambiguous.
 3. Read only what you need: `AGENTS.md`, `config.yaml`, `preferences.yaml`, kit `INSTALL.md`.
 
 ## Question router (common)
@@ -78,7 +78,7 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 
 ## Style (MUST)
 
-- Rule `08-user-communication`.
+- Rule `08-ask-user-communication`.
 - Framework answers: no product implementation in this skill.
 - After hand off to requirement: the requirement skill owns the rest of the turn/flow.
 

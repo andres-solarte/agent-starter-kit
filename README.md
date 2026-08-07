@@ -14,7 +14,7 @@ Does not include stack skills or `speckit-*` — those are added per project.
 
 ```text
 .cursor/
-  rules/     — process rules
+  rules/     — process rules (`NN-ask-*.mdc`)
   skills/    — ask-install, ask-centralize-docs, ask-update, ask-uninstall, ask-question, …
 agent-knowledge-template/
   — skeleton for a NEW product git repo (global + per-user memory)

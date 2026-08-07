@@ -22,7 +22,7 @@ workspace/
 
 Does not include stack skills (framework, testing, DB) or `speckit-*`; those are added per project under product `.cursor/skills/` with the `ask-` prefix when user-facing.
 
-**Naming:** all kit skills use the `ask-` prefix to avoid colliding with other skills.
+**Naming:** all kit **skills** and **rules** use an `ask-` segment in their names (skills: `ask-*`; rules: `NN-ask-*.mdc`) to avoid colliding with other Cursor rules/skills in the product workspace.
 
 ## What `/ask-install` does
 
@@ -88,7 +88,7 @@ Ask for directories (prefer one question per turn, or a short block of independe
 | 1 | **Kit directory** — absolute or workspace-relative path where the `agent-starter-kit` clone should live (or already lives) | If the folder is empty/missing: clone upstream there. If it already is a kit root (`INSTALL.md` present): use it. Never `rm -rf .git` on that clone. |
 | 2 | **agent-knowledge directory** — path where the product memory repo should live | Must be outside the kit directory. If missing: copy `agent-knowledge-template/` here and `git init`. If it already exists with data: do not wipe; ask before any merge. |
 | 3 | **Product `.cursor/` home** — directory that should receive the merged `.cursor/rules` and `.cursor/skills` | Default if skipped: **parent directory of agent-knowledge**. Must not be the kit directory itself. |
-| 4 | Product / project name (for `00-project.mdc`) | Default: name of product `.cursor/` home folder |
+| 4 | Product / project name (for `00-ask-project.mdc`) | Default: name of product `.cursor/` home folder |
 | 5 | Sibling app repos in the workspace | Default: empty |
 | 6 | `communication_language` | Default: `en` |
 
@@ -98,9 +98,9 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 1. **Ensure kit at kit directory:** clone if needed; verify `INSTALL.md` + `agent-knowledge-template/`; keep `.git` + upstream.
 2. Inventory product `.cursor/` home.
-3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Ensure `out-of-scope.md` exists. Record **kit directory** and **agent-knowledge directory** in `00-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `16-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage).
+3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Ensure `out-of-scope.md` exists. Record **kit directory** and **agent-knowledge directory** in `00-ask-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `16-ask-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage).
 4. Instantiate **agent-knowledge** at the chosen path (new git repo; product remote later; user + prefs).
-5. Fill `00-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `15-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed).
+5. Fill `00-ask-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `15-ask-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed).
 6. **Documentation centralization (gated):** ask whether to scan the **entire multi-repo workspace** for docs. If **no**, skip. If **yes**, run `.cursor/skills/ask-centralize-docs/SKILL.md` (copy into agent-knowledge → recommend cleanup of originals). Always install/update the `ask-centralize-docs` skill with the kit merge.
 7. No commit/push unless asked.
 8. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); note whether docs were centralized; `/ask-requirement`, `/ask-backlog`, `/ask-update`, `/ask-centralize-docs`.
@@ -135,7 +135,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 1. In **kit directory**: `git status`. If dirty, warn and ask before pull.
 2. `git pull` (or fetch + merge/rebase per user preference; default pull).
-3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `16-route-via-ask-question.mdc`, `ask-question`, and `ask-centralize-docs` are present.
+3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `16-ask-route-via-ask-question.mdc`, `ask-question`, and `ask-centralize-docs` are present. If legacy kit rules without `ask-` remain (`00-project.mdc`, `16-route-via-ask-question.mdc`, etc.), add `NN-ask-*.mdc` and remove those obsolete kit-sourced files (keep product-only rules).
 4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template stubs with user OK.
 5. **Documentation centralization (gated):** offer a full-workspace doc scan for installs that never ran it (or want a refresh). If **yes**, run `ask-centralize-docs` (authorize scan → copy → recommend cleanup). If **no**, skip; user can run `/ask-centralize-docs` later. Do **not** scan on every update without asking.
 6. Summarize what changed in the user’s chat language (kit revision, merged skills/rules, whether doc scan ran).
@@ -144,7 +144,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 - Reset agent-knowledge from template.
 - Force-push kit or product repos.
-- Overwrite `00-project.mdc` or product stack skills.
+- Overwrite `00-ask-project.mdc` or product stack skills.
 - Assume default paths if install recorded different ones.
 
 ---
@@ -233,7 +233,7 @@ Same outcomes as the contracts. Uninstall = reverse chosen pieces only. Centrali
 ## Post-install checklist
 
 - [ ] Kit clone tracks upstream; `.git` present
-- [ ] Product `.cursor/` has `ask-*` skills; `00-project.mdc` filled
+- [ ] Product `.cursor/` has `ask-*` skills; `00-ask-project.mdc` filled
 - [ ] `agent-knowledge/` is a **separate** git repo (own remote when you add it)
 - [ ] User `preferences.yaml` set
 - [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs` known

@@ -46,6 +46,6 @@ Do not mix "and while we're at it" the rest of the plan in the same turn.
 
 ## Relation to other rules
 
-- Out of scope / park → rule `09-focus-scope` + skill `ask-backlog`
+- Out of scope / park → rule `09-ask-focus-scope` + skill `ask-backlog`
 - After code → verify the local stack **only on what was touched in this point** (define a project-specific rule; see `13-verify-apps-after-changes.mdc` in Marketplace-Repuestos as a reference)
 - Multi-step plan: the plan may list several steps; **execution** remains one point per turn after the «yes»
