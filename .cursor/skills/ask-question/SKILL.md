@@ -6,7 +6,8 @@ description: >-
   (e.g. where is my work-log); hands off to ask-requirement when the user wants
   product changes. Use for /ask-question, "where is…", "how do I…", or any
   user message that is not already an explicit /ask-install|/ask-update|
-  /ask-uninstall|/ask-centralize-docs|/ask-requirement|/ask-backlog (rule 16).
+  /ask-uninstall|/ask-centralize-docs|/ask-setup-agents|/ask-requirement|
+  /ask-backlog (route rule).
 ---
 
 # /ask-question — ask the framework + triage (user)
@@ -33,7 +34,7 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 | Wants a feature, bugfix, refactor, product doc/spec change, “build/change/add/document…” on the product | **Hand off → `ask-requirement`** — see **Visible handoff (MUST)** below |
 | Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** — one clear line that it was parked |
 | Explicit `/ask-requirement` or `/ask-backlog` | Honor that skill |
-| Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` / `/ask-centralize-docs` | Those skills (not this one) |
+| Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` / `/ask-centralize-docs` / `/ask-setup-agents` | Those skills (not this one) |
 | Ambiguous | One clarifying question: framework fact vs product work? |
 
 ### Visible handoff (MUST)
@@ -70,7 +71,8 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 | Global knowledge | `knowledge/…` |
 | Personal deltas | `users/<email>/knowledge/…` + `DELTAS.md` |
 | Kit / `.cursor/` paths | Install record; `/ask-update` for upgrades |
-| Install / update / uninstall / centralize docs | `INSTALL.md` + `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs` |
+| Install / update / uninstall / centralize docs / setup agents | `INSTALL.md` + `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` |
+| Agent roles / RACI | `knowledge/architecture/agents/roles.md` · `/ask-setup-agents` |
 | Imported / centralized docs map | `knowledge/imported/IMPORT-MAP.md` |
 | Which slash for work vs park | `/ask-requirement` vs `/ask-backlog` |
 | Session backlog | `<agent-knowledge>/users/<email>/session-backlog.md` |

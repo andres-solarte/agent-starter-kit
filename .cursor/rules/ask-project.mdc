@@ -16,3 +16,15 @@
 → Specs: `knowledge/delivery/specs/` · constitution: `knowledge/delivery/specify/memory/constitution.md`
 
 No commits or PRs unless the user explicitly asks.
+
+## Kit paths
+
+- Kit directory: {{KIT_DIR}}
+- agent-knowledge directory: {{AGENT_KNOWLEDGE_DIR}}
+- Product `.cursor/` home: {{CURSOR_HOME}}
+
+## Agents
+
+- Roles: `agent-knowledge/knowledge/architecture/agents/roles.md`
+- Setup: {{pending|done}} ({{date if done}})
+- Update notice for /ask-setup-agents: {{pending|done}}

@@ -32,7 +32,17 @@ Does not include stack skills (framework, testing, DB) or `speckit-*`; those are
 2. Merges kit `.cursor/rules` + `.cursor/skills` into **product home** (safe merge).
 3. Instantiates **`agent-knowledge/`** as a **new** git repository (own history/remote).
 4. Fills product placeholders and per-user `preferences.yaml`.
-5. Merges `/ask-centralize-docs` for later **manual** use (does not prompt for a scan during install/update).
+5. Merges `/ask-centralize-docs` and `/ask-setup-agents` (does not prompt for a doc scan during install/update).
+6. Runs **`/ask-setup-agents`** after agent-knowledge exists (scan → confirm roles → `roles.md` + `ask-role-*` skills).
+
+## What `/ask-setup-agents` does
+
+1. Scans workspace siblings for stack/tooling signals and reads light business context (READMEs, product knowledge if any).
+2. Proposes a persona hint + role list; user confirms or edits.
+3. Writes `agent-knowledge/knowledge/architecture/agents/roles.md` (RACI).
+4. Copies approved role skills from kit `templates/role-skills/` into product `.cursor/skills/ask-role-*` and fills frontiers.
+
+Does **not** dump every template role into the product without confirmation.
 
 ## What `/ask-centralize-docs` does
 
@@ -46,9 +56,10 @@ Does **not** run without authorization. Does **not** delete originals during the
 ## What `/ask-update` does
 
 1. `git fetch` / `git pull` in the **kit clone** (or report if dirty/conflicts).
-2. Re-merges kit `.cursor/` → product home **without** overwriting product overlays or stack skills (brings new skills such as `ask-centralize-docs`).
+2. Re-merges kit `.cursor/` → product home **without** overwriting product overlays or stack skills (brings new skills such as `ask-centralize-docs`, `ask-setup-agents`).
 3. Does **not** reset or replace `agent-knowledge/` content (memory stays put). Optionally copies **new** template files that are missing only (never overwrite existing knowledge files).
 4. Does **not** offer a documentation scan — users run `/ask-centralize-docs` manually when they want it.
+5. **Once only:** if `ask-project.mdc` has not yet marked the notice done, mention `/ask-setup-agents` (what it is for); set the notice flag to `done`. Do not re-analyze on every update.
 
 ## Human setup (once)
 
@@ -103,9 +114,10 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Record **kit directory** and **agent-knowledge directory** in `ask-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `ask-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage). Do **not** create or keep a session backlog under `.cursor/` (SoT is `users/<email>/session-backlog.md`). On merge/update, remove obsolete `.cursor/out-of-scope.md` after migrating any content.
 4. Instantiate **agent-knowledge** at the chosen path (new git repo; product remote later; user + prefs). Ensure `users/<email>/session-backlog.md` exists (per-user session backlog for `/ask-backlog`).
 5. Fill `ask-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `ask-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed). Migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into the user’s `session-backlog.md`, then **delete** those legacy files (no stubs).
-6. Always install/update the `ask-centralize-docs` skill with the kit merge, but **do not** prompt to run it (manual only via `/ask-centralize-docs`).
-7. No commit/push unless asked.
-8. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); optional mention of `/ask-centralize-docs`; `/ask-requirement`, `/ask-backlog`, `/ask-update`.
+6. Always install/update skills `ask-centralize-docs` and `ask-setup-agents` with the kit merge. **Do not** prompt for doc scan (manual only via `/ask-centralize-docs`).
+7. Run **`/ask-setup-agents`** (same session): propose roles → user confirm → write `roles.md` + copy approved `ask-role-*` from kit `templates/role-skills/`. If the user declines setup, leave `Update notice for /ask-setup-agents: pending` in `ask-project.mdc`.
+8. No commit/push unless asked.
+9. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); roles created or skipped; optional mention of `/ask-centralize-docs`; `/ask-requirement`, `/ask-backlog`, `/ask-update`.
 
 ### MUST NOT
 
@@ -114,6 +126,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 - Put global/per-user memory inside the kit clone.
 - Overwrite product stack rules/skills without explicit ask.
 - Use the kit directory as the product `.cursor/` home.
+- Merge all of `templates/role-skills/` into product `.cursor/` without `/ask-setup-agents` confirmation.
 
 ### Done when
 
@@ -121,7 +134,8 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 - [ ] User-confirmed agent-knowledge directory is its own git repo with prefs
 - [ ] User-confirmed product `.cursor/` home has merged rules/skills
 - [ ] Paths recorded for `/ask-update`
-- [ ] Skill `ask-centralize-docs` is available for manual use
+- [ ] Skills `ask-centralize-docs` and `ask-setup-agents` available
+- [ ] `/ask-setup-agents` completed or explicitly skipped
 
 ---
 
@@ -137,10 +151,11 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 1. In **kit directory**: `git status`. If dirty, warn and ask before pull.
 2. `git pull` (or fetch + merge/rebase per user preference; default pull).
-3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `ask-route-via-ask-question.mdc`, `ask-question`, and `ask-centralize-docs` are present. If legacy kit rule filenames remain (`00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`, etc.), add current `ask-*.mdc` names and remove those obsolete kit-sourced files (keep product-only rules).
+3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `ask-route-via-ask-question.mdc`, `ask-question`, `ask-centralize-docs`, and `ask-setup-agents` are present. If legacy kit rule filenames remain (`00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`, etc.), add current `ask-*.mdc` names and remove those obsolete kit-sourced files (keep product-only rules).
 4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template files with user OK. Ensure `users/<email>/session-backlog.md` exists; migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into it, then **delete** the legacy files (no stubs).
 5. Do **not** prompt for `/ask-centralize-docs` (manual only).
-6. Summarize what changed in the user’s chat language (kit revision, merged skills/rules).
+6. **Once-only notice:** if `ask-project.mdc` lacks Agents / `Update notice for /ask-setup-agents: done`, tell the user briefly what `/ask-setup-agents` does and offer to run it; then set that notice to `done` (whether or not they run it). Do not re-announce on later updates.
+7. Summarize what changed in the user’s chat language (kit revision, merged skills/rules).
 
 ### MUST NOT
 
@@ -148,6 +163,37 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 - Force-push kit or product repos.
 - Overwrite `ask-project.mdc` or product stack skills.
 - Assume default paths if install recorded different ones.
+- Re-run full `/ask-setup-agents` analysis on every update without the user asking.
+
+---
+
+## Agent contract — setup agents (`/ask-setup-agents`) (MUST)
+
+### Preconditions
+
+1. Kit directory, agent-knowledge directory, and product `.cursor/` home are known (install record or ask).
+2. User ran `/ask-setup-agents`, or `/ask-install` reached this step, or `/ask-update` once-only offer was accepted.
+
+### Steps
+
+1. Lightweight scan of workspace siblings (exclude kit, vendor/build dirs) + business signals (README, `knowledge/product/` if present).
+2. Propose persona hint + roles + skill names with evidence → user **yes** / edit.
+3. Write/update `agent-knowledge/knowledge/architecture/agents/roles.md`.
+4. For each approved role: copy from kit `templates/role-skills/<name>/` into product `.cursor/skills/<name>/`, fill frontiers. Always prefer including `ask-role-tech-lead` unless declined.
+5. Update `ask-project.mdc` Agents section (`Setup: done`, `Update notice for /ask-setup-agents: done`).
+6. No commit/push unless asked.
+
+### MUST NOT
+
+- Invent roles with no evidence and no confirmation.
+- Overwrite customized `ask-role-*` skills without asking.
+- Dump every template role without a confirmed list.
+
+### Done when
+
+- [ ] `roles.md` reflects confirmed roles
+- [ ] Matching `ask-role-*` skills exist under product `.cursor/skills/`
+- [ ] `ask-project.mdc` Agents section updated
 
 ---
 
@@ -238,7 +284,8 @@ Same outcomes as the contracts. Uninstall = reverse chosen pieces only. Centrali
 - [ ] Product `.cursor/` has `ask-*` skills; `ask-project.mdc` filled
 - [ ] `agent-knowledge/` is a **separate** git repo (own remote when you add it)
 - [ ] User `preferences.yaml` set
-- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs` known
+- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` known
+- [ ] `knowledge/architecture/agents/roles.md` filled (or setup explicitly skipped)
 
 ## Contributing back to the kit
 

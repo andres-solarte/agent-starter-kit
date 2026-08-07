@@ -20,7 +20,7 @@ MUST follow `.cursor/skills/ask-agent-skill-discipline/SKILL.md` (do not improvi
 
 ## Source of truth
 
-1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create if missing) — roles, RACI, pipeline, loop engineering
+1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline, loop engineering; role skills `ask-role-*` under product `.cursor/skills/`
 2. `agent-knowledge/knowledge/delivery/PROCESS.md` — delivery process
 3. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
 4. `agent-knowledge/knowledge/delivery/NEXT.md` — what follows

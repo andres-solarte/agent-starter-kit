@@ -3,9 +3,10 @@ name: ask-update
 description: >-
   Update an installed agent-starter-kit: resolve kit and product .cursor
   directories (ask if unknown), git pull the kit clone, safely re-merge skills/rules
-  without wiping agent-knowledge. Use when the user says /ask-update, "update
-  the kit", or "pull agent-starter-kit changes". Does not offer doc scan —
-  use /ask-centralize-docs for that.
+  without wiping agent-knowledge. Once, mention /ask-setup-agents if not yet
+  announced. Use when the user says /ask-update, "update the kit", or "pull
+  agent-starter-kit changes". Does not offer doc scan — use
+  /ask-centralize-docs for that.
 ---
 
 # /ask-update — update kit dependency (user)
@@ -20,7 +21,8 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 3. git pull in kit directory
 4. Re-merge .cursor/ → product .cursor/ home (include new ask-* skills/rules)
 5. Leave agent-knowledge content untouched (except missing template stubs / backlog migrate)
-6. Summarize — do NOT offer /ask-centralize-docs
+6. Once-only notice: /ask-setup-agents (if flag pending)
+7. Summarize — do NOT offer /ask-centralize-docs
 ```
 
 ## Resolve paths
@@ -33,6 +35,16 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 
 Do not assume defaults that differ from the original install choices.
 
+## Once-only: `/ask-setup-agents` notice (MUST)
+
+If `ask-project.mdc` has **no** Agents section, or `Update notice for /ask-setup-agents:` is missing/`pending`:
+
+1. In the close, **one short paragraph** (chat language): `/ask-setup-agents` analyzes business + stack and creates role skills + `roles.md` for orchestration. Offer to run it now (yes) or later.
+2. Set `Update notice for /ask-setup-agents: done` in `ask-project.mdc` after announcing (whether or not they run it).
+3. Do **not** re-run full analysis every update. Do **not** re-announce if the flag is already `done`.
+
+If they say yes → run `ask-setup-agents` skill. If no → leave roles as-is.
+
 ## Doc centralization
 
 **Do not** prompt for a workspace doc scan on update. If the user wants that, they run `/ask-centralize-docs` themselves.
@@ -43,7 +55,7 @@ Same as `INSTALL.md` update contract: no wipe of agent-knowledge; no overwrite o
 
 **Framework path migrations (MUST):** when replacing an old kit path with a new one (rules, backlog files, etc.), **move/merge content then delete the old file**. Do **not** leave pointer stubs.
 
-After merge, verify product `.cursor/` includes rule `ask-route-via-ask-question.mdc`, skill `ask-question`, and skill `ask-centralize-docs` (add if missing — process-critical).
+After merge, verify product `.cursor/` includes rule `ask-route-via-ask-question.mdc`, skills `ask-question`, `ask-centralize-docs`, and `ask-setup-agents` (add if missing — process-critical).
 
 If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask-` names, e.g. `00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`), add the current `ask-*.mdc` files and remove those obsolete kit-sourced copies (do not delete product-only rules).
 
@@ -51,4 +63,4 @@ If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask
 
 ## Close
 
-Kit revision; what merged into product `.cursor/`; memory path untouched. Optional one line: docs scan is `/ask-centralize-docs` if they ask.
+Kit revision; what merged into product `.cursor/`; memory path untouched; once-only setup-agents notice if applicable. Optional one line: docs scan is `/ask-centralize-docs` if they ask.

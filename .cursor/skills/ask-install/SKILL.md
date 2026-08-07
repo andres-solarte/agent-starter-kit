@@ -3,9 +3,10 @@ name: ask-install
 description: >-
   Install agent-starter-kit as an updatable dependency: ask where the kit and
   agent-knowledge directories should live, merge .cursor into the chosen product
-  home, instantiate agent-knowledge as a NEW git repo. Doc scan is separate
-  (/ask-centralize-docs). Use when the user says /ask-install, "install this
-  kit", or wants to wire the kit into their workspace.
+  home, instantiate agent-knowledge as a NEW git repo, then run
+  /ask-setup-agents. Doc scan is separate (/ask-centralize-docs). Use when the
+  user says /ask-install, "install this kit", or wants to wire the kit into
+  their workspace.
 ---
 
 # /ask-install — install kit (updatable dependency)
@@ -28,7 +29,8 @@ Global knowledge → `…/knowledge/`. Per-user → `…/users/<email>/`.
 1. Q&A: kit dir + agent-knowledge dir (+ .cursor home if needed)
 2. Summary of paths → yes
 3. Ensure kit; merge .cursor/; create agent-knowledge; fill prefs + session-backlog
-4. Record paths; close — do NOT prompt for doc scan
+4. Run /ask-setup-agents (scan → propose roles → write roles.md + ask-role-* skills)
+5. Record paths; close — do NOT prompt for doc scan
 ```
 
 ## Q&A (MUST — directories first)
@@ -42,6 +44,10 @@ Global knowledge → `…/knowledge/`. Per-user → `…/users/<email>/`.
 | Sibling repos | Empty |
 | `communication_language` | `en` |
 
+## Setup agents (MUST)
+
+After agent-knowledge exists and paths are recorded, **run** `.cursor/skills/ask-setup-agents/SKILL.md` in the same install session (user confirmation of the role proposal still required). Do not skip unless the user explicitly declines (“skip agent setup”); if skipped, leave `Update notice for /ask-setup-agents: pending` in `ask-project.mdc`.
+
 ## Doc centralization
 
 **Do not** prompt for a workspace doc scan during install. Mention `/ask-centralize-docs` once in the close if useful. Always merge the `ask-centralize-docs` skill so it is available.
@@ -51,7 +57,8 @@ Global knowledge → `…/knowledge/`. Per-user → `…/users/<email>/`.
 - Do not use the kit directory as the product `.cursor/` home.
 - Do not overwrite product stack skills/rules without explicit ask.
 - Do not delete kit `.git`.
-- Always merge skill `ask-centralize-docs` with the kit.
+- Always merge skills `ask-centralize-docs` and `ask-setup-agents` with the kit.
+- Do **not** merge `templates/role-skills/` into product `.cursor/` wholesale — `/ask-setup-agents` copies only approved roles.
 
 ## MUST NOT
 
@@ -62,4 +69,4 @@ Global knowledge → `…/knowledge/`. Per-user → `…/users/<email>/`.
 
 ## Close
 
-Echo the three directories; optional one line that docs scan is `/ask-centralize-docs`; `/ask-requirement`, `/ask-update`.
+Echo the three directories; roles created (or skipped); optional one line that docs scan is `/ask-centralize-docs`; `/ask-requirement`, `/ask-update`.
