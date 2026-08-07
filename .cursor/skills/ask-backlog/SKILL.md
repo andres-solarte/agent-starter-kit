@@ -27,7 +27,7 @@ Do **not** write under `.cursor/` or under global `knowledge/delivery/`.
 5. Return to current focus
 ```
 
-**Migrate once if needed:** Open items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` → this user’s `session-backlog.md`, then leave pointer stubs or remove legacy files.
+**Migrate once if needed:** Open (and Done, if useful) items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` → this user’s `session-backlog.md`, then **delete** those legacy files. Do **not** leave pointer stubs.
 
 ## Commands
 

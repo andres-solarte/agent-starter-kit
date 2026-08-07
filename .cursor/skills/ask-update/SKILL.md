@@ -48,11 +48,13 @@ Useful for workspaces that installed the kit before this step existed.
 
 Same as `INSTALL.md` update contract: no wipe of agent-knowledge; no overwrite of product overlays; no force-push; no commit unless asked.
 
+**Framework path migrations (MUST):** when replacing an old kit path with a new one (rules, backlog files, etc.), **move/merge content then delete the old file**. Do **not** leave pointer stubs.
+
 After merge, verify product `.cursor/` includes rule `ask-route-via-ask-question.mdc`, skill `ask-question`, and skill `ask-centralize-docs` (add if missing — process-critical).
 
 If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask-` names, e.g. `00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`), add the current `ask-*.mdc` files and remove those obsolete kit-sourced copies (do not delete product-only rules).
 
-**Session backlog:** ensure `users/<email>/session-backlog.md` exists for the current user. Migrate Open items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into that file; leave pointer stubs or remove legacy files.
+**Session backlog:** ensure `users/<email>/session-backlog.md` exists for the current user. Migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into that file, then **delete** the legacy files (no stubs).
 
 ## Close
 

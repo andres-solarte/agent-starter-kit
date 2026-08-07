@@ -24,6 +24,8 @@ Does not include stack skills (framework, testing, DB) or `speckit-*`; those are
 
 **Naming:** all kit **skills** and **rules** use an `ask-` segment in their names (skills: `ask-*`; rules: `ask-*.mdc`) to avoid colliding with other Cursor rules/skills in the product workspace.
 
+**Migrations:** when the kit relocates a file (e.g. backlog path, renamed rules), **migrate content then delete the old path**. Do not leave pointer stubs.
+
 ## What `/ask-install` does
 
 1. Leaves the **kit clone** intact (updatable dependency).
@@ -98,9 +100,9 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 1. **Ensure kit at kit directory:** clone if needed; verify `INSTALL.md` + `agent-knowledge-template/`; keep `.git` + upstream.
 2. Inventory product `.cursor/` home.
-3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Record **kit directory** and **agent-knowledge directory** in `ask-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `ask-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage). Do **not** keep the session backlog under `.cursor/` (SoT is agent-knowledge).
+3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Record **kit directory** and **agent-knowledge directory** in `ask-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `ask-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage). Do **not** create or keep a session backlog under `.cursor/` (SoT is `users/<email>/session-backlog.md`). On merge/update, remove obsolete `.cursor/out-of-scope.md` after migrating any content.
 4. Instantiate **agent-knowledge** at the chosen path (new git repo; product remote later; user + prefs). Ensure `users/<email>/session-backlog.md` exists (per-user session backlog for `/ask-backlog`).
-5. Fill `ask-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `ask-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed). Migrate Open items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into the user’s `session-backlog.md`.
+5. Fill `ask-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `ask-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed). Migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into the user’s `session-backlog.md`, then **delete** those legacy files (no stubs).
 6. **Documentation centralization (gated):** ask whether to scan the **entire multi-repo workspace** for docs. If **no**, skip. If **yes**, run `.cursor/skills/ask-centralize-docs/SKILL.md` (copy into agent-knowledge → recommend cleanup of originals). Always install/update the `ask-centralize-docs` skill with the kit merge.
 7. No commit/push unless asked.
 8. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); note whether docs were centralized; `/ask-requirement`, `/ask-backlog`, `/ask-update`, `/ask-centralize-docs`.
@@ -136,7 +138,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 1. In **kit directory**: `git status`. If dirty, warn and ask before pull.
 2. `git pull` (or fetch + merge/rebase per user preference; default pull).
 3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `ask-route-via-ask-question.mdc`, `ask-question`, and `ask-centralize-docs` are present. If legacy kit rule filenames remain (`00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`, etc.), add current `ask-*.mdc` names and remove those obsolete kit-sourced files (keep product-only rules).
-4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template stubs with user OK. Ensure `users/<email>/session-backlog.md` exists; migrate Open items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into it.
+4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template files with user OK. Ensure `users/<email>/session-backlog.md` exists; migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into it, then **delete** the legacy files (no stubs).
 5. **Documentation centralization (gated):** offer a full-workspace doc scan for installs that never ran it (or want a refresh). If **yes**, run `ask-centralize-docs` (authorize scan → copy → recommend cleanup). If **no**, skip; user can run `/ask-centralize-docs` later. Do **not** scan on every update without asking.
 6. Summarize what changed in the user’s chat language (kit revision, merged skills/rules, whether doc scan ran).
 
