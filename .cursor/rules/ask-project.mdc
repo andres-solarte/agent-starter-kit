@@ -7,7 +7,7 @@
 - Code, commits, technical names, and **URL paths**: **English by default**
 - Durable agent-written knowledge/docs follow `agent-knowledge/config.yaml` → `locale.content` (default `en`)
 - Paths and identifiers: `locale.paths` (always `en`)
-- Chat language with the user is **per-user**, not project-wide — see rule `08-ask-user-communication` and `users/<email>/preferences.yaml`
+- Chat language with the user is **per-user**, not project-wide — see rule `ask-user-communication` and `users/<email>/preferences.yaml`
 
 ## Documentation
 

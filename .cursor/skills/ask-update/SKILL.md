@@ -28,7 +28,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 
 | Path | How |
 |------|-----|
-| Kit directory | From `00-ask-project.mdc` / `ask-kit-paths.mdc`, or ask |
+| Kit directory | From `ask-project.mdc` / `ask-kit-paths.mdc`, or ask |
 | Product `.cursor/` home | Same, or ask |
 | agent-knowledge directory | Confirm only to **not** overwrite; needed if user accepts doc scan |
 
@@ -48,9 +48,9 @@ Useful for workspaces that installed the kit before this step existed.
 
 Same as `INSTALL.md` update contract: no wipe of agent-knowledge; no overwrite of product overlays; no force-push; no commit unless asked.
 
-After merge, verify product `.cursor/` includes rule `16-ask-route-via-ask-question.mdc`, skill `ask-question`, and skill `ask-centralize-docs` (add if missing — process-critical).
+After merge, verify product `.cursor/` includes rule `ask-route-via-ask-question.mdc`, skill `ask-question`, and skill `ask-centralize-docs` (add if missing — process-critical).
 
-If the product still has **legacy kit rule filenames** without `ask-` (e.g. `00-project.mdc`, `16-route-via-ask-question.mdc`), add the new `NN-ask-*.mdc` files and remove the obsolete kit-sourced copies (do not delete product-only rules).
+If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask-` names, e.g. `00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`), add the current `ask-*.mdc` files and remove those obsolete kit-sourced copies (do not delete product-only rules).
 
 ## Close
 

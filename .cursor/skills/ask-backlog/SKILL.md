@@ -62,7 +62,7 @@ Example: «Parked: notification preferences. Continuing with the current request
 
 | Piece | Role |
 |-------|------|
-| Rule `09-ask-focus-scope` | Same policy; this skill is the explicit procedure |
+| Rule `ask-focus-scope` | Same policy; this skill is the explicit procedure |
 | `/ask-requirement` | When they want to **do** a backlog item: take it off the list and treat it as a requirement |
 | `ask-git-project` | Does not apply (no required commit when parking) |
 
