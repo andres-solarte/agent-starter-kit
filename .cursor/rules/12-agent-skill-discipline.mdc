@@ -5,8 +5,9 @@
 | Slash | For |
 |-------|-----|
 | `/ask-install` | Install kit as updatable dependency (see `INSTALL.md`) |
-| `/ask-update` | Pull kit upstream + safe re-merge into product |
+| `/ask-update` | Pull kit upstream + safe re-merge; offers `/ask-centralize-docs` |
 | `/ask-uninstall` | Remove kit wiring (asks what to delete; safe defaults keep memory) |
+| `/ask-centralize-docs` | Scan workspace docs → copy into agent-knowledge → recommend cleanup |
 | `/ask-question` | Ask the framework / default triage (rule `16`; may hand off to requirement) |
 | `/ask-requirement` | Product/code work now |
 | `/ask-backlog` | Park an idea without cutting focus |

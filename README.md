@@ -4,8 +4,9 @@ Reusable process engine for coding agents (Cursor, Claude Code, etc.): skill dis
 
 Does not include stack skills or `speckit-*` — those are added per project.
 
-> **Install:** `/ask-install` (asks for **kit**, **agent-knowledge**, and `.cursor/` directories).  
-> **Update:** `git pull` in the kit directory + `/ask-update`.  
+> **Install:** `/ask-install` (asks for directories; offers authorized workspace doc scan).  
+> **Centralize docs:** `/ask-centralize-docs` (scan → copy into agent-knowledge → recommend deleting originals).  
+> **Update:** `git pull` in the kit directory + `/ask-update` (also offers doc scan for existing installs).  
 > **Uninstall:** `/ask-uninstall` (asks what to remove; memory kept by default).  
 > Guide: **[INSTALL.md](INSTALL.md)**.
 
@@ -14,7 +15,7 @@ Does not include stack skills or `speckit-*` — those are added per project.
 ```text
 .cursor/
   rules/     — process rules
-  skills/    — ask-install, ask-update, ask-uninstall, ask-question, …
+  skills/    — ask-install, ask-centralize-docs, ask-update, ask-uninstall, ask-question, …
 agent-knowledge-template/
   — skeleton for a NEW product git repo (global + per-user memory)
 INSTALL.md   — dependency install + update contracts
@@ -38,8 +39,9 @@ INSTALL.md   — dependency install + update contracts
 
 | Slash | For |
 |-------|-----|
-| `/ask-install` | First-time wire-up (asks for directories) |
-| `/ask-update` | Pull kit + safe re-merge |
+| `/ask-install` | First-time wire-up (asks for directories; offers doc scan) |
+| `/ask-centralize-docs` | Scan workspace → copy docs → recommend cleanup |
+| `/ask-update` | Pull kit + safe re-merge; offers doc scan for existing installs |
 | `/ask-uninstall` | Remove wiring (asks what to delete) |
 | `/ask-question` | Ask the framework / default triage (may become a requirement) |
 | `/ask-requirement` | Product work |

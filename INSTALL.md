@@ -30,12 +30,23 @@ Does not include stack skills (framework, testing, DB) or `speckit-*`; those are
 2. Merges kit `.cursor/rules` + `.cursor/skills` into **product home** (safe merge).
 3. Instantiates **`agent-knowledge/`** as a **new** git repository (own history/remote).
 4. Fills product placeholders and per-user `preferences.yaml`.
+5. **Offers** a full-workspace documentation scan (user must authorize) → `/ask-centralize-docs`: copy into agent-knowledge, then **recommend** deleting originals.
+
+## What `/ask-centralize-docs` does
+
+1. Asks permission to scan **all** workspace sibling folders.
+2. Lists documentation candidates and proposed `knowledge/` destinations.
+3. **Copies** approved files into agent-knowledge; writes `knowledge/imported/IMPORT-MAP.md`.
+4. **Recommends** removing or stubbing originals; deletes only with explicit confirmation.
+
+Does **not** run without authorization. Does **not** delete originals during the copy step.
 
 ## What `/ask-update` does
 
 1. `git fetch` / `git pull` in the **kit clone** (or report if dirty/conflicts).
-2. Re-merges kit `.cursor/` → product home **without** overwriting product overlays or stack skills.
+2. Re-merges kit `.cursor/` → product home **without** overwriting product overlays or stack skills (brings new skills such as `ask-centralize-docs`).
 3. Does **not** reset or replace `agent-knowledge/` content (memory stays put). Optionally copies **new** template files that are missing only (never overwrite existing knowledge files).
+4. **Offers** the same gated documentation scan as install (`/ask-centralize-docs`) so already-installed workspaces can opt in without reinstalling. Never scans without asking.
 
 ## Human setup (once)
 
@@ -90,8 +101,9 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Ensure `out-of-scope.md` exists. Record **kit directory** and **agent-knowledge directory** in `00-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `16-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage).
 4. Instantiate **agent-knowledge** at the chosen path (new git repo; product remote later; user + prefs).
 5. Fill `00-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `15-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed).
-6. No commit/push unless asked.
-7. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); `/ask-requirement`, `/ask-backlog`, `/ask-update`.
+6. **Documentation centralization (gated):** ask whether to scan the **entire multi-repo workspace** for docs. If **no**, skip. If **yes**, run `.cursor/skills/ask-centralize-docs/SKILL.md` (copy into agent-knowledge → recommend cleanup of originals). Always install/update the `ask-centralize-docs` skill with the kit merge.
+7. No commit/push unless asked.
+8. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); note whether docs were centralized; `/ask-requirement`, `/ask-backlog`, `/ask-update`, `/ask-centralize-docs`.
 
 ### MUST NOT
 
@@ -107,6 +119,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 - [ ] User-confirmed agent-knowledge directory is its own git repo with prefs
 - [ ] User-confirmed product `.cursor/` home has merged rules/skills
 - [ ] Paths recorded for `/ask-update`
+- [ ] User was offered workspace doc scan (`/ask-centralize-docs`); if accepted, IMPORT-MAP updated and cleanup recommended
 
 ---
 
@@ -122,9 +135,10 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 1. In **kit directory**: `git status`. If dirty, warn and ask before pull.
 2. `git pull` (or fetch + merge/rebase per user preference; default pull).
-3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `16-route-via-ask-question.mdc` and `ask-question` are present.
+3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `16-route-via-ask-question.mdc`, `ask-question`, and `ask-centralize-docs` are present.
 4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template stubs with user OK.
-5. Summarize what changed in the user’s chat language.
+5. **Documentation centralization (gated):** offer a full-workspace doc scan for installs that never ran it (or want a refresh). If **yes**, run `ask-centralize-docs` (authorize scan → copy → recommend cleanup). If **no**, skip; user can run `/ask-centralize-docs` later. Do **not** scan on every update without asking.
+6. Summarize what changed in the user’s chat language (kit revision, merged skills/rules, whether doc scan ran).
 
 ### MUST NOT
 
@@ -132,6 +146,44 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 - Force-push kit or product repos.
 - Overwrite `00-project.mdc` or product stack skills.
 - Assume default paths if install recorded different ones.
+
+---
+
+## Agent contract — centralize docs (`/ask-centralize-docs`) (MUST)
+
+### Preconditions
+
+1. `agent-knowledge` directory exists (after install or already present).
+2. User ran `/ask-centralize-docs` **or** accepted the scan offer at the end of `/ask-install`.
+
+### Authorize (MUST)
+
+Ask permission to scan **all workspace sibling folders** for documentation. No recursive scan without **yes**.
+
+### Scan
+
+- Include every multi-root workspace folder.
+- Exclude: kit directory, agent-knowledge directory, `.git`, `node_modules`, build/cache dirs.
+- Candidate docs: README*, CONTRIBUTING*, ARCHITECTURE*, DESIGN*, docs/**, ADR trees, other root/docs markdown (user may deselect; ask before including CHANGELOG*).
+
+### Copy then recommend delete
+
+1. Show inventory `source → knowledge/…` → user yes to the set.
+2. **Copy** only (write `knowledge/imported/IMPORT-MAP.md`). Do not delete originals here.
+3. List originals now duplicated and **recommend** delete or stub with pointer to agent-knowledge.
+4. Delete/stub **only** paths the user confirms (default: keep originals).
+
+### MUST NOT
+
+- Scan or delete without authorization.
+- Move instead of copy on the first step.
+- Import secrets or overwrite existing knowledge SoT without asking.
+
+### Done when
+
+- [ ] IMPORT-MAP reflects copies
+- [ ] User saw cleanup recommendations
+- [ ] Any deletions/stubs match an explicit approved list
 
 ---
 
@@ -174,9 +226,9 @@ Show exact paths to delete → user **yes** to that list.
 
 ---
 
-## Manual install / update / uninstall
+## Manual install / update / uninstall / centralize
 
-Same outcomes as the contracts. Uninstall = reverse the chosen pieces only (see uninstall contract).
+Same outcomes as the contracts. Uninstall = reverse chosen pieces only. Centralize = `/ask-centralize-docs` contract.
 
 ## Post-install checklist
 
@@ -184,7 +236,7 @@ Same outcomes as the contracts. Uninstall = reverse the chosen pieces only (see 
 - [ ] Product `.cursor/` has `ask-*` skills; `00-project.mdc` filled
 - [ ] `agent-knowledge/` is a **separate** git repo (own remote when you add it)
 - [ ] User `preferences.yaml` set
-- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall` known
+- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs` known
 
 ## Contributing back to the kit
 
