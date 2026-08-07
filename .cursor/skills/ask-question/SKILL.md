@@ -73,7 +73,7 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 | Install / update / uninstall / centralize docs | `INSTALL.md` + `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs` |
 | Imported / centralized docs map | `knowledge/imported/IMPORT-MAP.md` |
 | Which slash for work vs park | `/ask-requirement` vs `/ask-backlog` |
-| Out of scope list | `.cursor/out-of-scope.md` |
+| Session backlog | `<agent-knowledge>/users/<email>/session-backlog.md` |
 | Doc locale | `config.yaml` → `locale.content` |
 
 ## Style (MUST)

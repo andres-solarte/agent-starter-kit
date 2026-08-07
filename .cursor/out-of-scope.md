@@ -1,7 +1,7 @@
-# Out of scope
+# Out of scope (moved)
 
-Living list of ideas/bugs/requests parked by the `ask-backlog` skill and rule `ask-focus-scope`.
+Session backlog is **per user** in agent-knowledge:
 
-## Open
+`users/<email>/session-backlog.md`
 
-## Done / discarded
+Do not append here. `/ask-backlog` writes to that file only.

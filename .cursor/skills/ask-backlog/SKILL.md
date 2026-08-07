@@ -2,25 +2,32 @@
 name: ask-backlog
 description: >-
   Park ideas, bugs, or requests for later without interrupting work in progress.
-  Use when the user says /ask-backlog, "note this", "later", "while we're at it", or
-  wants to save something for later while staying on the current task.
+  Writes to the current user's agent-knowledge session-backlog.md (committable).
+  Use when the user says /ask-backlog, "note this", "later", "while we're at it",
+  or wants to save something for later while staying on the current task.
 ---
 
 # /ask-backlog — park for later (user)
 
-**Fast** door so ideas are not lost. **Does not** execute the work. **Does not** replace `/ask-requirement` (that is for doing something now).
+**Fast** door so ideas are not lost. **Does not** execute the work. **Does not** replace `/ask-requirement`.
 
-Living list: `.cursor/out-of-scope.md`
+**Living list (SoT):** `<agent-knowledge>/users/<email>/session-backlog.md`  
+Resolve email via `git config user.email` (lowercase, keep `@`). Create from `users/_template/session-backlog.md` if missing.
+
+Do **not** write under `.cursor/` or under global `knowledge/delivery/`.  
 (If the project has a formal product backlog, move items there only when the user confirms promoting an item.)
 
 ## Flow (MUST)
 
 ```text
 1. Capture the text (idea / bug / "later…")
-2. Write a bullet in out-of-scope.md
-3. Acknowledge in ONE sentence
-4. Return to current focus (no long Q&A, no plan, no code for that idea)
+2. Resolve agent-knowledge + user email; ensure users/<email>/session-backlog.md exists
+3. Write a bullet under ## Open
+4. Acknowledge in ONE sentence
+5. Return to current focus
 ```
+
+**Migrate once if needed:** Open items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` → this user’s `session-backlog.md`, then leave pointer stubs or remove legacy files.
 
 ## Commands
 
@@ -28,10 +35,10 @@ Living list: `.cursor/out-of-scope.md`
 |-------|--------|
 | `/ask-backlog` + text | Park that text |
 | `/ask-backlog` with no text | Ask in one sentence: «What should we note?» |
-| `/ask-backlog list` or «show me the backlog» | List only the **Open** section (short summary; do not clear) |
-| `/ask-backlog done …` / «we already did X» | Move the bullet to **Done / discarded** if clearly identified |
+| `/ask-backlog list` or «show me the backlog» | List only **Open** (short; do not clear) |
+| `/ask-backlog done …` / «we already did X» | Move bullet to **Done / discarded** if clear |
 
-Synonyms that trigger the same flow (even without `/ask-backlog`): «note this», «later», «while we're at it», «for later», «not now but…».
+Synonyms: «note this», «later», «while we're at it», «for later», «not now but…».
 
 ## Bullet format
 
@@ -39,34 +46,30 @@ Synonyms that trigger the same flow (even without `/ask-backlog`): «note this»
 - YYYY-MM-DD — short summary in plain language (optional context if helpful)
 ```
 
-- Date = today (user's timezone if known).
-- No loose internal codes in chat when acknowledging; in the file you may leave an ID in parentheses if it already existed.
-- Do not duplicate: if a nearly identical bullet exists, do not add another; say «Already noted» in one sentence.
-
 ## Communication (MUST)
 
-- **One sentence** to the user: what was parked.
-- Then **continue** with the focused task (if there is one).
-- Do not ask for long confirmation. Do not offer a skill menu. Do not start implementing the parked item.
+- **One sentence** parked + continue focus.
+- No long confirmation, skill menu, or implementing the parked item.
 
-Example: «Parked: notification preferences. Continuing with the current request.»
+## Git
+
+Parking does not require a commit. `session-backlog.md` is **tracked**; when the user commits agent-knowledge, it can go with that repo (`ask-git-project`).
 
 ## MUST NOT
 
-- Execute, specify, or deeply plan the parked item.
-- Switch focus to the new item.
-- Put it in a formal product backlog unless the user says they want it as a confirmed improvement.
-- Clear the list «for cleanup» without being asked.
+- Append only under `.cursor/` or global `knowledge/delivery/out-of-scope.md`.
+- Execute or deeply plan the parked item.
+- Clear the list without being asked.
 
-## Relation to other pieces
+## Relation
 
 | Piece | Role |
 |-------|------|
-| Rule `ask-focus-scope` | Same policy; this skill is the explicit procedure |
-| `/ask-requirement` | When they want to **do** a backlog item: take it off the list and treat it as a requirement |
-| `ask-git-project` | Does not apply (no required commit when parking) |
+| Rule `ask-focus-scope` | Same park policy |
+| `/ask-requirement` | Do a parked item → treat as requirement |
+| `ask-git-project` | Optional commit in agent-knowledge repo |
 
-## For the user: how to use it
+## For the user
 
-1. Mid other work: `/ask-backlog that we can also…`
-2. When you want to tackle it: `/ask-requirement` with that topic (or «pull from the backlog the one about …»).
+1. Mid work: `/ask-backlog that we can also…`
+2. Later: `/ask-requirement` with that topic.

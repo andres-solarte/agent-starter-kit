@@ -45,6 +45,7 @@ Operating norms for the `agent-knowledge` repo. Short source for agents; routing
 
 ```text
 Personal preference / scratch?           → users/<email>/preferences.yaml | MEMORY.md
+Park for later (session backlog)?      → users/<email>/session-backlog.md
 When / what / why for this block?        → users/<email>/work-log/YYYY/MM/DD.md
 Durable learning not (yet) global?       → users/<email>/knowledge/<relpath>/<file>.md (delta)
 Ready for the team / already agreed?     → knowledge/<relpath>/ (via consolidation promote|merge)
@@ -68,5 +69,5 @@ There is no third `memory/` layer for durable facts.
 ## 7. Privacy
 
 - `work-log/`, `MEMORY.md`, `preferences.yaml` are **local by default** (gitignore in the repo).
-- Shared git **does** include: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`.
+- Shared git **does** include: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`, `session-backlog.md`.
 - Never paste secrets, tokens, or PII into logs or deltas.

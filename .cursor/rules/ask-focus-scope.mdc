@@ -10,7 +10,7 @@ If the user asks for or mentions something **outside the scope** of the current 
 
 ## What to do
 
-1. Follow the **`ask-backlog`** skill (`.cursor/skills/ask-backlog/SKILL.md`): bullet in [`.cursor/out-of-scope.md`](.cursor/out-of-scope.md).
+1. Follow the **`ask-backlog`** skill (`.cursor/skills/ask-backlog/SKILL.md`): bullet in `agent-knowledge/users/<email>/session-backlog.md` (per user; not under `.cursor/`).
 2. Acknowledge in **one sentence** (what was parked).
 3. Continue only with the focused task.
 4. Do not open PRs, migrate, or do a "quick fix" on the side.

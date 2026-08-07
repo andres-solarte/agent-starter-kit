@@ -16,7 +16,7 @@ What to resume: [NEXT.md](./NEXT.md).
 
 | Who | What |
 |-----|------|
-| Human | `/ask-requirement` (work now) · `/ask-backlog` (parked) |
+| Human | `/ask-requirement` (work now) · `/ask-backlog` (parked → `users/<email>/session-backlog.md`) |
 | Agents | `ask-orchestrate-requirement` + role skills (agent-only) |
 
 Do not offer a Spec Kit skill menu to the user.

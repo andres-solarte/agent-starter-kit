@@ -12,6 +12,7 @@ Example: `dev@example.com` → `users/dev@example.com/`.
 users/<email>/
   IDENTITY.md               # tracked
   DELTAS.md                 # tracked
+  session-backlog.md        # tracked — /ask-backlog
   knowledge/                # tracked — deltas only, same paths as global
   work-log/                 # LOCAL — YYYY/MM/DD.md
   preferences.yaml          # LOCAL gitignore — communication_language, detail_level, …

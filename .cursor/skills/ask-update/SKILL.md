@@ -52,6 +52,8 @@ After merge, verify product `.cursor/` includes rule `ask-route-via-ask-question
 
 If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask-` names, e.g. `00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`), add the current `ask-*.mdc` files and remove those obsolete kit-sourced copies (do not delete product-only rules).
 
+**Session backlog:** ensure `users/<email>/session-backlog.md` exists for the current user. Migrate Open items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into that file; leave pointer stubs or remove legacy files.
+
 ## Close
 
 Kit revision; what merged into product `.cursor/`; memory path untouched; whether doc scan ran or was deferred.

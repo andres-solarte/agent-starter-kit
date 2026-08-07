@@ -32,7 +32,7 @@ For each path, ask keep vs remove (defaults in bold = safest):
 | **agent-knowledge directory** | keep / delete directory | **keep** (memory; require typing the path or “delete agent-knowledge” to confirm if remove) |
 | **Product `.cursor/` kit pieces** | keep / remove only `ask-*` skills + kit process rules that match upstream names / remove entire `.cursor/` | **remove only kit-sourced `ask-*` skills + known kit rules** (never delete stack skills the product added unless listed and approved) |
 
-Also ask: remove `out-of-scope.md`? Default **keep**.
+Session backlog lives per user in agent-knowledge (`users/<email>/session-backlog.md`) — it follows the agent-knowledge keep/delete choice.
 
 ## Confirm gate (MUST)
 

@@ -99,7 +99,7 @@ Path: (Spec Kit core / roles / stop for BDR)
 | In scope / accepted BDR? | Stop or hand to Product / open question — do not invent scope |
 | Needs new BDR/ADR? | Tier **ambiguous**; draft proposal; **do not** implement until accepted (or user says proceed) |
 | Which repos? | List explicitly |
-| Out of scope side ideas | Park via `/ask-backlog` / `.cursor/out-of-scope.md` (rule 09) |
+| Out of scope side ideas | Park via `/ask-backlog` → `users/<email>/session-backlog.md` (rule `ask-focus-scope`) |
 | Schema change? | Plan MUST include **existing-data migration** (treat current rows as production) |
 
 Output a short **plan** before heavy work when tier is **normal** or **ambiguous** (unless user already said "execute / do it").

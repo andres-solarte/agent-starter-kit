@@ -30,7 +30,7 @@ Do not use flat keys `locale_content` / `locale_paths` — use nested `locale.co
 | Global | `knowledge/<relpath>/<file>.md` |
 | Individual delta | `users/<email>/knowledge/<relpath>/<file>.md` (**same basename**) |
 
-Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (local), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked).
+Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (local), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked), `session-backlog.md` (tracked — `/ask-backlog`).
 
 ## Read order
 
@@ -75,6 +75,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | Task | Path |
 |------|------|
 | What to do next | `knowledge/delivery/NEXT.md` |
+| Session backlog (`/ask-backlog`) | `users/<email>/session-backlog.md` |
 | Global docs | `knowledge/…` |
 | Delta | `users/<email>/knowledge/<same-relpath>` |
 | Delta index | `users/<email>/DELTAS.md` |

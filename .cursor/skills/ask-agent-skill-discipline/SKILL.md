@@ -60,7 +60,7 @@ SKILL GAP — improving myself (I will not improvise)
 
 - **Default:** do not continue that part.
 - **(a):** create/extend `SKILL.md` (+ project doc if it is a norm) **before or alongside** the work.
-- **(c):** note in `.cursor/out-of-scope.md`.
+- **(c):** note in `users/<email>/session-backlog.md` (via `/ask-backlog`).
 
 For **shared pack** gaps, prefer (a): the skill must exist for all agents.
 
