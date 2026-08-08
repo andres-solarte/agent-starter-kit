@@ -29,7 +29,7 @@ Global knowledge → `…/knowledge/`. Per-user → `…/users/<email>/`.
 1. Q&A: kit dir + agent-knowledge dir (+ .cursor home if needed)
 2. Summary of paths → yes
 3. Ensure kit; merge .cursor/; create agent-knowledge; fill prefs + session-backlog
-4. Run /ask-setup-agents (scan → propose roles → write roles.md + ask-role-* skills)
+4. Run /ask-setup-agents (scan → propose roles → write roles.md + .cursor/agents/ask-*.md)
 5. Record paths; close — do NOT prompt for doc scan
 ```
 
@@ -58,7 +58,7 @@ After agent-knowledge exists and paths are recorded, **run** `.cursor/skills/ask
 - Do not overwrite product stack skills/rules without explicit ask.
 - Do not delete kit `.git`.
 - Always merge skills `ask-centralize-docs` and `ask-setup-agents` with the kit.
-- Do **not** merge `templates/role-skills/` into product `.cursor/` wholesale — `/ask-setup-agents` copies only approved roles.
+- Do **not** merge `templates/role-agents/` into product `.cursor/agents/` wholesale — `/ask-setup-agents` copies only approved subagents.
 
 ## MUST NOT
 

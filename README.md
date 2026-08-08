@@ -5,7 +5,7 @@ Reusable process engine for coding agents (Cursor, Claude Code, etc.): skill dis
 Does not include stack skills or `speckit-*` — those are added per project.
 
 > **Install:** `/ask-install` (asks for directories; runs `/ask-setup-agents`).  
-> **Setup agents:** `/ask-setup-agents` (stack + business → roles + `ask-role-*` skills).  
+> **Setup agents:** `/ask-setup-agents` (stack + business → roles + `.cursor/agents/` subagents).  
 > **Centralize docs (manual):** `/ask-centralize-docs` (scan → copy into agent-knowledge → recommend deleting originals).  
 > **Update:** `git pull` in the kit directory + `/ask-update`.  
 > **Uninstall:** `/ask-uninstall` (asks what to remove; memory kept by default).  
@@ -18,7 +18,7 @@ Does not include stack skills or `speckit-*` — those are added per project.
   rules/     — process rules (`ask-*.mdc`)
   skills/    — ask-install, ask-setup-agents, ask-centralize-docs, ask-update, …
 templates/
-  role-skills/ — ask-role-* stubs copied into the product by /ask-setup-agents
+  role-agents/ — ask-*.md subagent stubs copied into .cursor/agents/ by /ask-setup-agents
 agent-knowledge-template/
   — skeleton for a NEW product git repo (global + per-user memory)
 INSTALL.md   — dependency install + update contracts
@@ -43,7 +43,7 @@ INSTALL.md   — dependency install + update contracts
 | Slash | For |
 |-------|-----|
 | `/ask-install` | First-time wire-up (asks for directories; runs setup agents) |
-| `/ask-setup-agents` | Detect stack/business → roles.md + role skills |
+| `/ask-setup-agents` | Detect stack/business → roles.md + Cursor subagents |
 | `/ask-centralize-docs` | Scan workspace → copy docs → recommend cleanup |
 | `/ask-update` | Pull kit + safe re-merge (once: mention setup agents) |
 | `/ask-uninstall` | Remove wiring (asks what to delete) |

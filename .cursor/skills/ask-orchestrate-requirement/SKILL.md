@@ -2,7 +2,8 @@
 name: ask-orchestrate-requirement
 description: >-
   [agent-only] Tech Lead orchestration with tiering; usually started after
-  /ask-requirement Q&A. Delegates to role skills. Not for end-user slash use.
+  /ask-requirement Q&A. Delegates to role subagents under .cursor/agents/.
+  Not for end-user slash use.
 disable-model-invocation: true
 ---
 
@@ -12,7 +13,7 @@ disable-model-invocation: true
 
 ## Shared pack reminder
 
-Every delegated role also follows shared skills: `ask-agent-skill-discipline` + `ask-git-project`. Role skill is **additional**, not a replacement.
+Every delegated role also follows shared skills: `ask-agent-skill-discipline` + `ask-git-project` + `ask-agent-knowledge`. The **role subagent** (`.cursor/agents/ask-*.md`) is the specialist context; shared skills are not a replacement for it.
 
 ## Mandatory companion skill
 
@@ -20,7 +21,7 @@ MUST follow `.cursor/skills/ask-agent-skill-discipline/SKILL.md` (do not improvi
 
 ## Source of truth
 
-1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline, loop engineering; role skills `ask-role-*` under product `.cursor/skills/`
+1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline; product subagents under `.cursor/agents/ask-*.md`
 2. `agent-knowledge/knowledge/delivery/PROCESS.md` — delivery process
 3. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
 4. `agent-knowledge/knowledge/delivery/NEXT.md` — what follows
@@ -37,7 +38,7 @@ This skill is the **orchestrator procedure**. It does not replace Product for BD
 2. **Execution plan gate** (from `/ask-requirement` step 4): objective, steps, **agents/roles**, how each participates, **order**, done-when. **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
 3. **Classify tier** (below); may appear *inside* the plan (not instead of it).
 4. Review scope, repos, risks (Step 0).
-5. Delegate in the **accepted order** (subagents and/or role skills).
+5. Delegate in the **accepted order** via **Task / role subagents** (and stack skills / Spec Kit as needed).
 6. **Loop** until the block's done-when is met: execute → verify → fix → repeat. Do not start the next roadmap block without a new accepted plan.
 7. Close with the verify bar for that tier.
 
@@ -53,7 +54,7 @@ Classify **before** coding. Default when unsure: **normal** (safer). User may ov
 
 | Tier | Use when **all** true (or user forces) | Path | Skip |
 |------|----------------------------------------|------|------|
-| **micro** | See criteria below | Orchestrate → role skill(s) → verify light → `ask-git-project` if commit asked | Full Spec Kit |
+| **micro** | See criteria below | Orchestrate → role subagent(s) → verify light → agent-knowledge auto close-out | Full Spec Kit |
 | **normal** | Default for features | `git-feature` → specify → [clarify] → plan → tasks → analyze → implement | Shortcuts that skip specify/plan/tasks |
 | **ambiguous** | Scope/product unclear or needs BDR/ADR | Product / clarify / BDR draft **before** code | Implementation until resolved |
 
@@ -143,12 +144,12 @@ Stop coding → Product / clarify / BDR-ADR → re-tier when resolved
 ## Default specialist order (normal / when micro needs several roles)
 
 ```text
-Data (schema/migrations)     [data role skill, if any]
-  → Backend (one API)         [backend role skill, if any]
-  → Frontend (one UI)         [frontend role skill, if any]
-  → Design system             [if design system / storybook exists]
-  → QA automation              [e2e skill, if any]
-  → QA review / Docs / DevOps if needed
+Data (schema/migrations)     [ask-data subagent, if any]
+  → Backend (one API)         [ask-backend]
+  → Frontend (one UI)         [ask-frontend]
+  → Design system             [ask-design if present]
+  → QA automation              [ask-qa / e2e stack skill]
+  → QA review / Docs / DevOps if needed [ask-devops]
   → Close
 ```
 

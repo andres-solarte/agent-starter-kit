@@ -30,7 +30,7 @@ For each path, ask keep vs remove (defaults in bold = safest):
 |-------|---------|---------|
 | **Kit directory** | keep clone / delete directory | **keep** |
 | **agent-knowledge directory** | keep / delete directory | **keep** (memory; require typing the path or “delete agent-knowledge” to confirm if remove) |
-| **Product `.cursor/` kit pieces** | keep / remove only `ask-*` skills + kit process rules that match upstream names / remove entire `.cursor/` | **remove only kit-sourced `ask-*` skills + known kit rules** (never delete stack skills the product added unless listed and approved) |
+| **Product `.cursor/` kit pieces** | keep / remove kit-sourced `ask-*` skills + kit process rules + kit-created `ask-*` **agents** / remove entire `.cursor/` | **remove kit-sourced skills/rules + `.cursor/agents/ask-*.md` from setup** (never delete stack skills the product added unless listed and approved) |
 
 Session backlog lives per user in agent-knowledge (`users/<email>/session-backlog.md`) — it follows the agent-knowledge keep/delete choice.
 
@@ -40,7 +40,7 @@ Show a bullet list of **exact paths** that will be deleted or files that will be
 
 ## Execution
 
-1. Product `.cursor/`: delete only approved skill folders / rule files (kit-sourced). Leave product overlays and non-kit skills.
+1. Product `.cursor/`: delete only approved skill folders / rule files / `agents/ask-*.md` (kit-sourced). Leave product overlays and non-kit skills.
 2. agent-knowledge: delete directory **only** if explicitly confirmed.
 3. Kit directory: delete **only** if explicitly confirmed (this removes the updatable dependency clone).
 4. Do not `git push --force` or touch app repos (`repo-api`, etc.).

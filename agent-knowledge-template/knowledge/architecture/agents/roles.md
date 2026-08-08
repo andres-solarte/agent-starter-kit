@@ -10,10 +10,10 @@ Filled by `/ask-setup-agents` (or manually). Used by `ask-orchestrate-requiremen
 
 ## Roles
 
-| Role | Skill | Primary surfaces / repos | Notes |
-|------|-------|--------------------------|-------|
-| Tech Lead | `ask-role-tech-lead` | orchestration | Always with shared pack |
-| … | `ask-role-…` | … | … |
+| Role | Subagent | Primary surfaces / repos | Notes |
+|------|----------|--------------------------|-------|
+| Tech Lead | `.cursor/agents/ask-tech-lead.md` | orchestration | Always with shared skills pack |
+| … | `.cursor/agents/ask-….md` | … | … |
 
 ## Default specialist order
 
@@ -36,6 +36,7 @@ Adjust to this product after setup.
 
 ## Delegation
 
-- Shared pack on every role: `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
-- Tech Lead / `ask-orchestrate-requirement` assigns **role skills** + scoped subagents (one point at a time).
-- Missing role skill → `SKILL GAP` (do not improvise).
+- **Roles = Cursor subagents** under `.cursor/agents/ask-*.md` (Task tool / `/name`). Isolated context.
+- **Shared skills pack** (same agent procedures, not subagents): `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
+- Tech Lead / `ask-orchestrate-requirement` delegates **one point** per turn to the matching subagent.
+- Missing subagent for a needed role → run `/ask-setup-agents` or add the `.md` (do not improvise a fake role).

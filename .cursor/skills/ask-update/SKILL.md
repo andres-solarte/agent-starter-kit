@@ -21,8 +21,9 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 3. git pull in kit directory
 4. Re-merge .cursor/ → product .cursor/ home (include new ask-* skills/rules)
 5. Leave agent-knowledge content untouched (except missing template stubs / backlog migrate)
-6. Once-only notice: /ask-setup-agents (if flag pending)
-7. Summarize — do NOT offer /ask-centralize-docs
+6. If legacy ask-role-* skills exist: mention once that /ask-setup-agents migrates them to .cursor/agents/ (offer to run)
+7. Once-only notice: /ask-setup-agents (if flag pending)
+8. Summarize — do NOT offer /ask-centralize-docs
 ```
 
 ## Resolve paths
@@ -39,7 +40,7 @@ Do not assume defaults that differ from the original install choices.
 
 If `ask-project.mdc` has **no** Agents section, or `Update notice for /ask-setup-agents:` is missing/`pending`:
 
-1. In the close, **one short paragraph** (chat language): `/ask-setup-agents` analyzes business + stack and creates role skills + `roles.md` for orchestration. Offer to run it now (yes) or later.
+1. In the close, **one short paragraph** (chat language): `/ask-setup-agents` analyzes business + stack and creates **Cursor subagents** under `.cursor/agents/` plus `roles.md` for orchestration. Offer to run it now (yes) or later.
 2. Set `Update notice for /ask-setup-agents: done` in `ask-project.mdc` after announcing (whether or not they run it).
 3. Do **not** re-run full analysis every update. Do **not** re-announce if the flag is already `done`.
 

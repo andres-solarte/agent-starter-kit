@@ -72,7 +72,7 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 | Personal deltas | `users/<email>/knowledge/…` + `DELTAS.md` |
 | Kit / `.cursor/` paths | Install record; `/ask-update` for upgrades |
 | Install / update / uninstall / centralize docs / setup agents | `INSTALL.md` + `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` |
-| Agent roles / RACI | `knowledge/architecture/agents/roles.md` · `/ask-setup-agents` |
+| Agent roles / RACI / subagents | `knowledge/architecture/agents/roles.md` · `.cursor/agents/ask-*.md` · `/ask-setup-agents` |
 | Imported / centralized docs map | `knowledge/imported/IMPORT-MAP.md` |
 | Which slash for work vs park | `/ask-requirement` vs `/ask-backlog` |
 | Session backlog | `<agent-knowledge>/users/<email>/session-backlog.md` |

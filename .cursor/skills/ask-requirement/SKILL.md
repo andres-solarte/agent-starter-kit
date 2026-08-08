@@ -9,7 +9,7 @@ description: >-
 
 # /ask-requirement — single entry (user)
 
-You speak **only** with this skill once it is active (user typed `/ask-requirement` **or** `ask-question` handed off under rule `16`). Other skills (Spec Kit, role skills, `ask-orchestrate-requirement`, etc.) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
+You speak **only** with this skill once it is active (user typed `/ask-requirement` **or** `ask-question` handed off under rule `16`). Other skills (Spec Kit, `ask-orchestrate-requirement`, etc.) and **role subagents** (`.cursor/agents/`) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
 
 ## Flow (MUST)
 
@@ -85,7 +85,7 @@ Ask for confirmation: «Shall we move to the execution plan?»
 Before showing the plan to the user for the «yes»:
 
 1. Identify the **roles the plan will involve**.
-2. **Consult each one** (subagent / role skill) with the draft plan and requirement context.
+2. **Consult each one** (role subagent under `.cursor/agents/`) with the draft plan and requirement context.
 3. Each role reviews with **its own criteria** (data: migration/backfill; backend: contracts/auth; frontend: surfaces/i18n; QA: how to verify; product: IN/OUT scope).
 4. The **Tech Lead** takes the feedback, **cross-checks** findings, and **resolves incoherence** (re-consulting affected roles if needed).
 5. **Loop** that pattern (consult → integrate → re-validate conflicts) until the plan is **coherent end-to-end**.

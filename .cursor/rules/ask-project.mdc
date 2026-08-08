@@ -26,5 +26,6 @@ No commits or PRs unless the user explicitly asks.
 ## Agents
 
 - Roles: `agent-knowledge/knowledge/architecture/agents/roles.md`
+- Subagents: `.cursor/agents/ask-*.md`
 - Setup: {{pending|done}} ({{date if done}})
 - Update notice for /ask-setup-agents: {{pending|done}}
