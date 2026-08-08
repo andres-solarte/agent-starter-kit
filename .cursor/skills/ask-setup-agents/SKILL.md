@@ -121,3 +121,5 @@ Add/update:
 ## Close
 
 List roles + skill paths created; persona hint; remind orchestration uses these on `/ask-requirement`.
+
+Then run **`ask-git-project` → agent-knowledge auto close-out** (commit + push if `origin` exists) for tracked roles/docs written in this step.

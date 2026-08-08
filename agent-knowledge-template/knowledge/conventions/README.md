@@ -2,6 +2,6 @@
 
 Project technical conventions: git, naming, code style, testing.
 
-Suggested to start: `git.md` (referenced from the `ask-git-project` skill).
-
-Empty by default.
+| Path | Role |
+|------|------|
+| [git.md](./git.md) | Commit/push policy — agent-knowledge auto close-out; app repos on ask (`ask-git-project`) |

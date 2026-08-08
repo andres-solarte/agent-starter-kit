@@ -51,9 +51,9 @@ Synonyms: «note this», «later», «while we're at it», «for later», «not 
 - **One sentence** parked + continue focus.
 - No long confirmation, skill menu, or implementing the parked item.
 
-## Git
+## Git (MUST)
 
-Parking does not require a commit. `session-backlog.md` is **tracked**; when the user commits agent-knowledge, it can go with that repo (`ask-git-project`).
+`session-backlog.md` is **tracked**. After writing it, run **`ask-git-project` → agent-knowledge auto close-out** (commit + push if `origin` exists). Do not wait for the user to ask. App/kit repos unchanged.
 
 ## MUST NOT
 
@@ -67,7 +67,7 @@ Parking does not require a commit. `session-backlog.md` is **tracked**; when the
 |-------|------|
 | Rule `ask-focus-scope` | Same park policy |
 | `/ask-requirement` | Do a parked item → treat as requirement |
-| `ask-git-project` | Optional commit in agent-knowledge repo |
+| `ask-git-project` | Auto commit/push agent-knowledge after park |
 
 ## For the user
 

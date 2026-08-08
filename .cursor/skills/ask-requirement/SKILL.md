@@ -140,7 +140,12 @@ Cursor `/loop` heartbeat is optional (re-check queue/drift); the "loop" here is 
 
 ## Step 6 — Close (to the user)
 
-2–4 sentences: what was done, what remains, one next step. No loose internal codes.
+Before or with the user-facing close:
+
+1. Run **agent-knowledge close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed).
+2. Run **`ask-git-project` → agent-knowledge auto close-out**: commit tracked memory changes; push if `origin` exists (no user ask required for this repo only).
+
+Then 2–4 sentences to the user: what was done, what remains, one next step. No loose internal codes. Mention push/remote only if push failed or there is no remote.
 
 If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I prepare the plan?»
 

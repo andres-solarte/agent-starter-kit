@@ -58,6 +58,7 @@ There is no third `memory/` layer for durable facts.
 1. Append work-log in `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**).
 2. If there is reusable learning → create/update delta + `DELTAS.md`.
 3. If several users or a mature delta → propose a row in `consolidation/QUEUE.md` (do not consolidate without confirmation).
+4. **Persist this repo:** commit tracked changes; `git push` when `origin` exists (see `knowledge/conventions/git.md`). Local-only files stay gitignored.
 
 ## 6. Tool-agnostic first
 

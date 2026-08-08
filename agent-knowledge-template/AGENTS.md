@@ -63,6 +63,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 1. Append work-log at `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**). Create year/month dirs if needed (zero-padded `MM`/`DD`).
 2. If reusable learning → delta + `DELTAS.md`.
 3. If mature / multi-user → propose `consolidation/QUEUE.md` (confirm before writing global).
+4. **Git (this repo only):** follow `knowledge/conventions/git.md` + shared skill `ask-git-project` → **commit** any tracked close-out changes, then **`git push`** if `origin` exists; if no remote, commit locally and say so once. Do not wait for the user to ask. App/kit repos are out of scope for this auto step.
 
 ## Before "why did we…?" / resuming related work
 

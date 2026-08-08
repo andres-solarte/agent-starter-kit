@@ -23,8 +23,8 @@ disable-model-invocation: true
 | Skill | Required when | Source / notes |
 |-------|---------------|----------------|
 | `ask-agent-skill-discipline` | Always | This skill |
-| `ask-git-project` | Any commit, branch, PR, stage, amend | `agent-knowledge/knowledge/conventions/git.md` (create if missing) |
-| `ask-agent-knowledge` | Block close-out / recalling why | Pointer → `agent-knowledge/AGENTS.md` |
+| `ask-git-project` | Any commit, branch, PR, stage, amend; **agent-knowledge auto close-out** | `agent-knowledge/knowledge/conventions/git.md` (create if missing) |
+| `ask-agent-knowledge` | Block close-out / recalling why | Pointer → `agent-knowledge/AGENTS.md` (includes git persist step) |
 
 When delegating or acting, the orchestrator MUST remember the shared pack **plus** the role skill.
 

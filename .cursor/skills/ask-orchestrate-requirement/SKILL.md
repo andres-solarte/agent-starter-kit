@@ -113,7 +113,8 @@ Output a short **plan** before heavy work when tier is **normal** or **ambiguous
 ```text
 Role skill(s) for touched frontier only
   → Verify light (see below)
-  → Close (update NEXT.md if needed; commit if asked)
+  → Close (NEXT.md if needed; agent-knowledge auto commit/push per ask-git-project;
+           app/kit commits only if user asked)
 ```
 
 Still name skills explicitly. Still `SKILL GAP` if uncovered.
@@ -125,7 +126,8 @@ Product (only if needed)
   → git-feature → specify → [clarify] → plan → tasks → analyze → implement
   → Inside implement, delegate frontiers:
        Data → Backend → Frontend → Design system? → QA E2E
-  → Verify hard → Close (NEXT.md if needed; commits if asked / project rules)
+  → Verify hard → Close (NEXT.md if needed; agent-knowledge auto commit/push;
+                         app/kit commits only if user asked)
 ```
 
 Skip Spec Kit phases only if an existing current `knowledge/delivery/specs/NNN-*` already covers the change and tasks say so — do not invent a third path.
