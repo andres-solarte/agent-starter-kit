@@ -62,6 +62,8 @@ If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask
 
 **Session backlog:** ensure `users/<email>/session-backlog.md` exists for the current user. Migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into that file, then **delete** the legacy files (no stubs).
 
+**Legacy Spec Kit paths (MUST):** under agent-knowledge, if `knowledge/delivery/specify/` or `knowledge/delivery/specs/` exist and contain **only** kit placeholder README(s) (or are empty), **delete** those directories. If they contain real product content, do **not** delete — tell the user once and leave them. Also remove obsolete `ask-project.mdc` lines pointing at those paths; point at `knowledge/delivery/requirements/` instead. Ensure `knowledge/delivery/requirements/` exists (copy from kit template if missing).
+
 ## Close
 
 Kit revision; what merged into product `.cursor/`; memory path untouched; once-only setup-agents notice if applicable. Optional one line: docs scan is `/ask-centralize-docs` if they ask.

@@ -20,7 +20,7 @@ workspace/
 | **Product `.cursor/` home** | Merged rules/skills + overlays | Your hub/product repo or as you prefer |
 | **agent-knowledge directory** | Global + per-user memory | **New** repo at the path chosen at install; product remote — not the kit remote. |
 
-Does not include stack skills (framework, testing, DB) or `speckit-*`; those are added per project under product `.cursor/skills/` with the `ask-` prefix when user-facing.
+Does not include stack skills (framework, testing, DB); those are added per project under product `.cursor/skills/` with the `ask-` prefix when user-facing.
 
 **Naming:** all kit **skills** and **rules** use an `ask-` segment in their names (skills: `ask-*`; rules: `ask-*.mdc`) to avoid colliding with other Cursor rules/skills in the product workspace.
 
@@ -153,7 +153,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 1. In **kit directory**: `git status`. If dirty, warn and ask before pull.
 2. `git pull` (or fetch + merge/rebase per user preference; default pull).
 3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `ask-route-via-ask-question.mdc`, `ask-question`, `ask-centralize-docs`, and `ask-setup-agents` are present. If legacy kit rule filenames remain (`00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`, etc.), add current `ask-*.mdc` names and remove those obsolete kit-sourced files (keep product-only rules).
-4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template files with user OK. Ensure `users/<email>/session-backlog.md` exists; migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into it, then **delete** the legacy files (no stubs).
+4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template files with user OK. Ensure `users/<email>/session-backlog.md` exists; migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into it, then **delete** the legacy files (no stubs). Ensure `knowledge/delivery/requirements/` exists (copy from kit template if missing). If `knowledge/delivery/specify/` or `knowledge/delivery/specs/` exist and are empty or kit-placeholder-only, **delete** them; if they hold real product content, leave them and warn once.
 5. Do **not** prompt for `/ask-centralize-docs` (manual only).
 6. **Once-only notice:** if `ask-project.mdc` lacks Agents / `Update notice for /ask-setup-agents: done`, tell the user briefly what `/ask-setup-agents` does and offer to run it; then set that notice to `done` (whether or not they run it). Do not re-announce on later updates.
 7. Summarize what changed in the user’s chat language (kit revision, merged skills/rules).

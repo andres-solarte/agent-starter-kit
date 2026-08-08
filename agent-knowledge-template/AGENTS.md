@@ -107,5 +107,4 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 1. Rename/fill this repo's `README.md`, `config.yaml` (`repo:` and `locale:` fields) for the new project.
 2. Fill `knowledge/product/`, `knowledge/domain/`, `knowledge/architecture/stack-versions.md` as the project takes shape — these start empty on purpose.
 3. Create the first `users/<email>/` from `users/_template/`.
-4. If the project wants a Spec Kit–based delivery process, install `github-spec-kit` and populate `knowledge/delivery/specify/` — see `knowledge/delivery/PROCESS.md`.
-5. Wikilinks policy: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).
+4. Wikilinks policy: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).

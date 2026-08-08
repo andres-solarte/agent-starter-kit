@@ -15,7 +15,7 @@
 
 If the project has its own local environment (Docker/PM2/etc.), add its slash commands here following the same pattern with the `ask-` prefix (e.g. `/ask-bootstrap`, `/ask-start-local`, `/ask-stop-local`) and document them in a project-owned `ask-local-env-shared` skill.
 
-- Do not ask the user to choose among internal skills (`/speckit-*`, `/ask-orchestrate-*`, framework details, etc.).
+- Do not ask the user to choose among internal skills (`/ask-orchestrate-*`, framework details, etc.).
 - Those skills are **agent-only** (`disable-model-invocation: true`); the orchestrator invokes them.
 
 ## Shared pack (agents)

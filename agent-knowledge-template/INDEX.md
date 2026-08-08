@@ -14,8 +14,7 @@ Wikilinks: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).
 | Design | [knowledge/design/](./knowledge/design/) |
 | Architecture | [knowledge/architecture/](./knowledge/architecture/) |
 | Conventions | [knowledge/conventions/](./knowledge/conventions/) |
-| Specs | [knowledge/delivery/specs/](./knowledge/delivery/specs/) |
-| Specify | [knowledge/delivery/specify/](./knowledge/delivery/specify/) |
+| Requirements | [knowledge/delivery/requirements/](./knowledge/delivery/requirements/) |
 | Process | [knowledge/delivery/PROCESS.md](./knowledge/delivery/PROCESS.md) |
 | What's next | [knowledge/delivery/NEXT.md](./knowledge/delivery/NEXT.md) |
 | Archive | [knowledge/archive/](./knowledge/archive/) |

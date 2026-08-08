@@ -1,13 +1,11 @@
 # delivery/
 
-Delivery: own process + Spec Kit artifacts (core, optional).
+Delivery process and requirement traceability.
 
 | Path | Role |
 |------|------|
-| [PROCESS.md](./PROCESS.md) | **How** we deliver (tiers, paths, core) |
+| [PROCESS.md](./PROCESS.md) | **How** we deliver (tiers, paths) |
 | [NEXT.md](./NEXT.md) | **What** to resume (active req pointer) |
 | [requirements/](./requirements/) | **Requirement registry** (`backlog` / `in_progress` / `closed`) |
-| [specs/](./specs/) | Features `NNN-slug/` (global SoT) |
-| [specify/](./specify/) | Constitution, templates, scripts (if using Spec Kit) |
 
 Routing: [AGENTS.md](../../AGENTS.md).

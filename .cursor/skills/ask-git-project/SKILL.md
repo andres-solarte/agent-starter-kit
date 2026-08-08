@@ -13,7 +13,6 @@ disable-model-invocation: true
 
 1. This skill
 2. `agent-knowledge/knowledge/conventions/git.md` (create if missing)
-3. Spec Kit hooks (`.cursor/skills/speckit-git-*`) — only inside Spec Kit flows, if the project uses them
 
 User/workspace commit safety rules still apply (no force-push to main, no amend of others' commits, etc.).
 
@@ -35,7 +34,7 @@ Run `git status` / `git diff` / commits **inside the repo that owns the files**.
 | When (**agent-knowledge**) | **Automatic** on close-out — see below (project rule) |
 | Language | English messages; focus on **why** |
 | Shape | Concise; conventional style preferred: `feat(scope): …` / `fix(scope): …` / `docs(…): …` |
-| Feature / Spec Kit | Prefer Conventional Commits; optional `Spec: knowledge/delivery/specs/NNN-slug` |
+| Feature / REQ | Prefer Conventional Commits; optional `Req: REQ-NNN` |
 | Secrets | Never stage `.env`, credentials, keys |
 | Noise | Exclude accidental build artifacts; respect `.gitignore` |
 | Hooks | If pre-commit rejects → fix and **new** commit (do not `--amend` unless user amend rules allow) |
@@ -67,8 +66,8 @@ Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missin
 
 ## Branches
 
-- Spec Kit / feature work: prefer `/speckit-git-feature` from `agent-knowledge/` (numbered branches), if the project uses Spec Kit.
-- Otherwise: short English names `feat/…`, `fix/…`, `chore/…` kebab-case; do not invent parallel branch naming conventions.
+- Short English names `feat/…`, `fix/…`, `chore/…` kebab-case; do not invent parallel branch naming conventions.
+- Optional: include REQ id, e.g. `feat/req-003-checkout`.
 - Do not force-push to `main`/`master`.
 
 ## Pull requests
@@ -83,7 +82,6 @@ Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missin
 - Push or merge **app/kit** without explicit ask
 - Skip agent-knowledge close-out commit/push when there are tracked changes after a block
 - Single commit across multiple sibling repos (split per repo)
-- Treat Spec Kit git hooks as general-purpose commit outside Spec Kit flows
 - Force-push under auto close-out
 
 ## Gap / self-improve

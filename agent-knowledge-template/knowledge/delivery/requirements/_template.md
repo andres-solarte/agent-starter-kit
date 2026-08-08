@@ -5,7 +5,6 @@ status: backlog
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 opened_by: "{{user email}}"
-spec: null
 ---
 
 # REQ-NNN — {{short title}}
@@ -25,9 +24,8 @@ spec: null
 
 ## Links
 
-- Spec (if any): …
 - NEXT pointer: `knowledge/delivery/NEXT.md`
-- Related decisions: …
+- Related decisions / docs: …
 
 ## Blocks
 

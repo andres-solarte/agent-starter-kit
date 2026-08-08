@@ -2,7 +2,7 @@
 
 Reusable process engine for coding agents (Cursor, Claude Code, etc.): skill discipline, communication, focus/scope, requirement orchestration, and the **agent-knowledge** template (memory separate from the kit).
 
-Does not include stack skills or `speckit-*` — those are added per project.
+Does not include stack skills (framework, testing, DB) — those are added per project.
 
 > **Install:** `/ask-install` (asks for directories; runs `/ask-setup-agents`).  
 > **Setup agents:** `/ask-setup-agents` (stack + business → roles + `.cursor/agents/` subagents).  

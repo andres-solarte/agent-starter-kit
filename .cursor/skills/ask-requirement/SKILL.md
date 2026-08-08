@@ -9,7 +9,7 @@ description: >-
 
 # /ask-requirement — single entry (user)
 
-You speak **only** with this skill once it is active (user typed `/ask-requirement` **or** `ask-question` handed off under rule `16`). Other skills (Spec Kit, `ask-orchestrate-requirement`, etc.) and **role subagents** (`.cursor/agents/`) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
+You speak **only** with this skill once it is active (user typed `/ask-requirement` **or** `ask-question` handed off under the route rule). Other skills (`ask-orchestrate-requirement`, etc.) and **role subagents** (`.cursor/agents/`) are **for agents**: the orchestrator reads and invokes them; you do not choose them.
 
 ## Flow (MUST)
 
@@ -139,7 +139,7 @@ Block plan:
 Do you accept the plan?
 ```
 
-**Forbidden:** start implementation, migrations, or Spec Kit `implement` without that «yes» to the plan.
+**Forbidden:** start implementation or migrations without that «yes» to the plan.
 **Forbidden:** ask for plan acceptance without having run subagent validation (except micro exception).
 
 **On plan accept (MUST):** set the REQ status to **`in_progress`**, append status log, update `NEXT.md` Active requirement.
@@ -170,7 +170,7 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 
 ## MUST NOT (toward the user)
 
-- Ask them to run internal skills (`/speckit-*`, `/ask-orchestrate-*`, etc.).
+- Ask them to run internal skills (`/ask-orchestrate-*`, etc.).
 - Show a menu of internal skills.
 - Start code in step 2 or **without an accepted plan** (step 4).
 - Skip Q&A when there are real blockers.

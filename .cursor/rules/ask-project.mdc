@@ -13,9 +13,9 @@
 
 → SoT: `agent-knowledge/` (`AGENTS.md`, `knowledge/`)
 → Process: `knowledge/delivery/PROCESS.md` · what's next: `knowledge/delivery/NEXT.md`
-→ Specs: `knowledge/delivery/specs/` · constitution: `knowledge/delivery/specify/memory/constitution.md`
+→ Requirements: `knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-*.md`)
 
-No commits or PRs unless the user explicitly asks.
+No commits or PRs of **app/kit** repos unless the user explicitly asks (agent-knowledge auto close-out still applies).
 
 ## Kit paths
 

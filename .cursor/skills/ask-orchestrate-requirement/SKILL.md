@@ -26,9 +26,6 @@ MUST follow `.cursor/skills/ask-agent-skill-discipline/SKILL.md` (do not improvi
 3. `agent-knowledge/knowledge/delivery/requirements/` — active `REQ-NNN` (status board)
 4. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
 5. `agent-knowledge/knowledge/delivery/NEXT.md` — what follows (points at REQ)
-6. Spec Kit when tier = **normal** and the project has it installed: specify→…→implement core
-
-**Spec Kit to invoke (keep lean, if the project uses Spec Kit):** `git-feature` → `specify` → optional `clarify` → `plan` → `tasks` → `analyze` → `implement`.
 
 This skill is the **orchestrator procedure**. It does not replace Product for BDR acceptance or human approval on sensitive flows (payments/auth/PII).
 
@@ -38,7 +35,7 @@ This skill is the **orchestrator procedure**. It does not replace Product for BD
 2. **Execution plan gate** (from `/ask-requirement` step 4): objective, steps, **agents/roles**, how each participates, **order**, done-when. **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
 3. **Classify tier** (below); may appear *inside* the plan (not instead of it).
 4. Review scope, repos, risks (Step 0).
-5. Delegate in the **accepted order** via **Task / role subagents** (and stack skills / Spec Kit as needed).
+5. Delegate in the **accepted order** via **Task / role subagents** (and stack skills as needed).
 6. **Loop** until the block's done-when is met: execute → verify → fix → repeat. Do not start the next roadmap block without a new accepted plan.
 7. Close with the verify bar for that tier.
 
@@ -48,22 +45,22 @@ This skill is the **orchestrator procedure**. It does not replace Product for BD
 
 ## Tiering (loop engineering — MUST)
 
-Classify **before** coding. Default when unsure: **normal** (safer). User may override ("make it micro" / "full Spec Kit").
+Classify **before** coding. Default when unsure: **normal** (safer). User may override ("make it micro").
 
 ### Tier decision table
 
 | Tier | Use when **all** true (or user forces) | Path | Skip |
 |------|----------------------------------------|------|------|
-| **micro** | See criteria below | Orchestrate → role subagent(s) → verify light → agent-knowledge auto close-out | Full Spec Kit |
-| **normal** | Default for features | `git-feature` → specify → [clarify] → plan → tasks → analyze → implement | Shortcuts that skip specify/plan/tasks |
+| **micro** | See criteria below | Orchestrate → role subagent(s) → verify light → agent-knowledge auto close-out | Heavy multi-frontier path |
+| **normal** | Default for features | Accepted plan → specialist order → verify hard → close-out | Coding without accepted plan |
 | **ambiguous** | Scope/product unclear or needs BDR/ADR | Product / clarify / BDR draft **before** code | Implementation until resolved |
 
 ### Micro — objective criteria (ALL must hold)
 
 1. **No new product scope** — no MVP IN/OUT change; no new BDR/ADR required.
 2. **≤ 2 sibling repos** touched (e.g. one UI, or one API, or UI+copy; not schema+3 APIs+3 UIs).
-3. **No new public API contract** (no new endpoint/resource shape) **or** only a trivial additive field already agreed in an existing spec.
-4. **No new DB table** and no destructive migration. Additive column only if already specified in an open Spec/item.
+3. **No new public API contract** (no new endpoint/resource shape) **or** only a trivial additive field already agreed in the open REQ/BDR.
+4. **No new DB table** and no destructive migration. Additive column only if already specified in the open REQ.
 5. **Fit in one session** — bug fix, typo, test flake, i18n string, wiring to existing primitive, doc sync, small refactor inside one module.
 6. **Acceptance is obvious** — one or two checks (unit/lint/single e2e file), not a new journey.
 7. **Not** auth, payments, settlements, PII, or security-sensitive behavior (those → **normal** minimum).
@@ -74,21 +71,21 @@ If any criterion fails → **normal** (or **ambiguous**).
 
 - User asks for a feature (via `/ask-requirement`).
 - New endpoint, schema change, multi-surface UI, new E2E journey.
-- Anything that should leave `knowledge/delivery/specs/NNN-*`.
+- Multi-block or multi-frontier work tracked as `REQ-NNN`.
 - Security/money/auth paths.
 
 ### Ambiguous — when to use
 
 - Conflicts with the project's accepted scope / open question / missing BDR.
 - User goal not verifiable ("improve UX" without acceptance).
-- Run `clarify` or Product path; do not start Data/Backend.
+- Run Product / clarify path; do not start Data/Backend.
 
 ### Announce format (MUST)
 
 ```text
 Tier: micro | normal | ambiguous
 Reason: (1–2 criteria)
-Path: (Spec Kit core / roles / stop for BDR)
+Path: (role subagents / stop for BDR)
 ```
 
 ---
@@ -112,26 +109,23 @@ Output a short **plan** before heavy work when tier is **normal** or **ambiguous
 ### Micro
 
 ```text
-Role skill(s) for touched frontier only
+Role subagent(s) for touched frontier only
   → Verify light (see below)
-  → Close (NEXT.md if needed; agent-knowledge auto commit/push per ask-git-project;
+  → Close (REQ/NEXT; agent-knowledge auto commit/push per ask-git-project;
            app/kit commits only if user asked)
 ```
 
-Still name skills explicitly. Still `SKILL GAP` if uncovered.
+Still name subagents/skills explicitly. Still `SKILL GAP` if uncovered.
 
 ### Normal
 
 ```text
 Product (only if needed)
-  → git-feature → specify → [clarify] → plan → tasks → analyze → implement
-  → Inside implement, delegate frontiers:
-       Data → Backend → Frontend → Design system? → QA E2E
-  → Verify hard → Close (NEXT.md if needed; agent-knowledge auto commit/push;
+  → Delegate frontiers in order:
+       Data → Backend → Frontend → Design system? → QA E2E → DevOps?
+  → Verify hard → Close (REQ/NEXT; agent-knowledge auto commit/push;
                          app/kit commits only if user asked)
 ```
-
-Skip Spec Kit phases only if an existing current `knowledge/delivery/specs/NNN-*` already covers the change and tasks say so — do not invent a third path.
 
 ### Ambiguous
 
@@ -175,31 +169,31 @@ Only after a stable contract (e.g. two UIs). Never parallelize Data + Backend ag
 ## Delegation rules
 
 1. One repo (or knowledge area) frontier.
-2. Name **shared pack** + role **skill(s)**.
+2. Name **shared pack** + role **subagent(s)**.
 3. Pass contracts / AC.
 4. Short handoff (what changed, how to verify).
-5. Missing skill → `SKILL GAP` — do not improvise.
+5. Missing subagent/skill → gap — do not improvise (`/ask-setup-agents` or SKILL GAP).
 
 ## Verify bar (before close)
 
 | Tier | Minimum verify |
 |------|----------------|
-| **micro** | Targeted check: lint/typecheck/unit or single e2e file for the touch; **plus** smoke of touched apps (define a project rule for this, e.g. health endpoint check); no CRITICAL constitution clash |
-| **normal** | `speckit-analyze` clean of CRITICAL (when Spec Kit ran) + relevant E2E if UI/API journey changed; **plus** touched apps boot and respond |
+| **micro** | Targeted check: lint/typecheck/unit or single e2e file for the touch; **plus** smoke of touched apps (define a project rule if needed) |
+| **normal** | Relevant E2E if UI/API journey changed; typecheck/tests for touched packages; **plus** touched apps boot and respond |
 | **ambiguous** | No code close |
 
-After any code change: verify boot/health of affected apps **before** declaring the block closed (define this rule in the project; see example in `agent-knowledge/knowledge/conventions/` if present).
+After any code change: verify boot/health of affected apps **before** declaring the block closed (define this in the project; see `agent-knowledge/knowledge/conventions/` if present).
 
 ## Close
 
 1. Cite verification run.
-2. Update tracking item/progress when applicable.
-3. Commits: user ask or project auto-commit rule — one commit per sibling repo; `ask-git-project`; no push unless asked.
-4. Summary in the user's language: tier used, what shipped, what's left, one next step.
+2. Update `REQ-NNN` + `NEXT.md` when applicable.
+3. Commits: agent-knowledge auto close-out; app/kit only if user asked — one commit per sibling repo; `ask-git-project`.
+4. Summary in the user's language: tier used, REQ status, what shipped, what's left, one next step.
 
 ## MUST NOT
 
-- Call **micro** to dodge Spec Kit on a real feature.
+- Call **micro** to dodge a real multi-frontier feature.
 - Implement alone while skipping frontiers on **normal**.
 - Expand scope without parking or "do it now".
 - New stacks without ADR.

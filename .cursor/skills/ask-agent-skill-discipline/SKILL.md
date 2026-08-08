@@ -16,7 +16,7 @@ disable-model-invocation: true
 2. **Forbidden to improvise** unanchored flows or conventions.
 3. **Improvement = create/extend skills** (and docs they cite), not one-chat magic.
 4. If the agent **does not know** or **there is no skill**: **say so** (`SKILL GAP`) and **add/extend the skill** (with user OK if the default is to stop).
-5. There is a **shared skill pack** that **every** role loads; **product roles** are Cursor **subagents** under `.cursor/agents/` (not skills). Stack/procedure skills (framework, e2e, Spec Kit) remain skills.
+5. There is a **shared skill pack** that **every** role loads; **product roles** are Cursor **subagents** under `.cursor/agents/` (not skills). Stack/procedure skills (framework, e2e, migrations) remain skills.
 
 ## Shared skills (pack — all agents)
 
@@ -45,7 +45,7 @@ If a pack skill is missing (or a common practice not listed is discovered):
 | Did I already read the skill + sources? | Read first |
 | Am I inventing a step? | Stop; extend skill or subagent |
 
-Typical **stack skills** (not role subagents): framework, E2E, DB migrations, Spec Kit (`speckit-*`). Role specialists live in `.cursor/agents/`. External bases do not override monorepo norms.
+Typical **stack skills** (not role subagents): framework, E2E, DB migrations. Role specialists live in `.cursor/agents/`. External bases do not override monorepo norms.
 
 ## Gap protocol (MUST — visible to the user)
 
@@ -79,7 +79,7 @@ For **shared pack** gaps, prefer (a): the skill must exist for all agents.
 `ask-orchestrate-requirement` MUST:
 
 1. Assume shared pack on every subtask.
-2. Assign **at least one role subagent** (Task / `.cursor/agents/ask-*`) and/or Spec Kit per subtask.
+2. Assign **at least one role subagent** (Task / `.cursor/agents/ask-*`) per subtask (plus stack skills as needed).
 3. If it cannot map → gap **before** delegating (prefer `/ask-setup-agents` when the role file is missing).
 
 ## Turn close-out (gap or improvement)

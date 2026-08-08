@@ -39,8 +39,7 @@ users:
       - design
       - architecture
       - conventions
-      - delivery/specs
-      - delivery/specify
+      - delivery/requirements
       - archive
   deltas_index: DELTAS.md
   identity_file: IDENTITY.md
