@@ -291,6 +291,7 @@ Same outcomes as the contracts. Uninstall = reverse chosen pieces only. Centrali
 - [ ] User `preferences.yaml` set
 - [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` known
 - [ ] `knowledge/architecture/agents/roles.md` filled (or setup explicitly skipped)
+- [ ] `knowledge/delivery/requirements/` present (INDEX + template) for REQ traceability
 
 ## Contributing back to the kit
 

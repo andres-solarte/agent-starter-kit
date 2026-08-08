@@ -10,8 +10,8 @@
 | `/ask-centralize-docs` | Scan workspace docs → copy into agent-knowledge → recommend cleanup |
 | `/ask-setup-agents` | Analyze stack + business → roles.md + `.cursor/agents/ask-*` subagents |
 | `/ask-question` | Ask the framework / default triage (may hand off to requirement) |
-| `/ask-requirement` | Product/code work now |
-| `/ask-backlog` | Park an idea without cutting focus |
+| `/ask-requirement` | Product/code work now (+ REQ registry status) |
+| `/ask-backlog` | Personal park only (not the REQ registry) |
 
 If the project has its own local environment (Docker/PM2/etc.), add its slash commands here following the same pattern with the `ask-` prefix (e.g. `/ask-bootstrap`, `/ask-start-local`, `/ask-stop-local`) and document them in a project-owned `ask-local-env-shared` skill.
 

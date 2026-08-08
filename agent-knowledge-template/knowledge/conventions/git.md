@@ -12,7 +12,7 @@ Norms for Git in this product workspace. Cursor shared skill: `ask-git-project`.
 
 ## agent-knowledge auto close-out (MUST)
 
-After a meaningful block/loop close, or after durable tracked writes (deltas, `session-backlog.md`, roles, agreed `knowledge/**`):
+After a meaningful block/loop close, or after durable tracked writes (deltas, `session-backlog.md`, requirement registry, roles, agreed `knowledge/**`):
 
 1. Work in the **agent-knowledge** directory only.
 2. Respect `.gitignore` (do not force-add `work-log/`, `preferences.yaml`, `MEMORY.md`).

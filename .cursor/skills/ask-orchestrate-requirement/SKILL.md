@@ -23,9 +23,9 @@ MUST follow `.cursor/skills/ask-agent-skill-discipline/SKILL.md` (do not improvi
 
 1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline; product subagents under `.cursor/agents/ask-*.md`
 2. `agent-knowledge/knowledge/delivery/PROCESS.md` — delivery process
-3. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
-4. `agent-knowledge/knowledge/delivery/NEXT.md` — what follows
-5. Rules: focus (`09`), docs (`01`), decisions (`02`)
+3. `agent-knowledge/knowledge/delivery/requirements/` — active `REQ-NNN` (status board)
+4. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
+5. `agent-knowledge/knowledge/delivery/NEXT.md` — what follows (points at REQ)
 6. Spec Kit when tier = **normal** and the project has it installed: specify→…→implement core
 
 **Spec Kit to invoke (keep lean, if the project uses Spec Kit):** `git-feature` → `specify` → optional `clarify` → `plan` → `tasks` → `analyze` → `implement`.

@@ -11,6 +11,8 @@ description: >-
 
 **Fast** door so ideas are not lost. **Does not** execute the work. **Does not** replace `/ask-requirement`.
 
+Personal only: does **not** create or update `knowledge/delivery/requirements/` (formal REQ registry). To track work with status, use `/ask-requirement`.
+
 **Living list (SoT):** `<agent-knowledge>/users/<email>/session-backlog.md`  
 Resolve email via `git config user.email` (lowercase, keep `@`). Create from `users/_template/session-backlog.md` if missing.
 

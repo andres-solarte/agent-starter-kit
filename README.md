@@ -48,8 +48,8 @@ INSTALL.md   — dependency install + update contracts
 | `/ask-update` | Pull kit + safe re-merge (once: mention setup agents) |
 | `/ask-uninstall` | Remove wiring (asks what to delete) |
 | `/ask-question` | Ask the framework / default triage (may become a requirement) |
-| `/ask-requirement` | Product work |
-| `/ask-backlog` | Park ideas |
+| `/ask-requirement` | Product work + REQ registry (`backlog` / `in_progress` / `closed`) |
+| `/ask-backlog` | Personal parked notes (not the REQ registry) |
 
 ## Contributing upstream
 

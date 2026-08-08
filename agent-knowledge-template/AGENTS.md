@@ -76,7 +76,8 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | Task | Path |
 |------|------|
 | What to do next | `knowledge/delivery/NEXT.md` |
-| Session backlog (`/ask-backlog`) | `users/<email>/session-backlog.md` |
+| Requirement registry | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
+| Session backlog (`/ask-backlog`, personal) | `users/<email>/session-backlog.md` |
 | Global docs | `knowledge/…` |
 | Delta | `users/<email>/knowledge/<same-relpath>` |
 | Delta index | `users/<email>/DELTAS.md` |

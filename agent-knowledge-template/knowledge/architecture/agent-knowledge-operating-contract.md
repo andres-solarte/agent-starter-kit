@@ -45,7 +45,8 @@ Operating norms for the `agent-knowledge` repo. Short source for agents; routing
 
 ```text
 Personal preference / scratch?           → users/<email>/preferences.yaml | MEMORY.md
-Park for later (session backlog)?      → users/<email>/session-backlog.md
+Park for later (personal notes)?         → users/<email>/session-backlog.md
+Formal requirement status?               → knowledge/delivery/requirements/ (REQ-NNN)
 When / what / why for this block?        → users/<email>/work-log/YYYY/MM/DD.md
 Durable learning not (yet) global?       → users/<email>/knowledge/<relpath>/<file>.md (delta)
 Ready for the team / already agreed?     → knowledge/<relpath>/ (via consolidation promote|merge)

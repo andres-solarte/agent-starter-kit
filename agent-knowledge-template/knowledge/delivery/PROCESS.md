@@ -16,7 +16,7 @@ What to resume: [NEXT.md](./NEXT.md).
 
 | Who | What |
 |-----|------|
-| Human | `/ask-requirement` (work now) · `/ask-backlog` (parked → `users/<email>/session-backlog.md`) |
+| Human | `/ask-requirement` (work now + registry) · `/ask-backlog` (personal notes only → `users/<email>/session-backlog.md`) |
 | Agents | `ask-orchestrate-requirement` + `.cursor/agents/ask-*` subagents (agent-only) |
 
 Do not offer a Spec Kit skill menu to the user.
@@ -25,10 +25,18 @@ Do not offer a Spec Kit skill menu to the user.
 
 | What | Path |
 |------|------|
+| Requirement registry | `knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-slug.md`) |
 | Specs (global) | `knowledge/delivery/specs/NNN-slug/` |
 | Templates + constitution | `knowledge/delivery/specify/` |
 | Runtime markers (symlinks, if using Spec Kit) | `agent-knowledge/.specify` → `knowledge/delivery/specify` · `agent-knowledge/specs` → `knowledge/delivery/specs` |
 | What's next | `knowledge/delivery/NEXT.md` |
+
+## Requirement registry (MUST)
+
+- Formal work is tracked as `REQ-NNN` with status `backlog` | `in_progress` | `closed`.
+- Owned by `/ask-requirement` (create on summary confirm; `in_progress` on plan accept; `closed` when the whole requirement finishes).
+- Personal `/ask-backlog` notes do **not** auto-enter this registry.
+- Detail: [requirements/README.md](./requirements/README.md).
 
 ## Tiers
 
@@ -57,6 +65,6 @@ Bash scripts (if used): run from `agent-knowledge/` (finds `.specify`).
 1. Block execution plan + role validation → user accepts.
 2. Execute per tier.
 3. Verify bar: maker ≠ checker (analyze / E2E / smoke per tier).
-4. Close: work-log; update `NEXT.md` if focus changed; commits only if asked / project rules.
+4. Close: work-log; update requirement registry + `NEXT.md`; agent-knowledge auto commit/push (`ask-git-project`).
 
 Role detail: project doc at `knowledge/architecture/agents/roles.md` (create if missing).

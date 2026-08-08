@@ -75,7 +75,8 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 | Agent roles / RACI / subagents | `knowledge/architecture/agents/roles.md` · `.cursor/agents/ask-*.md` · `/ask-setup-agents` |
 | Imported / centralized docs map | `knowledge/imported/IMPORT-MAP.md` |
 | Which slash for work vs park | `/ask-requirement` vs `/ask-backlog` |
-| Session backlog | `<agent-knowledge>/users/<email>/session-backlog.md` |
+| Requirement status / REQ id | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
+| Session backlog (personal) | `<agent-knowledge>/users/<email>/session-backlog.md` |
 | Doc locale | `config.yaml` → `locale.content` |
 
 ## Style (MUST)

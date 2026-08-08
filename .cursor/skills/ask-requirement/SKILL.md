@@ -16,13 +16,27 @@ You speak **only** with this skill once it is active (user typed `/ask-requireme
 ```text
 1. Capture requirement
 2. Q&A (clarify gaps)  ← no code yet
-3. Confirm summary + acceptance criteria
-4. Block execution plan  ← NEW GATE (required)
+3. Confirm summary + acceptance criteria → REGISTER REQ (backlog)
+4. Block execution plan  ← GATE → on accept: status in_progress
 5. Execute in loop mode until the block is fully resolved
-6. Deliver / close (or move to the next block with a new plan)
+6. Deliver / close (or next block with a new plan) → close REQ when whole req done
 ```
 
 If work is split into **several blocks**: **each block** repeats steps 4→5→6. Do not chain the next block without an accepted plan.
+
+## Requirement registry (MUST)
+
+SoT: `agent-knowledge/knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-slug.md`). See that folder’s README.
+
+| Moment | Action |
+|--------|--------|
+| After step 3 confirm | Allocate next `REQ-NNN`, create file from `_template.md`, INDEX row, status **`backlog`** |
+| User accepts step 4 plan | Status → **`in_progress`**; set `NEXT.md` Active requirement |
+| Step 6 — more blocks remain | Keep **`in_progress`**; update Blocks table + NEXT next step |
+| Step 6 — whole requirement done | Status → **`closed`**; INDEX + NEXT (Last closed) |
+
+Do **not** auto-create registry rows from `/ask-backlog` (personal notes only).  
+Resuming an existing REQ: ask which id (or use `NEXT.md` Active) and update that file — do not mint a duplicate id.
 
 ## Step 1 — Capture
 
@@ -76,6 +90,8 @@ Summary:
 Ask for confirmation: «Shall we move to the execution plan?»
 (If the user already said «do it / go ahead» on the summary, still go through **step 4** — the agent plan — except for an agreed trivial micro.)
 
+**On confirm (MUST):** register the requirement (`backlog`) before presenting the execution plan. Tell the user the id once (e.g. `REQ-003`).
+
 ## Step 4 — Execution plan (GATE — MUST)
 
 **Before writing code**, present a plan in plain language. The user must **accept it** («yes / ok / go ahead with the plan»).
@@ -126,6 +142,8 @@ Do you accept the plan?
 **Forbidden:** start implementation, migrations, or Spec Kit `implement` without that «yes» to the plan.
 **Forbidden:** ask for plan acceptance without having run subagent validation (except micro exception).
 
+**On plan accept (MUST):** set the REQ status to **`in_progress`**, append status log, update `NEXT.md` Active requirement.
+
 ## Step 5 — Execute in loop until resolved
 
 After the plan is accepted, follow `.cursor/skills/ask-orchestrate-requirement/SKILL.md` in **loop mode**:
@@ -142,12 +160,13 @@ Cursor `/loop` heartbeat is optional (re-check queue/drift); the "loop" here is 
 
 Before or with the user-facing close:
 
-1. Run **agent-knowledge close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed).
-2. Run **`ask-git-project` → agent-knowledge auto close-out**: commit tracked memory changes; push if `origin` exists (no user ask required for this repo only).
+1. Update the **REQ** file: Blocks table; if the **whole** requirement’s done-when is met → status **`closed`** + INDEX; else keep **`in_progress`** and note the next block. Update `NEXT.md`.
+2. Run **agent-knowledge close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed).
+3. Run **`ask-git-project` → agent-knowledge auto close-out**: commit tracked memory changes; push if `origin` exists (no user ask required for this repo only).
 
-Then 2–4 sentences to the user: what was done, what remains, one next step. No loose internal codes. Mention push/remote only if push failed or there is no remote.
+Then 2–4 sentences to the user: REQ id + status, what was done, what remains, one next step. No loose internal codes. Mention push/remote only if push failed or there is no remote.
 
-If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I prepare the plan?»
+If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I prepare the plan?» (REQ stays `in_progress`.)
 
 ## MUST NOT (toward the user)
 
@@ -156,10 +175,13 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 - Start code in step 2 or **without an accepted plan** (step 4).
 - Skip Q&A when there are real blockers.
 - Mark a half-finished block as closed.
+- Mark the REQ `closed` while blocks remain.
+- Skip registry create/update (no silent work without a REQ id).
 
 ## Internal references (agents)
 
 - Orchestration: `ask-orchestrate-requirement`
-- Discipline: `ask-agent-skill-discipline` + rule `12`
+- Discipline: `ask-agent-skill-discipline`
 - Git: `ask-git-project`
-- Roles / RACI / loop: project doc in `agent-knowledge/knowledge/architecture/agents/` (create if missing)
+- Registry: `agent-knowledge/knowledge/delivery/requirements/`
+- Roles / RACI / loop: `agent-knowledge/knowledge/architecture/agents/` (create if missing)
