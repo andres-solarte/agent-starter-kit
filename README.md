@@ -49,6 +49,7 @@ INSTALL.md   — dependency install + update contracts
 | `/ask-uninstall` | Remove wiring (asks what to delete) |
 | `/ask-question` | Ask the framework / default triage (may become a requirement) |
 | `/ask-requirement` | Product work + REQ registry (`backlog` / `in_progress` / `closed`) |
+| `/ask-requirement-fix` | Error on same / existing REQ (skip full re-plan) |
 | `/ask-backlog` | Personal parked notes (not the REQ registry) |
 
 ## Contributing upstream

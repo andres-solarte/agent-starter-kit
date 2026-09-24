@@ -3,11 +3,11 @@ name: ask-question
 description: >-
   Default entry for user questions and unclear intents: triage framework
   how/where questions vs product work. Answers kit/agent-knowledge questions
-  (e.g. where is my work-log); hands off to ask-requirement when the user wants
-  product changes. Use for /ask-question, "where is…", "how do I…", or any
-  user message that is not already an explicit /ask-install|/ask-update|
-  /ask-uninstall|/ask-centralize-docs|/ask-setup-agents|/ask-requirement|
-  /ask-backlog (route rule).
+  (e.g. where is my work-log); hands off to ask-requirement-fix for errors on
+  an existing REQ, or ask-requirement for new product work. Use for /ask-question,
+  "where is…", "how do I…", or any user message that is not already an explicit
+  /ask-install|/ask-update|/ask-uninstall|/ask-centralize-docs|/ask-setup-agents|
+  /ask-requirement|/ask-requirement-fix|/ask-backlog (route rule).
 ---
 
 # /ask-question — ask the framework + triage (user)
@@ -21,9 +21,9 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 
 ```text
 1. Capture message ($ARGUMENTS or user turn)
-2. Triage (below) → answer | hand off ask-requirement | hand off ask-backlog | ask one clarifier
+2. Triage (below) → answer | ask-requirement-fix | ask-requirement | ask-backlog | one clarifier
 3. If framework: resolve paths + answer (2–6 short sentences)
-4. If product work: continue with ask-requirement (do not improvise a mini-implement here)
+4. If product work / fix: continue with the handed-off skill (do not improvise here)
 ```
 
 ## Triage (MUST)
@@ -31,29 +31,47 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 | Signal | Action |
 |--------|--------|
 | How/where about kit, agent-knowledge, work-log, prefs, slashes, install/update | **Answer here** |
-| Wants a feature, bugfix, refactor, product doc/spec change, “build/change/add/document…” on the product | **Hand off → `ask-requirement`** — see **Visible handoff (MUST)** below |
+| Error / failure / regression / stacktrace / “no funciona” / “rompió…” / failing test **on recent or named work** | **Hand off → `ask-requirement-fix`** — see **Visible handoff — fix** below |
+| New feature, new bug with no REQ link, refactor, product doc/spec change, “build/change/add/document…” | **Hand off → `ask-requirement`** — see **Visible handoff — requirement** below |
 | Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** — one clear line that it was parked |
+| Explicit `/ask-requirement-fix` | That skill |
 | Explicit `/ask-requirement` or `/ask-backlog` | Honor that skill |
 | Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` / `/ask-centralize-docs` / `/ask-setup-agents` | Those skills (not this one) |
-| Ambiguous | One clarifying question: framework fact vs product work? |
+| Ambiguous (new work vs fix on existing REQ) | One clarifying question |
 
-### Visible handoff (MUST)
+**Prefer fix over new requirement** when an `in_progress` REQ exists (INDEX/NEXT) and the message clearly reports a failure. If unsure whether it is new scope vs a defect on current work → ask once.
 
-Before following `ask-requirement`, the **first** user-visible lines of the reply MUST say, in the user’s chat language (not only English), that:
+### Visible handoff — fix (MUST)
+
+Before following `ask-requirement-fix`, the **first** user-visible lines MUST say, in the user’s chat language:
+
+1. This is a **fix on the same requirement** (not a new requirement).
+2. You will **not** re-run full Q&A/plan — focus on the error.
+
+Example shape:
+
+```text
+I'm treating this as a fix on the same requirement — not a new one.
+I'll focus on the error; I won't re-run the full requirement plan.
+```
+
+Then read and execute `.cursor/skills/ask-requirement-fix/SKILL.md`.
+
+### Visible handoff — requirement (MUST)
+
+Before following `ask-requirement`, the **first** user-visible lines MUST say, in the user’s chat language:
 
 1. This is being treated as a **product requirement** (not a framework FAQ).
 2. Next come **clarifying questions and an agreed plan** — no implementing/documenting yet until those gates pass.
 
-Example shape (adapt language from `preferences.yaml`):
+Example shape:
 
 ```text
 I'm taking this as a product requirement.
 Next I'll clarify scope and get a short plan accepted — I won't start documenting/coding until then.
 ```
 
-Do **not** bury this after a long FAQ. Do **not** skip it because the user “should know” the flow.
-
-**Hand off means:** after that announcement, read and execute `.cursor/skills/ask-requirement/SKILL.md` (or backlog) — including Q&A and plan gates. Do not skip gates.
+**Hand off means:** after that announcement, read and execute the target skill — including its gates. Do not skip gates. Do **not** bury the announcement after a long FAQ.
 
 ## Resolve context (framework answers)
 
@@ -71,10 +89,10 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 | Global knowledge | `knowledge/…` |
 | Personal deltas | `users/<email>/knowledge/…` + `DELTAS.md` |
 | Kit / `.cursor/` paths | Install record; `/ask-update` for upgrades |
-| Install / update / uninstall / centralize docs / setup agents | `INSTALL.md` + `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` |
+| Install / update / uninstall / centralize docs / setup agents | `INSTALL.md` + matching `/ask-*` |
 | Agent roles / RACI / subagents | `knowledge/architecture/agents/roles.md` · `.cursor/agents/ask-*.md` · `/ask-setup-agents` |
 | Imported / centralized docs map | `knowledge/imported/IMPORT-MAP.md` |
-| Which slash for work vs park | `/ask-requirement` vs `/ask-backlog` |
+| Which slash for work vs park vs fix | `/ask-requirement` · `/ask-backlog` · `/ask-requirement-fix` |
 | Requirement status / REQ id | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
 | Session backlog (personal) | `<agent-knowledge>/users/<email>/session-backlog.md` |
 | Doc locale | `config.yaml` → `locale.content` |
@@ -83,14 +101,15 @@ Do **not** bury this after a long FAQ. Do **not** skip it because the user “sh
 
 - Rule `ask-user-communication`.
 - Framework answers: no product implementation in this skill.
-- After hand off to requirement: the requirement skill owns the rest of the turn/flow.
+- After hand off: the target skill owns the rest of the turn/flow.
 
 ## MUST NOT
 
 - Invent install paths.
 - Implement product work while claiming it is “just a question”.
-- Skip `ask-requirement` plan gates after triage says product work.
-- Hand off to requirement **silently** (no visible announcement).
+- Route a clear **error-on-existing-REQ** through full `ask-requirement` plan gates.
+- Skip `ask-requirement` plan gates after triage says **new** product work.
+- Hand off **silently** (no visible announcement).
 - Expose secrets from env files.
 
 ## Close

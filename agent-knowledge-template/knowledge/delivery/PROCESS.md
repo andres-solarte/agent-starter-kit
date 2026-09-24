@@ -16,7 +16,7 @@ What to resume: [NEXT.md](./NEXT.md).
 
 | Who | What |
 |-----|------|
-| Human | `/ask-requirement` (work now + registry) · `/ask-backlog` (personal notes only → `users/<email>/session-backlog.md`) |
+| Human | `/ask-requirement` (new work + registry) · `/ask-requirement-fix` (error on existing REQ) · `/ask-backlog` (personal notes → `users/<email>/session-backlog.md`) |
 | Agents | `ask-orchestrate-requirement` + `.cursor/agents/ask-*` subagents (agent-only) |
 
 Do not offer internal skill menus to the user.
@@ -32,6 +32,7 @@ Do not offer internal skill menus to the user.
 
 - Formal work is tracked as `REQ-NNN` with status `backlog` | `in_progress` | `closed`.
 - Owned by `/ask-requirement` (create on summary confirm; `in_progress` on plan accept; `closed` when the whole requirement finishes).
+- **Fixes** on an existing REQ use `/ask-requirement-fix` (no new id unless the user chooses a new REQ). Append a status-log / fix note on the same file.
 - Personal `/ask-backlog` notes do **not** auto-enter this registry.
 - Detail: [requirements/README.md](./requirements/README.md).
 
@@ -42,10 +43,11 @@ Do not offer internal skill menus to the user.
 | **micro** | Orchestrator criteria (few repos, no new scope/API/table, no auth/payments, …) | Role subagents + verify light |
 | **normal** | Default features | Accepted plan → specialist order → verify hard |
 | **ambiguous** | Missing product / BDR | Product / clarify — **no code** until resolved |
+| **fix** (existing REQ) | User reports failure on `in_progress` / reopened REQ | `/ask-requirement-fix` — no full plan gate |
 
 ## Loop engineering (summary)
 
-1. Block execution plan + role validation → user accepts.
+1. Block execution plan + role validation → user accepts. (**Skip** for `/ask-requirement-fix`.)
 2. Execute per tier (Task / `.cursor/agents/ask-*`).
 3. Verify bar: maker ≠ checker (E2E / smoke / typecheck per tier and project).
 4. Close: work-log; update requirement registry + `NEXT.md`; agent-knowledge auto commit/push (`ask-git-project`).

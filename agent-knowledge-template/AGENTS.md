@@ -77,6 +77,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 |------|------|
 | What to do next | `knowledge/delivery/NEXT.md` |
 | Requirement registry | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
+| Fix on existing REQ | `/ask-requirement-fix` |
 | Session backlog (`/ask-backlog`, personal) | `users/<email>/session-backlog.md` |
 | Global docs | `knowledge/…` |
 | Delta | `users/<email>/knowledge/<same-relpath>` |

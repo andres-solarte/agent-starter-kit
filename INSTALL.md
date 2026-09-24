@@ -118,7 +118,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 6. Always install/update skills `ask-centralize-docs` and `ask-setup-agents` with the kit merge. **Do not** prompt for doc scan (manual only via `/ask-centralize-docs`).
 7. Run **`/ask-setup-agents`** (same session): propose roles → user confirm → write `roles.md` + copy approved subagents from kit `templates/role-agents/` into `.cursor/agents/`. If the user declines setup, leave `Update notice for /ask-setup-agents: pending` in `ask-project.mdc`.
 8. No commit/push of **app/kit** unless asked (agent-knowledge auto close-out still applies after setup writes).
-9. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); subagents created or skipped; optional mention of `/ask-centralize-docs`; `/ask-requirement`, `/ask-backlog`, `/ask-update`.
+9. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); subagents created or skipped; optional mention of `/ask-centralize-docs`; `/ask-requirement`, `/ask-requirement-fix`, `/ask-backlog`, `/ask-update`.
 
 ### MUST NOT
 
@@ -289,7 +289,7 @@ Same outcomes as the contracts. Uninstall = reverse chosen pieces only. Centrali
 - [ ] Product `.cursor/agents/ask-*.md` role subagents present (or setup skipped)
 - [ ] `agent-knowledge/` is a **separate** git repo (own remote when you add it)
 - [ ] User `preferences.yaml` set
-- [ ] `/ask-requirement`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` known
+- [ ] `/ask-requirement`, `/ask-requirement-fix`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` known
 - [ ] `knowledge/architecture/agents/roles.md` filled (or setup explicitly skipped)
 - [ ] `knowledge/delivery/requirements/` present (INDEX + template) for REQ traceability
 

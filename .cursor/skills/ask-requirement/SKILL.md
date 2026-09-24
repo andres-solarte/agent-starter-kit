@@ -44,9 +44,9 @@ Take the user's text (`$ARGUMENTS` or the message). If empty, ask in one sentenc
 
 If this turn started via **`ask-question` handoff** (rule `16`) and the announcement was already shown, continue from Q&A. If somehow entered without announcement, open with the same two-line requirement notice (chat language) before questions.
 
-Do not invent scope. Apply focus (rule `09`): park "while we're at it…" with skill **`ask-backlog`** (`.cursor/skills/ask-backlog/SKILL.md`).
+Do **not** invent scope. Apply focus (rule `ask-focus-scope`): park "while we're at it…" with skill **`ask-backlog`**.
 
-When starting Q&A, prefer a short cue that this phase is **requirement clarification** (not documentation/coding yet), so it does not feel like an open-ended FAQ.
+If the user is reporting a **failure on work already under an `in_progress` REQ** (or explicitly wants a fix-on-same-REQ), hand off to **`ask-requirement-fix`** instead of continuing this skill’s full gates.
 
 ## Step 2 — Q&A (clarification session)
 
@@ -184,4 +184,5 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 - Discipline: `ask-agent-skill-discipline`
 - Git: `ask-git-project`
 - Registry: `agent-knowledge/knowledge/delivery/requirements/`
+- Fixes on same REQ: `ask-requirement-fix`
 - Roles / RACI / loop: `agent-knowledge/knowledge/architecture/agents/` (create if missing)
