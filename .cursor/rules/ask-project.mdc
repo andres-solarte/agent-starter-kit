@@ -29,3 +29,4 @@ No commits or PRs of **app/kit** repos unless the user explicitly asks (agent-kn
 - Subagents: `.cursor/agents/ask-*.md`
 - Setup: {{pending|done}} ({{date if done}})
 - Update notice for /ask-setup-agents: {{pending|done}}
+- Known surfaces: {{comma-separated workspace-relative repo paths from last setup scan}}

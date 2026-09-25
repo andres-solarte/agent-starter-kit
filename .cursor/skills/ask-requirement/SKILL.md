@@ -100,7 +100,7 @@ Ask for confirmation: «Shall we move to the execution plan?»
 
 Before showing the plan to the user for the «yes»:
 
-1. Identify the **roles the plan will involve**.
+1. Identify the **roles / surfaces** the plan will involve. If a surface has **no** matching subagent → follow `ask-orchestrate-requirement` → **Agent gap (surfaces)** (offer `/ask-setup-agents` delta; ask type vs per-surface). Do not accept a plan that invents coverage.
 2. **Consult each one** (role subagent under `.cursor/agents/`) with the draft plan and requirement context.
 3. Each role reviews with **its own criteria** (data: migration/backfill; backend: contracts/auth; frontend: surfaces/i18n; QA: how to verify; product: IN/OUT scope).
 4. The **Tech Lead** takes the feedback, **cross-checks** findings, and **resolves incoherence** (re-consulting affected roles if needed).

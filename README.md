@@ -43,7 +43,7 @@ INSTALL.md   — dependency install + update contracts
 | Slash | For |
 |-------|-----|
 | `/ask-install` | First-time wire-up (asks for directories; runs setup agents) |
-| `/ask-setup-agents` | Detect stack/business → roles.md + Cursor subagents |
+| `/ask-setup-agents` | Detect stack/surfaces → roles.md + Cursor subagents (also delta for new repos) |
 | `/ask-centralize-docs` | Scan workspace → copy docs → recommend cleanup |
 | `/ask-update` | Pull kit + safe re-merge (once: mention setup agents) |
 | `/ask-uninstall` | Remove wiring (asks what to delete) |

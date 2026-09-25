@@ -3,9 +3,10 @@ name: ask-setup-agents
 description: >-
   Analyze the workspace stack and product/business context, confirm with the
   user, then create agent-knowledge roles (RACI) and matching Cursor subagents
-  under .cursor/agents/ so orchestration can delegate from day one. Use when
-  the user says /ask-setup-agents, or when /ask-install runs this step after
-  agent-knowledge exists.
+  under .cursor/agents/. Re-run when surfaces change: proposes agents for new
+  repos/apps (asks type vs per-surface granularity). Use for /ask-setup-agents,
+  /ask-install after agent-knowledge exists, /ask-update when new repos appear,
+  or mid-requirement when a surface has no agent.
 ---
 
 # /ask-setup-agents — detect stack + create role subagents
@@ -14,61 +15,102 @@ Follow **`INSTALL.md`** → **Agent contract — setup agents**.
 
 ## Goal
 
-From **business context + technical scan** of the multi-repo workspace, define which **role subagents** this product needs, write them into agent-knowledge, and create **Cursor subagents** under the product `.cursor/agents/` so `/ask-requirement` → `ask-orchestrate-requirement` can **Task-delegate** for real (isolated context).
+From **business context + technical scan** of the multi-repo workspace, define which **role subagents** this product needs, write them into agent-knowledge, and create **Cursor subagents** under the product `.cursor/agents/` so orchestration can **Task-delegate** for real.
 
-**Not skills:** do **not** create `ask-role-*` under `.cursor/skills/`. Process skills (`ask-git-project`, etc.) stay skills; roles are **subagents**.
+Also used to **fill gaps** when a **new surface** (repo/app) appears or a REQ touches a surface with no matching agent.
+
+**Not skills:** do **not** create `ask-role-*` under `.cursor/skills/`. Process skills stay skills; roles are **subagents**.
 
 ## Flow (MUST)
 
 ```text
 1. Resolve kit dir, agent-knowledge dir, product .cursor/ home, sibling repos
-2. Gather business signals (product name, READMEs, knowledge/product if any)
-3. Scan workspace for stack/tooling signals (all sibling repos; skip kit + heavy vendor dirs)
-4. Propose: user persona hint + role list + subagent names + RACI sketch
-5. User yes / edit list
-6. Write roles.md + create/update .cursor/agents/ask-*.md (fill frontiers)
-7. Migrate away legacy ask-role-* skills if present (see below)
-8. Point ask-project.mdc at roles; mark setup done
-9. Close in chat language + agent-knowledge auto close-out
+2. Inventory surfaces (repos/apps) + existing .cursor/agents/ask-*.md + roles.md
+3. Gather business + stack signals (skip kit + heavy vendor dirs)
+4. Diff: surfaces without coverage → candidate agents
+5. Ask granularity if >1 surface shares a specialty (type vs per-surface)
+6. Propose: persona hint + create/update list + RACI sketch
+7. User yes / edit
+8. Write roles.md + .cursor/agents/ask-*.md; record Known surfaces in ask-project.mdc
+9. Legacy ask-role-* skill migration if needed
+10. Close + agent-knowledge auto close-out
 ```
+
+### Modes
+
+| Mode | When | Scope |
+|------|------|--------|
+| **Full** | Install / explicit `/ask-setup-agents` / user asks full refresh | All surfaces |
+| **Delta** | `/ask-update` found new repos; mid-REQ agent gap | Only uncovered / new surfaces (still confirm) |
 
 ## Scan (MUST — lightweight, no secrets)
 
 **Exclude:** kit directory, `node_modules`, `.git`, `dist`, `build`, `.next`, coverage, agent-knowledge `users/*/work-log`.
 
-**Business signals:** root/product README, `knowledge/product/**`, domain folder names, service names in docker-compose.
+**Surface inventory:** each sibling app/service repo (or package) with evidence of a deliverable (app, API, mobile, worker, etc.). Record path + kind (web-ui, api, mobile, data, infra, …).
+
+**Business signals:** root/product README, `knowledge/product/**`, domain folder names, docker-compose services.
 
 **Tech signals (examples):**
 
-| Signal | Suggests subagents |
+| Signal | Suggests specialty |
 |--------|-------------------|
-| Next/React/Vue/Angular UI apps | `ask-frontend` (+ `ask-design` if design-system/storybook) |
-| Nest/Express/FastAPI/Rails/Spring/Go API | `ask-backend` |
-| SQL migrations, Prisma/Drizzle/TypeORM, flyway | `ask-data` |
-| Terraform/Pulumi/Helm/k8s/Docker Compose/CI deploy | `ask-devops` |
-| Playwright/Cypress/Detox heavy test dirs | `ask-qa` |
-| Multiple of the above | fullstack / split specialists |
-| Little structure, scripts everywhere | note **todero/generalist** + still create specialists that match evidence |
-| Ambiguous product scope docs | `ask-product` |
+| Next/React/Vue/Angular UI | frontend |
+| Nest/Express/FastAPI/Rails/Spring/Go API | backend |
+| React Native / Flutter / Swift / Kotlin / Expo | mobile |
+| SQL migrations, Prisma/Drizzle/TypeORM | data |
+| Terraform/Pulumi/Helm/k8s/Docker/CI deploy | devops |
+| Playwright/Cypress/Detox heavy tests | qa |
+| Design system / Storybook / tokens | design |
+| Ambiguous product scope docs | product |
 
-Always include **`ask-tech-lead`** (orchestration companion to `ask-orchestrate-requirement`) unless the user declines.
+Always prefer including **`ask-tech-lead`** unless declined.
 
-**Persona hint (for humans):** `frontend` | `backend` | `devops` | `fullstack` | `todero` — show in the proposal for confirmation.
+**Persona hint:** `frontend` | `backend` | `devops` | `fullstack` | `mobile` | `todero` — show for confirmation.
+
+## Coverage gap (MUST)
+
+A surface is **uncovered** when:
+
+- No `.cursor/agents/ask-*.md` lists it in Frontier / primary repos, **and**
+- `roles.md` has no row mapping that surface to a subagent
+
+For each uncovered surface, propose a specialist whose **nature and scope** match the surface (mobile app → mobile specialist, not a generic frontend web agent unless the user merges them).
+
+## Granularity (MUST ask when relevant)
+
+When **two or more** surfaces share a specialty (e.g. two mobile apps, or three Nest APIs):
+
+Ask once (chat language):
+
+```text
+For these surfaces (…): prefer
+(A) one agent per type (e.g. ask-mobile covering all mobile repos), or
+(B) one agent per surface/repo (e.g. ask-buyer-mobile, ask-driver-mobile)?
+```
+
+Do not assume A or B. Record the choice in `roles.md` Notes.
+
+If only one surface per specialty → default to type-named agent (`ask-mobile`, `ask-frontend`, …) unless the user wants a surface-specific name.
 
 ## Proposal format (MUST before writing)
 
 ```text
+Mode: full | delta
 Persona hint: …
-Subagents to create:
-- ask-… — why (evidence: paths/deps)
-- …
+Surfaces found:
+- path — kind — covered by ask-… | UNCOVERED
+Granularity: A (type) | B (per surface) | n/a
+Subagents to create/update:
+- ask-… — why (evidence) — frontiers: …
 Will write:
 - agent-knowledge/knowledge/architecture/agents/roles.md
 - .cursor/agents/ask-*.md
 Edit or confirm?
 ```
 
-Do **not** list `.cursor/skills/ask-role-*` in the proposal.
+Do **not** list `.cursor/skills/ask-role-*` in the proposal.  
+Do **not** create agents for uncovered surfaces without confirmation.
 
 ## Write roles.md (MUST)
 
@@ -77,38 +119,27 @@ Path: `<agent-knowledge>/knowledge/architecture/agents/roles.md`
 Include:
 
 - Product one-liner / domain
-- Persona hint (confirmed)
-- Table of roles ↔ **subagent file** (`.cursor/agents/ask-….md`) ↔ primary repos/surfaces
-- Default specialist order (align with `ask-orchestrate-requirement`)
+- Persona hint + granularity choice
+- **Surfaces** table: path ↔ kind ↔ subagent
+- Roles ↔ subagent file ↔ primary repos
+- Default specialist order
 - RACI sketch
-- How Tech Lead delegates: **Task / subagents** + shared **skills** pack always
+- Delegation: Task / subagents + shared skills pack
 
-Use English for the durable file (`locale.content`); chat in user language.
+English for durable file; chat in user language.
 
 ## Write role subagents (MUST)
 
-Source templates live in the **kit** (not merged on install):
+Templates: `{{kit-directory}}/templates/role-agents/<ask-name>.md`
 
-`{{kit-directory}}/templates/role-agents/<ask-name>.md`
+For each approved agent:
 
-For each approved role:
+1. Copy template if missing (or author lean custom `.md` for surface-specific names).
+2. Fill frontiers with **exact** repos/paths from the scan.
+3. Frontmatter: `name` = basename; strong `description`; `model: inherit` unless chosen otherwise.
+4. Body: shared pack; frontier only; return summary to parent.
 
-1. Copy template → product `.cursor/agents/<ask-name>.md` if missing (product `.cursor/` home).
-2. Fill `{{…}}` frontiers with scan evidence (repos, stack notes).
-3. Ensure frontmatter: `name` matches file basename; strong `description` (when to delegate); `model: inherit` unless the user chose otherwise.
-4. Body MUST: shared pack skills; role frontier only; return summary to parent.
-
-If no template exists for a custom name the user approved, author a lean subagent `.md` with the same shape.
-
-Do **not** overwrite a customized existing subagent without asking — merge missing frontiers only.
-
-## Legacy migration (MUST when present)
-
-If product `.cursor/skills/ask-role-*/` exists from an older kit:
-
-1. Ensure matching `.cursor/agents/ask-*.md` exist (map `ask-role-frontend` → `ask-frontend`, etc.).
-2. After subagents are in place, **delete** the legacy `ask-role-*` skill folders (migrate content into the subagent body if it has product-specific MUSTS not yet in the agent file).
-3. Do not leave pointer stubs.
+Do **not** overwrite customized agents without asking — merge frontiers only.
 
 ## Record in ask-project.mdc
 
@@ -118,19 +149,23 @@ If product `.cursor/skills/ask-role-*/` exists from an older kit:
 - Subagents: `.cursor/agents/ask-*.md`
 - Setup: done (date)
 - Update notice for /ask-setup-agents: done
+- Known surfaces: `repo-a`, `repo-b`, …   # workspace-relative paths; for /ask-update delta
 ```
+
+## Legacy migration (MUST when present)
+
+If `.cursor/skills/ask-role-*/` exists: map to `.cursor/agents/ask-*.md`, migrate product MUSTS, **delete** skill folders (no stubs).
 
 ## MUST NOT
 
-- Invent roles with no evidence and no user confirmation.
-- Create dozens of vague roles — prefer a small set that matches the business + scan.
-- Create role **skills** (`ask-role-*`) instead of subagents.
-- Put role protocol only in chat — must land in files.
+- Invent roles with no evidence and no confirmation.
+- Silent-create agents on update or mid-REQ.
+- Create role **skills** instead of subagents.
+- Put role protocol only in chat.
 - Commit/push **app/kit** unless asked (agent-knowledge auto close-out still applies).
-- Run `/ask-centralize-docs` unless the user asks.
 
 ## Close
 
-List subagents + paths created; persona hint; remind orchestration delegates via Task / `/ask-frontend` etc. on `/ask-requirement`.
+List agents created/updated; surfaces still uncovered (if user skipped any); remind Task / `/ask-*` delegation.
 
-Then run **`ask-git-project` → agent-knowledge auto close-out**.
+Then **`ask-git-project` → agent-knowledge auto close-out**.

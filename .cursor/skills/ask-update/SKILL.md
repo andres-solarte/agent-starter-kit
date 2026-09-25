@@ -21,9 +21,10 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 3. git pull in kit directory
 4. Re-merge .cursor/ → product .cursor/ home (include new ask-* skills/rules)
 5. Leave agent-knowledge content untouched (except missing template stubs / backlog migrate)
-6. If legacy ask-role-* skills exist: mention once that /ask-setup-agents migrates them to .cursor/agents/ (offer to run)
-7. Once-only notice: /ask-setup-agents (if flag pending)
-8. Summarize — do NOT offer /ask-centralize-docs
+6. Surface delta: compare workspace sibling repos vs Known surfaces / roles.md → if new uncovered apps, propose agents
+7. If legacy ask-role-* skills exist: mention once that /ask-setup-agents migrates them to .cursor/agents/ (offer to run)
+8. Once-only notice: /ask-setup-agents (if flag pending)
+9. Summarize — do NOT offer /ask-centralize-docs
 ```
 
 ## Resolve paths
@@ -46,6 +47,22 @@ If `ask-project.mdc` has **no** Agents section, or `Update notice for /ask-setup
 
 If they say yes → run `ask-setup-agents` skill. If no → leave roles as-is.
 
+## New surfaces → propose agents (MUST)
+
+After merge, inventory workspace sibling repos (exclude kit, agent-knowledge, vendor/build dirs). Compare to:
+
+- `ask-project.mdc` → `Known surfaces`, and/or
+- `roles.md` Surfaces / primary-repos columns
+
+If there is at least one **new** app/service surface not covered by an existing `.cursor/agents/ask-*.md` frontier:
+
+1. In the close (chat language), list the new surfaces and say a matching **subagent** should be added (nature/scope of that surface).
+2. Ask granularity if several share a specialty (type vs per-surface) — same question as `/ask-setup-agents`.
+3. Offer to run **`ask-setup-agents` in delta mode** now (yes → run that skill scoped to gaps). Do **not** create agents silently.
+4. If the user declines, leave a one-line note under Open session-backlog or simply report; do not block the update.
+
+If no new uncovered surfaces → skip this section.
+
 ## Doc centralization
 
 **Do not** prompt for a workspace doc scan on update. If the user wants that, they run `/ask-centralize-docs` themselves.
@@ -66,4 +83,4 @@ If the product still has **legacy kit rule filenames** (numbered and/or pre-`ask
 
 ## Close
 
-Kit revision; what merged into product `.cursor/`; memory path untouched; once-only setup-agents notice if applicable. Optional one line: docs scan is `/ask-centralize-docs` if they ask.
+Kit revision; what merged into product `.cursor/`; memory path untouched; new-surface agent proposal if any; once-only setup-agents notice if applicable. Optional one line: docs scan is `/ask-centralize-docs` if they ask.

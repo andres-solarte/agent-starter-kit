@@ -156,7 +156,8 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template files with user OK. Ensure `users/<email>/session-backlog.md` exists; migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into it, then **delete** the legacy files (no stubs). Ensure `knowledge/delivery/requirements/` exists (copy from kit template if missing). If `knowledge/delivery/specify/` or `knowledge/delivery/specs/` exist and are empty or kit-placeholder-only, **delete** them; if they hold real product content, leave them and warn once.
 5. Do **not** prompt for `/ask-centralize-docs` (manual only).
 6. **Once-only notice:** if `ask-project.mdc` lacks Agents / `Update notice for /ask-setup-agents: done`, tell the user briefly what `/ask-setup-agents` does and offer to run it; then set that notice to `done` (whether or not they run it). Do not re-announce on later updates.
-7. Summarize what changed in the user’s chat language (kit revision, merged skills/rules).
+7. **New surfaces:** if workspace has app/service repos not in Known surfaces / `roles.md` and not covered by an agent frontier, list them and offer `/ask-setup-agents` **delta** (ask granularity when needed). Do not create agents silently.
+8. Summarize what changed in the user’s chat language (kit revision, merged skills/rules).
 
 ### MUST NOT
 
@@ -165,6 +166,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 - Overwrite `ask-project.mdc` or product stack skills.
 - Assume default paths if install recorded different ones.
 - Re-run full `/ask-setup-agents` analysis on every update without the user asking.
+- Silent-create subagents for new repos.
 
 ---
 
@@ -173,31 +175,33 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 ### Preconditions
 
 1. Kit directory, agent-knowledge directory, and product `.cursor/` home are known (install record or ask).
-2. User ran `/ask-setup-agents`, or `/ask-install` reached this step, or `/ask-update` once-only offer was accepted.
+2. User ran `/ask-setup-agents`, or `/ask-install` reached this step, or `/ask-update` offered setup / found new surfaces, or a mid-REQ **agent gap** was accepted.
 
 ### Steps
 
-1. Lightweight scan of workspace siblings (exclude kit, vendor/build dirs) + business signals (README, `knowledge/product/` if present).
-2. Propose persona hint + roles + **subagent names** with evidence → user **yes** / edit.
-3. Write/update `agent-knowledge/knowledge/architecture/agents/roles.md`.
-4. For each approved role: copy from kit `templates/role-agents/<ask-name>.md` into product `.cursor/agents/<ask-name>.md`, fill frontiers. Always prefer including `ask-tech-lead` unless declined.
-5. If legacy `.cursor/skills/ask-role-*/` exists: migrate product-specific MUSTS into the matching subagent, then **delete** those skill folders (no stubs).
-6. Update `ask-project.mdc` Agents section (`Subagents: .cursor/agents/ask-*.md`, `Setup: done`, notice done).
-7. Agent-knowledge auto close-out (commit/push). No app/kit commit unless asked.
+1. Inventory **surfaces** (sibling repos/apps) + existing agents/`roles.md` (full or **delta** mode).
+2. Lightweight stack/business scan (exclude kit, vendor/build dirs).
+3. For uncovered surfaces: propose specialists matching nature/scope. If several share a specialty → **ask** type vs per-surface granularity.
+4. Propose persona hint + create/update list → user **yes** / edit.
+5. Write/update `roles.md` (include Surfaces table) + copy/fill `.cursor/agents/ask-*.md` from `templates/role-agents/` (or lean custom). Prefer `ask-tech-lead` unless declined.
+6. If legacy `.cursor/skills/ask-role-*/` exists: migrate MUSTS, then **delete** those folders (no stubs).
+7. Update `ask-project.mdc` Agents section including **Known surfaces**.
+8. Agent-knowledge auto close-out (commit/push). No app/kit commit unless asked.
 
 ### MUST NOT
 
 - Invent roles with no evidence and no confirmation.
+- Silent-create agents on update or mid-REQ.
 - Create `ask-role-*` **skills** instead of `.cursor/agents/` subagents.
 - Overwrite customized subagents without asking.
 - Dump every template role without a confirmed list.
 
 ### Done when
 
-- [ ] `roles.md` reflects confirmed roles
-- [ ] Matching `.cursor/agents/ask-*.md` subagents exist
+- [ ] `roles.md` reflects confirmed roles + surfaces
+- [ ] Matching `.cursor/agents/ask-*.md` subagents exist for approved list
 - [ ] Legacy `ask-role-*` skills removed if they were present
-- [ ] `ask-project.mdc` Agents section updated
+- [ ] `ask-project.mdc` Agents + Known surfaces updated
 
 ---
 

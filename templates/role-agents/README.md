@@ -9,7 +9,8 @@ These are **subagents** (isolated context, Task / `/name` delegation) — **not*
 | Template file | `name` | Typical when |
 |---------------|--------|----------------|
 | `ask-tech-lead.md` | `ask-tech-lead` | Always (unless declined) |
-| `ask-frontend.md` | `ask-frontend` | UI apps |
+| `ask-frontend.md` | `ask-frontend` | Web UI apps |
+| `ask-mobile.md` | `ask-mobile` | Mobile apps (RN/Flutter/native) |
 | `ask-backend.md` | `ask-backend` | API services |
 | `ask-data.md` | `ask-data` | Migrations / ORM / SQL |
 | `ask-devops.md` | `ask-devops` | CI, containers, IaC |

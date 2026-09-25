@@ -97,10 +97,29 @@ Path: (role subagents / stop for BDR)
 | In scope / accepted BDR? | Stop or hand to Product / open question — do not invent scope |
 | Needs new BDR/ADR? | Tier **ambiguous**; draft proposal; **do not** implement until accepted (or user says proceed) |
 | Which repos? | List explicitly |
+| Surface has matching subagent? | See **Agent gap (surfaces)** below |
 | Out of scope side ideas | Park via `/ask-backlog` → `users/<email>/session-backlog.md` (rule `ask-focus-scope`) |
 | Schema change? | Plan MUST include **existing-data migration** (treat current rows as production) |
 
 Output a short **plan** before heavy work when tier is **normal** or **ambiguous** (unless user already said "execute / do it").
+
+## Agent gap (surfaces) (MUST)
+
+Before plan acceptance and before delegating work on a repo/app:
+
+1. Map each touched surface to `.cursor/agents/ask-*.md` / `roles.md`.
+2. If a surface is **uncovered** (no agent frontier owns it):
+
+```text
+AGENT GAP — surface without specialist
+- Surface / repo: …
+- Kind (mobile/api/web/…): …
+- Proposal: create ask-… (type) or ask-… (per-surface) via /ask-setup-agents delta
+- Meanwhile: (a) run setup-agents delta now  (b) user picks existing agent to extend  (c) park
+```
+
+3. Default: **(a)** offer `/ask-setup-agents` delta (ask granularity if needed). Do **not** improvise a fake specialist or silently assign web-frontend to a mobile app.
+4. Do not present the execution plan for acceptance until the gap is resolved or the user explicitly chooses (b)/(c).
 
 ---
 
@@ -140,7 +159,8 @@ Stop coding → Product / clarify / BDR-ADR → re-tier when resolved
 ```text
 Data (schema/migrations)     [ask-data subagent, if any]
   → Backend (one API)         [ask-backend]
-  → Frontend (one UI)         [ask-frontend]
+  → Frontend (web UI)         [ask-frontend]
+  → Mobile (app)              [ask-mobile or per-surface mobile agent]
   → Design system             [ask-design if present]
   → QA automation              [ask-qa / e2e stack skill]
   → QA review / Docs / DevOps if needed [ask-devops]

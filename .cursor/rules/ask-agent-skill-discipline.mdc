@@ -8,7 +8,7 @@
 | `/ask-update` | Pull kit upstream + safe re-merge |
 | `/ask-uninstall` | Remove kit wiring (asks what to delete; safe defaults keep memory) |
 | `/ask-centralize-docs` | Scan workspace docs → copy into agent-knowledge → recommend cleanup |
-| `/ask-setup-agents` | Analyze stack + business → roles.md + `.cursor/agents/ask-*` subagents |
+| `/ask-setup-agents` | Analyze stack/surfaces → roles + subagents (full or delta for new repos) |
 | `/ask-question` | Ask the framework / default triage (may hand off to requirement or fix) |
 | `/ask-requirement` | Product/code work now (+ REQ registry status) |
 | `/ask-requirement-fix` | Error on same / existing REQ (no full re-plan) |

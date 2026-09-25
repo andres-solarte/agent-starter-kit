@@ -16,7 +16,7 @@ What to resume: [NEXT.md](./NEXT.md).
 
 | Who | What |
 |-----|------|
-| Human | `/ask-requirement` (new work + registry) · `/ask-requirement-fix` (error on existing REQ) · `/ask-backlog` (personal notes → `users/<email>/session-backlog.md`) |
+| Human | `/ask-requirement` (new work + registry) · `/ask-requirement-fix` (error on existing REQ) · `/ask-setup-agents` (roles; also when new surfaces appear) · `/ask-backlog` (personal notes) |
 | Agents | `ask-orchestrate-requirement` + `.cursor/agents/ask-*` subagents (agent-only) |
 
 Do not offer internal skill menus to the user.
@@ -51,5 +51,7 @@ Do not offer internal skill menus to the user.
 2. Execute per tier (Task / `.cursor/agents/ask-*`).
 3. Verify bar: maker ≠ checker (E2E / smoke / typecheck per tier and project).
 4. Close: work-log; update requirement registry + `NEXT.md`; agent-knowledge auto commit/push (`ask-git-project`).
+
+**New / uncovered surfaces:** propose a specialist via `/ask-setup-agents` (delta); ask type vs per-surface when several share a specialty. Mid-REQ: agent gap blocks plan acceptance until resolved or the user chooses an exception.
 
 Role detail: project doc at `knowledge/architecture/agents/roles.md` (create if missing).
