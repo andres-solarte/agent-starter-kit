@@ -7,14 +7,21 @@ SoT: product **agent-knowledge** `AGENTS.md` + kit/process **`.agents/skills`**.
 ```text
 <adapter-home>/
   CLAUDE.md                 ← thin pointer
-  .agents/skills/           ← SoT (from kit)
-  .agents/rules/            ← plain rules SoT
+  .agents/skills/           ← process SoT (from kit)
+  .agents/rules/            ← plain rules SoT (incl. ask-agent-scope)
   .claude/skills → ../.agents/skills
   .claude/rules  → ../.agents/rules
-  .claude/agents/ask-*.md   ← role subagents from /ask-setup-agents
+  .claude/agents/ask-*.md   ← RUNTIME MIRROR (materialized)
+
+agent-knowledge/
+  agents/ask-*.md                    ← TEAM SoT (git)
+  users/<email>/agents/ask-*.md      ← USER SoT (git)
 ```
 
 **Do not** create `.cursor/` for Claude-only installs.
+
+Create/modify via `/ask-setup-agents` — always ask user-only vs team.  
+`/ask-update` rematerializes SoT → `.claude/agents/`.
 
 ## Minimal session
 

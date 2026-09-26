@@ -50,9 +50,13 @@ Formal requirement status?               → knowledge/delivery/requirements/ (R
 When / what / why for this block?        → users/<email>/work-log/YYYY/MM/DD.md
 Durable learning not (yet) global?       → users/<email>/knowledge/<relpath>/<file>.md (delta)
 Ready for the team / already agreed?     → knowledge/<relpath>/ (via consolidation promote|merge)
+Role subagent create/modify?             → ASK user-only vs team (ask-agent-scope)
+  → user-only                            → users/<email>/agents/ask-*.md
+  → team                                 → agents/ask-*.md + roles.md
+Then materialize host .cursor/.claude agents/ mirrors
 ```
 
-There is no third `memory/` layer for durable facts.
+There is no third `memory/` layer for durable facts. Role agents are separate (`agents/` / `users/<email>/agents/`).
 
 ## 5. Block close-out (MUST)
 
@@ -72,5 +76,5 @@ There is no third `memory/` layer for durable facts.
 ## 7. Privacy
 
 - `work-log/`, `MEMORY.md`, `preferences.yaml` are **local by default** (gitignore in the repo).
-- Shared git **does** include: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`, `session-backlog.md`.
+- Shared git **does** include: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`, `session-backlog.md`, `users/<email>/agents/**`, team `agents/**`.
 - Never paste secrets, tokens, or PII into logs or deltas.

@@ -1,0 +1,51 @@
+---
+description: Ask user vs team scope before creating or modifying role subagents
+alwaysApply: true
+---
+
+# Agent scope — user vs team (MUST)
+
+Whenever a **role subagent** is **created or modified** (including promote, rename, frontier edits, or delete-and-replace), **ask the user** before writing:
+
+```text
+Is this agent (A) user-only (you), or (B) team (everyone)?
+```
+
+Do **not** assume team for `/ask-setup-agents`, install, or mid-REQ gaps. Chat language from `preferences.yaml` → `communication_language`.
+
+## Layers (SoT in agent-knowledge)
+
+| Scope | SoT path (tracked in agent-knowledge) | In `roles.md` |
+|-------|----------------------------------------|---------------|
+| **Team** | `agent-knowledge/agents/ask-*.md` | Yes |
+| **User** | `agent-knowledge/users/<email>/agents/ask-*.md` | No (personal) |
+
+`<email>` = `git config user.email` lowercase as-is.
+
+## Runtime mirrors (not the SoT)
+
+After writing SoT, **materialize** into each configured host so Cursor/Claude load them:
+
+- `<adapter-home>/.cursor/agents/ask-*.md` (if hosts include cursor)
+- `<adapter-home>/.claude/agents/ask-*.md` (if hosts include claude)
+
+Materialize = copy/sync from SoT (team ∪ current user). Host dirs may sit outside git; teammates get team agents via **agent-knowledge pull** + materialize (`/ask-update` or `/ask-setup-agents`).
+
+## Promote (user → team)
+
+Only when the user chooses **team** for an agent that lived under `users/<email>/agents/`:
+
+1. Move/copy into `agent-knowledge/agents/`
+2. Add/update `roles.md`
+3. Rematerialize hosts
+4. Remove the user copy (or leave a stub pointer — prefer remove after confirm)
+
+Never silent-promote.
+
+## Demote / user-only edit of a team agent
+
+If the user chooses **user-only** while editing a **team** agent: do **not** silently fork. Ask: (1) personal override copy under `users/<email>/agents/`, or (2) change the team SoT (affects everyone). Default offer is (1) unless they confirm team change.
+
+## Related
+
+Skill: `/ask-setup-agents`. Map: `knowledge/architecture/agents/roles.md`. Kit: `INSTALL.md` setup-agents contract. Plain copy: `.agents/rules/ask-agent-scope.md`.

@@ -71,7 +71,7 @@ The workspace **must** include this `agent-knowledge` folder so agents can read 
 
 | Situation | Do |
 |-----------|-----|
-| New product / adapters missing (no product `.agents/`) | With kit + this repo in the workspace, run **`/ask-install`** (choose dirs + hosts). Install fills this table. |
+| New product / adapters missing (no product `.agents/`) | With kit + this repo in the workspace, run **`/ask-install`** (choose dirs + hosts). Install fills this table. Team agents land in `agents/` here (git); `/ask-update` materializes them to host dirs. |
 | Product already installed (teammate machine) | `git pull` in this repo and in the kit → **`/ask-update`**. Create `users/<your-email>/` from `users/_template/` if missing. |
 | Only catching up on apps | `git pull` in each app row; no need to re-run install |
 

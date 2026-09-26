@@ -161,11 +161,12 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 ### Steps
 
 1. Kit: `git status`; warn if dirty; `git pull`.
-2. Re-merge `.agents/`; refresh **only** recorded host adapters (same policy as install).
+2. Re-merge `.agents/`; refresh **only** recorded host adapters (same policy as install). Ensure rule `ask-agent-scope` is present.
 3. Claude-only with leftover kit-sourced `.cursor/` → offer delete after explicit yes.
-4. agent-knowledge: missing template files / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe.
-5. No doc-scan prompt. Once-only setup-agents notice if pending. New surfaces → offer setup-agents delta.
-6. Summarize (hosts + what merged).
+4. agent-knowledge: missing template files (`agents/`, `users/_template/agents/`) / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe.
+5. **Materialize** role agents: copy `agent-knowledge/agents/ask-*.md` ∪ `users/<email>/agents/ask-*.md` → each configured host `agents/` dir (runtime mirrors).
+6. No doc-scan prompt. Once-only setup-agents notice if pending. New surfaces → offer setup-agents delta (still ask user vs team).
+7. Summarize (hosts + what merged + materialize).
 
 ### MUST NOT
 
@@ -181,34 +182,37 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 
 ### Preconditions
 
-1. Kit directory, agent-knowledge directory, and product `.cursor/` home are known (install record or ask).
+1. Kit directory, agent-knowledge directory, and product adapter home are known (install record or ask).
 2. User ran `/ask-setup-agents`, or `/ask-install` reached this step, or `/ask-update` offered setup / found new surfaces, or a mid-REQ **agent gap** was accepted.
 
 ### Steps
 
-1. Inventory **surfaces** (sibling repos/apps) + existing agents/`roles.md` (full or **delta** mode).
+1. Inventory **surfaces** + existing SoT (`agent-knowledge/agents/`, `users/<email>/agents/`) + `roles.md` + host mirrors (full or **delta** mode).
 2. Lightweight stack/business scan (exclude kit, vendor/build dirs).
 3. For uncovered surfaces: propose specialists matching nature/scope. If several share a specialty → **ask** type vs per-surface granularity.
-4. Propose persona hint + create/update list → user **yes** / edit.
-5. Write/update `roles.md` (include Surfaces table) + copy/fill `.cursor/agents/ask-*.md` from `templates/role-agents/` (or lean custom). Prefer `ask-tech-lead` unless declined.
-6. If legacy `.agents/skills/ask-role-*/` exists: migrate MUSTS, then **delete** those folders (no stubs).
-7. Update `ask-project.mdc` Agents section including **Known surfaces**.
+4. Propose persona hint + create/update list → for each create/modify (or batch A/B/C) **MUST ask user-only vs team** (rule `ask-agent-scope`). Never assume team.
+5. On yes: write SoT under `agents/ask-*.md` (team) or `users/<email>/agents/ask-*.md` (user); update `roles.md` **only** for team; **materialize** team ∪ current-user SoT into each host `agents/` dir.
+6. If legacy `.agents/skills/ask-role-*/` exists: migrate MUSTS, then **delete** those folders (no stubs). If host mirrors exist but team SoT empty → offer import into `agent-knowledge/agents/`.
+7. Update `ask-project` Agents section: SoT paths + Known surfaces + hosts.
 8. Agent-knowledge auto close-out (commit/push). No app/kit commit unless asked.
 
 ### MUST NOT
 
 - Invent roles with no evidence and no confirmation.
+- Skip user-vs-team scope on create/modify.
 - Silent-create agents on update or mid-REQ.
-- Create `ask-role-*` **skills** instead of `.cursor/agents/` subagents.
-- Overwrite customized subagents without asking.
+- Create `ask-role-*` **skills** instead of subagents.
+- Treat host `.cursor/agents` / `.claude/agents` as the only copy (SoT is agent-knowledge).
+- Overwrite customized SoT without asking.
 - Dump every template role without a confirmed list.
 
 ### Done when
 
-- [ ] `roles.md` reflects confirmed roles + surfaces
-- [ ] Matching `.cursor/agents/ask-*.md` subagents exist for approved list
+- [ ] Scope answered for every new/changed agent
+- [ ] Team SoT + `roles.md` match confirmed team roles; user agents under `users/<email>/agents/`
+- [ ] Host mirrors materialized for configured hosts
 - [ ] Legacy `ask-role-*` skills removed if they were present
-- [ ] `ask-project.mdc` Agents + Known surfaces updated
+- [ ] `ask-project` Agents + Known surfaces updated
 
 ---
 
@@ -297,7 +301,7 @@ Same outcomes as the contracts. Uninstall = reverse chosen pieces only. Centrali
 
 - [ ] Kit clone tracks upstream; `.git` present
 - [ ] Product `.cursor/` has `ask-*` skills; `ask-project.mdc` filled
-- [ ] Product `.cursor/agents/ask-*.md` role subagents present (or setup skipped)
+- [ ] Product team agents in `agent-knowledge/agents/` (+ host mirrors) or setup skipped; user agents optional under `users/<email>/agents/`
 - [ ] `agent-knowledge/` is a **separate** git repo (own remote when you add it)
 - [ ] User `preferences.yaml` set
 - [ ] `/ask-requirement`, `/ask-requirement-fix`, `/ask-backlog`, `/ask-question`, `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents` known

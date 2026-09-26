@@ -57,6 +57,8 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | When / what / why | `users/<email>/work-log/` (local) |
 | Durable not-yet-global | delta under `users/<email>/knowledge/…` |
 | Team SoT | `knowledge/…` via consolidation only |
+| Team role agents | `agents/ask-*.md` (confirm scope = team) |
+| User-only role agents | `users/<email>/agents/ask-*.md` |
 
 ## Close-out (MUST every meaningful block)
 
@@ -76,6 +78,8 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | Task | Path |
 |------|------|
 | Same workspace on every machine (clone this repo first) | [WORKSPACE.md](./WORKSPACE.md) |
+| Team role agents (SoT) | [agents/](./agents/) |
+| User-only role agents | `users/<email>/agents/` |
 | What to do next | `knowledge/delivery/NEXT.md` |
 | Requirement registry | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
 | Fix on existing REQ | `/ask-requirement-fix` |
@@ -93,6 +97,8 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | Location | Policy |
 |----------|--------|
 | `knowledge/**` | Confirm / PR |
+| `agents/**` (team role agents) | Confirm + scope = team |
+| `users/<email>/agents/**` | OK after scope = user |
 | `users/<email>/knowledge/**` | Delta OK |
 | `users/<email>/work-log/**` | Append OK (local) |
 | `consolidation/**` | Confirm |

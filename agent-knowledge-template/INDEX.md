@@ -10,6 +10,7 @@ Wikilinks: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).
 | Area | Path |
 |------|------|
 | Team workspace (multi-root) | [WORKSPACE.md](./WORKSPACE.md) |
+| Team role agents | [agents/](./agents/) |
 | Product | [knowledge/product/](./knowledge/product/) |
 | Decisions | [knowledge/decisions/](./knowledge/decisions/) |
 | Domain | [knowledge/domain/](./knowledge/domain/) |

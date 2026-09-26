@@ -19,10 +19,11 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 3. git pull in kit directory
 4. Re-merge .agents/ → adapter home; re-wire only selected host adapters
 5. Leave agent-knowledge untouched (except missing template stubs / backlog migrate)
-6. Claude-only: if .cursor/ kit-sourced exists → offer delete (migration)
-7. Surface delta → propose agents if new uncovered repos
-8. Once-only / legacy notices as needed
-9. Summarize — do NOT offer /ask-centralize-docs
+6. Materialize role agents from AK SoT → host agents/ dirs (team ∪ current user)
+7. Claude-only: if .cursor/ kit-sourced exists → offer delete (migration)
+8. Surface delta → propose agents if new uncovered repos (scope ask via setup-agents)
+9. Once-only / legacy notices as needed
+10. Summarize — do NOT offer /ask-centralize-docs
 ```
 
 ## Resolve paths
@@ -42,7 +43,17 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
    - claude → `.claude/skills` + `.claude/rules` → `.agents/…`; keep `.claude/agents`; thin `CLAUDE.md`
 3. **If hosts = claude only:** do **not** create or refresh `.cursor/`. If a kit-sourced `.cursor/` exists, **offer to delete** it (list paths) after user yes.
 4. **If hosts = cursor only:** do not create `.claude/` unless user expands hosts.
-5. Ensure process-critical skills present under `.agents/skills`: `ask-question`, `ask-setup-agents`, `ask-centralize-docs`, route rule (cursor `.mdc` and/or `.agents/rules`).
+5. Ensure process-critical skills present under `.agents/skills`: `ask-question`, `ask-setup-agents`, `ask-centralize-docs`, route rule (cursor `.mdc` and/or `.agents/rules`). Ensure rule `ask-agent-scope` exists under `.agents/rules` and cursor `.mdc` when hosts include cursor.
+
+## Materialize role agents (MUST)
+
+After merge, sync runtime host mirrors from agent-knowledge SoT (do not invent agents here):
+
+1. Team: `<agent-knowledge>/agents/ask-*.md`
+2. Current user: `<agent-knowledge>/users/<email>/agents/ask-*.md` (`git config user.email` lowercase)
+3. Copy into `<adapter-home>/.cursor/agents/` and/or `.claude/agents/` per recorded hosts
+
+Host dirs are mirrors; SoT stays in agent-knowledge (shared via git). Create/modify still goes through `/ask-setup-agents` + scope question.
 
 ## Once-only: `/ask-setup-agents` notice (MUST)
 
@@ -67,4 +78,4 @@ Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setu
 
 ## Close
 
-Kit revision; hosts; what merged; Claude-only `.cursor` cleanup if done; surface proposals if any.
+Kit revision; hosts; what merged; materialize counts; Claude-only `.cursor` cleanup if done; surface proposals if any.

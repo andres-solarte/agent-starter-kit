@@ -2,41 +2,47 @@
 name: ask-setup-agents
 description: >-
   Analyze the workspace stack and product/business context, confirm with the
-  user, then create agent-knowledge roles (RACI) and matching subagents under
-  .cursor/agents and/or .claude/agents per recorded agent hosts. Re-run when
-  surfaces change. Use for /ask-setup-agents, install, update deltas, or
-  mid-requirement agent gaps.
+  user, then create agent-knowledge roles (RACI) and role subagents with
+  mandatory user-vs-team scope. SoT lives in agent-knowledge (team:
+  agents/ask-*.md; user: users/<email>/agents/). Materialize into host
+  .cursor/agents and/or .claude/agents. Re-run when surfaces change.
 ---
 
 # /ask-setup-agents — detect stack + create role subagents
 
-Follow **`INSTALL.md`** → **Agent contract — setup agents**.
+Follow **`INSTALL.md`** → **Agent contract — setup agents**.  
+Scope rule: **`ask-agent-scope`** (MUST ask user-only vs team on every create/modify).
 
 ## Goal
 
-From **business context + technical scan**, define **role subagents**, write `roles.md`, and create agent files under each **configured host**:
+From **business context + technical scan**, define **role subagents**, write team `roles.md` when scope is team, write SoT files under agent-knowledge, and **materialize** into configured hosts:
+
+| Scope | SoT (agent-knowledge, tracked) | `roles.md` |
+|-------|--------------------------------|------------|
+| **Team** | `agents/ask-*.md` | Update |
+| **User** | `users/<email>/agents/ask-*.md` | Do not list as team |
+
+Runtime mirrors (per hosts):
 
 - Cursor → `<adapter-home>/.cursor/agents/ask-*.md`
 - Claude → `<adapter-home>/.claude/agents/ask-*.md`
-- Optionally also `.agents/agents/` as neutral copy
 
-Also used to **fill gaps** when a **new surface** appears or a REQ touches a surface with no matching agent.
-
-**Not skills:** process skills live in `.agents/skills/` (host dirs are symlinks). Roles are **subagents**, not `ask-role-*` skills.
+**Not skills:** process skills live in `.agents/skills/`. Roles are **subagents**.
 
 ## Flow (MUST)
 
 ```text
-1. Resolve kit dir, agent-knowledge, adapter home, agent hosts, sibling repos
-2. Inventory surfaces + existing agents (per host) + roles.md
+1. Resolve kit dir, agent-knowledge, adapter home, agent hosts, sibling repos, user email
+2. Inventory surfaces + existing SoT (team agents/ + users/<email>/agents/) + roles.md + host mirrors
 3. Gather business + stack signals
 4. Diff uncovered surfaces → candidate agents
 5. Ask granularity if needed (type vs per-surface)
-6. Propose → user yes / edit
-7. Write roles.md + agent files to each host agents/ dir
-8. Record Known surfaces + hosts in ask-project
-9. Legacy ask-role-* skill migration if needed
-10. Close + agent-knowledge auto close-out
+6. Propose list → for each create/modify (or batch): MUST ask scope A user-only | B team
+7. User yes / edit
+8. Write SoT under the chosen layer; update roles.md only for team; materialize hosts
+9. Record Known surfaces + hosts + SoT paths in ask-project
+10. Legacy ask-role-* skill migration if needed
+11. Close + agent-knowledge auto close-out
 ```
 
 ### Modes
@@ -45,6 +51,27 @@ Also used to **fill gaps** when a **new surface** appears or a REQ touches a sur
 |------|------|--------|
 | **Full** | Install / explicit `/ask-setup-agents` / user asks full refresh | All surfaces |
 | **Delta** | `/ask-update` found new repos; mid-REQ agent gap | Only uncovered / new surfaces (still confirm) |
+
+## Scope question (MUST)
+
+Before writing **any** new or changed agent file, ask in the user’s chat language:
+
+```text
+Is this agent (A) user-only (you), or (B) team (everyone)?
+```
+
+For a **batch**, you may ask once:
+
+```text
+Scope for these agents?
+(A) all user-only  (B) all team  (C) ask per agent
+```
+
+Never default to team. Never write SoT until scope is answered.
+
+**Promote:** user-only → team only when they choose B for an agent that lived under `users/<email>/agents/` (see rule `ask-agent-scope`).
+
+**Edit of team agent + answer A:** ask personal override vs change team SoT — do not silent-fork.
 
 ## Scan (MUST — lightweight, no secrets)
 
@@ -67,7 +94,7 @@ Also used to **fill gaps** when a **new surface** appears or a REQ touches a sur
 | Design system / Storybook / tokens | design |
 | Ambiguous product scope docs | product |
 
-Always prefer including **`ask-tech-lead`** unless declined.
+Always prefer including **`ask-tech-lead`** unless declined (still ask scope).
 
 **Persona hint:** `frontend` | `backend` | `devops` | `fullstack` | `mobile` | `todero` — show for confirmation.
 
@@ -75,10 +102,10 @@ Always prefer including **`ask-tech-lead`** unless declined.
 
 A surface is **uncovered** when:
 
-- No host `agents/ask-*.md` (`.cursor` and/or `.claude` per hosts) lists it in Frontier / primary repos, **and**
-- `roles.md` has no row mapping that surface to a subagent
+- No **team** SoT `agents/ask-*.md` (and no user agent the current user relies on) lists it in Frontier / primary repos, **and**
+- `roles.md` has no row mapping that surface to a **team** subagent
 
-For each uncovered surface, propose a specialist whose **nature and scope** match the surface (mobile app → mobile specialist, not a generic frontend web agent unless the user merges them).
+For each uncovered surface, propose a specialist whose **nature and scope** match the surface.
 
 ## Granularity (MUST ask when relevant)
 
@@ -92,7 +119,7 @@ For these surfaces (…): prefer
 (B) one agent per surface/repo (e.g. ask-buyer-mobile, ask-driver-mobile)?
 ```
 
-Do not assume A or B. Record the choice in `roles.md` Notes.
+Do not assume A or B. Record the choice in `roles.md` Notes (team agents only).
 
 If only one surface per specialty → default to type-named agent (`ask-mobile`, `ask-frontend`, …) unless the user wants a surface-specific name.
 
@@ -105,45 +132,45 @@ Surfaces found:
 - path — kind — covered by ask-… | UNCOVERED
 Granularity: A (type) | B (per surface) | n/a
 Subagents to create/update:
-- ask-… — why (evidence) — frontiers: …
-Will write:
-- agent-knowledge/knowledge/architecture/agents/roles.md
-- .cursor/agents/ask-*.md and/or .claude/agents/ask-*.md (per hosts)
+- ask-… — why — frontiers: … — scope: TBD (ask A/B)
+Will write SoT:
+- team → agent-knowledge/agents/ask-*.md (+ roles.md)
+- user → agent-knowledge/users/<email>/agents/ask-*.md
+Then materialize → host agents/ dirs
 Edit or confirm?
 ```
 
-Do **not** create agents for uncovered surfaces without confirmation.  
+Do **not** create agents without confirmation + scope.  
 Do **not** write `.cursor/agents` when hosts are Claude-only.
 
-## Write roles.md (MUST)
+## Write roles.md (MUST for team scope)
 
 Path: `<agent-knowledge>/knowledge/architecture/agents/roles.md`
 
-Include:
+Include only **team** agents:
 
 - Product one-liner / domain
 - Persona hint + granularity choice
-- **Surfaces** table: path ↔ kind ↔ subagent
-- Roles ↔ subagent file ↔ primary repos
-- Default specialist order
-- RACI sketch
-- Delegation: Task / subagents + shared skills pack
+- **Surfaces** table: path ↔ kind ↔ team subagent SoT path
+- Roles ↔ `agents/ask-….md` ↔ primary repos
+- Default specialist order, RACI, delegation notes
 
 English for durable file; chat in user language.
 
-## Write role subagents (MUST)
+## Write SoT + materialize (MUST)
 
 Templates: `{{kit-directory}}/templates/role-agents/<ask-name>.md`
 
-For each approved agent, for **each configured host** agents dir:
+For each approved agent:
 
-1. Copy template if missing (or author lean custom `.md`).
-2. Fill frontiers with **exact** repos/paths from the scan.
-3. Frontmatter: `name` = basename; strong `description`; `model: inherit` unless chosen otherwise.
+1. Resolve scope (A/B already answered).
+2. Write/update file under the SoT path for that scope.
+3. Frontmatter: `name` = basename; strong `description`; `model: inherit` unless chosen otherwise; optional `scope: team|user`.
 4. Body: shared pack; frontier only; return summary to parent.
-5. Keep Cursor and Claude copies in sync when hosts = `both` (same body).
+5. If **team**: update `roles.md`. If **user**: do not add to team `roles.md`.
+6. **Materialize:** copy team `agents/ask-*.md` ∪ current `users/<email>/agents/ask-*.md` into each configured host `agents/` dir (overwrite mirrors that match SoT basenames; do not delete unknown host-only files without asking).
 
-Do **not** overwrite customized agents without asking — merge frontiers only.
+Do **not** overwrite customized SoT without asking — merge frontiers only.
 
 ## Record in ask-project.mdc
 
@@ -153,7 +180,9 @@ Do **not** overwrite customized agents without asking — merge frontiers only.
 
 ## Agents
 - Roles: `agent-knowledge/knowledge/architecture/agents/roles.md`
-- Subagents: `.cursor/agents/ask-*.md` and/or `.claude/agents/ask-*.md`
+- Team SoT: `agent-knowledge/agents/ask-*.md`
+- User SoT: `agent-knowledge/users/<email>/agents/ask-*.md`
+- Host mirrors: `.cursor/agents/` and/or `.claude/agents/` (materialized)
 - Setup: done (date)
 - Update notice for /ask-setup-agents: done
 - Known surfaces: `repo-a`, `repo-b`, …
@@ -161,18 +190,21 @@ Do **not** overwrite customized agents without asking — merge frontiers only.
 
 ## Legacy migration (MUST when present)
 
-If `.agents/skills/ask-role-*/` exists: map to `.cursor/agents/ask-*.md`, migrate product MUSTS, **delete** skill folders (no stubs).
+If `.agents/skills/ask-role-*/` exists: map into SoT + host mirrors, migrate product MUSTS, **delete** skill folders (no stubs).
+
+If host mirrors exist but `agent-knowledge/agents/` is empty: offer to **import** host `ask-*.md` into team SoT (confirm) so the team can share them.
 
 ## MUST NOT
 
 - Invent roles with no evidence and no confirmation.
 - Silent-create agents on update or mid-REQ.
+- Skip the user-vs-team scope question.
 - Create role **skills** instead of subagents.
-- Put role protocol only in chat.
+- Treat adapter-home host dirs as the only copy (SoT must be agent-knowledge).
 - Commit/push **app/kit** unless asked (agent-knowledge auto close-out still applies).
 
 ## Close
 
-List agents created/updated; surfaces still uncovered (if user skipped any); remind Task / `/ask-*` delegation. If new surfaces have remotes, confirm updating `agent-knowledge/WORKSPACE.md` so teammate machines stay aligned.
+List agents created/updated with **scope**; surfaces still uncovered; remind Task / `/ask-*` delegation. If new surfaces have remotes, confirm updating `WORKSPACE.md`.
 
-Then **`ask-git-project` → agent-knowledge auto close-out**.
+Then **`ask-git-project` → agent-knowledge auto close-out** (SoT under `agents/` and `users/<email>/agents/` is tracked).

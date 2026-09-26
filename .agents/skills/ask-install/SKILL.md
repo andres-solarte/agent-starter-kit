@@ -82,6 +82,8 @@ Record in product `ask-project.mdc` (under adapter home `.cursor/rules` and/or m
 - Agent hosts: cursor | claude | both
 ```
 
+Ensure rule **`ask-agent-scope`** is merged into `.agents/rules/` and into `.cursor/rules/` when hosts include cursor.
+
 ## WORKSPACE.md (MUST)
 
 After agent-knowledge exists, edit its root **`WORKSPACE.md`** so teammates can replicate the machine:

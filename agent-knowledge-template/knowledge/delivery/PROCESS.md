@@ -17,7 +17,7 @@ What to resume: [NEXT.md](./NEXT.md).
 | Who | What |
 |-----|------|
 | Human | `/ask-requirement` (new work + registry) · `/ask-requirement-fix` (error on existing REQ) · `/ask-setup-agents` (roles; also when new surfaces appear) · `/ask-backlog` (personal notes) |
-| Agents | `ask-orchestrate-requirement` + `.cursor/agents/ask-*` subagents (agent-only) |
+| Agents | `ask-orchestrate-requirement` + role subagents (SoT in `agent-knowledge/agents/` or `users/<email>/agents/`; host mirrors) |
 
 Do not offer internal skill menus to the user.
 
@@ -48,7 +48,7 @@ Do not offer internal skill menus to the user.
 ## Loop engineering (summary)
 
 1. Block execution plan + role validation → user accepts. (**Skip** for `/ask-requirement-fix`.)
-2. Execute per tier (Task / `.cursor/agents/ask-*`).
+2. Execute per tier (Task / role subagents from SoT mirrors).
 3. Verify bar: maker ≠ checker (E2E / smoke / typecheck per tier and project).
 4. Close: work-log; update requirement registry + `NEXT.md`; agent-knowledge auto commit/push (`ask-git-project`).
 

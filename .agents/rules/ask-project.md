@@ -27,8 +27,11 @@ No commits or PRs of **app/kit** repos unless the user explicitly asks (agent-kn
 ## Agents
 
 - Roles: `agent-knowledge/knowledge/architecture/agents/roles.md`
-- Subagents: `.cursor/agents/ask-*.md` and/or `.claude/agents/ask-*.md` (per hosts)
+- Team SoT: `agent-knowledge/agents/ask-*.md`
+- User SoT: `agent-knowledge/users/<email>/agents/ask-*.md`
+- Host mirrors: `.cursor/agents/` and/or `.claude/agents/` (materialized; not SoT)
 - Skills SoT: `.agents/skills/`
+- Scope: always ask user-only vs team on create/modify (`ask-agent-scope`)
 - Setup: {{pending|done}} ({{date if done}})
 - Update notice for /ask-setup-agents: {{pending|done}}
 - Known surfaces: {{comma-separated workspace-relative repo paths from last setup scan}}

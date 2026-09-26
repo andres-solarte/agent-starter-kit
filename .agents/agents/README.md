@@ -1,5 +1,12 @@
 # agents/
 
-Product role subagents land here when using a **neutral** layout, or install may write directly to `.cursor/agents/` / `.claude/agents/` per host.
+Kit-local note: product **role subagent SoT** is **agent-knowledge**:
 
-Kit templates: `templates/role-agents/`. Created by `/ask-setup-agents`.
+| Scope | Path |
+|-------|------|
+| Team | `<agent-knowledge>/agents/ask-*.md` |
+| User | `<agent-knowledge>/users/<email>/agents/ask-*.md` |
+
+Host dirs `.cursor/agents/` / `.claude/agents/` are **mirrors** after materialize.
+
+Templates: `templates/role-agents/`. Skill: `/ask-setup-agents`. Rule: `ask-agent-scope`.
