@@ -32,12 +32,13 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — install**.
 ## Flow (MUST)
 
 ```text
-1. Q&A: kit dir + agent-knowledge dir + adapter home + hosts
+1. Q&A: kit dir + agent-knowledge dir + adapter home + hosts + sibling remotes
 2. Summary of paths + hosts → yes
 3. Ensure kit; copy/merge .agents/; wire selected host adapters only
 4. Create agent-knowledge; fill prefs + session-backlog; record hosts in ask-project
-5. Run /ask-setup-agents (writes role agents to host agent dirs)
-6. Close — do NOT prompt for doc scan
+5. Fill WORKSPACE.md (remotes table + hosts; replace _TBD_ for known pieces)
+6. Run /ask-setup-agents (writes role agents to host agent dirs)
+7. Close — do NOT prompt for doc scan; point team at WORKSPACE.md
 ```
 
 ## Q&A (MUST)
@@ -49,7 +50,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — install**.
 | **Product adapter home** | Parent of agent-knowledge |
 | **Agent hosts** (`cursor` / `claude` / `both`) | Fail — must choose |
 | Project name | Adapter home folder name |
-| Sibling repos | Empty |
+| Sibling repos (local folder + remote URL each) | Empty table rows only if none yet — still write kit + agent-knowledge rows in `WORKSPACE.md` |
 | `communication_language` | `en` |
 
 ## Wire adapters (MUST)
@@ -81,6 +82,15 @@ Record in product `ask-project.mdc` (under adapter home `.cursor/rules` and/or m
 - Agent hosts: cursor | claude | both
 ```
 
+## WORKSPACE.md (MUST)
+
+After agent-knowledge exists, edit its root **`WORKSPACE.md`** so teammates can replicate the machine:
+
+1. Set **Agent hosts** to the chosen value.
+2. Fill the **Repos** table: this repo’s remote (if `origin` exists or user gave URL), kit folder + remote, adapter home / apps from sibling answers.
+3. Replace every `_TBD_` that is known; leave a clear `_TBD_` only for unknowns.
+4. Optionally copy `templates/workspace.code-workspace` notes into close (Cursor parent multi-root).
+
 ## Setup agents (MUST)
 
 After agent-knowledge exists, run `ask-setup-agents` (from `.agents/skills/…`). Role agents go to each selected host’s `agents/` dir (and optionally `.agents/agents/` as SoT).
@@ -96,7 +106,8 @@ Do not prompt for doc scan. Merge `ask-centralize-docs` skill via `.agents/`. Me
 - Delete kit `.git`.
 - Commit/push app/kit unless asked.
 - Wipe existing agent-knowledge with data without asking.
+- Leave `WORKSPACE.md` as the untouched template when kit/AK/hosts are already known.
 
 ## Close
 
-Echo kit / agent-knowledge / adapter home / **hosts**; confirm `.cursor` absent if Claude-only; roles created or skipped; `/ask-requirement`, `/ask-update`.
+Echo kit / agent-knowledge / adapter home / **hosts**; confirm `.cursor` absent if Claude-only; roles created or skipped; tell the team to onboard via **`agent-knowledge/WORKSPACE.md`**; `/ask-requirement`, `/ask-update`.

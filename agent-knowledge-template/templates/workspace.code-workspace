@@ -1,0 +1,7 @@
+{
+  "folders": [
+    { "name": "agent-knowledge", "path": "agent-knowledge" },
+    { "name": "agent-starter-kit", "path": "agent-starter-kit" }
+  ],
+  "settings": {}
+}

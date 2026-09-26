@@ -173,6 +173,6 @@ If `.agents/skills/ask-role-*/` exists: map to `.cursor/agents/ask-*.md`, migrat
 
 ## Close
 
-List agents created/updated; surfaces still uncovered (if user skipped any); remind Task / `/ask-*` delegation.
+List agents created/updated; surfaces still uncovered (if user skipped any); remind Task / `/ask-*` delegation. If new surfaces have remotes, confirm updating `agent-knowledge/WORKSPACE.md` so teammate machines stay aligned.
 
 Then **`ask-git-project` → agent-knowledge auto close-out**.

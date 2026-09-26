@@ -38,6 +38,7 @@ Claude-only product installs receive **`.agents/` + `.claude/`** only — **not*
 | Kit clone | `git pull` + `/ask-update` |
 | Product `.agents/` + host adapters | Merged from kit per recorded hosts |
 | `agent-knowledge/` | Product’s own remote; not replaced by kit updates |
+| Team multi-root | `agent-knowledge/WORKSPACE.md` — clone memory first, then siblings |
 
 ## Language
 

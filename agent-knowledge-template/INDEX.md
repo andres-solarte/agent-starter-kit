@@ -1,6 +1,7 @@
 # INDEX — agent-knowledge
 
 Start with [AGENTS.md](./AGENTS.md) and the [operating contract](./knowledge/architecture/agent-knowledge-operating-contract.md).
+**New machine / team workspace:** [WORKSPACE.md](./WORKSPACE.md) — clone this repo first, then the sibling remotes.
 Adapters: [adapters/](./adapters/). Config: [config.yaml](./config.yaml).
 Wikilinks: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).
 
@@ -8,6 +9,7 @@ Wikilinks: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).
 
 | Area | Path |
 |------|------|
+| Team workspace (multi-root) | [WORKSPACE.md](./WORKSPACE.md) |
 | Product | [knowledge/product/](./knowledge/product/) |
 | Decisions | [knowledge/decisions/](./knowledge/decisions/) |
 | Domain | [knowledge/domain/](./knowledge/domain/) |

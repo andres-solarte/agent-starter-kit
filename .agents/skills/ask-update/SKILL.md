@@ -50,7 +50,7 @@ If Agents setup notice is pending: announce once (subagents for orchestration); 
 
 ## New surfaces → propose agents (MUST)
 
-Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setup-agents` **delta**. Check frontiers under `.cursor/agents` and/or `.claude/agents` per hosts. Do not create silently.
+Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setup-agents` **delta**. Check frontiers under `.cursor/agents` and/or `.claude/agents` per hosts. Do not create silently. If a new sibling remote is confirmed, also offer to add a row to `agent-knowledge/WORKSPACE.md`.
 
 ## Legacy migrations (MUST)
 

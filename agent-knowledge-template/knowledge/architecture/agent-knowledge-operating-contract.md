@@ -67,6 +67,7 @@ There is no third `memory/` layer for durable facts.
 - Cursor / Claude Code / others: **thin adapters only** (`adapters/`).
 - Do not grow `.cursor/`, `.claude/`, etc. with duplicated close-out or delta rules.
 - Workspace MUST make this repo visible to the agent (container folder or multi-root).
+- **Team layout SoT:** root [`WORKSPACE.md`](../../WORKSPACE.md) — clone **this** repo first; sibling remotes and multi-root steps live there so every machine matches.
 
 ## 7. Privacy
 

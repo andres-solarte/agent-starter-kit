@@ -2,7 +2,9 @@
 
 How to wire this kit into a product workspace as an **updatable dependency** (git clone with upstream), while product memory lives in a **separate** `agent-knowledge` repo.
 
-**Preferred path:** clone this repo, add it to your workspace (Cursor and/or Claude Code), then `/ask-install`. Later: `/ask-update` after pulling new kit versions.
+**Preferred path (first install):** clone this repo, add it to your workspace (Cursor and/or Claude Code), then `/ask-install`. Later: `/ask-update` after pulling new kit versions.
+
+**Team / new machine (product already exists):** clone **`agent-knowledge` first**, follow that repo’s root **`WORKSPACE.md`** (sibling remotes + multi-root), then `/ask-update` if adapters already exist (or `/ask-install` only if the product was never wired).
 
 ## Mental model
 
@@ -63,8 +65,16 @@ Skills SoT: `.agents/skills/`. Host folders `.cursor/skills` and `.claude/skills
 ## Human setup (once)
 
 1. Clone/place the kit; add folders to the workspace.
-2. `/ask-install` — kit dir, agent-knowledge dir, adapter home, **hosts**.
+2. `/ask-install` — kit dir, agent-knowledge dir, adapter home, **hosts**, sibling remotes → fills `agent-knowledge/WORKSPACE.md`.
 3. Later: `git pull` in kit + `/ask-update`.
+4. Share the **agent-knowledge** remote with the team; newcomers start from `WORKSPACE.md`, not from a private folder layout.
+
+## Team onboarding (existing product)
+
+1. Clone **agent-knowledge** (product memory remote).
+2. Open **`WORKSPACE.md`** — clone every **Required** sibling into the same parent; open multi-root (Cursor/Claude).
+3. Create `users/<email>/` from `users/_template/` if missing.
+4. Kit: `git pull` → **`/ask-update`**. Do not re-run `/ask-install` unless adapters are missing.
 
 ## Order when also using ai-dev-standard
 
@@ -113,10 +123,11 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 3. Wire **only** selected hosts (symlinks skills/rules → `.agents/…`; Cursor also merges `.cursor/rules/*.mdc`). Write thin `CLAUDE.md` when Claude is selected.
 4. Record kit / agent-knowledge / adapter home / **Agent hosts** in `ask-project` (Cursor `.mdc` and refresh `.agents/rules/ask-project.md` when regenerating rules).
 5. Instantiate agent-knowledge; prefs; `session-backlog.md`. Migrate legacy out-of-scope → backlog; delete legacy (no stubs).
-6. Ensure `ask-question`, `ask-setup-agents`, `ask-centralize-docs` present under `.agents/skills`. No doc-scan prompt.
-7. Run `/ask-setup-agents` → `roles.md` + agents into each host `agents/` dir. Decline → leave setup notice pending.
-8. No app/kit commit unless asked (agent-knowledge auto close-out still applies).
-9. Close: paths + **hosts**; confirm no `.cursor/` if Claude-only; next slashes.
+6. Fill **`WORKSPACE.md`**: agent-knowledge remote (if known), kit remote/folder, adapter home, **hosts**, and every sibling app repo from Q&A (local folder + remote URL + required). Replace `_TBD_` placeholders; do not leave an empty Remotes table after install.
+7. Ensure `ask-question`, `ask-setup-agents`, `ask-centralize-docs` present under `.agents/skills`. No doc-scan prompt.
+8. Run `/ask-setup-agents` → `roles.md` + agents into each host `agents/` dir. Decline → leave setup notice pending.
+9. No app/kit commit unless asked (agent-knowledge auto close-out still applies).
+10. Close: paths + **hosts**; point teammates to `agent-knowledge/WORKSPACE.md`; confirm no `.cursor/` if Claude-only; next slashes.
 
 ### MUST NOT
 
@@ -131,6 +142,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 
 - [ ] Kit has upstream git
 - [ ] agent-knowledge is its own repo with prefs
+- [ ] `WORKSPACE.md` lists remotes/siblings/hosts (no leftover `_TBD_` for known pieces)
 - [ ] `.agents/` present; host adapters match chosen hosts only
 - [ ] Claude-only has **no** product `.cursor/`
 - [ ] Paths + hosts recorded

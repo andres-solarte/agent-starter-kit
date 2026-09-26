@@ -75,6 +75,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 
 | Task | Path |
 |------|------|
+| Same workspace on every machine (clone this repo first) | [WORKSPACE.md](./WORKSPACE.md) |
 | What to do next | `knowledge/delivery/NEXT.md` |
 | Requirement registry | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
 | Fix on existing REQ | `/ask-requirement-fix` |
@@ -105,7 +106,8 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 
 ## First use in a new project
 
-1. Rename/fill this repo's `README.md`, `config.yaml` (`repo:` and `locale:` fields) for the new project.
+1. Rename/fill this repo's `README.md`, `config.yaml` (`repo:` and `locale:` fields), and **`WORKSPACE.md`** (remotes + siblings) for the new project.
 2. Fill `knowledge/product/`, `knowledge/domain/`, `knowledge/architecture/stack-versions.md` as the project takes shape — these start empty on purpose.
 3. Create the first `users/<email>/` from `users/_template/`.
 4. Wikilinks policy: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).
+5. Teammates joining later: follow **`WORKSPACE.md`** (this repo first), not a one-off folder layout.
