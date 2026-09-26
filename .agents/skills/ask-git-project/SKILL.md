@@ -52,17 +52,30 @@ Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missin
 
 ### agent-knowledge auto close-out (MUST)
 
-**Trigger:** finishing a requirement **block/loop**, or completing a durable tracked write in agent-knowledge (deltas, `session-backlog.md`, roles, agreed global knowledge, install/setup memory fills).
+**Trigger:** finishing a requirement **block/loop**, or completing a durable tracked write in agent-knowledge.
 
-**Do this without waiting for the user to ask** (exception to app-repo policy):
+**Split by path (rule `ask-knowledge-pr`):**
 
-1. Resolve the **agent-knowledge directory** (install record / workspace). Run git **only** there.
+| Paths | Action |
+|-------|--------|
+| User-scoped (`users/<email>/…` tracked), `consolidation/QUEUE.md` | Commit + **push default branch** without waiting for the user |
+| `knowledge/**`, team `agents/**`, `WORKSPACE.md` (team SoT) | **Branch + PR only** — never push these to `main`/`master` from the agent |
+
+**User-scoped direct path:**
+
+1. Resolve the **agent-knowledge** directory. Run git **only** there.
 2. Complete `ask-agent-knowledge` close-out writes first (work-log, deltas as needed).
 3. `git status`. If nothing to commit (only ignored local files) → stop; OK.
-4. Stage relevant tracked paths. **Never** force-add gitignored paths (`work-log/`, `preferences.yaml`, `MEMORY.md`, secrets).
-5. Commit (English; why-focused).
-6. **Push:** if remote `origin` exists → `git push` (use `-u origin HEAD` when upstream is missing). If **no** remote → leave commit local and tell the user once that push needs a remote.
-7. Never force-push. Never auto-commit/push sibling app repos or the kit clone under this rule.
+4. Stage **user-scoped** tracked paths only. **Never** force-add gitignored paths.
+5. Commit (English; why-focused) → `git push` when `origin` exists.
+6. Never force-push. Never auto-commit/push sibling app repos or the kit clone under this rule.
+
+**General / team PR path:**
+
+1. Confirm the user wants the team/global change.
+2. Create branch → apply `knowledge/**` / team `agents/**` / `WORKSPACE.md` there → commit → `git push -u origin HEAD` → `gh pr create`.
+3. Do **not** merge unless the user explicitly asks. Return the PR URL.
+4. Chat “yes” alone does **not** authorize pushing global SoT to the default branch.
 
 ## Branches
 
@@ -72,17 +85,20 @@ Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missin
 
 ## Pull requests
 
-- Use `gh` when the user asks for a PR (app/kit).
-- Include summary + test plan.
-- Push with `-u` only if needed and user requested the PR/push path (app/kit). agent-knowledge close-out push does not open a PR by itself.
+- **agent-knowledge general/team SoT:** open a PR as part of the write path (rule `ask-knowledge-pr`) — do not wait for a separate “please open a PR” when promoting to `knowledge/**`.
+- App/kit: use `gh` when the user asks for a PR.
+- Include summary + test plan / review checklist.
+- Push with `-u` when opening the PR branch. Do **not** merge agent-knowledge team PRs unless the user asks.
 
 ## MUST NOT
 
 - Commit app/kit repos "while at it" without user trigger
 - Push or merge **app/kit** without explicit ask
-- Skip agent-knowledge close-out commit/push when there are tracked changes after a block
+- Push `knowledge/**`, team `agents/**`, or `WORKSPACE.md` to the agent-knowledge **default branch**
+- Skip user-scoped agent-knowledge close-out commit/push when there are tracked user changes after a block
 - Single commit across multiple sibling repos (split per repo)
 - Force-push under auto close-out
+- Merge an agent-knowledge team PR without explicit user ask
 
 ## Gap / self-improve
 

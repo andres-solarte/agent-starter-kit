@@ -43,7 +43,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
    - claude → `.claude/skills` + `.claude/rules` → `.agents/…`; keep `.claude/agents`; thin `CLAUDE.md`
 3. **If hosts = claude only:** do **not** create or refresh `.cursor/`. If a kit-sourced `.cursor/` exists, **offer to delete** it (list paths) after user yes.
 4. **If hosts = cursor only:** do not create `.claude/` unless user expands hosts.
-5. Ensure process-critical skills present under `.agents/skills`: `ask-question`, `ask-setup-agents`, `ask-centralize-docs`, route rule (cursor `.mdc` and/or `.agents/rules`). Ensure rule `ask-agent-scope` exists under `.agents/rules` and cursor `.mdc` when hosts include cursor.
+5. Ensure process-critical skills present under `.agents/skills`: `ask-question`, `ask-setup-agents`, `ask-centralize-docs`, route rule (cursor `.mdc` and/or `.agents/rules`). Ensure rules `ask-agent-scope` and `ask-knowledge-pr` exist under `.agents/rules` and cursor `.mdc` when hosts include cursor.
 
 ## Materialize role agents (MUST)
 

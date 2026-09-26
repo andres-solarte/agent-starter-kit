@@ -41,7 +41,7 @@ Identity: literal email (`users/<email>/`). See [users/README.md](./users/README
 
 ## How to maintain
 
-1. Deltas: same basename as global.
+1. Deltas: same basename as global — **direct** under `users/<email>/`.
 2. Close-out via skill `ask-agent-knowledge`.
-3. Consolidate only with confirmation.
+3. Promote to global `knowledge/**` only via **pull request** (rule `ask-knowledge-pr`).
 4. Wikilinks: normalize when touching ([WIKILINKS.md](./knowledge/WIKILINKS.md)).

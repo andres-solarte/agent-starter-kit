@@ -49,11 +49,11 @@ Park for later (personal notes)?         → users/<email>/session-backlog.md
 Formal requirement status?               → knowledge/delivery/requirements/ (REQ-NNN)
 When / what / why for this block?        → users/<email>/work-log/YYYY/MM/DD.md
 Durable learning not (yet) global?       → users/<email>/knowledge/<relpath>/<file>.md (delta)
-Ready for the team / already agreed?     → knowledge/<relpath>/ (via consolidation promote|merge)
+Ready for the team / already agreed?     → propose consolidation/QUEUE.md → apply knowledge/** via **PR only** (ask-knowledge-pr)
 Role subagent create/modify?             → ASK user-only vs team (ask-agent-scope)
-  → user-only                            → users/<email>/agents/ask-*.md
-  → team                                 → agents/ask-*.md + roles.md
-Then materialize host .cursor/.claude agents/ mirrors
+  → user-only                            → users/<email>/agents/ask-*.md (direct OK)
+  → team                                 → agents/ask-*.md + roles.md via **PR only**
+Then materialize host .cursor/.claude agents/ mirrors (after merge, or locally from PR branch)
 ```
 
 There is no third `memory/` layer for durable facts. Role agents are separate (`agents/` / `users/<email>/agents/`).
@@ -61,9 +61,9 @@ There is no third `memory/` layer for durable facts. Role agents are separate (`
 ## 5. Block close-out (MUST)
 
 1. Append work-log in `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**).
-2. If there is reusable learning → create/update delta + `DELTAS.md`.
-3. If several users or a mature delta → propose a row in `consolidation/QUEUE.md` (do not consolidate without confirmation).
-4. **Persist this repo:** commit tracked changes; `git push` when `origin` exists (see `knowledge/conventions/git.md`). Local-only files stay gitignored.
+2. If there is reusable learning → create/update delta + `DELTAS.md` (**direct** OK).
+3. If several users or a mature delta → propose a row in `consolidation/QUEUE.md` (direct OK). Landing edits in `knowledge/**` → **branch + PR** (rule `ask-knowledge-pr`); never push global SoT to the default branch from the agent.
+4. **Persist this repo:** user-scoped tracked changes → commit + push default branch; general/team paths → PR only (see `knowledge/conventions/git.md`). Local-only files stay gitignored.
 
 ## 6. Tool-agnostic first
 

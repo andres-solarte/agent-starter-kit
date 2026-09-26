@@ -207,4 +207,4 @@ If host mirrors exist but `agent-knowledge/agents/` is empty: offer to **import*
 
 List agents created/updated with **scope**; surfaces still uncovered; remind Task / `/ask-*` delegation. If new surfaces have remotes, confirm updating `WORKSPACE.md`.
 
-Then **`ask-git-project` → agent-knowledge auto close-out** (SoT under `agents/` and `users/<email>/agents/` is tracked).
+Then **`ask-git-project`**: user-scoped paths → direct close-out; team SoT (`agents/`, `roles.md` under `knowledge/`) → **branch + PR** (rule `ask-knowledge-pr`). Do not push team agents to the default branch.

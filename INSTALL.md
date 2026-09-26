@@ -161,7 +161,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 ### Steps
 
 1. Kit: `git status`; warn if dirty; `git pull`.
-2. Re-merge `.agents/`; refresh **only** recorded host adapters (same policy as install). Ensure rule `ask-agent-scope` is present.
+2. Re-merge `.agents/`; refresh **only** recorded host adapters (same policy as install). Ensure rules `ask-agent-scope` and `ask-knowledge-pr` are present.
 3. Claude-only with leftover kit-sourced `.cursor/` → offer delete after explicit yes.
 4. agent-knowledge: missing template files (`agents/`, `users/_template/agents/`) / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe.
 5. **Materialize** role agents: copy `agent-knowledge/agents/ask-*.md` ∪ `users/<email>/agents/ask-*.md` → each configured host `agents/` dir (runtime mirrors).
@@ -194,7 +194,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 5. On yes: write SoT under `agents/ask-*.md` (team) or `users/<email>/agents/ask-*.md` (user); update `roles.md` **only** for team; **materialize** team ∪ current-user SoT into each host `agents/` dir.
 6. If legacy `.agents/skills/ask-role-*/` exists: migrate MUSTS, then **delete** those folders (no stubs). If host mirrors exist but team SoT empty → offer import into `agent-knowledge/agents/`.
 7. Update `ask-project` Agents section: SoT paths + Known surfaces + hosts.
-8. Agent-knowledge auto close-out (commit/push). No app/kit commit unless asked.
+8. Agent-knowledge: user-scoped → direct close-out; team SoT (`agents/`, `roles.md`) → **PR** (rule `ask-knowledge-pr`). No app/kit commit unless asked.
 
 ### MUST NOT
 
@@ -236,7 +236,7 @@ Ask permission to scan **all workspace sibling folders** for documentation. No r
 ### Copy then recommend delete
 
 1. Show inventory `source → knowledge/…` → user yes to the set.
-2. **Copy** only (write `knowledge/imported/IMPORT-MAP.md`). Do not delete originals here.
+2. **Copy** on a branch + write `knowledge/imported/IMPORT-MAP.md` → **open PR** (rule `ask-knowledge-pr`). Do not push imports to the default branch. Do not delete originals here.
 3. List originals now duplicated and **recommend** delete or stub with pointer to agent-knowledge.
 4. Delete/stub **only** paths the user confirms (default: keep originals).
 
@@ -248,7 +248,7 @@ Ask permission to scan **all workspace sibling folders** for documentation. No r
 
 ### Done when
 
-- [ ] IMPORT-MAP reflects copies
+- [ ] IMPORT-MAP reflects copies on a PR (not silent push to default branch)
 - [ ] User saw cleanup recommendations
 - [ ] Any deletions/stubs match an explicit approved list
 

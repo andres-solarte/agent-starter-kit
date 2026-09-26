@@ -160,11 +160,11 @@ Cursor `/loop` heartbeat is optional (re-check queue/drift); the "loop" here is 
 
 Before or with the user-facing close:
 
-1. Update the **REQ** file: Blocks table; if the **whole** requirement’s done-when is met → status **`closed`** + INDEX; else keep **`in_progress`** and note the next block. Update `NEXT.md`.
-2. Run **agent-knowledge close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed).
-3. Run **`ask-git-project` → agent-knowledge auto close-out**: commit tracked memory changes; push if `origin` exists (no user ask required for this repo only).
+1. Update the **REQ** file: Blocks table; if the **whole** requirement’s done-when is met → status **`closed`** + INDEX; else keep **`in_progress`** and note the next block. Update `NEXT.md`. (These live under `knowledge/**` → persist via **PR**, rule `ask-knowledge-pr`.)
+2. Run **agent-knowledge close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed) — **direct** OK for user paths.
+3. Run **`ask-git-project`**: user-scoped → commit/push default branch; REQ / `NEXT.md` / other `knowledge/**` → **branch + PR** (do not push registry to default branch). Return PR URL when opened.
 
-Then 2–4 sentences to the user: REQ id + status, what was done, what remains, one next step. No loose internal codes. Mention push/remote only if push failed or there is no remote.
+Then 2–4 sentences to the user: REQ id + status, what was done, what remains, one next step. No loose internal codes. Mention the knowledge PR URL when registry changes went through a PR; mention push/remote only if user-path push failed or there is no remote.
 
 If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I prepare the plan?» (REQ stays `in_progress`.)
 

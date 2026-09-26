@@ -74,14 +74,14 @@ On conflict with an existing knowledge file: **keep existing**; copy new as `…
 
 ## Copy (MUST)
 
-1. Copy approved files only (create dirs as needed).
-2. Write/update `knowledge/imported/IMPORT-MAP.md` (or `knowledge/conventions/doc-import-map.md`) with: date, source path, destination path, status `copied`.
+1. On a **dedicated branch** (general knowledge is PR-only): copy approved files only (create dirs as needed).
+2. Write/update `knowledge/imported/IMPORT-MAP.md` with: date, source path, destination path, status `copied`.
 3. Do **not** delete originals in this step.
-4. No commit/push unless asked.
+4. Commit on the branch → push → **`gh pr create`** (rule `ask-knowledge-pr`). Do **not** push these copies to the default branch. Do not merge unless the user asks.
 
 ## Recommend cleanup (MUST)
 
-After copy, list originals that are now centralized and **recommend**:
+After copy (and preferably after noting the PR URL), list originals that are now centralized and **recommend**:
 
 - Delete the original, **or**
 - Replace with a short stub pointing to the agent-knowledge path.
@@ -89,7 +89,7 @@ After copy, list originals that are now centralized and **recommend**:
 Ask which paths to clean. Defaults: **keep originals** until the user picks deletions/stubs.  
 Never mass-delete without an explicit approved list.
 
-When deleting/stubbing: update IMPORT-MAP status to `original_removed` or `stubbed`.
+When deleting/stubbing (app repos): only with user ask + normal app git rules. Update IMPORT-MAP status on the knowledge PR branch to `original_removed` or `stubbed` when applicable.
 
 ## MUST NOT
 
@@ -97,8 +97,9 @@ When deleting/stubbing: update IMPORT-MAP status to `original_removed` or `stubb
 - Move/delete originals as part of the copy step.
 - Import secrets (`.env`, keys) or treat them as docs.
 - Overwrite existing SoT knowledge without asking.
+- Push imported docs to the agent-knowledge **default branch**.
 - Touch the kit’s own README/docs as product docs to import.
 
 ## Close
 
-Counts copied; path to IMPORT-MAP; which originals still outside; remind `/ask-question` can locate centralized docs later.
+Counts copied; PR URL for knowledge imports; path to IMPORT-MAP; which originals still outside; remind `/ask-question` can locate centralized docs later.

@@ -53,7 +53,7 @@ Silent handoff is forbidden.
 2. Resolve REQ (above)
 3. Capture error (symptom, how to reproduce, expected vs actual) — 0–2 short questions if needed
 4. Fix loop: diagnose → patch (role subagents as needed) → verify the failure is gone
-5. Close: note on REQ file + work-log + agent-knowledge auto close-out
+5. Close: note on REQ file + work-log + agent-knowledge close-out (user direct; REQ/`knowledge/**` via PR)
 ```
 
 ### MUST NOT re-run
@@ -83,7 +83,7 @@ Prefer evidence already in the message (log, path, steps). If missing, ask at mo
 1. Append to the REQ file: status log line + optional Blocks note (“fix: …”).
 2. Keep status **`in_progress`** if the original done-when is still open; **`closed`** only if the whole REQ done-when is now met (same rules as `/ask-requirement` step 6).
 3. Update `NEXT.md` if needed.
-4. Agent-knowledge close-out (`ask-agent-knowledge` + `ask-git-project` auto commit/push).
+4. Agent-knowledge close-out (`ask-agent-knowledge` + `ask-git-project`): user paths direct; REQ updates under `knowledge/**` → **PR** (`ask-knowledge-pr`).
 5. 2–4 sentences to the user: REQ id, what failed, what changed, how verified.
 
 ## MUST NOT
@@ -91,7 +91,7 @@ Prefer evidence already in the message (log, path, steps). If missing, ask at mo
 - Treat every bug as a brand-new requirement by default.
 - Skip the visible announcement.
 - Expand product scope under the guise of a “fix”.
-- Commit/push app/kit repos unless the user asks (agent-knowledge auto close-out still applies).
+- Commit/push app/kit repos unless the user asks (agent-knowledge: user direct / general via PR).
 
 ## Relation
 

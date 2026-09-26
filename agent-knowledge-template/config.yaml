@@ -15,10 +15,12 @@ agent:
     - knowledge/architecture/agent-knowledge-operating-contract.md
   max_index_lines: 200
   write_policy:
-    knowledge: human_or_pr
-    users/knowledge: agent_delta_ok
+    knowledge: pr_only
+    users/knowledge: agent_delta_ok_direct
+    users/agents: agent_ok_direct_after_scope_user
     users/work-log: agent_append_ok_local
-    consolidation: agent_ok_with_confirm
+    agents: pr_only_after_scope_team
+    consolidation: agent_queue_ok_direct_promote_via_pr
 
 users:
   id_source: git_user_email

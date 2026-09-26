@@ -56,16 +56,16 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | Prefs / scratch | `users/<email>/preferences.yaml` / `MEMORY.md` (local) |
 | When / what / why | `users/<email>/work-log/` (local) |
 | Durable not-yet-global | delta under `users/<email>/knowledge/…` |
-| Team SoT | `knowledge/…` via consolidation only |
-| Team role agents | `agents/ask-*.md` (confirm scope = team) |
-| User-only role agents | `users/<email>/agents/ask-*.md` |
+| Team SoT | `knowledge/…` via consolidation + **PR only** (never push global to default branch) |
+| Team role agents | `agents/ask-*.md` (scope = team) → **PR only** |
+| User-only role agents | `users/<email>/agents/ask-*.md` (direct OK) |
 
 ## Close-out (MUST every meaningful block)
 
 1. Append work-log at `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**). Create year/month dirs if needed (zero-padded `MM`/`DD`).
 2. If reusable learning → delta + `DELTAS.md`.
-3. If mature / multi-user → propose `consolidation/QUEUE.md` (confirm before writing global).
-4. **Git (this repo only):** follow `knowledge/conventions/git.md` + shared skill `ask-git-project` → **commit** any tracked close-out changes, then **`git push`** if `origin` exists; if no remote, commit locally and say so once. Do not wait for the user to ask. App/kit repos are out of scope for this auto step.
+3. If mature / multi-user → propose `consolidation/QUEUE.md`; landing in `knowledge/**` is **PR only** (rule `ask-knowledge-pr`).
+4. **Git (this repo only):** follow `knowledge/conventions/git.md` + `ask-git-project` → **direct** commit/push for **user-scoped** tracked paths; for `knowledge/**`, team `agents/**`, `WORKSPACE.md` → **branch + PR** (do not push those to default branch). App/kit repos out of scope unless asked.
 
 ## Before "why did we…?" / resuming related work
 
@@ -96,12 +96,16 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 
 | Location | Policy |
 |----------|--------|
-| `knowledge/**` | Confirm / PR |
-| `agents/**` (team role agents) | Confirm + scope = team |
-| `users/<email>/agents/**` | OK after scope = user |
-| `users/<email>/knowledge/**` | Delta OK |
+| `knowledge/**` | **PR only** (never direct to default branch) |
+| `agents/**` (team role agents) | Scope = team + **PR only** |
+| `WORKSPACE.md` | **PR only** |
+| `users/<email>/agents/**` | Direct OK after scope = user |
+| `users/<email>/knowledge/**` | Direct OK (deltas) |
 | `users/<email>/work-log/**` | Append OK (local) |
-| `consolidation/**` | Confirm |
+| `users/<email>/DELTAS.md`, `session-backlog.md`, `IDENTITY.md` | Direct OK |
+| `consolidation/QUEUE.md` | Direct OK (proposals); promote into `knowledge/**` via PR |
+
+Rule: `ask-knowledge-pr`.
 
 ## Never
 
