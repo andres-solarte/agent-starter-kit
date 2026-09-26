@@ -55,7 +55,7 @@ I'm treating this as a fix on the same requirement — not a new one.
 I'll focus on the error; I won't re-run the full requirement plan.
 ```
 
-Then read and execute `.cursor/skills/ask-requirement-fix/SKILL.md`.
+Then read and execute `.agents/skills/ask-requirement-fix/SKILL.md`.
 
 ### Visible handoff — requirement (MUST)
 

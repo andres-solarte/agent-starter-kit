@@ -19,8 +19,8 @@ Filled by `/ask-setup-agents` (or manually). Used by `ask-orchestrate-requiremen
 
 | Role | Subagent | Primary surfaces / repos | Notes |
 |------|----------|--------------------------|-------|
-| Tech Lead | `.cursor/agents/ask-tech-lead.md` | orchestration | Always with shared skills pack |
-| … | `.cursor/agents/ask-….md` | … | … |
+| Tech Lead | `.cursor/agents/` and/or `.claude/agents/ask-tech-lead.md` | orchestration | Per install hosts |
+| … | host `agents/ask-….md` | … | … |
 
 ## Default specialist order
 
@@ -44,7 +44,7 @@ Adjust to this product after setup.
 
 ## Delegation
 
-- **Roles = Cursor subagents** under `.cursor/agents/ask-*.md` (Task tool / `/name`). Isolated context.
+- **Roles = subagents** under `.cursor/agents/` and/or `.claude/agents/` (per hosts). Isolated context.
 - **Shared skills pack** (same agent procedures, not subagents): `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 - Tech Lead / `ask-orchestrate-requirement` delegates **one point** per turn to the matching subagent.
 - **Uncovered surface** (new repo/app with no agent) → `/ask-setup-agents` delta (ask type vs per-surface); do not improvise a fake role.

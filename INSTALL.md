@@ -2,72 +2,69 @@
 
 How to wire this kit into a product workspace as an **updatable dependency** (git clone with upstream), while product memory lives in a **separate** `agent-knowledge` repo.
 
-**Preferred path:** clone this repo, add it to the Cursor workspace, then `/ask-install`. Later: `/ask-update` after pulling new kit versions.
+**Preferred path:** clone this repo, add it to your workspace (Cursor and/or Claude Code), then `/ask-install`. Later: `/ask-update` after pulling new kit versions.
 
 ## Mental model
 
 ```text
 workspace/
-  <kit-directory>/           ← user-chosen (keep .git + origin upstream)
-  <agent-knowledge-dir>/     ← user-chosen (NEW product git repo)
-  <cursor-home>/.cursor/     ← user-chosen (default: parent of agent-knowledge)
+  <kit-directory>/              ← keep .git + upstream
+  <agent-knowledge-dir>/        ← NEW product git repo (memory)
+  <adapter-home>/
+    .agents/skills|rules/       ← tool-neutral SoT (copied from kit)
+    .cursor/…                   ← ONLY if host includes cursor
+    .claude/…                   ← ONLY if host includes claude
   repo-api/ …
 ```
 
 | Piece | Role | Git |
 |-------|------|-----|
-| **Kit directory** | Canonical process engine | Keep `.git`; upstream kit remote. **Do not** `rm -rf .git`. Path chosen at `/ask-install`. |
-| **Product `.cursor/` home** | Merged rules/skills + overlays | Your hub/product repo or as you prefer |
-| **agent-knowledge directory** | Global + per-user memory | **New** repo at the path chosen at install; product remote — not the kit remote. |
+| **Kit directory** | Process engine (`.agents/` SoT + host adapters for kit dev) | Keep `.git`; upstream. **Do not** `rm -rf .git`. |
+| **Product adapter home** | Receives `.agents/` + selected host dirs | Hub/product repo as you prefer |
+| **Agent hosts** | `cursor` \| `claude` \| `both` | Recorded at install |
+| **agent-knowledge** | Global + per-user memory | **New** repo; product remote |
 
-Does not include stack skills (framework, testing, DB); those are added per project under product `.cursor/skills/` with the `ask-` prefix when user-facing.
+**Claude-only products must not get a `.cursor/` tree.** Cursor-only products need not get `.claude/`.
 
-**Naming:** all kit **skills** and **rules** use an `ask-` segment in their names (skills: `ask-*`; rules: `ask-*.mdc`) to avoid colliding with other Cursor rules/skills in the product workspace.
+Skills SoT: `.agents/skills/`. Host folders `.cursor/skills` and `.claude/skills` are **symlinks** (copy fallback if symlinks fail).
 
-**Migrations:** when the kit relocates a file (e.g. backlog path, renamed rules), **migrate content then delete the old path**. Do not leave pointer stubs.
+**Naming:** kit skills/rules use `ask-` prefix.
+
+**Migrations:** relocate then **delete** old paths (no stubs).
 
 ## What `/ask-install` does
 
-1. Leaves the **kit clone** intact (updatable dependency).
-2. Merges kit `.cursor/rules` + `.cursor/skills` into **product home** (safe merge).
-3. Instantiates **`agent-knowledge/`** as a **new** git repository (own history/remote).
-4. Fills product placeholders and per-user `preferences.yaml`.
-5. Merges `/ask-centralize-docs` and `/ask-setup-agents` (does not prompt for a doc scan during install/update).
-6. Runs **`/ask-setup-agents`** after agent-knowledge exists (scan → confirm roles → `roles.md` + `.cursor/agents/ask-*.md` subagents).
+1. Leaves the **kit clone** intact.
+2. Asks **agent hosts** (`cursor` / `claude` / `both`).
+3. Merges kit **`.agents/`** into adapter home; wires **only** selected host adapters.
+4. Instantiates **agent-knowledge** as a new git repo; prefs + session-backlog.
+5. Runs **`/ask-setup-agents`** → `roles.md` + host `agents/ask-*.md`.
+6. Does not prompt for doc scan (`/ask-centralize-docs` is manual).
 
 ## What `/ask-setup-agents` does
 
-1. Scans workspace siblings for stack/tooling signals and reads light business context (READMEs, product knowledge if any).
-2. Proposes a persona hint + role list; user confirms or edits.
-3. Writes `agent-knowledge/knowledge/architecture/agents/roles.md` (RACI).
-4. Copies approved **subagents** from kit `templates/role-agents/` into product `.cursor/agents/ask-*.md` and fills frontiers.
-5. Migrates away legacy `ask-role-*` **skills** if present (roles are subagents, not skills).
-
-Does **not** dump every template role into the product without confirmation. Does **not** create role skills under `.cursor/skills/`.
+1. Scans surfaces + stack/business signals.
+2. Proposes roles; asks type vs per-surface when needed.
+3. Writes `roles.md` + subagents under each configured host’s `agents/` dir.
+4. Migrates legacy `ask-role-*` skills if present.
 
 ## What `/ask-centralize-docs` does
 
-1. Asks permission to scan **all** workspace sibling folders.
-2. Lists documentation candidates and proposed `knowledge/` destinations.
-3. **Copies** approved files into agent-knowledge; writes `knowledge/imported/IMPORT-MAP.md`.
-4. **Recommends** removing or stubbing originals; deletes only with explicit confirmation.
-
-Does **not** run without authorization. Does **not** delete originals during the copy step.
+1. Authorize scan of workspace siblings → copy into agent-knowledge → recommend cleanup.
+2. Does not run without authorization.
 
 ## What `/ask-update` does
 
-1. `git fetch` / `git pull` in the **kit clone** (or report if dirty/conflicts).
-2. Re-merges kit `.cursor/` → product home **without** overwriting product overlays or stack skills (brings new skills such as `ask-centralize-docs`, `ask-setup-agents`).
-3. Does **not** reset or replace `agent-knowledge/` content (memory stays put). Optionally copies **new** template files that are missing only (never overwrite existing knowledge files).
-4. Does **not** offer a documentation scan — users run `/ask-centralize-docs` manually when they want it.
-5. **Once only:** if `ask-project.mdc` has not yet marked the notice done, mention `/ask-setup-agents` (what it is for); set the notice flag to `done`. Do not re-analyze on every update.
+1. Pull kit; re-merge `.agents/` + refresh **only** recorded host adapters.
+2. Claude-only: offer to remove leftover kit-sourced `.cursor/` if present.
+3. Surface delta → offer setup-agents delta; once-only setup notice if pending.
+4. No automatic doc scan.
 
 ## Human setup (once)
 
-1. **Clone or place the kit** where you want it (or let `/ask-install` clone into a path you choose).
-2. **Add folders** to the Cursor workspace as needed.
-3. Run **`/ask-install`** — it **asks** for kit directory, agent-knowledge directory, and product `.cursor/` home.
-4. Later: `git pull` in the kit directory + **`/ask-update`**.
+1. Clone/place the kit; add folders to the workspace.
+2. `/ask-install` — kit dir, agent-knowledge dir, adapter home, **hosts**.
+3. Later: `git pull` in kit + `/ask-update`.
 
 ## Order when also using ai-dev-standard
 
@@ -99,44 +96,45 @@ Ask for directories (prefer one question per turn, or a short block of independe
 
 | # | Ask | Notes |
 |---|-----|--------|
-| 1 | **Kit directory** — absolute or workspace-relative path where the `agent-starter-kit` clone should live (or already lives) | If the folder is empty/missing: clone upstream there. If it already is a kit root (`INSTALL.md` present): use it. Never `rm -rf .git` on that clone. |
-| 2 | **agent-knowledge directory** — path where the product memory repo should live | Must be outside the kit directory. If missing: copy `agent-knowledge-template/` here and `git init`. If it already exists with data: do not wipe; ask before any merge. |
-| 3 | **Product `.cursor/` home** — directory that should receive the merged `.cursor/rules` and `.cursor/skills` | Default if skipped: **parent directory of agent-knowledge**. Must not be the kit directory itself. |
-| 4 | Product / project name (for `ask-project.mdc`) | Default: name of product `.cursor/` home folder |
-| 5 | Sibling app repos in the workspace | Default: empty |
-| 6 | `communication_language` | Default: `en` |
+| 1 | **Kit directory** | Empty/missing → clone; existing kit root → use. Never `rm -rf .git`. |
+| 2 | **agent-knowledge directory** | Outside kit. Missing → copy template + `git init`. Existing data → do not wipe. |
+| 3 | **Product adapter home** | Default: **parent of agent-knowledge**. Not the kit directory. |
+| 4 | **Agent hosts** — `cursor` / `claude` / `both` | **Required.** Claude-only → no `.cursor/`. |
+| 5 | Product / project name | Default: adapter home folder name |
+| 6 | Sibling app repos | Default: empty |
+| 7 | `communication_language` | Default: `en` |
 
-Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. Summary of all chosen paths → user **yes** before writing.
+Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** before writing.
 
 ### Install steps (after yes)
 
-1. **Ensure kit at kit directory:** clone if needed; verify `INSTALL.md` + `agent-knowledge-template/`; keep `.git` + upstream.
-2. Inventory product `.cursor/` home.
-3. Merge kit `.cursor/` → product `.cursor/` home (safe merge; no blind overwrite). Record **kit directory** and **agent-knowledge directory** in `ask-project.mdc` (or `ask-kit-paths.mdc`) for `/ask-update`. **Always install/update** rule `ask-route-via-ask-question.mdc` and skill `ask-question` (process-critical — default triage). Do **not** create or keep a session backlog under `.cursor/` (SoT is `users/<email>/session-backlog.md`). On merge/update, remove obsolete `.cursor/out-of-scope.md` after migrating any content.
-4. Instantiate **agent-knowledge** at the chosen path (new git repo; product remote later; user + prefs). Ensure `users/<email>/session-backlog.md` exists (per-user session backlog for `/ask-backlog`).
-5. Fill `ask-project.mdc`; fix pointers so they resolve to the chosen agent-knowledge path (update `ask-agent-knowledge.mdc` / `ask-agent-knowledge` skill as needed). Migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into the user’s `session-backlog.md`, then **delete** those legacy files (no stubs).
-6. Always install/update skills `ask-centralize-docs` and `ask-setup-agents` with the kit merge. **Do not** prompt for doc scan (manual only via `/ask-centralize-docs`).
-7. Run **`/ask-setup-agents`** (same session): propose roles → user confirm → write `roles.md` + copy approved subagents from kit `templates/role-agents/` into `.cursor/agents/`. If the user declines setup, leave `Update notice for /ask-setup-agents: pending` in `ask-project.mdc`.
-8. No commit/push of **app/kit** unless asked (agent-knowledge auto close-out still applies after setup writes).
-9. Close: echo the three paths (kit / agent-knowledge / `.cursor` home); subagents created or skipped; optional mention of `/ask-centralize-docs`; `/ask-requirement`, `/ask-requirement-fix`, `/ask-backlog`, `/ask-update`.
+1. Ensure kit at kit directory (`INSTALL.md`, `.agents/`, template); keep `.git` + upstream.
+2. Merge kit `.agents/` → `<adapter-home>/.agents/` (safe merge).
+3. Wire **only** selected hosts (symlinks skills/rules → `.agents/…`; Cursor also merges `.cursor/rules/*.mdc`). Write thin `CLAUDE.md` when Claude is selected.
+4. Record kit / agent-knowledge / adapter home / **Agent hosts** in `ask-project` (Cursor `.mdc` and refresh `.agents/rules/ask-project.md` when regenerating rules).
+5. Instantiate agent-knowledge; prefs; `session-backlog.md`. Migrate legacy out-of-scope → backlog; delete legacy (no stubs).
+6. Ensure `ask-question`, `ask-setup-agents`, `ask-centralize-docs` present under `.agents/skills`. No doc-scan prompt.
+7. Run `/ask-setup-agents` → `roles.md` + agents into each host `agents/` dir. Decline → leave setup notice pending.
+8. No app/kit commit unless asked (agent-knowledge auto close-out still applies).
+9. Close: paths + **hosts**; confirm no `.cursor/` if Claude-only; next slashes.
 
 ### MUST NOT
 
-- Assume `./agent-knowledge` or “next to the kit” without asking.
-- `rm -rf` the kit’s `.git` or re-init the kit as the product remote.
-- Put global/per-user memory inside the kit clone.
-- Overwrite product stack rules/skills without explicit ask.
-- Use the kit directory as the product `.cursor/` home.
-- Merge all of `templates/role-agents/` into product `.cursor/agents/` without `/ask-setup-agents` confirmation.
+- Assume paths without asking.
+- `rm -rf` kit `.git`.
+- Put memory inside the kit clone.
+- Use kit directory as adapter home.
+- Create `.cursor/` when hosts are Claude-only.
+- Merge all `templates/role-agents/` without confirmation.
 
 ### Done when
 
-- [ ] User-confirmed kit directory has upstream git
-- [ ] User-confirmed agent-knowledge directory is its own git repo with prefs
-- [ ] User-confirmed product `.cursor/` home has merged rules/skills
-- [ ] Paths recorded for `/ask-update`
-- [ ] Skills `ask-centralize-docs` and `ask-setup-agents` available
-- [ ] `/ask-setup-agents` completed or explicitly skipped
+- [ ] Kit has upstream git
+- [ ] agent-knowledge is its own repo with prefs
+- [ ] `.agents/` present; host adapters match chosen hosts only
+- [ ] Claude-only has **no** product `.cursor/`
+- [ ] Paths + hosts recorded
+- [ ] Setup-agents done or skipped
 
 ---
 
@@ -144,29 +142,26 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 
 ### Preconditions
 
-1. Resolve **kit directory** and **product `.cursor/` home** (from recorded install paths, or ask).
-2. Optionally confirm **agent-knowledge directory** (only to avoid touching it — do not overwrite).
-3. User asked to update / ran `/ask-update`.
+1. Resolve kit directory, adapter home, **agent hosts** (or ask).
+2. Optionally confirm agent-knowledge directory (do not overwrite).
+3. User ran `/ask-update`.
 
 ### Steps
 
-1. In **kit directory**: `git status`. If dirty, warn and ask before pull.
-2. `git pull` (or fetch + merge/rebase per user preference; default pull).
-3. Re-merge kit `.cursor/rules` + `skills` → product `.cursor/` home with the **same merge policy as install**. Ensure `ask-route-via-ask-question.mdc`, `ask-question`, `ask-centralize-docs`, and `ask-setup-agents` are present. If legacy kit rule filenames remain (`00-project.mdc`, `00-ask-project.mdc`, `16-route-via-ask-question.mdc`, `16-ask-route-via-ask-question.mdc`, etc.), add current `ask-*.mdc` names and remove those obsolete kit-sourced files (keep product-only rules).
-4. Never delete or overwrite files under the agent-knowledge directory except creating **missing** empty template files with user OK. Ensure `users/<email>/session-backlog.md` exists; migrate items from legacy `.cursor/out-of-scope.md` or `knowledge/delivery/out-of-scope.md` into it, then **delete** the legacy files (no stubs). Ensure `knowledge/delivery/requirements/` exists (copy from kit template if missing). If `knowledge/delivery/specify/` or `knowledge/delivery/specs/` exist and are empty or kit-placeholder-only, **delete** them; if they hold real product content, leave them and warn once.
-5. Do **not** prompt for `/ask-centralize-docs` (manual only).
-6. **Once-only notice:** if `ask-project.mdc` lacks Agents / `Update notice for /ask-setup-agents: done`, tell the user briefly what `/ask-setup-agents` does and offer to run it; then set that notice to `done` (whether or not they run it). Do not re-announce on later updates.
-7. **New surfaces:** if workspace has app/service repos not in Known surfaces / `roles.md` and not covered by an agent frontier, list them and offer `/ask-setup-agents` **delta** (ask granularity when needed). Do not create agents silently.
-8. Summarize what changed in the user’s chat language (kit revision, merged skills/rules).
+1. Kit: `git status`; warn if dirty; `git pull`.
+2. Re-merge `.agents/`; refresh **only** recorded host adapters (same policy as install).
+3. Claude-only with leftover kit-sourced `.cursor/` → offer delete after explicit yes.
+4. agent-knowledge: missing template files / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe.
+5. No doc-scan prompt. Once-only setup-agents notice if pending. New surfaces → offer setup-agents delta.
+6. Summarize (hosts + what merged).
 
 ### MUST NOT
 
 - Reset agent-knowledge from template.
-- Force-push kit or product repos.
-- Overwrite `ask-project.mdc` or product stack skills.
-- Assume default paths if install recorded different ones.
-- Re-run full `/ask-setup-agents` analysis on every update without the user asking.
+- Force-push.
+- Add `.cursor/` to Claude-only products.
 - Silent-create subagents for new repos.
+- Assume default paths/hosts if install recorded different ones.
 
 ---
 
@@ -184,7 +179,7 @@ Cap: if too many unknowns, ask paths **1–3 first** (blocking), then the rest. 
 3. For uncovered surfaces: propose specialists matching nature/scope. If several share a specialty → **ask** type vs per-surface granularity.
 4. Propose persona hint + create/update list → user **yes** / edit.
 5. Write/update `roles.md` (include Surfaces table) + copy/fill `.cursor/agents/ask-*.md` from `templates/role-agents/` (or lean custom). Prefer `ask-tech-lead` unless declined.
-6. If legacy `.cursor/skills/ask-role-*/` exists: migrate MUSTS, then **delete** those folders (no stubs).
+6. If legacy `.agents/skills/ask-role-*/` exists: migrate MUSTS, then **delete** those folders (no stubs).
 7. Update `ask-project.mdc` Agents section including **Known surfaces**.
 8. Agent-knowledge auto close-out (commit/push). No app/kit commit unless asked.
 

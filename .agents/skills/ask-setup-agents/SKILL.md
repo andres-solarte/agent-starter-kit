@@ -2,11 +2,10 @@
 name: ask-setup-agents
 description: >-
   Analyze the workspace stack and product/business context, confirm with the
-  user, then create agent-knowledge roles (RACI) and matching Cursor subagents
-  under .cursor/agents/. Re-run when surfaces change: proposes agents for new
-  repos/apps (asks type vs per-surface granularity). Use for /ask-setup-agents,
-  /ask-install after agent-knowledge exists, /ask-update when new repos appear,
-  or mid-requirement when a surface has no agent.
+  user, then create agent-knowledge roles (RACI) and matching subagents under
+  .cursor/agents and/or .claude/agents per recorded agent hosts. Re-run when
+  surfaces change. Use for /ask-setup-agents, install, update deltas, or
+  mid-requirement agent gaps.
 ---
 
 # /ask-setup-agents — detect stack + create role subagents
@@ -15,23 +14,27 @@ Follow **`INSTALL.md`** → **Agent contract — setup agents**.
 
 ## Goal
 
-From **business context + technical scan** of the multi-repo workspace, define which **role subagents** this product needs, write them into agent-knowledge, and create **Cursor subagents** under the product `.cursor/agents/` so orchestration can **Task-delegate** for real.
+From **business context + technical scan**, define **role subagents**, write `roles.md`, and create agent files under each **configured host**:
 
-Also used to **fill gaps** when a **new surface** (repo/app) appears or a REQ touches a surface with no matching agent.
+- Cursor → `<adapter-home>/.cursor/agents/ask-*.md`
+- Claude → `<adapter-home>/.claude/agents/ask-*.md`
+- Optionally also `.agents/agents/` as neutral copy
 
-**Not skills:** do **not** create `ask-role-*` under `.cursor/skills/`. Process skills stay skills; roles are **subagents**.
+Also used to **fill gaps** when a **new surface** appears or a REQ touches a surface with no matching agent.
+
+**Not skills:** process skills live in `.agents/skills/` (host dirs are symlinks). Roles are **subagents**, not `ask-role-*` skills.
 
 ## Flow (MUST)
 
 ```text
-1. Resolve kit dir, agent-knowledge dir, product .cursor/ home, sibling repos
-2. Inventory surfaces (repos/apps) + existing .cursor/agents/ask-*.md + roles.md
-3. Gather business + stack signals (skip kit + heavy vendor dirs)
-4. Diff: surfaces without coverage → candidate agents
-5. Ask granularity if >1 surface shares a specialty (type vs per-surface)
-6. Propose: persona hint + create/update list + RACI sketch
-7. User yes / edit
-8. Write roles.md + .cursor/agents/ask-*.md; record Known surfaces in ask-project.mdc
+1. Resolve kit dir, agent-knowledge, adapter home, agent hosts, sibling repos
+2. Inventory surfaces + existing agents (per host) + roles.md
+3. Gather business + stack signals
+4. Diff uncovered surfaces → candidate agents
+5. Ask granularity if needed (type vs per-surface)
+6. Propose → user yes / edit
+7. Write roles.md + agent files to each host agents/ dir
+8. Record Known surfaces + hosts in ask-project
 9. Legacy ask-role-* skill migration if needed
 10. Close + agent-knowledge auto close-out
 ```
@@ -72,7 +75,7 @@ Always prefer including **`ask-tech-lead`** unless declined.
 
 A surface is **uncovered** when:
 
-- No `.cursor/agents/ask-*.md` lists it in Frontier / primary repos, **and**
+- No host `agents/ask-*.md` (`.cursor` and/or `.claude` per hosts) lists it in Frontier / primary repos, **and**
 - `roles.md` has no row mapping that surface to a subagent
 
 For each uncovered surface, propose a specialist whose **nature and scope** match the surface (mobile app → mobile specialist, not a generic frontend web agent unless the user merges them).
@@ -105,12 +108,12 @@ Subagents to create/update:
 - ask-… — why (evidence) — frontiers: …
 Will write:
 - agent-knowledge/knowledge/architecture/agents/roles.md
-- .cursor/agents/ask-*.md
+- .cursor/agents/ask-*.md and/or .claude/agents/ask-*.md (per hosts)
 Edit or confirm?
 ```
 
-Do **not** list `.cursor/skills/ask-role-*` in the proposal.  
-Do **not** create agents for uncovered surfaces without confirmation.
+Do **not** create agents for uncovered surfaces without confirmation.  
+Do **not** write `.cursor/agents` when hosts are Claude-only.
 
 ## Write roles.md (MUST)
 
@@ -132,29 +135,33 @@ English for durable file; chat in user language.
 
 Templates: `{{kit-directory}}/templates/role-agents/<ask-name>.md`
 
-For each approved agent:
+For each approved agent, for **each configured host** agents dir:
 
-1. Copy template if missing (or author lean custom `.md` for surface-specific names).
+1. Copy template if missing (or author lean custom `.md`).
 2. Fill frontiers with **exact** repos/paths from the scan.
 3. Frontmatter: `name` = basename; strong `description`; `model: inherit` unless chosen otherwise.
 4. Body: shared pack; frontier only; return summary to parent.
+5. Keep Cursor and Claude copies in sync when hosts = `both` (same body).
 
 Do **not** overwrite customized agents without asking — merge frontiers only.
 
 ## Record in ask-project.mdc
 
 ```markdown
+## Kit paths
+- Agent hosts: cursor | claude | both
+
 ## Agents
 - Roles: `agent-knowledge/knowledge/architecture/agents/roles.md`
-- Subagents: `.cursor/agents/ask-*.md`
+- Subagents: `.cursor/agents/ask-*.md` and/or `.claude/agents/ask-*.md`
 - Setup: done (date)
 - Update notice for /ask-setup-agents: done
-- Known surfaces: `repo-a`, `repo-b`, …   # workspace-relative paths; for /ask-update delta
+- Known surfaces: `repo-a`, `repo-b`, …
 ```
 
 ## Legacy migration (MUST when present)
 
-If `.cursor/skills/ask-role-*/` exists: map to `.cursor/agents/ask-*.md`, migrate product MUSTS, **delete** skill folders (no stubs).
+If `.agents/skills/ask-role-*/` exists: map to `.cursor/agents/ask-*.md`, migrate product MUSTS, **delete** skill folders (no stubs).
 
 ## MUST NOT
 

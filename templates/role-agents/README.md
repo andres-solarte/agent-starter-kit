@@ -2,9 +2,9 @@
 
 Canonical stubs for product **Cursor subagents** (`.cursor/agents/*.md`). Not merged wholesale on install.
 
-`/ask-setup-agents` copies **approved** roles into the product `.cursor/agents/` and fills frontiers from the workspace scan.
+`/ask-setup-agents` copies **approved** roles into `.cursor/agents/` and/or `.claude/agents/` (per install hosts) and fills frontiers from the workspace scan.
 
-These are **subagents** (isolated context, Task / `/name` delegation) — **not** skills. Process skills stay under `.cursor/skills/` (`ask-git-project`, `ask-requirement`, etc.).
+These are **subagents** (isolated context) — **not** skills. Process skills live under `.agents/skills/`.
 
 | Template file | `name` | Typical when |
 |---------------|--------|----------------|

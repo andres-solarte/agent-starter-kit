@@ -1,11 +1,23 @@
 # Adapter — Claude Code
 
-SoT: [`../AGENTS.md`](../AGENTS.md)
+SoT: product **agent-knowledge** `AGENTS.md` + kit/process **`.agents/skills`**.
 
-## Minimal wiring
+## Product wiring (after `/ask-install` with host `claude` or `both`)
 
-1. Work with this repo in the session (cwd or added directory).  
-2. Root [`../CLAUDE.md`](../CLAUDE.md) redirects to `AGENTS.md` (Claude Code native).  
-3. No `.claude/` project config required for basic use.  
+```text
+<adapter-home>/
+  CLAUDE.md                 ← thin pointer
+  .agents/skills/           ← SoT (from kit)
+  .agents/rules/            ← plain rules SoT
+  .claude/skills → ../.agents/skills
+  .claude/rules  → ../.agents/rules
+  .claude/agents/ask-*.md   ← role subagents from /ask-setup-agents
+```
 
-If you add Claude project settings later, they MUST only link to `AGENTS.md`, not fork the protocol.
+**Do not** create `.cursor/` for Claude-only installs.
+
+## Minimal session
+
+1. Open adapter home (or add it) as cwd / project.
+2. Claude loads `CLAUDE.md` + `.claude/skills` + `.claude/rules` + `.claude/agents`.
+3. Memory protocol: agent-knowledge `AGENTS.md` (workspace folder).

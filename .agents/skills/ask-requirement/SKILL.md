@@ -146,7 +146,7 @@ Do you accept the plan?
 
 ## Step 5 — Execute in loop until resolved
 
-After the plan is accepted, follow `.cursor/skills/ask-orchestrate-requirement/SKILL.md` in **loop mode**:
+After the plan is accepted, follow `.agents/skills/ask-orchestrate-requirement/SKILL.md` in **loop mode**:
 
 1. Execute the next plan step (delegate to the relevant role).
 2. Verify that step.

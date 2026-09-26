@@ -13,15 +13,15 @@ disable-model-invocation: true
 
 ## Shared pack reminder
 
-Every delegated role also follows shared skills: `ask-agent-skill-discipline` + `ask-git-project` + `ask-agent-knowledge`. The **role subagent** (`.cursor/agents/ask-*.md`) is the specialist context; shared skills are not a replacement for it.
+Every delegated role also follows shared skills: `ask-agent-skill-discipline` + `ask-git-project` + `ask-agent-knowledge`. The **role subagent** (host `agents/ask-*.md`) is the specialist context; shared skills are not a replacement for it.
 
 ## Mandatory companion skill
 
-MUST follow `.cursor/skills/ask-agent-skill-discipline/SKILL.md` (do not improvise; declare gaps).
+MUST follow `.agents/skills/ask-agent-skill-discipline/SKILL.md` (do not improvise; declare gaps).
 
 ## Source of truth
 
-1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline; product subagents under `.cursor/agents/ask-*.md`
+1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline; product subagents under `.cursor/agents/` and/or `.claude/agents/` per hosts
 2. `agent-knowledge/knowledge/delivery/PROCESS.md` — delivery process
 3. `agent-knowledge/knowledge/delivery/requirements/` — active `REQ-NNN` (status board)
 4. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
@@ -107,13 +107,14 @@ Output a short **plan** before heavy work when tier is **normal** or **ambiguous
 
 Before plan acceptance and before delegating work on a repo/app:
 
-1. Map each touched surface to `.cursor/agents/ask-*.md` / `roles.md`.
+1. Map each touched surface to host `agents/ask-*.md` (`.cursor` and/or `.claude` per install hosts) / `roles.md`.
 2. If a surface is **uncovered** (no agent frontier owns it):
 
 ```text
 AGENT GAP — surface without specialist
 - Surface / repo: …
 - Kind (mobile/api/web/…): …
+- Hosts: cursor | claude | both
 - Proposal: create ask-… (type) or ask-… (per-surface) via /ask-setup-agents delta
 - Meanwhile: (a) run setup-agents delta now  (b) user picks existing agent to extend  (c) park
 ```

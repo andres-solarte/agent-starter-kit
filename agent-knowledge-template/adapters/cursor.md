@@ -1,11 +1,17 @@
 # Adapter — Cursor
 
-SoT: `agent-knowledge/AGENTS.md`
+SoT: product **agent-knowledge** `AGENTS.md` + kit/process **`.agents/skills`**.
 
-## Minimal workspace wiring
+## Product wiring (after `/ask-install` with host `cursor` or `both`)
 
-1. Open the project's workspace (or add `agent-knowledge` as a folder), so this repo is visible.
-2. Keep **one** always-on rule that only points here (see `.cursor/rules/ask-agent-knowledge.mdc` in the starter kit).
-3. Optional pack skill `.cursor/skills/ask-agent-knowledge/SKILL.md` — also a **pointer only** (for pack discovery).
+```text
+<adapter-home>/
+  .agents/skills/           ← SoT (from kit)
+  .cursor/skills → ../.agents/skills
+  .cursor/rules/*.mdc       ← Cursor globs / always-on
+  .cursor/agents/ask-*.md   ← role subagents from /ask-setup-agents
+```
 
-Do **not** paste close-out / delta / identity rules into `.cursor/`; edit `AGENTS.md` and the operating contract instead.
+Keep **one** always-on rule that points at agent-knowledge (`ask-agent-knowledge.mdc`).
+
+Do **not** paste close-out / delta rules into `.cursor/`; edit agent-knowledge instead.

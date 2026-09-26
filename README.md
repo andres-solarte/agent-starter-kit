@@ -1,35 +1,42 @@
 # agent-starter-kit
 
-Reusable process engine for coding agents (Cursor, Claude Code, etc.): skill discipline, communication, focus/scope, requirement orchestration, and the **agent-knowledge** template (memory separate from the kit).
+Reusable process engine for coding agents (**Cursor** and **Claude Code**): skill discipline, communication, focus/scope, requirement orchestration, and the **agent-knowledge** template (memory separate from the kit).
 
 Does not include stack skills (framework, testing, DB) — those are added per project.
 
-> **Install:** `/ask-install` (asks for directories; runs `/ask-setup-agents`).  
-> **Setup agents:** `/ask-setup-agents` (stack + business → roles + `.cursor/agents/` subagents).  
-> **Centralize docs (manual):** `/ask-centralize-docs` (scan → copy into agent-knowledge → recommend deleting originals).  
-> **Update:** `git pull` in the kit directory + `/ask-update`.  
-> **Uninstall:** `/ask-uninstall` (asks what to remove; memory kept by default).  
+> **Install:** `/ask-install` (asks for directories + **agent hosts**: cursor / claude / both).  
+> **Setup agents:** `/ask-setup-agents` (surfaces → roles + host `agents/`).  
+> **Centralize docs (manual):** `/ask-centralize-docs`.  
+> **Update:** `git pull` in the kit + `/ask-update`.  
+> **Uninstall:** `/ask-uninstall`.  
 > Guide: **[INSTALL.md](INSTALL.md)**.
 
 ## What's here
 
 ```text
+.agents/
+  skills/    — canonical ask-* skills (SoT)
+  rules/     — plain rules for Claude (+ sync from .cursor/rules)
 .cursor/
-  rules/     — process rules (`ask-*.mdc`)
-  skills/    — ask-install, ask-setup-agents, ask-centralize-docs, ask-update, …
-templates/
-  role-agents/ — ask-*.md subagent stubs copied into .cursor/agents/ by /ask-setup-agents
+  skills → ../.agents/skills
+  rules/     — Cursor .mdc rules
+.claude/
+  skills → ../.agents/skills
+  rules  → ../.agents/rules
+templates/role-agents/   — subagent stubs for /ask-setup-agents
 agent-knowledge-template/
-  — skeleton for a NEW product git repo (global + per-user memory)
-INSTALL.md   — dependency install + update contracts
+INSTALL.md
+CLAUDE.md                — Claude Code entry for this kit repo
 ```
+
+Claude-only product installs receive **`.agents/` + `.claude/`** only — **not** `.cursor/`.
 
 ## Layout after install
 
 | Piece | Updates via |
 |-------|-------------|
-| Kit clone in workspace | `git pull` + `/ask-update` |
-| Product `.cursor/` | Merged from kit; overlays stay local |
+| Kit clone | `git pull` + `/ask-update` |
+| Product `.agents/` + host adapters | Merged from kit per recorded hosts |
 | `agent-knowledge/` | Product’s own remote; not replaced by kit updates |
 
 ## Language
@@ -42,15 +49,15 @@ INSTALL.md   — dependency install + update contracts
 
 | Slash | For |
 |-------|-----|
-| `/ask-install` | First-time wire-up (asks for directories; runs setup agents) |
-| `/ask-setup-agents` | Detect stack/surfaces → roles.md + Cursor subagents (also delta for new repos) |
+| `/ask-install` | Wire-up (dirs + hosts; runs setup agents) |
+| `/ask-setup-agents` | Surfaces → roles + subagents (full or delta) |
 | `/ask-centralize-docs` | Scan workspace → copy docs → recommend cleanup |
-| `/ask-update` | Pull kit + safe re-merge (once: mention setup agents) |
-| `/ask-uninstall` | Remove wiring (asks what to delete) |
-| `/ask-question` | Ask the framework / default triage (may become a requirement) |
-| `/ask-requirement` | Product work + REQ registry (`backlog` / `in_progress` / `closed`) |
-| `/ask-requirement-fix` | Error on same / existing REQ (skip full re-plan) |
-| `/ask-backlog` | Personal parked notes (not the REQ registry) |
+| `/ask-update` | Pull kit + re-merge selected hosts |
+| `/ask-uninstall` | Remove wiring |
+| `/ask-question` | Triage (may become requirement or fix) |
+| `/ask-requirement` | Product work + REQ registry |
+| `/ask-requirement-fix` | Error on same / existing REQ |
+| `/ask-backlog` | Personal parked notes |
 
 ## Contributing upstream
 

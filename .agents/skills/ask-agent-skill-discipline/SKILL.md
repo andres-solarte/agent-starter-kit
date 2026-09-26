@@ -12,7 +12,7 @@ disable-model-invocation: true
 
 ## Guiding principle
 
-1. **Every procedural act** belongs to an **existing skill** (`.cursor/skills/`) or a **rule/doc** that a skill cites as source.
+1. **Every procedural act** belongs to an **existing skill** (`.agents/skills/`) or a **rule/doc** that a skill cites as source.
 2. **Forbidden to improvise** unanchored flows or conventions.
 3. **Improvement = create/extend skills** (and docs they cite), not one-chat magic.
 4. If the agent **does not know** or **there is no skill**: **say so** (`SKILL GAP`) and **add/extend the skill** (with user OK if the default is to stop).
@@ -31,7 +31,7 @@ When delegating or acting, the orchestrator MUST remember the shared pack **plus
 If a pack skill is missing (or a common practice not listed is discovered):
 
 1. `SKILL GAP` — shared pack.
-2. Create/extend the shared skill under `.cursor/skills/`.
+2. Create/extend the shared skill under `.agents/skills/`.
 3. Update the project's role docs (if any, e.g. `agent-knowledge/knowledge/architecture/agents/roles.md`) § Shared skills.
 4. Update this section of the skill.
 
