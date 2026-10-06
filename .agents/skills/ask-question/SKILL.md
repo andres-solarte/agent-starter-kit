@@ -34,6 +34,7 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 | Error / failure / regression / stacktrace / “no funciona” / “rompió…” / failing test **on recent or named work** | **Hand off → `ask-requirement-fix`** — see **Visible handoff — fix** below |
 | New feature, new bug with no REQ link, refactor, product doc/spec change, “build/change/add/document…” | **Hand off → `ask-requirement`** — see **Visible handoff — requirement** below |
 | Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** — one clear line that it was parked |
+| “What’s next?” / “where were we?” / resume a `BL-NNN` | **Hand off → `ask-backlog`** (`next` / `resume`) — rule `ask-one-item-per-conversation` |
 | Explicit `/ask-requirement-fix` | That skill |
 | Explicit `/ask-requirement` or `/ask-backlog` | Honor that skill |
 | Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` / `/ask-centralize-docs` / `/ask-setup-agents` | Those skills (not this one) |
@@ -72,6 +73,8 @@ Next I'll clarify scope and get a short plan accepted — I won't start document
 ```
 
 **Hand off means:** after that announcement, read and execute the target skill — including its gates. Do not skip gates. Do **not** bury the announcement after a long FAQ.
+
+**First turn of a conversation:** apply rule `ask-one-item-per-conversation` → if the message maps to an existing `BL-NNN` / `REQ-NNN`, name it and use its **Resume** note instead of re-asking.
 
 ## Resolve context (framework answers)
 

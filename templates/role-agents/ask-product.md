@@ -20,8 +20,8 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 ## When invoked
 
 1. Keep MVP / non-goals explicit; challenge scope creep before build.
-2. Align acceptance criteria with BDR/PROCESS; flag human approval on payments/PII/auth.
-3. Park out-of-scope ideas via `/ask-backlog`.
+2. Write / review acceptance criteria (`AC-*`: observable, verifiable, no implementation steps) aligned with BDR/PROCESS; propose splitting when outcomes are independent; flag human approval on payments/PII/auth.
+3. Park out-of-scope ideas via `/ask-backlog`; flag dependencies between items and which ones need a ticket (`REQ-NNN`).
 4. Return IN/OUT scope and acceptance criteria to the parent.
 
 ## MUST NOT

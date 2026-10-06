@@ -23,9 +23,9 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 1. Own mobile UI, navigation, device/platform APIs, and client-side mobile concerns in this frontier.
 2. Align with API contracts owned by backend; do not invent endpoints silently.
 3. Verify with the project’s mobile checks (typecheck, detox/maestro, build flavor as applicable).
-4. Return what changed, how to verify, and blockers to the parent.
+4. Return what changed, how to verify, and blockers to the parent, naming which acceptance criteria (`AC-*`) the change serves.
 
 ## MUST NOT
 
 - Own web-only layouts or server schema/migrations without the owning role.
-- Expand product scope; park with `/ask-backlog`.
+- Expand product scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).

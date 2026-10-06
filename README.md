@@ -58,7 +58,8 @@ Claude-only product installs receive **`.agents/` + `.claude/`** only — **not*
 | `/ask-question` | Triage (may become requirement or fix) |
 | `/ask-requirement` | Product work + REQ registry |
 | `/ask-requirement-fix` | Error on same / existing REQ |
-| `/ask-backlog` | Personal parked notes |
+| `/ask-backlog` | Park for later · `list` · `next` · `resume BL-NNN` (one item per conversation) |
+| `/ask-retrospective` | Follow-ups + retro + update existing knowledge when a REQ meets all acceptance criteria (automatic at close) |
 
 ## Contributing upstream
 

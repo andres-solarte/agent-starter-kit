@@ -35,12 +35,13 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 ## Read order
 
 1. This file → operating contract
-2. `INDEX.md`
-3. `knowledge/<relpath>/…`
-4. `users/<email>/knowledge/<same relpath>/…` + `DELTAS.md`
-5. `users/<email>/preferences.yaml` (chat language)
-6. `users/<email>/work-log/` (local when/what/why)
-7. `consolidation/QUEUE.md` if consolidating
+2. Knowledge MUSTs — already loaded via the always-on rule `ask-knowledge-musts` and role agent `## Knowledge MUSTs`; open the linked doc when a MUST applies (contract §8)
+3. `INDEX.md`
+4. `knowledge/<relpath>/…`
+5. `users/<email>/knowledge/<same relpath>/…` + `DELTAS.md`
+6. `users/<email>/preferences.yaml` (chat language)
+7. `users/<email>/work-log/` (local when/what/why)
+8. `consolidation/QUEUE.md` if consolidating
 
 ## Delta naming (locked)
 
@@ -57,6 +58,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | When / what / why | `users/<email>/work-log/` (local) |
 | Durable not-yet-global | delta under `users/<email>/knowledge/…` |
 | Team SoT | `knowledge/…` via consolidation + **PR only** (never push global to default branch) |
+| Learning (retro, fix root cause, correction) | **Edit the doc that owns the topic** (decision, convention, architecture, role agent…) + MUST block if critical — contract §7–§8. Team → PR; user → delta. **Not** a separate lessons list, work-log, or `MEMORY.md` only |
 | Team role agents | `agents/ask-*.md` (scope = team) → **PR only** |
 | User-only role agents | `users/<email>/agents/ask-*.md` (direct OK) |
 
@@ -82,8 +84,10 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | User-only role agents | `users/<email>/agents/` |
 | What to do next | `knowledge/delivery/NEXT.md` |
 | Requirement registry | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
+| Retrospective / learnings | `/ask-retrospective` → existing docs + MUST blocks (contract §7–§8) |
 | Fix on existing REQ | `/ask-requirement-fix` |
 | Session backlog (`/ask-backlog`, personal) | `users/<email>/session-backlog.md` |
+| Resume an item in a new conversation | `/ask-backlog resume BL-NNN` · `/ask-requirement resume REQ-NNN` (rule `ask-one-item-per-conversation`) |
 | Global docs | `knowledge/…` |
 | Delta | `users/<email>/knowledge/<same-relpath>` |
 | Delta index | `users/<email>/DELTAS.md` |

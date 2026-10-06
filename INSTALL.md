@@ -120,12 +120,13 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 
 1. Ensure kit at kit directory (`INSTALL.md`, `.agents/`, template); keep `.git` + upstream.
 2. Merge kit `.agents/` → `<adapter-home>/.agents/` (safe merge).
-3. Wire **only** selected hosts (symlinks skills/rules → `.agents/…`; Cursor also merges `.cursor/rules/*.mdc`). Write thin `CLAUDE.md` when Claude is selected.
+3. Wire **only** selected hosts (symlinks skills/rules → `.agents/…`; Cursor also merges `.cursor/rules/*.mdc`). Write thin `CLAUDE.md` when Claude is selected (include `@.agents/rules/ask-knowledge-musts.md`).
 4. Record kit / agent-knowledge / adapter home / **Agent hosts** in `ask-project` (Cursor `.mdc` and refresh `.agents/rules/ask-project.md` when regenerating rules).
 5. Instantiate agent-knowledge; prefs; `session-backlog.md`. Migrate legacy out-of-scope → backlog; delete legacy (no stubs).
 6. Fill **`WORKSPACE.md`**: agent-knowledge remote (if known), kit remote/folder, adapter home, **hosts**, and every sibling app repo from Q&A (local folder + remote URL + required). Replace `_TBD_` placeholders; do not leave an empty Remotes table after install.
 7. Ensure `ask-question`, `ask-setup-agents`, `ask-centralize-docs` present under `.agents/skills`. No doc-scan prompt.
 8. Run `/ask-setup-agents` → `roles.md` + agents into each host `agents/` dir. Decline → leave setup notice pending.
+8b. **Materialize MUSTs** (skill `ask-retrospective` → *Materialize MUSTs*): generated always-on `ask-knowledge-musts` rule per host + `## Knowledge MUSTs` in agent mirrors, from MUST blocks in agent-knowledge docs (empty → «No knowledge MUSTs yet.»).
 9. No app/kit commit unless asked (agent-knowledge auto close-out still applies).
 10. Close: paths + **hosts**; point teammates to `agent-knowledge/WORKSPACE.md`; confirm no `.cursor/` if Claude-only; next slashes.
 
@@ -147,6 +148,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 - [ ] Claude-only has **no** product `.cursor/`
 - [ ] Paths + hosts recorded
 - [ ] Setup-agents done or skipped
+- [ ] `ask-knowledge-musts` rule generated for each host (Claude: imported from `CLAUDE.md`)
 
 ---
 
@@ -165,6 +167,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 3. Claude-only with leftover kit-sourced `.cursor/` → offer delete after explicit yes.
 4. agent-knowledge: missing template files (`agents/`, `users/_template/agents/`) / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe.
 5. **Materialize** role agents: copy `agent-knowledge/agents/ask-*.md` ∪ `users/<email>/agents/ask-*.md` → each configured host `agents/` dir (runtime mirrors).
+5b. **Materialize MUSTs** (skill `ask-retrospective`): regenerate `ask-knowledge-musts` rule + `## Knowledge MUSTs` blocks; drop user `Pending: <PR>` copies whose team PR is merged.
 6. No doc-scan prompt. Once-only setup-agents notice if pending. New surfaces → offer setup-agents delta (still ask user vs team).
 7. Summarize (hosts + what merged + materialize).
 
@@ -191,7 +194,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 2. Lightweight stack/business scan (exclude kit, vendor/build dirs).
 3. For uncovered surfaces: propose specialists matching nature/scope. If several share a specialty → **ask** type vs per-surface granularity.
 4. Propose persona hint + create/update list → for each create/modify (or batch A/B/C) **MUST ask user-only vs team** (rule `ask-agent-scope`). Never assume team.
-5. On yes: write SoT under `agents/ask-*.md` (team) or `users/<email>/agents/ask-*.md` (user); update `roles.md` **only** for team; **materialize** team ∪ current-user SoT into each host `agents/` dir.
+5. On yes: write SoT under `agents/ask-*.md` (team) or `users/<email>/agents/ask-*.md` (user); update `roles.md` **only** for team; **materialize** team ∪ current-user SoT into each host `agents/` dir, then append each role's `## Knowledge MUSTs` (skill `ask-retrospective`).
 6. If legacy `.agents/skills/ask-role-*/` exists: migrate MUSTS, then **delete** those folders (no stubs). If host mirrors exist but team SoT empty → offer import into `agent-knowledge/agents/`.
 7. Update `ask-project` Agents section: SoT paths + Known surfaces + hosts.
 8. Agent-knowledge: user-scoped → direct close-out; team SoT (`agents/`, `roles.md`) → **PR** (rule `ask-knowledge-pr`). No app/kit commit unless asked.

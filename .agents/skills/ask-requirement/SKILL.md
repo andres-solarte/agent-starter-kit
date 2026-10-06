@@ -16,17 +16,17 @@ You speak **only** with this skill once it is active (user typed `/ask-requireme
 ```text
 1. Capture requirement
 2. Q&A (clarify gaps)  ← no code yet
-3. Confirm summary + acceptance criteria → REGISTER REQ (backlog)
+3. Confirm summary + acceptance criteria (AC-*) → REGISTER REQ (backlog)
 4. Block execution plan  ← GATE → on accept: status in_progress
 5. Execute in loop mode until the block is fully resolved
-6. Deliver / close (or next block with a new plan) → close REQ when whole req done
+6. Deliver / close (or next block with a new plan) → when every AC is met: follow-ups + retrospective (ask-retrospective) → close REQ
 ```
 
 If work is split into **several blocks**: **each block** repeats steps 4→5→6. Do not chain the next block without an accepted plan.
 
 ## Requirement registry (MUST)
 
-SoT: `agent-knowledge/knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-slug.md`). See that folder’s README.
+SoT: `agent-knowledge/knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-slug.md`). See that folder’s README — including the **acceptance criteria contract** (writing, scope test, close). Every REQ has ≥ 1 `AC-*`; no REQ without them.
 
 | Moment | Action |
 |--------|--------|
@@ -35,8 +35,10 @@ SoT: `agent-knowledge/knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-s
 | Step 6 — more blocks remain | Keep **`in_progress`**; update Blocks table + NEXT next step |
 | Step 6 — whole requirement done | Status → **`closed`**; INDEX + NEXT (Last closed) |
 
-Do **not** auto-create registry rows from `/ask-backlog` (personal notes only).  
-Resuming an existing REQ: ask which id (or use `NEXT.md` Active) and update that file — do not mint a duplicate id.
+Do **not** auto-create registry rows from `/ask-backlog` (personal notes only). When the user promotes a `BL-NNN` item, register the REQ and set the item’s `Ticket: REQ-NNN` (and `Source: BL-NNN` in the REQ).  
+Resuming an existing REQ (`/ask-requirement resume REQ-NNN`, or ask which id / use `NEXT.md` Active): read its **Resume** section and continue from there — do not mint a duplicate id or re-run Q&A already recorded.
+
+**One REQ per conversation** (rule `ask-one-item-per-conversation`): at each block close or pause, rewrite the REQ’s **Resume** section and suggest continuing in a new conversation with `/ask-requirement resume REQ-NNN`. Record `Depends on` (other REQs / `BL-NNN`) when found during Q&A or planning; flag unmet dependencies before plan acceptance.
 
 ## Step 1 — Capture
 
@@ -62,7 +64,7 @@ If the user is reporting a **failure on work already under an `in_progress` REQ*
 
 ### What to ask (prioritize blockers)
 
-1. Observable outcome / "done" criterion
+1. Observable outcome → **acceptance criteria** (what the user will see / check; how it is verified)
 2. Surface (which repo/app/module)
 3. OUT of scope (what not to do)
 4. Data or migrations — yes/no?
@@ -82,12 +84,16 @@ When no blockers remain, show:
 ```text
 Summary:
 - What: …
-- Done when: …
 - Surfaces/repos: …
 - Out of scope: …
+Acceptance criteria (done = all met):
+- AC-1: Given …, when …, then … (verified by …)
+- AC-2: …
 ```
 
-Ask for confirmation: «Shall we move to the execution plan?»
+Acceptance criteria rules (MUST): observable, verifiable, not implementation steps; ≥ 1 even for micro; > ~7 or independent outcomes → propose splitting into several REQs. Anything the user mentions that no criterion covers goes to **Out of scope** (park / separate ticket) unless they ask to add a criterion.
+
+Ask for confirmation of the summary **and the criteria**: «Are these acceptance criteria right? Shall we move to the execution plan?»
 (If the user already said «do it / go ahead» on the summary, still go through **step 4** — the agent plan — except for an agreed trivial micro.)
 
 **On confirm (MUST):** register the requirement (`backlog`) before presenting the execution plan. Tell the user the id once (e.g. `REQ-003`).
@@ -119,7 +125,7 @@ Narrow exception (typo micro / one string): no subagent round needed; name who t
 2. **How** (short steps, no jargon).
 3. **Who participates** (roles/agents): plain name + what each does — **already validated** in the previous loop.
 4. **Order** (sequence; what runs in parallel if applicable).
-5. **How we know it finished** ("block resolved" criterion).
+5. **Acceptance criteria covered** by this block (`AC-*` ids) and how each is verified. Every REQ criterion must be covered by some block.
 6. **What is out** of this block.
 7. **If there is a data/DB change:** how **existing data** migrates (NULL/default/backfill). Treat current data as production.
 8. **Loop findings** (optional, brief): 1–3 bullets of what roles contributed if the plan changed.
@@ -134,7 +140,7 @@ Block plan:
   - … → …
   - … → …
 - Order: …
-- Done when: …
+- Covers: AC-1, AC-2 (verified by …)
 - Out: …
 Do you accept the plan?
 ```
@@ -151,8 +157,9 @@ After the plan is accepted, follow `.agents/skills/ask-orchestrate-requirement/S
 1. Execute the next plan step (delegate to the relevant role).
 2. Verify that step.
 3. If it fails or is incomplete → fix and repeat (same block).
-4. Do not declare the block closed until the «Done when» criterion is met.
-5. Do not jump to the **next roadmap block** without a **new plan** (return to step 4).
+4. Do not declare the block closed until each of its `AC-*` is `met` with evidence (checker ≠ maker). Update the criteria table (status + evidence) as they pass.
+5. **Scope test** on anything new that comes up: not needed for an `AC-*` → out of scope → park (`/ask-backlog`, ticket candidate) or separate REQ; tell the user which criteria it falls outside of.
+6. Do not jump to the **next roadmap block** without a **new plan** (return to step 4).
 
 Cursor `/loop` heartbeat is optional (re-check queue/drift); the "loop" here is the **execute → verify → fix** cycle until the requirement/block closes.
 
@@ -160,11 +167,11 @@ Cursor `/loop` heartbeat is optional (re-check queue/drift); the "loop" here is 
 
 Before or with the user-facing close:
 
-1. Update the **REQ** file: Blocks table; if the **whole** requirement’s done-when is met → status **`closed`** + INDEX; else keep **`in_progress`** and note the next block. Update `NEXT.md`. (These live under `knowledge/**` → persist via **PR**, rule `ask-knowledge-pr`.)
+1. Update the **REQ** file: acceptance-criteria table (status + evidence), Blocks table, INDEX `AC met`; if **every** criterion is `met` (or `dropped` with user OK) → run **`ask-retrospective`** (follow-up tickets + retrospective + update existing knowledge + materialize MUSTs), then status **`closed`** + INDEX; else keep **`in_progress`** and note the pending criteria / next block. Update `NEXT.md`. (These live under `knowledge/**` → persist via **PR**, rule `ask-knowledge-pr`.)
 2. Run **agent-knowledge close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed) — **direct** OK for user paths.
 3. Run **`ask-git-project`**: user-scoped → commit/push default branch; REQ / `NEXT.md` / other `knowledge/**` → **branch + PR** (do not push registry to default branch). Return PR URL when opened.
 
-Then 2–4 sentences to the user: REQ id + status, what was done, what remains, one next step. No loose internal codes. Mention the knowledge PR URL when registry changes went through a PR; mention push/remote only if user-path push failed or there is no remote.
+Then 2–4 sentences to the user: REQ id + status, which criteria are met / pending, what was done, one next step. No loose internal codes. Mention the knowledge PR URL when registry changes went through a PR; mention push/remote only if user-path push failed or there is no remote.
 
 If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I prepare the plan?» (REQ stays `in_progress`.)
 
@@ -175,7 +182,10 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 - Start code in step 2 or **without an accepted plan** (step 4).
 - Skip Q&A when there are real blockers.
 - Mark a half-finished block as closed.
-- Mark the REQ `closed` while blocks remain.
+- Mark the REQ `closed` while blocks remain or any criterion is `pending` / `failed`.
+- Register a REQ without acceptance criteria, or change criteria without user confirmation.
+- Report a REQ `closed` without the follow-ups + retrospective (`ask-retrospective`), unless the user explicitly skips it.
+- Absorb work no criterion covers (scope creep) without the user choosing to amend the criteria.
 - Skip registry create/update (no silent work without a REQ id).
 
 ## Internal references (agents)
@@ -185,4 +195,5 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 - Git: `ask-git-project`
 - Registry: `agent-knowledge/knowledge/delivery/requirements/`
 - Fixes on same REQ: `ask-requirement-fix`
+- Close-out (follow-ups, retro, knowledge update): `ask-retrospective`
 - Roles / RACI / loop: `agent-knowledge/knowledge/architecture/agents/` (create if missing)

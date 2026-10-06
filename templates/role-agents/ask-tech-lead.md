@@ -19,12 +19,12 @@ Follow project skills: `ask-agent-skill-discipline`, `ask-git-project`, `ask-age
 
 ## When invoked
 
-1. Clarify the single point you own this turn (paths, contract, done-when).
+1. Clarify the single point you own this turn (paths, contract, `AC-*` it serves).
 2. Prefer delegating specialists (`ask-frontend`, `ask-backend`, `ask-data`, etc.) over implementing every surface yourself.
 3. Integrate findings; resolve conflicts between roles; report a concise result to the parent.
 
 ## MUST NOT
 
 - Skip `/ask-requirement` plan gates.
-- Expand scope; park with `/ask-backlog`.
+- Expand scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).
 - Force-push or auto-commit app/kit repos (agent-knowledge close-out only per `ask-git-project`).

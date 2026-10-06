@@ -22,9 +22,9 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 1. Own API surface, edge validation, and domain services in this frontier.
 2. Coordinate schema with Data; keep contracts explicit for Frontend.
 3. Verify with API tests / typecheck as the project defines.
-4. Return what changed, contracts touched, and blockers to the parent.
+4. Return what changed, contracts touched, and blockers to the parent, naming which acceptance criteria (`AC-*`) the change serves.
 
 ## MUST NOT
 
 - Own UI layouts or infra-as-code unless dual-hatted in roles.md.
-- Expand product scope; park with `/ask-backlog`.
+- Expand product scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).

@@ -1,9 +1,9 @@
 # Requirements index
 
-Living board. One row per `REQ-NNN`. Update whenever status changes (`/ask-requirement`).
+Living board. One row per `REQ-NNN`. Update whenever status or acceptance-criteria progress changes (`/ask-requirement`).
 
-| ID | Title | Status | Updated | File |
-|----|-------|--------|---------|------|
-| — | (none yet) | — | — | — |
+| ID | Title | Status | AC met | Updated | File |
+|----|-------|--------|--------|---------|------|
+| — | (none yet) | — | — | — | — |
 
-Statuses: `backlog` · `in_progress` · `closed`
+Statuses: `backlog` · `in_progress` · `closed` · AC met = `met / total` (excluding `dropped`)

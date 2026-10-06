@@ -22,9 +22,9 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 1. Own schema, migrations, and query boundaries for owned aggregates.
 2. Keep a single system of record per aggregate; coordinate API impact with Backend.
 3. Verify migrations apply cleanly in the project’s local/CI path.
-4. Return migration plan, risks to existing data, and blockers to the parent.
+4. Return migration plan, risks to existing data, and blockers to the parent, naming which acceptance criteria (`AC-*`) the change serves.
 
 ## MUST NOT
 
 - Ship breaking schema without Backend/Frontend contract awareness.
-- Expand product scope; park with `/ask-backlog`.
+- Expand product scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).

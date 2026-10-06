@@ -24,6 +24,7 @@ Templates: `agent-knowledge/templates/decision-business.md` · `decision-archite
 2. Update the index table in `knowledge/decisions/README.md`
 3. If applicable, update `knowledge/product/scope/mvp.md` or other docs — do not duplicate; link
 4. Status: `proposed` until explicit user confirmation → `accepted`
+5. A decision that changes or reverses an earlier one → mark the old record `superseded` (link the new one) and update the docs that depended on it — do not leave both as current. Retrospectives (`/ask-retrospective`) apply the same rule; critical consequences get a MUST block (agent-knowledge operating contract §7–§8).
 
 ## What does not need a record
 

@@ -46,6 +46,8 @@ Silent handoff is forbidden.
    - New REQ → hand off to `ask-requirement` (full gates) with a one-line note that the user chose a new requirement for the fix.
 4. If several `in_progress` → ask which REQ id.
 
+**Acceptance-criteria test (MUST):** it is a fix on this REQ only if the error makes one of its `AC-*` fail, or regresses something this REQ touched. Name the criterion (e.g. «AC-2 is failing»). If no criterion covers the reported behavior → it is **new scope**: say so in one sentence and offer a separate item (`/ask-backlog`, ticket candidate) or new REQ (`/ask-requirement`) — or, if the user chooses, amend this REQ’s criteria (logged).
+
 ## Flow (MUST)
 
 ```text
@@ -74,17 +76,17 @@ Prefer evidence already in the message (log, path, steps). If missing, ask at mo
 
 ## Execute
 
-1. Stay inside the REQ’s stated surfaces / done-when unless the user expands scope (then park or escalate to `/ask-requirement`).
+1. Stay inside the REQ’s stated surfaces / acceptance criteria unless the user expands scope (then park or escalate to `/ask-requirement`).
 2. Prefer the smallest change that clears the reported failure.
-3. Verify: reproduce the failure path or the project’s light check for that surface.
+3. Verify: reproduce the failure path or the project’s light check for that surface, and re-check the affected `AC-*`.
 
 ## Close
 
-1. Append to the REQ file: status log line + optional Blocks note (“fix: …”).
-2. Keep status **`in_progress`** if the original done-when is still open; **`closed`** only if the whole REQ done-when is now met (same rules as `/ask-requirement` step 6).
+1. Append to the REQ file: status log line + optional Blocks note (“fix: …”); set the affected criterion back to `met` with new evidence (`failed` while broken). Write the **root cause** in one line (input for the retrospective).
+2. Keep status **`in_progress`** if any criterion is still pending; **`closed`** only if every criterion is `met` — then run **`ask-retrospective`** first (same rules as `/ask-requirement` step 6). On a **reopened** REQ, the retro also covers why the defect escaped the original verification.
 3. Update `NEXT.md` if needed.
 4. Agent-knowledge close-out (`ask-agent-knowledge` + `ask-git-project`): user paths direct; REQ updates under `knowledge/**` → **PR** (`ask-knowledge-pr`).
-5. 2–4 sentences to the user: REQ id, what failed, what changed, how verified.
+5. 2–4 sentences to the user: REQ id, which criterion failed, what changed, how verified.
 
 ## MUST NOT
 

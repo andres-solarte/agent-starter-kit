@@ -31,6 +31,7 @@ Do not offer internal skill menus to the user.
 ## Requirement registry (MUST)
 
 - Formal work is tracked as `REQ-NNN` with status `backlog` | `in_progress` | `closed`.
+- Every REQ has **acceptance criteria** (`AC-*`), confirmed by the user: they define done (close only when all are met with evidence) and scope (work no criterion needs → separate item / ticket).
 - Owned by `/ask-requirement` (create on summary confirm; `in_progress` on plan accept; `closed` when the whole requirement finishes).
 - **Fixes** on an existing REQ use `/ask-requirement-fix` (no new id unless the user chooses a new REQ). Append a status-log / fix note on the same file.
 - Personal `/ask-backlog` notes do **not** auto-enter this registry.
@@ -51,6 +52,7 @@ Do not offer internal skill menus to the user.
 2. Execute per tier (Task / role subagents from SoT mirrors).
 3. Verify bar: maker ≠ checker (E2E / smoke / typecheck per tier and project).
 4. Close: work-log; update requirement registry + `NEXT.md`; agent-knowledge auto commit/push (`ask-git-project`).
+5. REQ fully executed (every `AC-*` met) → `/ask-retrospective`: follow-up tickets, short retro in the REQ, and learnings folded into the docs that own each topic (new / modified / superseded decisions, conventions, architecture, role agents). Critical statements are marked as MUST blocks and materialized into the always-on rule `ask-knowledge-musts` and role agent mirrors so agents cannot skip them (operating contract §7–§8).
 
 **New / uncovered surfaces:** propose a specialist via `/ask-setup-agents` (delta); ask type vs per-surface when several share a specialty. Mid-REQ: agent gap blocks plan acceptance until resolved or the user chooses an exception.
 

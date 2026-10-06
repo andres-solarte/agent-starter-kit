@@ -19,7 +19,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 3. git pull in kit directory
 4. Re-merge .agents/ → adapter home; re-wire only selected host adapters
 5. Leave agent-knowledge untouched (except missing template stubs / backlog migrate)
-6. Materialize role agents from AK SoT → host agents/ dirs (team ∪ current user)
+6. Materialize role agents from AK SoT → host agents/ dirs (team ∪ current user) + knowledge MUSTs (ask-knowledge-musts rule + ## Knowledge MUSTs)
 7. Claude-only: if .cursor/ kit-sourced exists → offer delete (migration)
 8. Surface delta → propose agents if new uncovered repos (scope ask via setup-agents)
 9. Once-only / legacy notices as needed
@@ -53,6 +53,8 @@ After merge, sync runtime host mirrors from agent-knowledge SoT (do not invent a
 2. Current user: `<agent-knowledge>/users/<email>/agents/ask-*.md` (`git config user.email` lowercase)
 3. Copy into `<adapter-home>/.cursor/agents/` and/or `.claude/agents/` per recorded hosts
 
+4. Then **materialize MUSTs** (skill `ask-retrospective` → *Materialize MUSTs*): regenerate the always-on `ask-knowledge-musts` rule for recorded hosts from MUST blocks in agent-knowledge docs, and append `## Knowledge MUSTs` to each mirror; remove user `Pending: <PR>` block copies whose team PR is merged. Claude hosts: ensure `CLAUDE.md` contains `@.agents/rules/ask-knowledge-musts.md`.
+
 Host dirs are mirrors; SoT stays in agent-knowledge (shared via git). Create/modify still goes through `/ask-setup-agents` + scope question.
 
 ## Once-only: `/ask-setup-agents` notice (MUST)
@@ -78,4 +80,4 @@ Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setu
 
 ## Close
 
-Kit revision; hosts; what merged; materialize counts; Claude-only `.cursor` cleanup if done; surface proposals if any.
+Kit revision; hosts; what merged; materialize counts (agents + MUST blocks); Claude-only `.cursor` cleanup if done; surface proposals if any.

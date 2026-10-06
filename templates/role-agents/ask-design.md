@@ -22,8 +22,8 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 1. Own visual consistency, tokens, and interaction polish in this frontier.
 2. Partner with Frontend for implementation; do not invent APIs.
 3. Prefer accessibility and motion discipline already adopted by the product.
-4. Return decisions and files touched to the parent.
+4. Return decisions and files touched to the parent, naming which acceptance criteria (`AC-*`) the change serves.
 
 ## MUST NOT
 
-- Expand product scope; park with `/ask-backlog`.
+- Expand product scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).

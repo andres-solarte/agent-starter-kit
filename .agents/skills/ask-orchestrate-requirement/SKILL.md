@@ -32,11 +32,11 @@ This skill is the **orchestrator procedure**. It does not replace Product for BD
 ## Experience (MUST)
 
 1. User provides a **requirement** via `/ask-requirement` Q&A.
-2. **Execution plan gate** (from `/ask-requirement` step 4): objective, steps, **agents/roles**, how each participates, **order**, done-when. **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
+2. **Execution plan gate** (from `/ask-requirement` step 4): objective, steps, **agents/roles**, how each participates, **order**, acceptance criteria covered (`AC-*` from the REQ). **Before asking the user to accept:** run a **validation loop** with each involved role/subagent (their own criteria) → Tech Lead integrates feedback, resolves incoherence (re-ask roles as needed) until the plan is coherent end-to-end. If the project has domain-specific or security/compliance checklist skills, consult them here — findings are advisory unless the project defines otherwise; **high**-severity findings on personal data or payments MUST be resolved or raised before the user accepts the plan. Each role checks the plan against the **knowledge MUSTs** (always-on rule `ask-knowledge-musts` + `## Knowledge MUSTs` in its agent file) and the docs they link, and flags conflicts. **Ask the user only** for product/scope gaps not covered by the requirement/BDR. **No code** until user accepts the plan.
 3. **Classify tier** (below); may appear *inside* the plan (not instead of it).
 4. Review scope, repos, risks (Step 0).
 5. Delegate in the **accepted order** via **Task / role subagents** (and stack skills as needed).
-6. **Loop** until the block's done-when is met: execute → verify → fix → repeat. Do not start the next roadmap block without a new accepted plan.
+6. **Loop** until every `AC-*` of the block is `met` with evidence: execute → verify → fix → repeat. Work no criterion needs → out of scope (park / separate ticket). Do not start the next roadmap block without a new accepted plan.
 7. Close with the verify bar for that tier.
 
 "Automatic" = one accepted plan; the chain runs to completion for that block. Not = agents waking with no trigger.
@@ -207,8 +207,8 @@ After any code change: verify boot/health of affected apps **before** declaring 
 
 ## Close
 
-1. Cite verification run.
-2. Update `REQ-NNN` + `NEXT.md` when applicable.
+1. Cite verification run **per acceptance criterion** (`AC-*` → evidence).
+2. Update `REQ-NNN` + `NEXT.md` when applicable. Every `AC-*` met → `ask-retrospective` before reporting the REQ closed.
 3. Commits: agent-knowledge auto close-out; app/kit only if user asked — one commit per sibling repo; `ask-git-project`.
 4. Summary in the user's language: tier used, REQ status, what shipped, what's left, one next step.
 
@@ -220,3 +220,4 @@ After any code change: verify boot/health of affected apps **before** declaring 
 - New stacks without ADR.
 - Community skills overriding monorepo conventions.
 - Mark done without the verify bar for that tier.
+- Close a block or REQ with any of its `AC-*` still `pending` / `failed`.

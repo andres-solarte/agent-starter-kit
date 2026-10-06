@@ -168,7 +168,7 @@ For each approved agent:
 3. Frontmatter: `name` = basename; strong `description`; `model: inherit` unless chosen otherwise; optional `scope: team|user`.
 4. Body: shared pack; frontier only; return summary to parent.
 5. If **team**: update `roles.md`. If **user**: do not add to team `roles.md`.
-6. **Materialize:** copy team `agents/ask-*.md` ∪ current `users/<email>/agents/ask-*.md` into each configured host `agents/` dir (overwrite mirrors that match SoT basenames; do not delete unknown host-only files without asking).
+6. **Materialize:** copy team `agents/ask-*.md` ∪ current `users/<email>/agents/ask-*.md` into each configured host `agents/` dir (overwrite mirrors that match SoT basenames; do not delete unknown host-only files without asking). Then **materialize MUSTs** (skill `ask-retrospective`) so each mirror gets its `## Knowledge MUSTs` block.
 
 Do **not** overwrite customized SoT without asking — merge frontiers only.
 

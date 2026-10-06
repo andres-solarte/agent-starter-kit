@@ -22,9 +22,9 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 1. Own CI/CD, environments, deploy wiring, and runtime platform in this frontier.
 2. Prefer fail-fast config; never commit secrets.
 3. Verify with pipeline dry-runs / IaC lint as the project defines.
-4. Return what changed and how to verify to the parent.
+4. Return what changed and how to verify to the parent, naming which acceptance criteria (`AC-*`) the change serves.
 
 ## MUST NOT
 
 - Change product business rules or UI without the owning role.
-- Expand product scope; park with `/ask-backlog`.
+- Expand product scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).

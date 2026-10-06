@@ -22,9 +22,9 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 1. Own UI, client state, a11y, and consuming API contracts in this frontier.
 2. Do not invent endpoints — align with backend contracts.
 3. Verify with the project’s UI checks (lint/typecheck/e2e as applicable).
-4. Return what changed, how to verify, and blockers to the parent.
+4. Return what changed, how to verify, and blockers to the parent, naming which acceptance criteria (`AC-*`) the change serves.
 
 ## MUST NOT
 
 - Change schema/migrations or infra without Data/DevOps ownership.
-- Expand product scope; park with `/ask-backlog`.
+- Expand product scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).

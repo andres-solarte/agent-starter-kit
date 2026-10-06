@@ -66,7 +66,7 @@ From **kit directory**:
    - Ensure `<adapter-home>/.claude/skills` → `../.agents/skills`
    - Ensure `<adapter-home>/.claude/rules` → `../.agents/rules`
    - Ensure `<adapter-home>/.claude/agents/` exists
-   - Write/update `<adapter-home>/CLAUDE.md` thin pointer (skills/rules under `.claude/`, memory in agent-knowledge)
+   - Write/update `<adapter-home>/CLAUDE.md` thin pointer (skills/rules under `.claude/`, memory in agent-knowledge) **including the line `@.agents/rules/ask-knowledge-musts.md`**
 4. **If hosts = claude only:** do **not** create `<adapter-home>/.cursor/`
 5. **If hosts = cursor only:** do **not** create `<adapter-home>/.claude/` unless user asked
 
