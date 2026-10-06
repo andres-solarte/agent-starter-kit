@@ -18,7 +18,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 2. Ask if paths/hosts not recorded / ambiguous
 3. git pull in kit directory
 4. Re-merge .agents/ → adapter home; re-wire only selected host adapters
-5. Leave agent-knowledge untouched (except missing template stubs / backlog migrate)
+5. Leave agent-knowledge content untouched, except: missing template stubs, backlog migrate, and **kit-owned process docs** (below)
 6. Materialize role agents from AK SoT → host agents/ dirs (team ∪ current user) + knowledge MUSTs (ask-knowledge-musts rule + ## Knowledge MUSTs)
 7. Claude-only: if .cursor/ kit-sourced exists → offer delete (migration)
 8. Surface delta → propose agents if new uncovered repos (scope ask via setup-agents)
@@ -44,6 +44,22 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 3. **If hosts = claude only:** do **not** create or refresh `.cursor/`. If a kit-sourced `.cursor/` exists, **offer to delete** it (list paths) after user yes.
 4. **If hosts = cursor only:** do not create `.claude/` unless user expands hosts.
 5. Ensure process-critical skills present under `.agents/skills`: `ask-question`, `ask-setup-agents`, `ask-centralize-docs`, route rule (cursor `.mdc` and/or `.agents/rules`). Ensure rules `ask-agent-scope` and `ask-knowledge-pr` exist under `.agents/rules` and cursor `.mdc` when hosts include cursor.
+
+## Kit-owned process docs in agent-knowledge (MUST)
+
+These template files define process the kit skills rely on. On update, compare each with `agent-knowledge-template/` in the kit:
+
+| Kit-owned (process) | Notes |
+|---------------------|-------|
+| `knowledge/architecture/agent-knowledge-operating-contract.md` | Merge new sections; keep product-specific additions |
+| `knowledge/delivery/PROCESS.md` | Same |
+| `knowledge/delivery/requirements/README.md`, `_template.md` | `INDEX.md`: only header/columns — never rows |
+| `knowledge/delivery/NEXT.md` | Only new fields — never current values |
+| `users/_template/**`, `templates/**` | Template files |
+
+1. Missing file → add. Differs → **merge**: bring new kit sections/rules, keep product customizations; if they conflict, show the conflict and ask.
+2. Existing data is never rewritten to the new format by this step (REQ files, INDEX rows); new format applies to new / touched items.
+3. `knowledge/**` and team templates land via **branch + PR** (rule `ask-knowledge-pr`), one PR per update (e.g. `docs/kit-update-<kit-short-sha>`); report the URL. Do not merge.
 
 ## Materialize role agents (MUST)
 

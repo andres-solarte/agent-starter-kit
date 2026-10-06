@@ -165,7 +165,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 1. Kit: `git status`; warn if dirty; `git pull`.
 2. Re-merge `.agents/`; refresh **only** recorded host adapters (same policy as install). Ensure rules `ask-agent-scope` and `ask-knowledge-pr` are present.
 3. Claude-only with leftover kit-sourced `.cursor/` → offer delete after explicit yes.
-4. agent-knowledge: missing template files (`agents/`, `users/_template/agents/`) / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe.
+4. agent-knowledge: missing template files (`agents/`, `users/_template/agents/`) / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe. **Kit-owned process docs** (operating contract, `PROCESS.md`, requirements README/template, `NEXT.md` fields, `users/_template/**`, `templates/**`) → merge new kit content, keep product customizations, land via **PR** (skill `ask-update`).
 5. **Materialize** role agents: copy `agent-knowledge/agents/ask-*.md` ∪ `users/<email>/agents/ask-*.md` → each configured host `agents/` dir (runtime mirrors).
 5b. **Materialize MUSTs** (skill `ask-retrospective`): regenerate `ask-knowledge-musts` rule + `## Knowledge MUSTs` blocks; drop user `Pending: <PR>` copies whose team PR is merged.
 6. No doc-scan prompt. Once-only setup-agents notice if pending. New surfaces → offer setup-agents delta (still ask user vs team).
