@@ -31,7 +31,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — uninstall**.
 | **`.claude/`** (if present) | keep / remove kit-sourced links+agents / remove entire `.claude/` | **remove kit-sourced** |
 | **`CLAUDE.md`** at adapter home | keep / delete if kit-written | follow `.claude/` choice |
 
-Never delete product-only stack skills/rules unless listed and approved. Generated `ask-knowledge-musts` rule files count as kit-sourced (their SoT stays in agent-knowledge).
+Never delete product-only stack skills/rules unless listed and approved. Generated `ask-knowledge-musts` / `ask-tools-available` rule files count as kit-sourced (their SoT stays in agent-knowledge).
 
 ## Confirm gate (MUST)
 

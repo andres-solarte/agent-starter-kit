@@ -16,5 +16,6 @@ users/*/work-log/**
 !users/_template/work-log/**
 users/*/MEMORY.md
 users/*/preferences.yaml
+users/*/tools.local.yaml
 !users/_template/MEMORY.md
 !users/_template/preferences.yaml

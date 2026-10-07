@@ -13,6 +13,7 @@
 | `/ask-requirement` | Product/code work now (+ REQ registry status) |
 | `/ask-requirement-fix` | Error on same / existing REQ (no full re-plan) |
 | `/ask-backlog` | Personal park, track, resume (`next`, `resume BL-NNN`) — not the REQ registry |
+| `/ask-tools` | Tool inventory (MCP, CLI, …): list, scan, install all / one, check, install mode |
 | `/ask-retrospective` | Follow-ups + retro + update existing knowledge for a closed REQ (runs automatically at REQ close) |
 
 If the project has its own local environment (Docker/PM2/etc.), add its slash commands here following the same pattern with the `ask-` prefix (e.g. `/ask-bootstrap`, `/ask-start-local`, `/ask-stop-local`) and document them in a project-owned `ask-local-env-shared` skill.

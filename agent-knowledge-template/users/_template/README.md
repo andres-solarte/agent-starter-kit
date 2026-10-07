@@ -10,4 +10,5 @@ Copy to `users/<email>/` (`git config user.email`, lowercase, keep `@`).
 | `agents/` | tracked | User-only role subagents (`ask-*.md`) |
 | `knowledge/` | tracked | Global mirror — deltas only |
 | `work-log/` | local | When / what / why |
-| `preferences.yaml` / `MEMORY.md` | local | Prefs (incl. `communication_language`) / scratch |
+| `preferences.yaml` / `MEMORY.md` | local | Prefs (incl. `communication_language`, `tools_install_mode`) / scratch |
+| `tools.local.yaml` | local | Tool status on **this machine** (`/ask-tools`); created on first setup |

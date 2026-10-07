@@ -59,6 +59,7 @@ Claude-only product installs receive **`.agents/` + `.claude/`** only — **not*
 | `/ask-requirement` | Product work + REQ registry |
 | `/ask-requirement-fix` | Error on same / existing REQ |
 | `/ask-backlog` | Park for later · `list` · `next` · `resume BL-NNN` (one item per conversation) |
+| `/ask-tools` | Tool inventory (MCP, CLI, …) + install all now or on demand |
 | `/ask-retrospective` | Follow-ups + retro + update existing knowledge when a REQ meets all acceptance criteria (automatic at close) |
 
 ## Contributing upstream

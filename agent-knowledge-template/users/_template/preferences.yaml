@@ -1,3 +1,4 @@
 # Local (gitignored) personal prefs — not shared team SoT
 communication_language: en  # language for agent ↔ this user in chat
 detail_level: normal        # optional: concise | normal | verbose
+tools_install_mode: ask     # ask | all | on_demand — set on first setup of this machine (/ask-tools)

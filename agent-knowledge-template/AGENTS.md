@@ -30,7 +30,7 @@ Do not use flat keys `locale_content` / `locale_paths` — use nested `locale.co
 | Global | `knowledge/<relpath>/<file>.md` |
 | Individual delta | `users/<email>/knowledge/<relpath>/<file>.md` (**same basename**) |
 
-Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (local), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked), `session-backlog.md` (tracked — `/ask-backlog`).
+Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (local), `tools.local.yaml` (local, per machine), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked), `session-backlog.md` (tracked — `/ask-backlog`).
 
 ## Read order
 
@@ -84,6 +84,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | User-only role agents | `users/<email>/agents/` |
 | What to do next | `knowledge/delivery/NEXT.md` |
 | Requirement registry | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
+| Tools agents can use (MCP, CLI, …) + how to install | `knowledge/tooling/INVENTORY.md` · status here: always-on rule `ask-tools-available` · `/ask-tools` |
 | Retrospective / learnings | `/ask-retrospective` → existing docs + MUST blocks (contract §7–§8) |
 | Fix on existing REQ | `/ask-requirement-fix` |
 | Session backlog (`/ask-backlog`, personal) | `users/<email>/session-backlog.md` |

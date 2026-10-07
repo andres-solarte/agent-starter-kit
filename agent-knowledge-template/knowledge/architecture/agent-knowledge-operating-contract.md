@@ -82,6 +82,7 @@ A learning (retrospective, fix root cause, user correction) **edits the doc that
 |--------------------|------|
 | A decision (new, changed, reversed) | `knowledge/decisions/…` — new BDR/ADR or `superseded` + new record (rule `ask-decisions`); update docs that depend on it |
 | A convention / how we build | `knowledge/conventions/…` |
+| A tool agents use (MCP, CLI, SDK, service) — new, changed, or setup steps | `knowledge/tooling/INVENTORY.md` (skill `ask-tools`) |
 | Architecture, domain, product, design facts | Their doc under `knowledge/…` |
 | How a role works (its frontier, checks it must run) | Role agent SoT (`agents/ask-*.md` / `users/<email>/agents/`) — scope rule `ask-agent-scope` |
 | The delivery process itself | `knowledge/delivery/PROCESS.md`, or kit skill gap (`ask-agent-skill-discipline`) |

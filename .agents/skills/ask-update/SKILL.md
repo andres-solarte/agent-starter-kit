@@ -20,6 +20,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 4. Re-merge .agents/ → adapter home; re-wire only selected host adapters
 5. Leave agent-knowledge content untouched, except: missing template stubs, backlog migrate, and **kit-owned process docs** (below)
 6. Materialize role agents from AK SoT → host agents/ dirs (team ∪ current user) + knowledge MUSTs (ask-knowledge-musts rule + ## Knowledge MUSTs)
+6b. Tools (ask-tools): no tools.local.yaml → fresh-machine question (all now vs on demand); empty inventory → offer scan; regenerate ask-tools-available
 7. Claude-only: if .cursor/ kit-sourced exists → offer delete (migration)
 8. Surface delta → propose agents if new uncovered repos (scope ask via setup-agents)
 9. Once-only / legacy notices as needed
@@ -73,6 +74,10 @@ After merge, sync runtime host mirrors from agent-knowledge SoT (do not invent a
 
 Host dirs are mirrors; SoT stays in agent-knowledge (shared via git). Create/modify still goes through `/ask-setup-agents` + scope question.
 
+## Tools (MUST)
+
+Follow skill `ask-tools`: if `users/<email>/tools.local.yaml` is missing (new collaborator / new PC) → **Fresh machine** flow (ask once: install all now vs on demand). Inventory empty → offer **Scan**. Mode `all` and tools added to the inventory since the last check → offer to install them. Always regenerate `ask-tools-available`. Claude hosts: ensure `CLAUDE.md` contains `@.agents/rules/ask-tools-available.md`.
+
 ## Once-only: `/ask-setup-agents` notice (MUST)
 
 If Agents setup notice is pending: announce once (subagents for orchestration); set notice done; offer to run.
@@ -96,4 +101,4 @@ Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setu
 
 ## Close
 
-Kit revision; hosts; what merged; materialize counts (agents + MUST blocks); Claude-only `.cursor` cleanup if done; surface proposals if any.
+Kit revision; hosts; what merged; materialize counts (agents + MUST blocks); tools status (installed / missing); Claude-only `.cursor` cleanup if done; surface proposals if any.

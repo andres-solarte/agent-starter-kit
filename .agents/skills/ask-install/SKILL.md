@@ -38,6 +38,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — install**.
 4. Create agent-knowledge; fill prefs + session-backlog; record hosts in ask-project
 5. Fill WORKSPACE.md (remotes table + hosts; replace _TBD_ for known pieces)
 6. Run /ask-setup-agents (writes role agents to host agent dirs)
+6b. Tools (ask-tools): scan all knowledge → inventory (PR) → ask install all now vs on demand → generate ask-tools-available
 7. Close — do NOT prompt for doc scan; point team at WORKSPACE.md
 ```
 
@@ -66,7 +67,7 @@ From **kit directory**:
    - Ensure `<adapter-home>/.claude/skills` → `../.agents/skills`
    - Ensure `<adapter-home>/.claude/rules` → `../.agents/rules`
    - Ensure `<adapter-home>/.claude/agents/` exists
-   - Write/update `<adapter-home>/CLAUDE.md` thin pointer (skills/rules under `.claude/`, memory in agent-knowledge) **including the line `@.agents/rules/ask-knowledge-musts.md`**
+   - Write/update `<adapter-home>/CLAUDE.md` thin pointer (skills/rules under `.claude/`, memory in agent-knowledge) **including the lines `@.agents/rules/ask-knowledge-musts.md` and `@.agents/rules/ask-tools-available.md`**
 4. **If hosts = claude only:** do **not** create `<adapter-home>/.cursor/`
 5. **If hosts = cursor only:** do **not** create `<adapter-home>/.claude/` unless user asked
 
@@ -96,6 +97,10 @@ After agent-knowledge exists, edit its root **`WORKSPACE.md`** so teammates can 
 ## Setup agents (MUST)
 
 After agent-knowledge exists, run `ask-setup-agents` (from `.agents/skills/…`). Role agents go to each selected host’s `agents/` dir (and optionally `.agents/agents/` as SoT).
+
+## Tools (MUST)
+
+After setup agents, follow skill `ask-tools`: **Scan** (search all knowledge for MCP, CLI, SDK, services, runtimes agents need) → confirm inventory → **Fresh machine** (ask: install everything now or on demand) → generate `ask-tools-available`. Also applies when installing on a machine where agent-knowledge already exists (new collaborator / new PC).
 
 ## Doc centralization
 

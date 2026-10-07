@@ -6,7 +6,7 @@ description: >-
   (e.g. where is my work-log); hands off to ask-requirement-fix for errors on
   an existing REQ, or ask-requirement for new product work. Use for /ask-question,
   "where is…", "how do I…", or any user message that is not already an explicit
-  /ask-install|/ask-update|/ask-uninstall|/ask-centralize-docs|/ask-setup-agents|
+  /ask-install|/ask-update|/ask-uninstall|/ask-centralize-docs|/ask-setup-agents|/ask-tools|/ask-retrospective|
   /ask-requirement|/ask-requirement-fix|/ask-backlog (route rule).
 ---
 
@@ -37,7 +37,7 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 | “What’s next?” / “where were we?” / resume a `BL-NNN` | **Hand off → `ask-backlog`** (`next` / `resume`) — rule `ask-one-item-per-conversation` |
 | Explicit `/ask-requirement-fix` | That skill |
 | Explicit `/ask-requirement` or `/ask-backlog` | Honor that skill |
-| Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` / `/ask-centralize-docs` / `/ask-setup-agents` | Those skills (not this one) |
+| Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` / `/ask-centralize-docs` / `/ask-setup-agents` / `/ask-tools` / `/ask-retrospective` | Those skills (not this one) |
 | Ambiguous (new work vs fix on existing REQ) | One clarifying question |
 
 **Prefer fix over new requirement** when an `in_progress` REQ exists (INDEX/NEXT) and the message clearly reports a failure. If unsure whether it is new scope vs a defect on current work → ask once.
@@ -98,6 +98,7 @@ Next I'll clarify scope and get a short plan accepted — I won't start document
 | Which slash for work vs park vs fix | `/ask-requirement` · `/ask-backlog` · `/ask-requirement-fix` |
 | Requirement status / REQ id | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
 | Session backlog (personal) | `<agent-knowledge>/users/<email>/session-backlog.md` |
+| Tools (MCP, CLI…) available / how to install or configure one | `knowledge/tooling/INVENTORY.md` + `users/<email>/tools.local.yaml` → hand off to `ask-tools` for install / scan |
 | Doc locale | `config.yaml` → `locale.content` |
 
 ## Style (MUST)

@@ -65,7 +65,7 @@ If nothing went wrong: two lines («No rework.» + «No knowledge changes.»). *
 ## 4. Route each learning (MUST — strongest first)
 
 1. **Automated check** (test, lint rule, CI gate, type) when the mistake is mechanically detectable → follow-up ticket. Cannot be skipped by any agent.
-2. **The doc that owns the topic** (operating contract §7): decision → BDR/ADR (new, or supersede the old one); convention → `conventions/`; architecture / domain / product / design → its doc; how a role works → role agent SoT (`ask-agent-scope`); process → `PROCESS.md` or kit skill gap.
+2. **The doc that owns the topic** (operating contract §7): decision → BDR/ADR (new, or supersede the old one); convention → `conventions/`; architecture / domain / product / design → its doc; how a role works → role agent SoT (`ask-agent-scope`); process → `PROCESS.md` or kit skill gap; tool introduced or set up differently → `knowledge/tooling/INVENTORY.md` (skill `ask-tools`).
 
 Read the target doc first. If it already says it → nothing to add (maybe the problem was it being skipped → make it a MUST block). If it says something wrong or incomplete → **modify** it (no contradictory appendix). If no doc owns the topic → create one where it belongs and link it from the nearest index.
 

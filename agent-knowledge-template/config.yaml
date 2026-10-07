@@ -42,11 +42,12 @@ users:
       - architecture
       - conventions
       - delivery/requirements
+      - tooling
       - archive
   deltas_index: DELTAS.md
   identity_file: IDENTITY.md
   # Tracked in git: knowledge/**, DELTAS.md, IDENTITY.md
-  # Local only (gitignore): work-log/**, MEMORY.md, preferences.yaml
+  # Local only (gitignore): work-log/**, MEMORY.md, preferences.yaml, tools.local.yaml
   work_log:
     path: work-log
     # Keep day files small: year / month / day

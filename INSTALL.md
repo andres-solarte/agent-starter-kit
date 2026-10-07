@@ -120,12 +120,13 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 
 1. Ensure kit at kit directory (`INSTALL.md`, `.agents/`, template); keep `.git` + upstream.
 2. Merge kit `.agents/` → `<adapter-home>/.agents/` (safe merge).
-3. Wire **only** selected hosts (symlinks skills/rules → `.agents/…`; Cursor also merges `.cursor/rules/*.mdc`). Write thin `CLAUDE.md` when Claude is selected (include `@.agents/rules/ask-knowledge-musts.md`).
+3. Wire **only** selected hosts (symlinks skills/rules → `.agents/…`; Cursor also merges `.cursor/rules/*.mdc`). Write thin `CLAUDE.md` when Claude is selected (include `@.agents/rules/ask-knowledge-musts.md` and `@.agents/rules/ask-tools-available.md`).
 4. Record kit / agent-knowledge / adapter home / **Agent hosts** in `ask-project` (Cursor `.mdc` and refresh `.agents/rules/ask-project.md` when regenerating rules).
 5. Instantiate agent-knowledge; prefs; `session-backlog.md`. Migrate legacy out-of-scope → backlog; delete legacy (no stubs).
 6. Fill **`WORKSPACE.md`**: agent-knowledge remote (if known), kit remote/folder, adapter home, **hosts**, and every sibling app repo from Q&A (local folder + remote URL + required). Replace `_TBD_` placeholders; do not leave an empty Remotes table after install.
 7. Ensure `ask-question`, `ask-setup-agents`, `ask-centralize-docs` present under `.agents/skills`. No doc-scan prompt.
 8. Run `/ask-setup-agents` → `roles.md` + agents into each host `agents/` dir. Decline → leave setup notice pending.
+8a. **Tools** (skill `ask-tools`): **Scan** all knowledge (agent-knowledge, skills, host MCP config, sibling repos) → propose `knowledge/tooling/INVENTORY.md` (PR) → **Fresh machine** flow: ask once *install all now* vs *on demand* → save `tools_install_mode` + `tools.local.yaml` → generate the always-on `ask-tools-available` rule.
 8b. **Materialize MUSTs** (skill `ask-retrospective` → *Materialize MUSTs*): generated always-on `ask-knowledge-musts` rule per host + `## Knowledge MUSTs` in agent mirrors, from MUST blocks in agent-knowledge docs (empty → «No knowledge MUSTs yet.»).
 9. No app/kit commit unless asked (agent-knowledge auto close-out still applies).
 10. Close: paths + **hosts**; point teammates to `agent-knowledge/WORKSPACE.md`; confirm no `.cursor/` if Claude-only; next slashes.
@@ -148,6 +149,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 - [ ] Claude-only has **no** product `.cursor/`
 - [ ] Paths + hosts recorded
 - [ ] Setup-agents done or skipped
+- [ ] Tool inventory scanned/confirmed; install mode chosen; `ask-tools-available` rule generated
 - [ ] `ask-knowledge-musts` rule generated for each host (Claude: imported from `CLAUDE.md`)
 
 ---
@@ -167,6 +169,7 @@ Cap: ask **1–4** first (blocking). Summary of paths + hosts → user **yes** b
 3. Claude-only with leftover kit-sourced `.cursor/` → offer delete after explicit yes.
 4. agent-knowledge: missing template files (`agents/`, `users/_template/agents/`) / backlog migrate / requirements folder; delete Spec Kit placeholders if empty; no content wipe. **Kit-owned process docs** (operating contract, `PROCESS.md`, requirements README/template, `NEXT.md` fields, `users/_template/**`, `templates/**`) → merge new kit content, keep product customizations, land via **PR** (skill `ask-update`).
 5. **Materialize** role agents: copy `agent-knowledge/agents/ask-*.md` ∪ `users/<email>/agents/ask-*.md` → each configured host `agents/` dir (runtime mirrors).
+5a. **Tools** (skill `ask-tools`): `users/<email>/tools.local.yaml` missing (new collaborator / new PC) → **Fresh machine** flow (ask *all now* vs *on demand*); inventory empty → offer **Scan**; mode `all` + tools added since last check → offer to install them; then regenerate `ask-tools-available`.
 5b. **Materialize MUSTs** (skill `ask-retrospective`): regenerate `ask-knowledge-musts` rule + `## Knowledge MUSTs` blocks; drop user `Pending: <PR>` copies whose team PR is merged.
 6. No doc-scan prompt. Once-only setup-agents notice if pending. New surfaces → offer setup-agents delta (still ask user vs team).
 7. Summarize (hosts + what merged + materialize).

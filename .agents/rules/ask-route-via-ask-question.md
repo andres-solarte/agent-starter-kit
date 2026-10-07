@@ -12,7 +12,7 @@ After this kit is installed (or updated), **every user turn that is a question o
    - Park-for-later side idea → **`ask-backlog`**.
 3. On hand off: the **first** lines of the user-visible reply MUST announce the triage in the user’s chat language (see `ask-question` → Visible handoff). Silent handoff is forbidden.
 4. If the user already invoked `/ask-requirement`, `/ask-requirement-fix`, or `/ask-backlog` explicitly, honor that slash (still OK to peek at ask-question router if unsure).
-5. If the user invoked `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, or `/ask-setup-agents`, run those skills directly (not ask-question).
+5. If the user invoked `/ask-install`, `/ask-update`, `/ask-uninstall`, `/ask-centralize-docs`, `/ask-setup-agents`, `/ask-tools`, or `/ask-retrospective`, run those skills directly (not ask-question).
 
 ## Why
 

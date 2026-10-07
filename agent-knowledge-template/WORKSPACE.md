@@ -74,6 +74,7 @@ The workspace **must** include this `agent-knowledge` folder so agents can read 
 | New product / adapters missing (no product `.agents/`) | With kit + this repo in the workspace, run **`/ask-install`** (choose dirs + hosts). Install fills this table. Team agents land in `agents/` here (git); `/ask-update` materializes them to host dirs. |
 | Product already installed (teammate machine) | `git pull` in this repo and in the kit → **`/ask-update`**. Create `users/<your-email>/` from `users/_template/` if missing. |
 | Only catching up on apps | `git pull` in each app row; no need to re-run install |
+| New collaborator or new PC (any of the above) | `/ask-install` / `/ask-update` asks once: **install all tools now** or **on demand** (inventory: `knowledge/tooling/INVENTORY.md`). Change later with `/ask-tools mode`. |
 
 Kit clone: keep `.git` and upstream; never put memory inside the kit directory.
 
@@ -84,6 +85,7 @@ Kit clone: keep `.git` and upstream; never put memory inside the kit directory.
 - [ ] Multi-root window includes agent-knowledge + kit + apps
 - [ ] Product adapter home has `.agents/` and only the hosts listed above
 - [ ] `git config user.email` set; `users/<email>/` exists for you
+- [ ] Tool install mode chosen (all / on demand); `/ask-tools` lists status for this machine
 - [ ] Kit tracks upstream; `git pull` + `/ask-update` when process changes
 
 ## 7. When the layout changes

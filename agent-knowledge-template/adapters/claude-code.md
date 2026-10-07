@@ -13,6 +13,7 @@ SoT: product **agent-knowledge** `AGENTS.md` + kit/process **`.agents/skills`**.
   .claude/rules  → ../.agents/rules
   .claude/agents/ask-*.md   ← RUNTIME MIRROR (materialized; + ## Knowledge MUSTs per role)
   .agents/rules/ask-knowledge-musts.md ← GENERATED index of MUST blocks in knowledge docs; imported from CLAUDE.md
+  .agents/rules/ask-tools-available.md ← GENERATED per machine: tools + status (ask-tools); imported from CLAUDE.md
 
 agent-knowledge/
   agents/ask-*.md                    ← TEAM SoT (git)
@@ -22,7 +23,7 @@ agent-knowledge/
 **Do not** create `.cursor/` for Claude-only installs.
 
 Create/modify via `/ask-setup-agents` — always ask user-only vs team.  
-`/ask-update` rematerializes SoT → `.claude/agents/` and MUST blocks → `.agents/rules/ask-knowledge-musts.md` (contract: skill `ask-retrospective`). Thin `CLAUDE.md` MUST contain the line `@.agents/rules/ask-knowledge-musts.md` so they load every session.
+`/ask-update` rematerializes SoT → `.claude/agents/` and MUST blocks → `.agents/rules/ask-knowledge-musts.md` (contract: skill `ask-retrospective`). Thin `CLAUDE.md` MUST contain the lines `@.agents/rules/ask-knowledge-musts.md` and `@.agents/rules/ask-tools-available.md` so they load every session.
 
 ## Minimal session
 

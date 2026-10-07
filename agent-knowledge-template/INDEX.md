@@ -17,6 +17,7 @@ Wikilinks: [knowledge/WIKILINKS.md](./knowledge/WIKILINKS.md).
 | Design | [knowledge/design/](./knowledge/design/) |
 | Architecture | [knowledge/architecture/](./knowledge/architecture/) |
 | Conventions | [knowledge/conventions/](./knowledge/conventions/) |
+| Tool inventory (MCP, CLI, …) | [knowledge/tooling/INVENTORY.md](./knowledge/tooling/INVENTORY.md) |
 | Requirements | [knowledge/delivery/requirements/](./knowledge/delivery/requirements/) |
 | Process | [knowledge/delivery/PROCESS.md](./knowledge/delivery/PROCESS.md) |
 | What's next | [knowledge/delivery/NEXT.md](./knowledge/delivery/NEXT.md) |

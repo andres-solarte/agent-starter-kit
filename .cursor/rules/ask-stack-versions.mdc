@@ -2,6 +2,8 @@
 
 Source of truth: **`agent-knowledge/knowledge/architecture/stack-versions.md`** (create if missing).
 
+Tools agents/developers use to work (MCP servers, CLIs, SDKs, services) live in **`knowledge/tooling/INVENTORY.md`** (skill `ask-tools`); link versions here when they matter.
+
 ## When introducing or updating a technology
 
 1. Look up the **latest stable version** (npm, official releases, Docker tags)

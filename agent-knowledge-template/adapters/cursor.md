@@ -11,6 +11,7 @@ SoT: product **agent-knowledge** `AGENTS.md` + kit/process **`.agents/skills`**.
   .cursor/rules/*.mdc       ← Cursor globs / always-on (incl. ask-agent-scope)
   .cursor/agents/ask-*.md   ← RUNTIME MIRROR (materialized; + ## Knowledge MUSTs per role)
   .cursor/rules/ask-knowledge-musts.mdc ← GENERATED always-on index of MUST blocks in knowledge docs
+  .cursor/rules/ask-tools-available.mdc ← GENERATED per machine: tools inventory + status here (ask-tools)
 
 agent-knowledge/
   agents/ask-*.md                    ← TEAM SoT (git)
