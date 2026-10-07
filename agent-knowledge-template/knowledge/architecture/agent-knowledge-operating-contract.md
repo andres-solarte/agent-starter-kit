@@ -47,6 +47,7 @@ Operating norms for the `agent-knowledge` repo. Short source for agents; routing
 Personal preference / scratch?           → users/<email>/preferences.yaml | MEMORY.md
 Park for later (personal notes)?         → users/<email>/session-backlog.md
 Formal requirement status?               → knowledge/delivery/requirements/ (REQ-NNN)
+What happened in this conversation?      → users/<email>/conversations/YYYY/MM/YYYY-MM-DD-<slug>.md + INDEX.md (tracked)
 When / what / why for this block?        → users/<email>/work-log/YYYY/MM/DD.md
 Learning from a REQ / fix / correction? → edit the doc that owns the topic (§7) + MUST block if critical (§8)
 Durable learning not (yet) global?       → users/<email>/knowledge/<relpath>/<file>.md (delta)
@@ -61,7 +62,7 @@ There is no third `memory/` layer for durable facts. Role agents are separate (`
 
 ## 5. Block close-out (MUST)
 
-1. Append work-log in `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**).
+1. Update the conversation log + `conversations/INDEX.md` (rule `ask-conversation-log`); append work-log in `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**, linking the log).
 2. If there is reusable learning → create/update delta + `DELTAS.md` (**direct** OK).
 3. If several users or a mature delta → propose a row in `consolidation/QUEUE.md` (direct OK). Landing edits in `knowledge/**` → **branch + PR** (rule `ask-knowledge-pr`); never push global SoT to the default branch from the agent.
 4. **Persist this repo:** user-scoped tracked changes → commit + push default branch; general/team paths → PR only (see `knowledge/conventions/git.md`). Local-only files stay gitignored.
@@ -109,5 +110,5 @@ Docs under `knowledge/` are not auto-loaded. A statement whose omission would ca
 ## 9. Privacy
 
 - `work-log/`, `MEMORY.md`, `preferences.yaml` are **local by default** (gitignore in the repo).
-- Shared git **does** include: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`, `session-backlog.md`, `users/<email>/agents/**`, team `agents/**`.
+- Shared git **does** include: `users/<email>/knowledge/**` (deltas), `DELTAS.md`, `IDENTITY.md`, `session-backlog.md`, `users/<email>/conversations/**` (summaries only — no secrets), `users/<email>/agents/**`, team `agents/**`.
 - Never paste secrets, tokens, or PII into logs or deltas.

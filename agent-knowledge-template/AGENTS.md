@@ -30,7 +30,7 @@ Do not use flat keys `locale_content` / `locale_paths` — use nested `locale.co
 | Global | `knowledge/<relpath>/<file>.md` |
 | Individual delta | `users/<email>/knowledge/<relpath>/<file>.md` (**same basename**) |
 
-Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (local), `tools.local.yaml` (local, per machine), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked), `session-backlog.md` (tracked — `/ask-backlog`).
+Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (local), `tools.local.yaml` (local, per machine), `MEMORY.md` (local), `DELTAS.md` (tracked), `IDENTITY.md` (tracked), `session-backlog.md` (tracked — `/ask-backlog`), `conversations/` (tracked — one log per conversation).
 
 ## Read order
 
@@ -55,7 +55,8 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | Need | Write |
 |------|-------|
 | Prefs / scratch | `users/<email>/preferences.yaml` / `MEMORY.md` (local) |
-| When / what / why | `users/<email>/work-log/` (local) |
+| Conversation log (every conversation) | `users/<email>/conversations/YYYY/MM/YYYY-MM-DD-<slug>.md` + `INDEX.md` (tracked; rule `ask-conversation-log`) |
+| When / what / why | `users/<email>/work-log/` (local; link the conversation log) |
 | Durable not-yet-global | delta under `users/<email>/knowledge/…` |
 | Team SoT | `knowledge/…` via consolidation + **PR only** (never push global to default branch) |
 | Learning (retro, fix root cause, correction) | **Edit the doc that owns the topic** (decision, convention, architecture, role agent…) + MUST block if critical — contract §7–§8. Team → PR; user → delta. **Not** a separate lessons list, work-log, or `MEMORY.md` only |
@@ -64,16 +65,19 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 
 ## Close-out (MUST every meaningful block)
 
-1. Append work-log at `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**). Create year/month dirs if needed (zero-padded `MM`/`DD`).
+1. Update this conversation's log + `conversations/INDEX.md` (rule `ask-conversation-log`).
+1b. Append work-log at `users/<email>/work-log/YYYY/MM/DD.md` (**What** + **Why**; link the conversation log). Create year/month dirs if needed (zero-padded `MM`/`DD`).
 2. If reusable learning → delta + `DELTAS.md`.
 3. If mature / multi-user → propose `consolidation/QUEUE.md`; landing in `knowledge/**` is **PR only** (rule `ask-knowledge-pr`).
 4. **Git (this repo only):** follow `knowledge/conventions/git.md` + `ask-git-project` → **direct** commit/push for **user-scoped** tracked paths; for `knowledge/**`, team `agents/**`, `WORKSPACE.md` → **branch + PR** (do not push those to default branch). App/kit repos out of scope unless asked.
 
 ## Before "why did we…?" / resuming related work
 
-1. `users/<email>/work-log/`
-2. `users/<email>/DELTAS.md` + matching deltas
-3. Global `knowledge/…` for the same relpath
+1. `users/<email>/conversations/INDEX.md` → matching log(s)
+2. Item **Resume** notes (`session-backlog.md` / `REQ-NNN`)
+3. `users/<email>/work-log/`
+4. `users/<email>/DELTAS.md` + matching deltas
+5. Global `knowledge/…` for the same relpath
 
 ## Routing
 
@@ -93,6 +97,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | Delta | `users/<email>/knowledge/<same-relpath>` |
 | Delta index | `users/<email>/DELTAS.md` |
 | Consolidation | `consolidation/` |
+| Conversation logs (resume anything) | `users/<email>/conversations/INDEX.md` |
 | Work log | `users/<email>/work-log/YYYY/MM/DD.md` (gitignored) |
 | User prefs | `users/<email>/preferences.yaml` (gitignored) |
 | Tool wiring | `adapters/` |
@@ -107,7 +112,7 @@ Also under each user (not mirrors): `work-log/` (local), `preferences.yaml` (loc
 | `users/<email>/agents/**` | Direct OK after scope = user |
 | `users/<email>/knowledge/**` | Direct OK (deltas) |
 | `users/<email>/work-log/**` | Append OK (local) |
-| `users/<email>/DELTAS.md`, `session-backlog.md`, `IDENTITY.md` | Direct OK |
+| `users/<email>/DELTAS.md`, `session-backlog.md`, `IDENTITY.md`, `conversations/**` | Direct OK |
 | `consolidation/QUEUE.md` | Direct OK (proposals); promote into `knowledge/**` via PR |
 
 Rule: `ask-knowledge-pr`.

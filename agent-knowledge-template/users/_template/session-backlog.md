@@ -15,7 +15,7 @@ Item format (`Depends on` / `Ticket` / `Resume` optional until known):
 - Depends on: BL-000, REQ-000 (or —)
 - Related: BL-000 (or —)
 - Ticket: REQ-000 | external key/URL | candidate | —
-- Resume: where it stopped; next concrete step; paths / branch / PR
+- Resume: where it stopped; next concrete step; paths / branch / PR; last conversation log
 ```
 
 ## In progress

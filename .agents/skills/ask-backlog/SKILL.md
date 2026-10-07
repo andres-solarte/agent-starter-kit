@@ -91,7 +91,7 @@ If unsure, do not invent a dependency — note `Related` or leave `—`.
 ## Flow — resume (MUST)
 
 ```text
-1. Read the item (+ Resume note, Depends on, Ticket)
+1. Read the item (+ Resume note, Depends on, Ticket) and its latest conversation log (`conversations/INDEX.md`)
 2. Unmet dependencies → tell the user; offer: tackle dependency first | proceed anyway
 3. Ticket candidate → suggest /ask-requirement (REQ work continues under that skill)
 4. Status → in_progress (move to ## In progress); Updated date

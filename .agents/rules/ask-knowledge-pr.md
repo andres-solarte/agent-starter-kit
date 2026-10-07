@@ -9,7 +9,7 @@
 |------|--------|
 | `users/<email>/knowledge/**` | Deltas |
 | `users/<email>/agents/**` | User-only agents (after scope = user) |
-| `users/<email>/DELTAS.md`, `IDENTITY.md`, `session-backlog.md` | Tracked personal |
+| `users/<email>/DELTAS.md`, `IDENTITY.md`, `session-backlog.md`, `conversations/**` | Tracked personal |
 | `users/<email>/work-log/**`, `preferences.yaml`, `MEMORY.md` | Local / gitignore — no commit |
 | `consolidation/QUEUE.md` | Queue **proposals** only (no `knowledge/**` body yet) |
 

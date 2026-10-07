@@ -34,7 +34,8 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 | Error / failure / regression / stacktrace / “no funciona” / “rompió…” / failing test **on recent or named work** | **Hand off → `ask-requirement-fix`** — see **Visible handoff — fix** below |
 | New feature, new bug with no REQ link, refactor, product doc/spec change, “build/change/add/document…” | **Hand off → `ask-requirement`** — see **Visible handoff — requirement** below |
 | Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** — one clear line that it was parked |
-| “What’s next?” / “where were we?” / resume a `BL-NNN` | **Hand off → `ask-backlog`** (`next` / `resume`) — rule `ask-one-item-per-conversation` |
+| “What’s next?” / resume a `BL-NNN` | **Hand off → `ask-backlog`** (`next` / `resume`) — rule `ask-one-item-per-conversation` |
+| “Where were we?” / “what did we do about X?” / resume past work | Search `users/<email>/conversations/INDEX.md` → log → item Resume note (rule `ask-conversation-log`); then continue or hand off |
 | Explicit `/ask-requirement-fix` | That skill |
 | Explicit `/ask-requirement` or `/ask-backlog` | Honor that skill |
 | Explicit `/ask-install` / `/ask-update` / `/ask-uninstall` / `/ask-centralize-docs` / `/ask-setup-agents` / `/ask-tools` / `/ask-retrospective` | Those skills (not this one) |
@@ -86,6 +87,7 @@ Next I'll clarify scope and get a short plan accepted — I won't start document
 
 | User asks about… | Answer from |
 |------------------|-------------|
+| Conversation logs | `<agent-knowledge>/users/<email>/conversations/INDEX.md` |
 | Work-log | `<agent-knowledge>/users/<email>/work-log/YYYY/MM/DD.md` |
 | Preferences / chat language | `users/<email>/preferences.yaml` |
 | Identity / user folder | `users/<email>/` + `IDENTITY.md` |

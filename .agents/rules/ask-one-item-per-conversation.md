@@ -10,7 +10,7 @@ This is a **suggestion**, not a block: if the user insists on continuing in the 
 
 ## Start of a conversation (MUST)
 
-1. Read `users/<email>/session-backlog.md` (**In progress** + **Open**) and `knowledge/delivery/NEXT.md`.
+1. Read `users/<email>/session-backlog.md` (**In progress** + **Open**), `knowledge/delivery/NEXT.md`, and the latest matching entries in `users/<email>/conversations/INDEX.md` (rule `ask-conversation-log`).
 2. If the user's message maps to an existing item → name it in one sentence («This conversation: `BL-004` — …»). Read its **Resume** note; do not re-ask what is already recorded.
 3. If the user names no item and one is `in_progress` → offer to resume it (one sentence).
 4. If the chosen item has **unmet dependencies** (`Depends on` not `done`/`closed`) → say so and offer: (a) tackle the dependency first, (b) proceed anyway (user's call).
@@ -32,6 +32,7 @@ Before the final message for the item:
 
 1. Update the item (skill `ask-backlog`): status (`done` / `in_progress` / `blocked`), **Resume** note (where it stopped, pending `AC-*`, next concrete step, key paths / branch / PR), and unblock dependents (items whose `Depends on` is now satisfied).
 2. If it has a REQ → also follow `ask-requirement` close-out (REQ file + `NEXT.md` via PR); when every `AC-*` is met, that includes follow-up tickets + retrospective (`ask-retrospective`).
+2b. Update this conversation's log (rule `ask-conversation-log`) with the same status and resume line.
 3. Tell the user, in 2–4 sentences: what landed, the item status, and the **next ready item** (no unmet dependencies) — or the blocker.
 4. Suggest a **new conversation** for the next item and give the exact line to paste there:
 

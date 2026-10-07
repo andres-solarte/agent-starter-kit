@@ -46,7 +46,7 @@ users:
       - archive
   deltas_index: DELTAS.md
   identity_file: IDENTITY.md
-  # Tracked in git: knowledge/**, DELTAS.md, IDENTITY.md
+  # Tracked in git: knowledge/**, DELTAS.md, IDENTITY.md, session-backlog.md, conversations/**
   # Local only (gitignore): work-log/**, MEMORY.md, preferences.yaml, tools.local.yaml
   work_log:
     path: work-log
