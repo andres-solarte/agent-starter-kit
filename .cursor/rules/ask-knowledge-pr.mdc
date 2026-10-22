@@ -46,4 +46,3 @@ alwaysApply: true
 
 - `AGENTS.md` write rules · `knowledge/conventions/git.md` · skill `ask-git-project`
 - User vs team agents: rule `ask-agent-scope` (team agents still need PR after scope = team)
-- Plain copy: `.agents/rules/ask-knowledge-pr.md`

@@ -1,3 +1,8 @@
+---
+description: Route every user question or work request through the ask-question skill first
+alwaysApply: true
+---
+
 # Route user messages via ask-question
 
 After this kit is installed (or updated), **every user turn that is a question or a work request** must be handled through the **`ask-question`** skill first, even if the user did not type `/ask-question` or `/ask-requirement`.

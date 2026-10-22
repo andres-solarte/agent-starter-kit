@@ -1,3 +1,8 @@
+---
+description: Use when a business or architecture decision is made, changed or reversed — record it as a BDR/ADR in agent-knowledge
+alwaysApply: false
+---
+
 # Decision records
 
 Every **business** or **architecture** decision that affects the product must live in **agent-knowledge**.
