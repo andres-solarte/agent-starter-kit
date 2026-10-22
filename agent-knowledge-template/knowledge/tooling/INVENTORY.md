@@ -13,7 +13,7 @@ What agents (and developers) need to work on this product: MCP servers, CLIs, SD
 
 Maintained by `/ask-tools` (scan at install; `/ask-tools add` when a new tool appears; checked at REQ retrospective). Status per machine lives in `users/<email>/tools.local.yaml` (local) and is materialized into the always-on rule `ask-tools-available`.
 
-App runtime / library versions: [stack-versions.md](../architecture/stack-versions.md).
+App runtime / library versions: `knowledge/architecture/stack-versions.md` (rule `ask-stack-versions`; created when the stack is defined).
 
 **Never** write secret values here — only env var names and where to obtain them.
 
