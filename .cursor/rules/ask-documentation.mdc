@@ -1,3 +1,8 @@
+---
+description: Use when writing, moving or deciding where documentation lives — editor rules vs agent-knowledge vs product docs
+alwaysApply: false
+---
+
 # Memory: editor rules vs agent-knowledge
 
 Container workspace: `{{workspace-name}}/`.

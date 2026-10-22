@@ -5,7 +5,6 @@ description: >-
   existing project skill; shared skills (git, etc.) apply to every role; on
   gaps the agent must stop, declare the gap, and create or improve the skill
   instead of improvising. Use always.
-disable-model-invocation: true
 ---
 
 # Skill discipline (all agents)

@@ -1,3 +1,8 @@
+---
+description: Memory protocol — follow agent-knowledge/AGENTS.md and its operating contract
+alwaysApply: true
+---
+
 # agent-knowledge (thin adapter)
 
 Follow `agent-knowledge/AGENTS.md` (and its operating contract link).

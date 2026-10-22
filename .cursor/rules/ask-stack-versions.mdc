@@ -1,3 +1,8 @@
+---
+description: Use when introducing, upgrading or choosing versions of a technology — record them in stack-versions.md
+alwaysApply: false
+---
+
 # Stack versions
 
 Source of truth: **`agent-knowledge/knowledge/architecture/stack-versions.md`** (create if missing).

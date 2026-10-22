@@ -1,3 +1,8 @@
+---
+description: Chat language per user and plain-language style for every reply
+alwaysApply: true
+---
+
 # Communication with the user
 
 Priority: the user **understands on the first read** what happened and what is being asked.
