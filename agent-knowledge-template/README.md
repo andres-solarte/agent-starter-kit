@@ -1,4 +1,4 @@
-# agent-knowledge
+# ask-memory
 
 Shared project knowledge **optimized for agents**, in an independent git repo.
 

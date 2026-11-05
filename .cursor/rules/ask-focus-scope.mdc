@@ -11,7 +11,7 @@ If the user asks for or mentions something **outside the scope** of the current 
 
 ## What to do
 
-1. Follow the **`ask-backlog`** skill (`.agents/skills/ask-backlog/SKILL.md`): `BL-NNN` item in `agent-knowledge/users/<email>/session-backlog.md` (per user; not under `.cursor/`), with its dependency + ticket check.
+1. Follow the **`ask-backlog`** skill (`.agents/skills/ask-backlog/SKILL.md`): `BL-NNN` item in `ask-memory/users/<email>/session-backlog.md` (per user; not under `.cursor/`), with its dependency + ticket check.
 2. Acknowledge in **one sentence** (what was parked, its id, and a dependency on the current item if any).
 3. Continue only with the focused task.
 4. Do not open PRs, migrate, or do a "quick fix" on the side.

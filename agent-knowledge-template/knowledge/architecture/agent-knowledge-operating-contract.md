@@ -3,13 +3,13 @@ id: agent-knowledge-operating-contract
 type: guide
 status: active
 scope: architecture
-tags: [agent-knowledge, deltas, consolidation]
+tags: [ask-memory, deltas, consolidation]
 updated: 2026-08-05
 ---
 
-# Operating contract — agent-knowledge
+# Operating contract — ask-memory
 
-Operating norms for the `agent-knowledge` repo. Short source for agents; routing detail in `AGENTS.md`.
+Operating norms for the `ask-memory` repo. Short source for agents; routing detail in `AGENTS.md`.
 
 ## 1. User identity
 

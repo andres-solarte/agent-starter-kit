@@ -1,15 +1,15 @@
 # Decision records
 
-Every **business** or **architecture** decision that affects the product must live in **agent-knowledge**.
+Every **business** or **architecture** decision that affects the product must live in **ask-memory**.
 
 ## Where
 
 | Type | Folder | Prefix | Index |
 |------|--------|--------|-------|
-| Business | `agent-knowledge/knowledge/decisions/business/` | `BDR-NNNN` | `…/decisions/README.md` |
-| Architecture | `agent-knowledge/knowledge/decisions/architecture/` | `ADR-NNNN` | same |
+| Business | `ask-memory/knowledge/decisions/business/` | `BDR-NNNN` | `…/decisions/README.md` |
+| Architecture | `ask-memory/knowledge/decisions/architecture/` | `ADR-NNNN` | same |
 
-Templates: `agent-knowledge/templates/decision-business.md` · `decision-architecture.md`.
+Templates: `ask-memory/templates/decision-business.md` · `decision-architecture.md`.
 
 ## When to create a record
 
@@ -24,7 +24,7 @@ Templates: `agent-knowledge/templates/decision-business.md` · `decision-archite
 2. Update the index table in `knowledge/decisions/README.md`
 3. If applicable, update `knowledge/product/scope/mvp.md` or other docs — do not duplicate; link
 4. Status: `proposed` until explicit user confirmation → `accepted`
-5. A decision that changes or reverses an earlier one → mark the old record `superseded` (link the new one) and update the docs that depended on it — do not leave both as current. Retrospectives (`/ask-retrospective`) apply the same rule; critical consequences get a MUST block (agent-knowledge operating contract §7–§8).
+5. A decision that changes or reverses an earlier one → mark the old record `superseded` (link the new one) and update the docs that depended on it — do not leave both as current. Retrospectives (`/ask-retrospective`) apply the same rule; critical consequences get a MUST block (ask-memory operating contract §7–§8).
 
 ## What does not need a record
 

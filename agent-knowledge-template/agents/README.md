@@ -1,6 +1,6 @@
 # agents/ — team role subagents (SoT)
 
-**Team-scoped** role subagents for this product. Tracked in git with agent-knowledge. Changes to this directory land via **pull request** (rule `ask-knowledge-pr`), not direct push to the default branch.
+**Team-scoped** role subagents for this product. Tracked in git with ask-memory. Changes to this directory land via **pull request** (rule `ask-knowledge-pr`), not direct push to the default branch.
 
 | Path | Scope |
 |------|--------|

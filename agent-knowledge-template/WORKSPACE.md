@@ -10,20 +10,20 @@ Do not invent a different folder tree per machine. Change this file (PR / confir
 - Agent host(s) used by this product (see **Agent hosts**)
 - Optional: same parent directory name on disk is nice-to-have; **relative sibling names** in the table are what must match
 
-## 2. Clone this repo (`agent-knowledge`)
+## 2. Clone this repo (`ask-memory`)
 
 ```bash
 # Parent directory for the whole product workspace (create if needed)
 mkdir -p <WORKSPACE_PARENT>
 cd <WORKSPACE_PARENT>
 
-git clone <AGENT_KNOWLEDGE_REMOTE_URL> <agent-knowledge-folder>
-cd <agent-knowledge-folder>
+git clone <ASK_MEMORY_REMOTE_URL> <ask-memory-folder>
+cd <ask-memory-folder>
 ```
 
 Open **this file** next — do not open only an app repo and hope the rest appears.
 
-Default local folder name: `agent-knowledge` (or the name recorded under **Repos**).
+Default local folder name: `ask-memory` (or the name recorded under **Repos**).
 
 ## 3. Clone every other repo (same parent)
 
@@ -31,7 +31,7 @@ All clones sit as **siblings** under `<WORKSPACE_PARENT>` (never inside this rep
 
 ```text
 <WORKSPACE_PARENT>/
-  <agent-knowledge-folder>/     ← this repo (memory + this file)
+  <ask-memory-folder>/     ← this repo (memory + this file)
   <kit-folder>/                 ← agent-starter-kit (process; keep .git + upstream)
   <adapter-home>/               ← product hub that holds .agents/ + host adapters (may be parent itself)
   <app-repo>/                   ← application code (repeat per row)
@@ -39,7 +39,7 @@ All clones sit as **siblings** under `<WORKSPACE_PARENT>` (never inside this rep
 
 | Local folder | Remote URL | Required | Role |
 |--------------|------------|----------|------|
-| `agent-knowledge` | `<AGENT_KNOWLEDGE_REMOTE_URL>` | yes | Product memory (this repo) |
+| `ask-memory` | `<ASK_MEMORY_REMOTE_URL>` | yes | Product memory (this repo) |
 | `agent-starter-kit` | `https://github.com/andres-solarte/agent-starter-kit.git` | yes | Process kit (updatable dependency) |
 | `_TBD_adapter_or_app_` | `_TBD_` | yes | Fill at install — adapter home and/or first app |
 
@@ -65,7 +65,7 @@ Open **every Required** folder (and the Optional ones you need) in one window:
 
 **Agent hosts for this product:** `_TBD_cursor_claude_or_both_`
 
-The workspace **must** include this `agent-knowledge` folder so agents can read `AGENTS.md` and write memory.
+The workspace **must** include this `ask-memory` folder so agents can read `AGENTS.md` and write memory.
 
 ## 5. First day on a machine
 
@@ -82,7 +82,7 @@ Kit clone: keep `.git` and upstream; never put memory inside the kit directory.
 
 - [ ] This repo cloned first; `WORKSPACE.md` matches the Remotes the team uses
 - [ ] Every **Required** row exists as a sibling under the same parent
-- [ ] Multi-root window includes agent-knowledge + kit + apps
+- [ ] Multi-root window includes ask-memory + kit + apps
 - [ ] Product adapter home has `.agents/` and only the hosts listed above
 - [ ] `git config user.email` set; `users/<email>/` exists for you
 - [ ] Tool install mode chosen (all / on demand); `/ask-tools` lists status for this machine

@@ -5,30 +5,30 @@
 ## Language (technical)
 
 - Code, commits, technical names, and **URL paths**: **English by default**
-- Durable agent-written knowledge/docs follow `agent-knowledge/config.yaml` → `locale.content` (default `en`)
+- Durable agent-written knowledge/docs follow `ask-memory/config.yaml` → `locale.content` (default `en`)
 - Paths and identifiers: `locale.paths` (always `en`)
 - Chat language with the user is **per-user**, not project-wide — see rule `ask-user-communication` and `users/<email>/preferences.yaml`
 
 ## Documentation
 
-→ SoT: `agent-knowledge/` (`AGENTS.md`, `knowledge/`)
+→ SoT: `ask-memory/` (`AGENTS.md`, `knowledge/`)
 → Process: `knowledge/delivery/PROCESS.md` · what's next: `knowledge/delivery/NEXT.md`
 → Requirements: `knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-*.md`)
 
-No commits or PRs of **app/kit** repos unless the user explicitly asks (agent-knowledge auto close-out still applies).
+No commits or PRs of **app/kit** repos unless the user explicitly asks (ask-memory auto close-out still applies).
 
 ## Kit paths
 
 - Kit directory: {{KIT_DIR}}
-- agent-knowledge directory: {{AGENT_KNOWLEDGE_DIR}}
+- ask-memory directory: {{ASK_MEMORY_DIR}}
 - Product adapter home: {{ADAPTER_HOME}}
 - Agent hosts: {{cursor|claude|both}}
 
 ## Agents
 
-- Roles: `agent-knowledge/knowledge/architecture/agents/roles.md`
-- Team SoT: `agent-knowledge/agents/ask-*.md`
-- User SoT: `agent-knowledge/users/<email>/agents/ask-*.md`
+- Roles: `ask-memory/knowledge/architecture/agents/roles.md`
+- Team SoT: `ask-memory/agents/ask-*.md`
+- User SoT: `ask-memory/users/<email>/agents/ask-*.md`
 - Host mirrors: `.cursor/agents/` and/or `.claude/agents/` (materialized; not SoT)
 - Skills SoT: `.agents/skills/`
 - Scope: always ask user-only vs team on create/modify (`ask-agent-scope`)

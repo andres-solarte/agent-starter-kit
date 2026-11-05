@@ -2,7 +2,7 @@
 
 Personal parked ideas, bugs, or requests (`/ask-backlog` + rules `ask-focus-scope`, `ask-one-item-per-conversation`).
 
-Path: `users/<email>/session-backlog.md` (tracked — can commit with agent-knowledge).
+Path: `users/<email>/session-backlog.md` (tracked — can commit with ask-memory).
 
 One item per conversation. Resume in a new conversation with `/ask-backlog resume BL-NNN`.
 

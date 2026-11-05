@@ -4,11 +4,11 @@ Priority: the user **understands on the first read** what happened and what is b
 
 ## Language (MUST)
 
-1. Resolve user id (`git config user.email` → `users/<email>/` under agent-knowledge).
+1. Resolve user id (`git config user.email` → `users/<email>/` under ask-memory).
 2. Read `users/<email>/preferences.yaml` → `communication_language` (e.g. `en`, `es`).
 3. Reply in that language for **chat** with this user.
 4. If the file or key is missing → default **`en`**.
-5. Durable written content (knowledge, decisions, specs, commits, paths) follows `agent-knowledge/config.yaml` → `locale.content` / `locale.paths` (defaults `en` / `en`) — not the chat language.
+5. Durable written content (knowledge, decisions, specs, commits, paths) follows `ask-memory/config.yaml` → `locale.content` / `locale.paths` (defaults `en` / `en`) — not the chat language.
 
 ## Style (MUST)
 

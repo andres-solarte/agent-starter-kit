@@ -9,7 +9,7 @@ updated: YYYY-MM-DD
 
 # Wikilinks — policy
 
-The SoT of `agent-knowledge` is plain Git/Markdown, not Obsidian.
+The SoT of `ask-memory` is plain Git/Markdown, not Obsidian.
 
 ## Rule
 

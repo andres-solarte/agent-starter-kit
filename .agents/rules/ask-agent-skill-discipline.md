@@ -7,7 +7,7 @@
 | `/ask-install` | Install kit as updatable dependency (see `INSTALL.md`) |
 | `/ask-update` | Pull kit upstream + safe re-merge |
 | `/ask-uninstall` | Remove kit wiring (asks what to delete; safe defaults keep memory) |
-| `/ask-centralize-docs` | Scan workspace docs → copy into agent-knowledge → recommend cleanup |
+| `/ask-centralize-docs` | Scan workspace docs → copy into ask-memory → recommend cleanup |
 | `/ask-setup-agents` | Analyze stack/surfaces → roles + subagents (full or delta for new repos) |
 | `/ask-question` | Ask the framework / default triage (may hand off to requirement or fix) |
 | `/ask-requirement` | Product/code work now (+ REQ registry status) |
@@ -27,7 +27,7 @@ If the project has its own local environment (Docker/PM2/etc.), add its slash co
 |-------|-----|
 | `ask-agent-skill-discipline` | Do not improvise; gaps; self-improve |
 | `ask-git-project` | Commits, branches, PRs, multi-repo |
-| `ask-agent-knowledge` | Pointer to `agent-knowledge/AGENTS.md` |
+| `ask-agent-knowledge` | Pointer to `ask-memory/AGENTS.md` |
 
 If a shared skill is missing → `SKILL GAP` → create/extend the skill + update the project's role docs (if any).
 

@@ -1,6 +1,6 @@
 # agent-starter-kit
 
-Reusable process engine for coding agents (**Cursor** and **Claude Code**): skill discipline, communication, focus/scope, requirement orchestration, and the **agent-knowledge** template (memory separate from the kit).
+Reusable process engine for coding agents (**Cursor** and **Claude Code**): skill discipline, communication, focus/scope, requirement orchestration, and the **ask-memory** template (memory separate from the kit).
 
 Does not include stack skills (framework, testing, DB) — those are added per project.
 
@@ -37,13 +37,13 @@ Claude-only product installs receive **`.agents/` + `.claude/`** only — **not*
 |-------|-------------|
 | Kit clone | `git pull` + `/ask-update` |
 | Product `.agents/` + host adapters | Merged from kit per recorded hosts |
-| `agent-knowledge/` | Product’s own remote; not replaced by kit updates |
-| Team multi-root | `agent-knowledge/WORKSPACE.md` — clone memory first, then siblings |
+| `ask-memory/` | Product’s own remote; not replaced by kit updates |
+| Team multi-root | `ask-memory/WORKSPACE.md` — clone memory first, then siblings |
 
 ## Language
 
 - Default English for code, commits, paths, durable docs.
-- `agent-knowledge/config.yaml` → `locale.content` / `locale.paths`.
+- `ask-memory/config.yaml` → `locale.content` / `locale.paths`.
 - Per-user chat: `users/<email>/preferences.yaml` → `communication_language`.
 
 ## Commands
@@ -64,4 +64,4 @@ Claude-only product installs receive **`.agents/` + `.claude/`** only — **not*
 
 ## Contributing upstream
 
-Process improvements without business/personal content → PR to this repo. Product memory stays in `agent-knowledge` only.
+Process improvements without business/personal content → PR to this repo. Product memory stays in `ask-memory` only.

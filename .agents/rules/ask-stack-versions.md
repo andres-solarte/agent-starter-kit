@@ -1,6 +1,6 @@
 # Stack versions
 
-Source of truth: **`agent-knowledge/knowledge/architecture/stack-versions.md`** (create if missing).
+Source of truth: **`ask-memory/knowledge/architecture/stack-versions.md`** (create if missing).
 
 Tools agents/developers use to work (MCP servers, CLIs, SDKs, services) live in **`knowledge/tooling/INVENTORY.md`** (skill `ask-tools`); link versions here when they matter.
 
@@ -9,7 +9,7 @@ Tools agents/developers use to work (MCP servers, CLIs, SDKs, services) live in 
 1. Look up the **latest stable version** (npm, official releases, Docker tags)
 2. Verify **compatibility** with the rest of the documented stack
 3. Update `stack-versions.md` (version, verification date, source, notes)
-4. If it is a material decision → ADR in `agent-knowledge/knowledge/decisions/architecture/`
+4. If it is a material decision → ADR in `ask-memory/knowledge/decisions/architecture/`
 
 ## Compatibility criteria (examples — adjust to the project's real stack)
 

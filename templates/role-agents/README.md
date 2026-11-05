@@ -2,7 +2,7 @@
 
 Canonical stubs for product **role subagents**. Not merged wholesale on install.
 
-`/ask-setup-agents` copies **approved** roles into **agent-knowledge SoT** (team `agents/` or user `users/<email>/agents/`) after asking **user-only vs team**, then **materializes** into `.cursor/agents/` and/or `.claude/agents/` (per install hosts).
+`/ask-setup-agents` copies **approved** roles into **ask-memory SoT** (team `agents/` or user `users/<email>/agents/`) after asking **user-only vs team**, then **materializes** into `.cursor/agents/` and/or `.claude/agents/` (per install hosts).
 
 These are **subagents** (isolated context) — **not** skills. Process skills live under `.agents/skills/`.
 
