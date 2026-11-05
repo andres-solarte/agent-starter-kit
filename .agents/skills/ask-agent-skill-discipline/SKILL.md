@@ -23,8 +23,8 @@ disable-model-invocation: true
 | Skill | Required when | Source / notes |
 |-------|---------------|----------------|
 | `ask-agent-skill-discipline` | Always | This skill |
-| `ask-git-project` | Any commit, branch, PR, stage, amend; **agent-knowledge auto close-out** | `agent-knowledge/knowledge/conventions/git.md` (create if missing) |
-| `ask-agent-knowledge` | Block close-out / recalling why | Pointer → `agent-knowledge/AGENTS.md` (includes git persist step) |
+| `ask-git-project` | Any commit, branch, PR, stage, amend; **ask-memory auto close-out** | `ask-memory/knowledge/conventions/git.md` (create if missing) |
+| `ask-agent-knowledge` | Block close-out / recalling why | Pointer → `ask-memory/AGENTS.md` (includes git persist step) |
 
 When delegating or acting, the orchestrator MUST remember the shared pack **plus** the matching **role subagent** (`.cursor/agents/ask-*.md`) and any stack skills that apply.
 
@@ -32,7 +32,7 @@ If a pack skill is missing (or a common practice not listed is discovered):
 
 1. `SKILL GAP` — shared pack.
 2. Create/extend the shared skill under `.agents/skills/`.
-3. Update the project's role docs (if any, e.g. `agent-knowledge/knowledge/architecture/agents/roles.md`) § Shared skills.
+3. Update the project's role docs (if any, e.g. `ask-memory/knowledge/architecture/agents/roles.md`) § Shared skills.
 4. Update this section of the skill.
 
 ## Before acting

@@ -3,7 +3,7 @@ name: ask-backlog
 description: >-
   Park ideas, bugs, or requests for later without interrupting work in progress,
   and track them across conversations (ids, status, dependencies, ticket link,
-  resume notes). Writes to the current user's agent-knowledge session-backlog.md
+  resume notes). Writes to the current user's ask-memory session-backlog.md
   (committable). Use when the user says /ask-backlog, "note this", "later",
   "while we're at it", wants to save something for later, asks what is next,
   or wants to resume a backlog item in a new conversation.
@@ -15,7 +15,7 @@ description: >-
 
 Personal only: does **not** create or update `knowledge/delivery/requirements/` (formal REQ registry). An item may **link** to a REQ (`Ticket`) once the user promotes it via `/ask-requirement`.
 
-**Living list (SoT):** `<agent-knowledge>/users/<email>/session-backlog.md`  
+**Living list (SoT):** `<ask-memory>/users/<email>/session-backlog.md`  
 Resolve email via `git config user.email` (lowercase, keep `@`). Create from `users/_template/session-backlog.md` if missing.
 
 Do **not** write under `.cursor/` or under global `knowledge/delivery/`.  
@@ -25,7 +25,7 @@ Do **not** write under `.cursor/` or under global `knowledge/delivery/`.
 
 ```text
 1. Capture the text (idea / bug / "later…")
-2. Resolve agent-knowledge + user email; ensure users/<email>/session-backlog.md exists
+2. Resolve ask-memory + user email; ensure users/<email>/session-backlog.md exists
 3. Allocate next BL-NNN; write the item under ## Open
 4. Dependency + ticket check (below) — quick, from what is already known; no deep planning
 5. Acknowledge in ONE sentence (id + dependency/ticket hint only if found)
@@ -116,7 +116,7 @@ Before the final message about the item:
 
 ## Git (MUST)
 
-`session-backlog.md` is **tracked**. After writing it, run **`ask-git-project` → agent-knowledge auto close-out** (commit + push if `origin` exists). Do not wait for the user to ask. App/kit repos unchanged.
+`session-backlog.md` is **tracked**. After writing it, run **`ask-git-project` → ask-memory auto close-out** (commit + push if `origin` exists). Do not wait for the user to ask. App/kit repos unchanged.
 
 ## MUST NOT
 
@@ -133,7 +133,7 @@ Before the final message about the item:
 | Rule `ask-focus-scope` | Same park policy |
 | Rule `ask-one-item-per-conversation` | One item per conversation; handoff + resume |
 | `/ask-requirement` | Do a parked item as a formal ticket (`REQ-NNN`) |
-| `ask-git-project` | Auto commit/push agent-knowledge after park |
+| `ask-git-project` | Auto commit/push ask-memory after park |
 
 ## For the user
 

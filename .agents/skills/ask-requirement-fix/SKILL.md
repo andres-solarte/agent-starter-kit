@@ -55,7 +55,7 @@ Silent handoff is forbidden.
 2. Resolve REQ (above)
 3. Capture error (symptom, how to reproduce, expected vs actual) — 0–2 short questions if needed
 4. Fix loop: diagnose → patch (role subagents as needed) → verify the failure is gone
-5. Close: note on REQ file + work-log + agent-knowledge close-out (user direct; REQ/`knowledge/**` via PR)
+5. Close: note on REQ file + work-log + ask-memory close-out (user direct; REQ/`knowledge/**` via PR)
 ```
 
 ### MUST NOT re-run
@@ -85,7 +85,7 @@ Prefer evidence already in the message (log, path, steps). If missing, ask at mo
 1. Append to the REQ file: status log line + optional Blocks note (“fix: …”); set the affected criterion back to `met` with new evidence (`failed` while broken). Write the **root cause** in one line (input for the retrospective).
 2. Keep status **`in_progress`** if any criterion is still pending; **`closed`** only if every criterion is `met` — then run **`ask-retrospective`** first (same rules as `/ask-requirement` step 6). On a **reopened** REQ, the retro also covers why the defect escaped the original verification.
 3. Update `NEXT.md` if needed.
-4. Agent-knowledge close-out (`ask-agent-knowledge` + `ask-git-project`): user paths direct; REQ updates under `knowledge/**` → **PR** (`ask-knowledge-pr`).
+4. Ask-memory close-out (`ask-agent-knowledge` + `ask-git-project`): user paths direct; REQ updates under `knowledge/**` → **PR** (`ask-knowledge-pr`).
 5. 2–4 sentences to the user: REQ id, which criterion failed, what changed, how verified.
 
 ## MUST NOT
@@ -93,7 +93,7 @@ Prefer evidence already in the message (log, path, steps). If missing, ask at mo
 - Treat every bug as a brand-new requirement by default.
 - Skip the visible announcement.
 - Expand product scope under the guise of a “fix”.
-- Commit/push app/kit repos unless the user asks (agent-knowledge: user direct / general via PR).
+- Commit/push app/kit repos unless the user asks (ask-memory: user direct / general via PR).
 
 ## Relation
 

@@ -14,11 +14,11 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 ## Flow (MUST)
 
 ```text
-1. Resolve kit dir + adapter home + agent hosts (+ agent-knowledge to avoid)
+1. Resolve kit dir + adapter home + agent hosts (+ ask-memory to avoid)
 2. Ask if paths/hosts not recorded / ambiguous
 3. git pull in kit directory
 4. Re-merge .agents/ → adapter home; re-wire only selected host adapters
-5. Leave agent-knowledge content untouched, except: missing template stubs, backlog migrate, and **kit-owned process docs** (below)
+5. Leave ask-memory content untouched, except: missing template stubs, backlog migrate, and **kit-owned process docs** (below)
 6. Materialize role agents from AK SoT → host agents/ dirs (team ∪ current user) + knowledge MUSTs (ask-knowledge-musts rule + ## Knowledge MUSTs)
 6b. Tools (ask-tools): no tools.local.yaml → fresh-machine question (all now vs on demand); empty inventory → offer scan; regenerate ask-tools-available
 7. Claude-only: if .cursor/ kit-sourced exists → offer delete (migration)
@@ -34,7 +34,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 | Kit directory | `ask-project` Kit paths, or ask |
 | Product adapter home | Same, or ask |
 | Agent hosts | `ask-project` → Agent hosts (`cursor` / `claude` / `both`), or ask |
-| agent-knowledge directory | Confirm only to **not** overwrite |
+| ask-memory directory | Confirm only to **not** overwrite |
 
 ## Merge (MUST)
 
@@ -46,7 +46,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — update**.
 4. **If hosts = cursor only:** do not create `.claude/` unless user expands hosts.
 5. Ensure process-critical skills present under `.agents/skills`: `ask-question`, `ask-setup-agents`, `ask-centralize-docs`, route rule (cursor `.mdc` and/or `.agents/rules`). Ensure rules `ask-agent-scope` and `ask-knowledge-pr` exist under `.agents/rules` and cursor `.mdc` when hosts include cursor.
 
-## Kit-owned process docs in agent-knowledge (MUST)
+## Kit-owned process docs in ask-memory (MUST)
 
 These template files define process the kit skills rely on. On update, compare each with `agent-knowledge-template/` in the kit:
 
@@ -64,15 +64,15 @@ These template files define process the kit skills rely on. On update, compare e
 
 ## Materialize role agents (MUST)
 
-After merge, sync runtime host mirrors from agent-knowledge SoT (do not invent agents here):
+After merge, sync runtime host mirrors from ask-memory SoT (do not invent agents here):
 
-1. Team: `<agent-knowledge>/agents/ask-*.md`
-2. Current user: `<agent-knowledge>/users/<email>/agents/ask-*.md` (`git config user.email` lowercase)
+1. Team: `<ask-memory>/agents/ask-*.md`
+2. Current user: `<ask-memory>/users/<email>/agents/ask-*.md` (`git config user.email` lowercase)
 3. Copy into `<adapter-home>/.cursor/agents/` and/or `.claude/agents/` per recorded hosts
 
-4. Then **materialize MUSTs** (skill `ask-retrospective` → *Materialize MUSTs*): regenerate the always-on `ask-knowledge-musts` rule for recorded hosts from MUST blocks in agent-knowledge docs, and append `## Knowledge MUSTs` to each mirror; remove user `Pending: <PR>` block copies whose team PR is merged. Claude hosts: ensure `CLAUDE.md` contains `@.agents/rules/ask-knowledge-musts.md`.
+4. Then **materialize MUSTs** (skill `ask-retrospective` → *Materialize MUSTs*): regenerate the always-on `ask-knowledge-musts` rule for recorded hosts from MUST blocks in ask-memory docs, and append `## Knowledge MUSTs` to each mirror; remove user `Pending: <PR>` block copies whose team PR is merged. Claude hosts: ensure `CLAUDE.md` contains `@.agents/rules/ask-knowledge-musts.md`.
 
-Host dirs are mirrors; SoT stays in agent-knowledge (shared via git). Create/modify still goes through `/ask-setup-agents` + scope question.
+Host dirs are mirrors; SoT stays in ask-memory (shared via git). Create/modify still goes through `/ask-setup-agents` + scope question.
 
 ## Tools (MUST)
 
@@ -84,7 +84,7 @@ If Agents setup notice is pending: announce once (subagents for orchestration); 
 
 ## New surfaces → propose agents (MUST)
 
-Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setup-agents` **delta**. Check frontiers under `.cursor/agents` and/or `.claude/agents` per hosts. Do not create silently. If a new sibling remote is confirmed, also offer to add a row to `agent-knowledge/WORKSPACE.md`.
+Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setup-agents` **delta**. Check frontiers under `.cursor/agents` and/or `.claude/agents` per hosts. Do not create silently. If a new sibling remote is confirmed, also offer to add a row to `ask-memory/WORKSPACE.md`.
 
 ## Legacy migrations (MUST)
 
@@ -95,7 +95,7 @@ Same as before: compare siblings vs Known surfaces / `roles.md`; offer `ask-setu
 
 ## MUST NOT
 
-- Wipe agent-knowledge.
+- Wipe ask-memory.
 - Install `.cursor/` into Claude-only products.
 - Force-push; commit app/kit unless asked.
 

@@ -12,7 +12,7 @@ disable-model-invocation: true
 ## Source of truth
 
 1. This skill
-2. `agent-knowledge/knowledge/conventions/git.md` (create if missing)
+2. `ask-memory/knowledge/conventions/git.md` (create if missing)
 
 User/workspace commit safety rules still apply (no force-push to main, no amend of others' commits, etc.).
 
@@ -31,7 +31,7 @@ Run `git status` / `git diff` / commits **inside the repo that owns the files**.
 | Rule | Detail |
 |------|--------|
 | When (app / kit repos) | Only if the user asks |
-| When (**agent-knowledge**) | **Automatic** on close-out — see below (project rule) |
+| When (**ask-memory**) | **Automatic** on close-out — see below (project rule) |
 | Language | English messages; focus on **why** |
 | Shape | Concise; conventional style preferred: `feat(scope): …` / `fix(scope): …` / `docs(…): …` |
 | Feature / REQ | Prefer Conventional Commits; optional `Req: REQ-NNN` |
@@ -39,7 +39,7 @@ Run `git status` / `git diff` / commits **inside the repo that owns the files**.
 | Noise | Exclude accidental build artifacts; respect `.gitignore` |
 | Hooks | If pre-commit rejects → fix and **new** commit (do not `--amend` unless user amend rules allow) |
 
-Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missing).
+Project detail: `ask-memory/knowledge/conventions/git.md` (create if missing).
 
 ### Protocol before commit (any repo)
 
@@ -50,9 +50,9 @@ Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missin
 
 **App / kit repos:** **no push** unless the user explicitly asks. **No** updating git config.
 
-### agent-knowledge auto close-out (MUST)
+### ask-memory auto close-out (MUST)
 
-**Trigger:** finishing a requirement **block/loop**, or completing a durable tracked write in agent-knowledge.
+**Trigger:** finishing a requirement **block/loop**, or completing a durable tracked write in ask-memory.
 
 **Split by path (rule `ask-knowledge-pr`):**
 
@@ -63,7 +63,7 @@ Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missin
 
 **User-scoped direct path:**
 
-1. Resolve the **agent-knowledge** directory. Run git **only** there.
+1. Resolve the **ask-memory** directory. Run git **only** there.
 2. Complete `ask-agent-knowledge` close-out writes first (work-log, deltas as needed).
 3. `git status`. If nothing to commit (only ignored local files) → stop; OK.
 4. Stage **user-scoped** tracked paths only. **Never** force-add gitignored paths.
@@ -85,21 +85,21 @@ Project detail: `agent-knowledge/knowledge/conventions/git.md` (create if missin
 
 ## Pull requests
 
-- **agent-knowledge general/team SoT:** open a PR as part of the write path (rule `ask-knowledge-pr`) — do not wait for a separate “please open a PR” when promoting to `knowledge/**`.
+- **ask-memory general/team SoT:** open a PR as part of the write path (rule `ask-knowledge-pr`) — do not wait for a separate “please open a PR” when promoting to `knowledge/**`.
 - App/kit: use `gh` when the user asks for a PR.
 - Include summary + test plan / review checklist.
-- Push with `-u` when opening the PR branch. Do **not** merge agent-knowledge team PRs unless the user asks.
+- Push with `-u` when opening the PR branch. Do **not** merge ask-memory team PRs unless the user asks.
 
 ## MUST NOT
 
 - Commit app/kit repos "while at it" without user trigger
 - Push or merge **app/kit** without explicit ask
-- Push `knowledge/**`, team `agents/**`, or `WORKSPACE.md` to the agent-knowledge **default branch**
-- Skip user-scoped agent-knowledge close-out commit/push when there are tracked user changes after a block
+- Push `knowledge/**`, team `agents/**`, or `WORKSPACE.md` to the ask-memory **default branch**
+- Skip user-scoped ask-memory close-out commit/push when there are tracked user changes after a block
 - Single commit across multiple sibling repos (split per repo)
 - Force-push under auto close-out
-- Merge an agent-knowledge team PR without explicit user ask
+- Merge an ask-memory team PR without explicit user ask
 
 ## Gap / self-improve
 
-If a Git practice needed is not covered here → follow `ask-agent-skill-discipline`: declare `SKILL GAP`, then create/amplify **this** skill (and update `agent-knowledge/knowledge/conventions/git.md` if the norm is project-wide).
+If a Git practice needed is not covered here → follow `ask-agent-skill-discipline`: declare `SKILL GAP`, then create/amplify **this** skill (and update `ask-memory/knowledge/conventions/git.md` if the norm is project-wide).
