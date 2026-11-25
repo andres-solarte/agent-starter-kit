@@ -8,12 +8,12 @@ Is this agent (A) user-only (you), or (B) team (everyone)?
 
 Do **not** assume team for `/ask-setup-agents`, install, or mid-REQ gaps. Chat language from `preferences.yaml` → `communication_language`.
 
-## Layers (SoT in agent-knowledge)
+## Layers (SoT in ask-memory)
 
-| Scope | SoT path (tracked in agent-knowledge) | In `roles.md` |
+| Scope | SoT path (tracked in ask-memory) | In `roles.md` |
 |-------|----------------------------------------|---------------|
-| **Team** | `agent-knowledge/agents/ask-*.md` | Yes |
-| **User** | `agent-knowledge/users/<email>/agents/ask-*.md` | No (personal) |
+| **Team** | `ask-memory/agents/ask-*.md` | Yes |
+| **User** | `ask-memory/users/<email>/agents/ask-*.md` | No (personal) |
 
 `<email>` = `git config user.email` lowercase as-is.
 
@@ -24,13 +24,13 @@ After writing SoT, **materialize** into each configured host so Cursor/Claude lo
 - `<adapter-home>/.cursor/agents/ask-*.md` (if hosts include cursor)
 - `<adapter-home>/.claude/agents/ask-*.md` (if hosts include claude)
 
-Materialize = copy/sync from SoT (team ∪ current user). Host dirs may sit outside git; teammates get team agents via **agent-knowledge pull** + materialize (`/ask-update` or `/ask-setup-agents`).
+Materialize = copy/sync from SoT (team ∪ current user). Host dirs may sit outside git; teammates get team agents via **ask-memory pull** + materialize (`/ask-update` or `/ask-setup-agents`).
 
 ## Promote (user → team)
 
 Only when the user chooses **team** for an agent that lived under `users/<email>/agents/`:
 
-1. Move/copy into `agent-knowledge/agents/`
+1. Move/copy into `ask-memory/agents/`
 2. Add/update `roles.md`
 3. Rematerialize hosts
 4. Remove the user copy (or leave a stub pointer — prefer remove after confirm)

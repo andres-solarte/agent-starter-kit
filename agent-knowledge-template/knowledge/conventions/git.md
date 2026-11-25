@@ -7,21 +7,21 @@ Knowledge promotion: rule `ask-knowledge-pr`.
 
 | Repo | Commit / push |
 |------|----------------|
-| **agent-knowledge** | Split by path — see below |
+| **ask-memory** | Split by path — see below |
 | App / product code repos | Only when the user asks |
 | Kit clone (`agent-starter-kit`) | Only when the user asks |
 
-## agent-knowledge — user paths (direct)
+## ask-memory — user paths (direct)
 
 After a meaningful block/loop close, or durable **user-scoped** tracked writes (deltas, `session-backlog.md`, user `agents/ask-*.md`, `DELTAS.md`, `consolidation/QUEUE.md` proposals):
 
-1. Work in the **agent-knowledge** directory only.
+1. Work in the **ask-memory** directory only.
 2. Respect `.gitignore` (do not force-add `work-log/`, `preferences.yaml`, `MEMORY.md`).
 3. Stage **only** user-scoped / queue paths → commit (English Conventional Commit; **why**).
 4. If remote `origin` exists → `git push` to the **default branch** (or current personal branch if already on one for user-only work).
 5. Never force-push.
 
-## agent-knowledge — general / team paths (PR only)
+## ask-memory — general / team paths (PR only)
 
 Changes under `knowledge/**`, team `agents/**`, or `WORKSPACE.md` (and product-norm edits to root `AGENTS.md` / `INDEX.md` / `config.yaml`):
 

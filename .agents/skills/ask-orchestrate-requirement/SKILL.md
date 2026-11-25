@@ -21,11 +21,11 @@ MUST follow `.agents/skills/ask-agent-skill-discipline/SKILL.md` (do not improvi
 
 ## Source of truth
 
-1. `agent-knowledge/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline; product subagents under `.cursor/agents/` and/or `.claude/agents/` per hosts
-2. `agent-knowledge/knowledge/delivery/PROCESS.md` — delivery process
-3. `agent-knowledge/knowledge/delivery/requirements/` — active `REQ-NNN` (status board)
-4. `agent-knowledge/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
-5. `agent-knowledge/knowledge/delivery/NEXT.md` — what follows (points at REQ)
+1. `ask-memory/knowledge/architecture/agents/roles.md` (create via `/ask-setup-agents` if missing) — roles, RACI, pipeline; product subagents under `.cursor/agents/` and/or `.claude/agents/` per hosts
+2. `ask-memory/knowledge/delivery/PROCESS.md` — delivery process
+3. `ask-memory/knowledge/delivery/requirements/` — active `REQ-NNN` (status board)
+4. `ask-memory/knowledge/product/scope/` + BDR/ADR in `knowledge/decisions/`
+5. `ask-memory/knowledge/delivery/NEXT.md` — what follows (points at REQ)
 
 This skill is the **orchestrator procedure**. It does not replace Product for BDR acceptance or human approval on sensitive flows (payments/auth/PII).
 
@@ -51,7 +51,7 @@ Classify **before** coding. Default when unsure: **normal** (safer). User may ov
 
 | Tier | Use when **all** true (or user forces) | Path | Skip |
 |------|----------------------------------------|------|------|
-| **micro** | See criteria below | Orchestrate → role subagent(s) → verify light → agent-knowledge auto close-out | Heavy multi-frontier path |
+| **micro** | See criteria below | Orchestrate → role subagent(s) → verify light → ask-memory auto close-out | Heavy multi-frontier path |
 | **normal** | Default for features | Accepted plan → specialist order → verify hard → close-out | Coding without accepted plan |
 | **ambiguous** | Scope/product unclear or needs BDR/ADR | Product / clarify / BDR draft **before** code | Implementation until resolved |
 
@@ -131,7 +131,7 @@ AGENT GAP — surface without specialist
 ```text
 Role subagent(s) for touched frontier only
   → Verify light (see below)
-  → Close (REQ/NEXT; agent-knowledge auto commit/push per ask-git-project;
+  → Close (REQ/NEXT; ask-memory auto commit/push per ask-git-project;
            app/kit commits only if user asked)
 ```
 
@@ -143,7 +143,7 @@ Still name subagents/skills explicitly. Still `SKILL GAP` if uncovered.
 Product (only if needed)
   → Delegate frontiers in order:
        Data → Backend → Frontend → Design system? → QA E2E → DevOps?
-  → Verify hard → Close (REQ/NEXT; agent-knowledge auto commit/push;
+  → Verify hard → Close (REQ/NEXT; ask-memory auto commit/push;
                          app/kit commits only if user asked)
 ```
 
@@ -203,13 +203,13 @@ Only after a stable contract (e.g. two UIs). Never parallelize Data + Backend ag
 | **normal** | Relevant E2E if UI/API journey changed; typecheck/tests for touched packages; **plus** touched apps boot and respond |
 | **ambiguous** | No code close |
 
-After any code change: verify boot/health of affected apps **before** declaring the block closed (define this in the project; see `agent-knowledge/knowledge/conventions/` if present).
+After any code change: verify boot/health of affected apps **before** declaring the block closed (define this in the project; see `ask-memory/knowledge/conventions/` if present).
 
 ## Close
 
 1. Cite verification run **per acceptance criterion** (`AC-*` → evidence).
 2. Update `REQ-NNN` + `NEXT.md` when applicable. Every `AC-*` met → `ask-retrospective` before reporting the REQ closed.
-3. Commits: agent-knowledge auto close-out; app/kit only if user asked — one commit per sibling repo; `ask-git-project`.
+3. Commits: ask-memory auto close-out; app/kit only if user asked — one commit per sibling repo; `ask-git-project`.
 4. Summary in the user's language: tier used, REQ status, what shipped, what's left, one next step.
 
 ## MUST NOT

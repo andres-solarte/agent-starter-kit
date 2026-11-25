@@ -2,7 +2,7 @@
 name: ask-question
 description: >-
   Default entry for user questions and unclear intents: triage framework
-  how/where questions vs product work. Answers kit/agent-knowledge questions
+  how/where questions vs product work. Answers kit/ask-memory questions
   (e.g. where is my work-log); hands off to ask-requirement-fix for errors on
   an existing REQ, or ask-requirement for new product work. Use for /ask-question,
   "where is…", "how do I…", or any user message that is not already an explicit
@@ -30,7 +30,7 @@ Answer framework questions in the user’s chat language (`preferences.yaml` →
 
 | Signal | Action |
 |--------|--------|
-| How/where about kit, agent-knowledge, work-log, prefs, slashes, install/update | **Answer here** |
+| How/where about kit, ask-memory, work-log, prefs, slashes, install/update | **Answer here** |
 | Error / failure / regression / stacktrace / “no funciona” / “rompió…” / failing test **on recent or named work** | **Hand off → `ask-requirement-fix`** — see **Visible handoff — fix** below |
 | New feature, new bug with no REQ link, refactor, product doc/spec change, “build/change/add/document…” | **Hand off → `ask-requirement`** — see **Visible handoff — requirement** below |
 | Side idea / later / while-at-it without “do it now” | **Hand off → `ask-backlog`** — one clear line that it was parked |
@@ -80,15 +80,15 @@ Next I'll clarify scope and get a short plan accepted — I won't start document
 ## Resolve context (framework answers)
 
 1. **User id:** `git config user.email` → lowercase as-is (keep `@`).
-2. **Paths:** install record (`ask-project.mdc`, `ask-kit-paths.mdc`) → workspace kit/agent-knowledge folders → **ask** if ambiguous.
+2. **Paths:** install record (`ask-project.mdc`, `ask-kit-paths.mdc`) → workspace kit/ask-memory folders → **ask** if ambiguous.
 3. Read only what you need: `AGENTS.md`, `config.yaml`, `preferences.yaml`, kit `INSTALL.md`.
 
 ## Question router (common)
 
 | User asks about… | Answer from |
 |------------------|-------------|
-| Conversation logs | `<agent-knowledge>/users/<email>/conversations/INDEX.md` |
-| Work-log | `<agent-knowledge>/users/<email>/work-log/YYYY/MM/DD.md` |
+| Conversation logs | `<ask-memory>/users/<email>/conversations/INDEX.md` |
+| Work-log | `<ask-memory>/users/<email>/work-log/YYYY/MM/DD.md` |
 | Preferences / chat language | `users/<email>/preferences.yaml` |
 | Identity / user folder | `users/<email>/` + `IDENTITY.md` |
 | Global knowledge | `knowledge/…` |
@@ -99,7 +99,7 @@ Next I'll clarify scope and get a short plan accepted — I won't start document
 | Imported / centralized docs map | `knowledge/imported/IMPORT-MAP.md` |
 | Which slash for work vs park vs fix | `/ask-requirement` · `/ask-backlog` · `/ask-requirement-fix` |
 | Requirement status / REQ id | `knowledge/delivery/requirements/INDEX.md` + `REQ-NNN-*.md` |
-| Session backlog (personal) | `<agent-knowledge>/users/<email>/session-backlog.md` |
+| Session backlog (personal) | `<ask-memory>/users/<email>/session-backlog.md` |
 | Tools (MCP, CLI…) available / how to install or configure one | `knowledge/tooling/INVENTORY.md` + `users/<email>/tools.local.yaml` → hand off to `ask-tools` for install / scan |
 | Doc locale | `config.yaml` → `locale.content` |
 

@@ -46,7 +46,7 @@ Adjust to this product after setup.
 
 ## Delegation
 
-- **Team SoT** = `agent-knowledge/agents/ask-*.md` (git). **User SoT** = `users/<email>/agents/ask-*.md`.
+- **Team SoT** = `ask-memory/agents/ask-*.md` (git). **User SoT** = `users/<email>/agents/ask-*.md`.
 - **Host mirrors** = `.cursor/agents/` and/or `.claude/agents/` (materialized; may be outside git).
 - Create/modify → **always** ask user-only vs team (`ask-agent-scope`).
 - **Shared skills pack:** `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.

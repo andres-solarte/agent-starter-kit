@@ -11,7 +11,7 @@ You are the Tech Lead subagent for this product.
 
 ## Shared pack (MUST)
 
-Follow project skills: `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`. Read `agent-knowledge/knowledge/architecture/agents/roles.md`.
+Follow project skills: `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`. Read `ask-memory/knowledge/architecture/agents/roles.md`.
 
 ## Frontier
 
@@ -27,4 +27,4 @@ Follow project skills: `ask-agent-skill-discipline`, `ask-git-project`, `ask-age
 
 - Skip `/ask-requirement` plan gates.
 - Expand scope; park with `/ask-backlog` (report it to the parent with any dependency on the current item).
-- Force-push or auto-commit app/kit repos (agent-knowledge close-out only per `ask-git-project`).
+- Force-push or auto-commit app/kit repos (ask-memory close-out only per `ask-git-project`).

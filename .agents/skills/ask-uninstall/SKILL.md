@@ -2,7 +2,7 @@
 name: ask-uninstall
 description: >-
   Uninstall agent-starter-kit wiring: ask which pieces to remove (kit clone,
-  agent-knowledge, .agents SoT, .cursor and/or .claude adapters), confirm, then
+  ask-memory, .agents SoT, .cursor and/or .claude adapters), confirm, then
   delete only what was approved. Use for /ask-uninstall.
 ---
 
@@ -13,7 +13,7 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — uninstall**.
 ## Flow (MUST)
 
 ```text
-1. Resolve kit dir, agent-knowledge dir, adapter home, hosts
+1. Resolve kit dir, ask-memory dir, adapter home, hosts
 2. Q&A: what to remove (each piece independently)
 3. Summary of exact paths → explicit yes
 4. Perform only approved removals
@@ -25,13 +25,13 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — uninstall**.
 | Piece | Options | Default |
 |-------|---------|---------|
 | **Kit directory** | keep / delete | **keep** |
-| **agent-knowledge** | keep / delete | **keep** (confirm path/phrase if delete) |
+| **ask-memory** | keep / delete | **keep** (confirm path/phrase if delete) |
 | **`.agents/` SoT** | keep / remove kit-sourced ask-* skills+rules | **remove kit-sourced** |
 | **`.cursor/`** (if present) | keep / remove kit-sourced rules+skills link+ask-* agents / remove entire `.cursor/` | **remove kit-sourced** |
 | **`.claude/`** (if present) | keep / remove kit-sourced links+agents / remove entire `.claude/` | **remove kit-sourced** |
 | **`CLAUDE.md`** at adapter home | keep / delete if kit-written | follow `.claude/` choice |
 
-Never delete product-only stack skills/rules unless listed and approved. Generated `ask-knowledge-musts` / `ask-tools-available` rule files count as kit-sourced (their SoT stays in agent-knowledge).
+Never delete product-only stack skills/rules unless listed and approved. Generated `ask-knowledge-musts` / `ask-tools-available` rule files count as kit-sourced (their SoT stays in ask-memory).
 
 ## Confirm gate (MUST)
 
@@ -40,7 +40,7 @@ List exact paths. Require clear yes.
 ## Execution
 
 1. Remove only approved adapter / `.agents` kit pieces.
-2. Delete agent-knowledge / kit only if approved.
+2. Delete ask-memory / kit only if approved.
 3. No force-push; no app repo wipes; no commit unless asked.
 
 ## Close

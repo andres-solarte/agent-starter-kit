@@ -8,7 +8,7 @@ Tracks docs **copied** from the multi-repo workspace into `knowledge/` during `/
 
 Status meanings:
 
-- `copied` — present in agent-knowledge; original may still exist
+- `copied` — present in ask-memory; original may still exist
 - `stubbed` — original replaced with a pointer stub
 - `original_removed` — original deleted after user confirmation
 

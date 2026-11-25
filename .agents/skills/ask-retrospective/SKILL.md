@@ -3,7 +3,7 @@ name: ask-retrospective
 description: >-
   Close-out of a fully executed REQ (every acceptance criterion met): propose
   follow-up tickets, run a short retrospective, and fold learnings into the
-  existing agent-knowledge docs (decisions, conventions, architecture, role
+  existing ask-memory docs (decisions, conventions, architecture, role
   agents…), marking critical ones as MUST blocks that are materialized where
   agents always load them. Invoked by ask-requirement step 6; also
   /ask-retrospective REQ-NNN. Owns the "Materialize MUSTs" contract used by
@@ -16,7 +16,7 @@ Runs when a REQ is **fully executed**: every `AC-*` is `met` (or `dropped` with 
 
 The REQ is reported to the user as **closed only after** this skill finishes (`ask-requirement` step 6).
 
-Normative home for where learnings go and the MUST block format: agent-knowledge operating contract §7–§8 (`knowledge/architecture/agent-knowledge-operating-contract.md`).
+Normative home for where learnings go and the MUST block format: ask-memory operating contract §7–§8 (`knowledge/architecture/agent-knowledge-operating-contract.md`).
 
 ## Flow (MUST)
 
@@ -89,7 +89,7 @@ Also run by `/ask-install`, `/ask-update`, and `/ask-setup-agents` after materia
 | `<adapter-home>/.agents/rules/ask-knowledge-musts.md` (always; Claude loads it via `CLAUDE.md` import) | Same body, no frontmatter |
 | Each host agent mirror `.cursor/agents/ask-<role>.md` / `.claude/agents/ask-<role>.md` | After copying the SoT agent, append `## Knowledge MUSTs` with that role's blocks (one line + link each) |
 
-Header of generated files: `<!-- Generated from agent-knowledge MUST blocks by ask-retrospective. Edit the source docs, not this file. -->`
+Header of generated files: `<!-- Generated from ask-memory MUST blocks by ask-retrospective. Edit the source docs, not this file. -->`
 
 No blocks → still write the rule with «No knowledge MUSTs yet.» (wiring stays visible).
 
@@ -101,7 +101,7 @@ No blocks → still write the rule with «No knowledge MUSTs yet.» (wiring stay
 
 - REQ file and team `knowledge/**` / `agents/**` edits → **PR**.
 - User deltas, user agents, backlog items → direct (`ask-git-project` auto close-out).
-- Generated host files: not in agent-knowledge; do not commit app/kit repos unless asked.
+- Generated host files: not in ask-memory; do not commit app/kit repos unless asked.
 
 ## MUST NOT
 

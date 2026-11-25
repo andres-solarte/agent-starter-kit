@@ -1,5 +1,5 @@
 schema_version: 1
-repo: agent-knowledge
+repo: ask-memory
 locale:
   content: en   # language for agent-written durable knowledge/docs (global)
   paths: en     # paths/identifiers always English

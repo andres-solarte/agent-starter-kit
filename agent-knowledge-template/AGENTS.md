@@ -1,4 +1,4 @@
-# AGENTS — agent-knowledge
+# AGENTS — ask-memory
 
 Tool-agnostic instructions for any coding agent (Cursor, Claude Code, Codex, Copilot, …).
 **SoT is this repo.** IDE/dotfile adapters MUST stay thin — see [adapters/README.md](./adapters/README.md).

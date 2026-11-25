@@ -2,9 +2,9 @@
 name: ask-install
 description: >-
   Install agent-starter-kit as an updatable dependency: choose agent hosts
-  (Cursor and/or Claude Code), kit and agent-knowledge directories, merge only
+  (Cursor and/or Claude Code), kit and ask-memory directories, merge only
   the matching adapters (.cursor and/or .claude) plus neutral .agents/ SoT,
-  instantiate agent-knowledge, then run /ask-setup-agents. Never install
+  instantiate ask-memory, then run /ask-setup-agents. Never install
   .cursor into Claude-only products.
 ---
 
@@ -17,8 +17,8 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — install**.
 | Path (user-chosen) | Action |
 |--------------------|--------|
 | **Kit directory** | Clone or use existing kit; keep `.git` + upstream. |
-| **agent-knowledge directory** | Copy template → **new** `git init` (outside kit). |
-| **Product adapter home** | Receives `.agents/` SoT + host adapters (default: parent of agent-knowledge). |
+| **ask-memory directory** | Copy template → **new** `git init` (outside kit). |
+| **Product adapter home** | Receives `.agents/` SoT + host adapters (default: parent of ask-memory). |
 | **Agent hosts** | `cursor` \| `claude` \| `both` — **only** these adapters are created. |
 
 | Host | What gets created under adapter home |
@@ -32,10 +32,10 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — install**.
 ## Flow (MUST)
 
 ```text
-1. Q&A: kit dir + agent-knowledge dir + adapter home + hosts + sibling remotes
+1. Q&A: kit dir + ask-memory dir + adapter home + hosts + sibling remotes
 2. Summary of paths + hosts → yes
 3. Ensure kit; copy/merge .agents/; wire selected host adapters only
-4. Create agent-knowledge; fill prefs + session-backlog; record hosts in ask-project
+4. Create ask-memory; fill prefs + session-backlog; record hosts in ask-project
 5. Fill WORKSPACE.md (remotes table + hosts; replace _TBD_ for known pieces)
 6. Run /ask-setup-agents (writes role agents to host agent dirs)
 6b. Tools (ask-tools): scan all knowledge → inventory (PR) → ask install all now vs on demand → generate ask-tools-available
@@ -47,11 +47,11 @@ Follow **`INSTALL.md` at the kit root** → **Agent contract — install**.
 | Ask | Default if skipped |
 |-----|--------------------|
 | **Kit directory** | Fail — must choose |
-| **agent-knowledge directory** | Fail — must choose (not inside kit) |
-| **Product adapter home** | Parent of agent-knowledge |
+| **ask-memory directory** | Fail — must choose (not inside kit) |
+| **Product adapter home** | Parent of ask-memory |
 | **Agent hosts** (`cursor` / `claude` / `both`) | Fail — must choose |
 | Project name | Adapter home folder name |
-| Sibling repos (local folder + remote URL each) | Empty table rows only if none yet — still write kit + agent-knowledge rows in `WORKSPACE.md` |
+| Sibling repos (local folder + remote URL each) | Empty table rows only if none yet — still write kit + ask-memory rows in `WORKSPACE.md` |
 | `communication_language` | `en` |
 
 ## Wire adapters (MUST)
@@ -67,7 +67,7 @@ From **kit directory**:
    - Ensure `<adapter-home>/.claude/skills` → `../.agents/skills`
    - Ensure `<adapter-home>/.claude/rules` → `../.agents/rules`
    - Ensure `<adapter-home>/.claude/agents/` exists
-   - Write/update `<adapter-home>/CLAUDE.md` thin pointer (skills/rules under `.claude/`, memory in agent-knowledge) **including the lines `@.agents/rules/ask-knowledge-musts.md` and `@.agents/rules/ask-tools-available.md`**
+   - Write/update `<adapter-home>/CLAUDE.md` thin pointer (skills/rules under `.claude/`, memory in ask-memory) **including the lines `@.agents/rules/ask-knowledge-musts.md` and `@.agents/rules/ask-tools-available.md`**
 4. **If hosts = claude only:** do **not** create `<adapter-home>/.cursor/`
 5. **If hosts = cursor only:** do **not** create `<adapter-home>/.claude/` unless user asked
 
@@ -78,7 +78,7 @@ Record in product `ask-project.mdc` (under adapter home `.cursor/rules` and/or m
 ```markdown
 ## Kit paths
 - Kit directory: …
-- agent-knowledge directory: …
+- ask-memory directory: …
 - Product adapter home: …
 - Agent hosts: cursor | claude | both
 ```
@@ -87,7 +87,7 @@ Ensure rule **`ask-agent-scope`** and **`ask-knowledge-pr`** are merged into `.a
 
 ## WORKSPACE.md (MUST)
 
-After agent-knowledge exists, edit its root **`WORKSPACE.md`** so teammates can replicate the machine:
+After ask-memory exists, edit its root **`WORKSPACE.md`** so teammates can replicate the machine:
 
 1. Set **Agent hosts** to the chosen value.
 2. Fill the **Repos** table: this repo’s remote (if `origin` exists or user gave URL), kit folder + remote, adapter home / apps from sibling answers.
@@ -96,11 +96,11 @@ After agent-knowledge exists, edit its root **`WORKSPACE.md`** so teammates can 
 
 ## Setup agents (MUST)
 
-After agent-knowledge exists, run `ask-setup-agents` (from `.agents/skills/…`). Role agents go to each selected host’s `agents/` dir (and optionally `.agents/agents/` as SoT).
+After ask-memory exists, run `ask-setup-agents` (from `.agents/skills/…`). Role agents go to each selected host’s `agents/` dir (and optionally `.agents/agents/` as SoT).
 
 ## Tools (MUST)
 
-After setup agents, follow skill `ask-tools`: **Scan** (search all knowledge for MCP, CLI, SDK, services, runtimes agents need) → confirm inventory → **Fresh machine** (ask: install everything now or on demand) → generate `ask-tools-available`. Also applies when installing on a machine where agent-knowledge already exists (new collaborator / new PC).
+After setup agents, follow skill `ask-tools`: **Scan** (search all knowledge for MCP, CLI, SDK, services, runtimes agents need) → confirm inventory → **Fresh machine** (ask: install everything now or on demand) → generate `ask-tools-available`. Also applies when installing on a machine where ask-memory already exists (new collaborator / new PC).
 
 ## Doc centralization
 
@@ -112,9 +112,9 @@ Do not prompt for doc scan. Merge `ask-centralize-docs` skill via `.agents/`. Me
 - Use the kit directory as product adapter home.
 - Delete kit `.git`.
 - Commit/push app/kit unless asked.
-- Wipe existing agent-knowledge with data without asking.
+- Wipe existing ask-memory with data without asking.
 - Leave `WORKSPACE.md` as the untouched template when kit/AK/hosts are already known.
 
 ## Close
 
-Echo kit / agent-knowledge / adapter home / **hosts**; confirm `.cursor` absent if Claude-only; roles created or skipped; tell the team to onboard via **`agent-knowledge/WORKSPACE.md`**; `/ask-requirement`, `/ask-update`.
+Echo kit / ask-memory / adapter home / **hosts**; confirm `.cursor` absent if Claude-only; roles created or skipped; tell the team to onboard via **`ask-memory/WORKSPACE.md`**; `/ask-requirement`, `/ask-update`.

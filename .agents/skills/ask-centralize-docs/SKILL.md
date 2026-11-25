@@ -2,8 +2,8 @@
 name: ask-centralize-docs
 description: >-
   With user authorization, scan the whole multi-repo workspace for documentation,
-  copy it into agent-knowledge, then recommend deleting the originals outside
-  agent-knowledge. Use when the user says /ask-centralize-docs, after
+  copy it into ask-memory, then recommend deleting the originals outside
+  ask-memory. Use when the user says /ask-centralize-docs, after
   /ask-install offers doc migration, or "centralize documentation".
 ---
 
@@ -17,13 +17,13 @@ Also invoked as a **gated step** at the end of `/ask-install` (only after the us
 
 1. **Ask permission** to scan the entire Cursor workspace (all sibling folders).
 2. **Inventory** documentation candidates.
-3. On user **yes** to the plan: **copy** into `agent-knowledge/knowledge/` (never silent move).
-4. **Recommend** deleting (or stubbing) originals that now live in agent-knowledge; delete **only** with explicit confirmation.
+3. On user **yes** to the plan: **copy** into `ask-memory/knowledge/` (never silent move).
+4. **Recommend** deleting (or stubbing) originals that now live in ask-memory; delete **only** with explicit confirmation.
 
 ## Flow (MUST)
 
 ```text
-1. Resolve agent-knowledge dir + workspace roots
+1. Resolve ask-memory dir + workspace roots
 2. Ask: authorize full-workspace doc scan? (no → stop cleanly)
 3. Scan → present inventory + proposed destinations
 4. User yes to copy set → copy + write import map
@@ -41,7 +41,7 @@ No scan without **yes**. Skipping is OK (install can finish without this step).
 - **Include:** every folder root in the multi-root workspace (sibling repos).
 - **Exclude:**
   - the **kit** directory (`INSTALL.md` + `agent-knowledge-template/`)
-  - the **agent-knowledge** directory itself
+  - the **ask-memory** directory itself
   - `.git/`, `node_modules/`, `dist/`, `build/`, `.next/`, `coverage/`, vendor caches, binary assets folders if obvious
 - **Candidates (documentation):**
   - `README*`, `CONTRIBUTING*`, `ARCHITECTURE*`, `DESIGN*`, `ADR*`, `CHANGELOG*` (optional — ask if changelogs should be included)
@@ -59,7 +59,7 @@ Found N doc files across M repos:
 Exclude any? Include changelogs? (yes to proceed with listed set)
 ```
 
-Proposed layout under agent-knowledge (adjust to fit existing folders):
+Proposed layout under ask-memory (adjust to fit existing folders):
 
 | Source kind | Default destination |
 |-------------|---------------------|
@@ -84,7 +84,7 @@ On conflict with an existing knowledge file: **keep existing**; copy new as `…
 After copy (and preferably after noting the PR URL), list originals that are now centralized and **recommend**:
 
 - Delete the original, **or**
-- Replace with a short stub pointing to the agent-knowledge path.
+- Replace with a short stub pointing to the ask-memory path.
 
 Ask which paths to clean. Defaults: **keep originals** until the user picks deletions/stubs.  
 Never mass-delete without an explicit approved list.
@@ -97,7 +97,7 @@ When deleting/stubbing (app repos): only with user ask + normal app git rules. U
 - Move/delete originals as part of the copy step.
 - Import secrets (`.env`, keys) or treat them as docs.
 - Overwrite existing SoT knowledge without asking.
-- Push imported docs to the agent-knowledge **default branch**.
+- Push imported docs to the ask-memory **default branch**.
 - Touch the kit’s own README/docs as product docs to import.
 
 ## Close

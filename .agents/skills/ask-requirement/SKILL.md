@@ -26,7 +26,7 @@ If work is split into **several blocks**: **each block** repeats steps 4→5→6
 
 ## Requirement registry (MUST)
 
-SoT: `agent-knowledge/knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-slug.md`). See that folder’s README — including the **acceptance criteria contract** (writing, scope test, close). Every REQ has ≥ 1 `AC-*`; no REQ without them.
+SoT: `ask-memory/knowledge/delivery/requirements/` (`INDEX.md` + `REQ-NNN-slug.md`). See that folder’s README — including the **acceptance criteria contract** (writing, scope test, close). Every REQ has ≥ 1 `AC-*`; no REQ without them.
 
 | Moment | Action |
 |--------|--------|
@@ -168,7 +168,7 @@ Cursor `/loop` heartbeat is optional (re-check queue/drift); the "loop" here is 
 Before or with the user-facing close:
 
 1. Update the **REQ** file: acceptance-criteria table (status + evidence), Blocks table, INDEX `AC met`; if **every** criterion is `met` (or `dropped` with user OK) → run **`ask-retrospective`** (follow-up tickets + retrospective + update existing knowledge + materialize MUSTs), then status **`closed`** + INDEX; else keep **`in_progress`** and note the pending criteria / next block. Update `NEXT.md`. (These live under `knowledge/**` → persist via **PR**, rule `ask-knowledge-pr`.)
-2. Run **agent-knowledge close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed) — **direct** OK for user paths.
+2. Run **ask-memory close-out** (`ask-agent-knowledge` → `AGENTS.md`): work-log (+ deltas if needed) — **direct** OK for user paths.
 3. Run **`ask-git-project`**: user-scoped → commit/push default branch; REQ / `NEXT.md` / other `knowledge/**` → **branch + PR** (do not push registry to default branch). Return PR URL when opened.
 
 Then 2–4 sentences to the user: REQ id + status, which criteria are met / pending, what was done, one next step. No loose internal codes. Mention the knowledge PR URL when registry changes went through a PR; mention push/remote only if user-path push failed or there is no remote.
@@ -193,7 +193,7 @@ If there are more pre-agreed blocks: «Block N done. Next: block N+1 — shall I
 - Orchestration: `ask-orchestrate-requirement`
 - Discipline: `ask-agent-skill-discipline`
 - Git: `ask-git-project`
-- Registry: `agent-knowledge/knowledge/delivery/requirements/`
+- Registry: `ask-memory/knowledge/delivery/requirements/`
 - Fixes on same REQ: `ask-requirement-fix`
 - Close-out (follow-ups, retro, knowledge update): `ask-retrospective`
-- Roles / RACI / loop: `agent-knowledge/knowledge/architecture/agents/` (create if missing)
+- Roles / RACI / loop: `ask-memory/knowledge/architecture/agents/` (create if missing)

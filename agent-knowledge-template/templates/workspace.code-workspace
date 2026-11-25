@@ -1,6 +1,6 @@
 {
   "folders": [
-    { "name": "agent-knowledge", "path": "agent-knowledge" },
+    { "name": "ask-memory", "path": "ask-memory" },
     { "name": "agent-starter-kit", "path": "agent-starter-kit" }
   ],
   "settings": {}

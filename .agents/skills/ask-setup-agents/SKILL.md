@@ -2,8 +2,8 @@
 name: ask-setup-agents
 description: >-
   Analyze the workspace stack and product/business context, confirm with the
-  user, then create agent-knowledge roles (RACI) and role subagents with
-  mandatory user-vs-team scope. SoT lives in agent-knowledge (team:
+  user, then create ask-memory roles (RACI) and role subagents with
+  mandatory user-vs-team scope. SoT lives in ask-memory (team:
   agents/ask-*.md; user: users/<email>/agents/). Materialize into host
   .cursor/agents and/or .claude/agents. Re-run when surfaces change.
 ---
@@ -15,9 +15,9 @@ Scope rule: **`ask-agent-scope`** (MUST ask user-only vs team on every create/mo
 
 ## Goal
 
-From **business context + technical scan**, define **role subagents**, write team `roles.md` when scope is team, write SoT files under agent-knowledge, and **materialize** into configured hosts:
+From **business context + technical scan**, define **role subagents**, write team `roles.md` when scope is team, write SoT files under ask-memory, and **materialize** into configured hosts:
 
-| Scope | SoT (agent-knowledge, tracked) | `roles.md` |
+| Scope | SoT (ask-memory, tracked) | `roles.md` |
 |-------|--------------------------------|------------|
 | **Team** | `agents/ask-*.md` | Update |
 | **User** | `users/<email>/agents/ask-*.md` | Do not list as team |
@@ -32,7 +32,7 @@ Runtime mirrors (per hosts):
 ## Flow (MUST)
 
 ```text
-1. Resolve kit dir, agent-knowledge, adapter home, agent hosts, sibling repos, user email
+1. Resolve kit dir, ask-memory, adapter home, agent hosts, sibling repos, user email
 2. Inventory surfaces + existing SoT (team agents/ + users/<email>/agents/) + roles.md + host mirrors
 3. Gather business + stack signals
 4. Diff uncovered surfaces → candidate agents
@@ -42,7 +42,7 @@ Runtime mirrors (per hosts):
 8. Write SoT under the chosen layer; update roles.md only for team; materialize hosts
 9. Record Known surfaces + hosts + SoT paths in ask-project
 10. Legacy ask-role-* skill migration if needed
-11. Close + agent-knowledge auto close-out
+11. Close + ask-memory auto close-out
 ```
 
 ### Modes
@@ -75,7 +75,7 @@ Never default to team. Never write SoT until scope is answered.
 
 ## Scan (MUST — lightweight, no secrets)
 
-**Exclude:** kit directory, `node_modules`, `.git`, `dist`, `build`, `.next`, coverage, agent-knowledge `users/*/work-log`.
+**Exclude:** kit directory, `node_modules`, `.git`, `dist`, `build`, `.next`, coverage, ask-memory `users/*/work-log`.
 
 **Surface inventory:** each sibling app/service repo (or package) with evidence of a deliverable (app, API, mobile, worker, etc.). Record path + kind (web-ui, api, mobile, data, infra, …).
 
@@ -134,8 +134,8 @@ Granularity: A (type) | B (per surface) | n/a
 Subagents to create/update:
 - ask-… — why — frontiers: … — scope: TBD (ask A/B)
 Will write SoT:
-- team → agent-knowledge/agents/ask-*.md (+ roles.md)
-- user → agent-knowledge/users/<email>/agents/ask-*.md
+- team → ask-memory/agents/ask-*.md (+ roles.md)
+- user → ask-memory/users/<email>/agents/ask-*.md
 Then materialize → host agents/ dirs
 Edit or confirm?
 ```
@@ -145,7 +145,7 @@ Do **not** write `.cursor/agents` when hosts are Claude-only.
 
 ## Write roles.md (MUST for team scope)
 
-Path: `<agent-knowledge>/knowledge/architecture/agents/roles.md`
+Path: `<ask-memory>/knowledge/architecture/agents/roles.md`
 
 Include only **team** agents:
 
@@ -179,9 +179,9 @@ Do **not** overwrite customized SoT without asking — merge frontiers only.
 - Agent hosts: cursor | claude | both
 
 ## Agents
-- Roles: `agent-knowledge/knowledge/architecture/agents/roles.md`
-- Team SoT: `agent-knowledge/agents/ask-*.md`
-- User SoT: `agent-knowledge/users/<email>/agents/ask-*.md`
+- Roles: `ask-memory/knowledge/architecture/agents/roles.md`
+- Team SoT: `ask-memory/agents/ask-*.md`
+- User SoT: `ask-memory/users/<email>/agents/ask-*.md`
 - Host mirrors: `.cursor/agents/` and/or `.claude/agents/` (materialized)
 - Setup: done (date)
 - Update notice for /ask-setup-agents: done
@@ -192,7 +192,7 @@ Do **not** overwrite customized SoT without asking — merge frontiers only.
 
 If `.agents/skills/ask-role-*/` exists: map into SoT + host mirrors, migrate product MUSTS, **delete** skill folders (no stubs).
 
-If host mirrors exist but `agent-knowledge/agents/` is empty: offer to **import** host `ask-*.md` into team SoT (confirm) so the team can share them.
+If host mirrors exist but `ask-memory/agents/` is empty: offer to **import** host `ask-*.md` into team SoT (confirm) so the team can share them.
 
 ## MUST NOT
 
@@ -200,8 +200,8 @@ If host mirrors exist but `agent-knowledge/agents/` is empty: offer to **import*
 - Silent-create agents on update or mid-REQ.
 - Skip the user-vs-team scope question.
 - Create role **skills** instead of subagents.
-- Treat adapter-home host dirs as the only copy (SoT must be agent-knowledge).
-- Commit/push **app/kit** unless asked (agent-knowledge auto close-out still applies).
+- Treat adapter-home host dirs as the only copy (SoT must be ask-memory).
+- Commit/push **app/kit** unless asked (ask-memory auto close-out still applies).
 
 ## Close
 

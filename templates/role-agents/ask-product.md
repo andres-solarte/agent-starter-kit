@@ -14,7 +14,7 @@ Follow `ask-agent-skill-discipline`, `ask-git-project`, `ask-agent-knowledge`.
 
 ## Frontier
 
-- Primary paths: `agent-knowledge/knowledge/product/`, BDR/ADR under decisions
+- Primary paths: `ask-memory/knowledge/product/`, BDR/ADR under decisions
 - Notes: {{MVP, modules, non-goals from /ask-setup-agents}}
 
 ## When invoked

@@ -1,4 +1,4 @@
-# INDEX — agent-knowledge
+# INDEX — ask-memory
 
 Start with [AGENTS.md](./AGENTS.md) and the [operating contract](./knowledge/architecture/agent-knowledge-operating-contract.md).
 **New machine / team workspace:** [WORKSPACE.md](./WORKSPACE.md) — clone this repo first, then the sibling remotes.

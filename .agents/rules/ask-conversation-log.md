@@ -6,8 +6,8 @@
 
 | File | Role |
 |------|------|
-| `agent-knowledge/users/<email>/conversations/YYYY/MM/YYYY-MM-DD-<slug>.md` | One file per conversation (tracked) |
-| `agent-knowledge/users/<email>/conversations/INDEX.md` | One line per conversation, newest first (tracked) |
+| `ask-memory/users/<email>/conversations/YYYY/MM/YYYY-MM-DD-<slug>.md` | One file per conversation (tracked) |
+| `ask-memory/users/<email>/conversations/INDEX.md` | One line per conversation, newest first (tracked) |
 
 Format: `users/_template/conversations/README.md`. Tracked and pushed directly (user-scoped; rule `ask-knowledge-pr`), so it follows the user to any machine.
 
@@ -17,7 +17,7 @@ The local `work-log/` keeps the daily *what / why* notes; its entries link to th
 
 1. **First substantive turn** (anything beyond a greeting): create the file + INDEX line. A pure framework question still gets a short entry (goal + answer in 1–2 lines).
 2. **End of every turn that changed something** (files, decisions, backlog / REQ status, PRs, tools): update the file. Do not wait for the conversation to "end" — the user may just close the window.
-3. **Item close / pause / handoff to a new conversation** (rule `ask-one-item-per-conversation`): final update, `status`, resume line; commit + push agent-knowledge (`ask-git-project` auto close-out).
+3. **Item close / pause / handoff to a new conversation** (rule `ask-one-item-per-conversation`): final update, `status`, resume line; commit + push ask-memory (`ask-git-project` auto close-out).
 4. **Start of a conversation:** if a previous log has uncommitted changes, commit + push it first.
 
 Keep track of this conversation's file path once created; reuse it (do not create a second file for the same conversation).
@@ -52,4 +52,4 @@ Order of sources: conversation log → item Resume note → work-log → docs. D
 
 ## Related
 
-Rule `ask-one-item-per-conversation` · skill `ask-backlog` · `agent-knowledge/AGENTS.md` (close-out) · skill `ask-git-project`.
+Rule `ask-one-item-per-conversation` · skill `ask-backlog` · `ask-memory/AGENTS.md` (close-out) · skill `ask-git-project`.

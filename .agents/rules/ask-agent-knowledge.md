@@ -1,5 +1,5 @@
-# agent-knowledge (thin adapter)
+# ask-memory (thin adapter)
 
-Follow `agent-knowledge/AGENTS.md` (and its operating contract link).
+Follow `ask-memory/AGENTS.md` (and its operating contract link).
 
-Do not duplicate those rules here. Adapter notes: `agent-knowledge/adapters/cursor.md`.
+Do not duplicate those rules here. Adapter notes: `ask-memory/adapters/cursor.md`.

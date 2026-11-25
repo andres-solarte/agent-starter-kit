@@ -1,11 +1,11 @@
 # agents/
 
-Kit-local note: product **role subagent SoT** is **agent-knowledge**:
+Kit-local note: product **role subagent SoT** is **ask-memory**:
 
 | Scope | Path |
 |-------|------|
-| Team | `<agent-knowledge>/agents/ask-*.md` |
-| User | `<agent-knowledge>/users/<email>/agents/ask-*.md` |
+| Team | `<ask-memory>/agents/ask-*.md` |
+| User | `<ask-memory>/users/<email>/agents/ask-*.md` |
 
 Host dirs `.cursor/agents/` / `.claude/agents/` are **mirrors** after materialize.
 
