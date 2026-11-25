@@ -1,3 +1,8 @@
+---
+description: Work one concrete point per turn and delegate it to role subagents
+alwaysApply: true
+---
+
 # One point at a time (agent load)
 
 In multi-repo or multi-module projects, **do not** tackle an entire block (DB + several APIs + several UIs + tests) in a single turn. Work **one concrete point**, close it or leave it verifiable, then move to the next.

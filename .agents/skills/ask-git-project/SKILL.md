@@ -4,7 +4,6 @@ description: >-
   Shared Git practices for this project (single repo or sibling multi-repo
   layout). Use whenever committing, branching, opening PRs, staging, or
   amending; every agent role must follow this skill for Git work.
-disable-model-invocation: true
 ---
 
 # Project Git (shared skill)

@@ -1,3 +1,8 @@
+---
+description: Memory protocol — follow ask-memory/AGENTS.md and its operating contract
+alwaysApply: true
+---
+
 # ask-memory (thin adapter)
 
 Follow `ask-memory/AGENTS.md` (and its operating contract link).

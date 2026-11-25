@@ -48,4 +48,4 @@ If the user chooses **user-only** while editing a **team** agent: do **not** sil
 
 ## Related
 
-Skill: `/ask-setup-agents`. Map: `knowledge/architecture/agents/roles.md`. Kit: `INSTALL.md` setup-agents contract. Plain copy: `.agents/rules/ask-agent-scope.md`.
+Skill: `/ask-setup-agents`. Map: `knowledge/architecture/agents/roles.md`. Kit: `INSTALL.md` setup-agents contract.

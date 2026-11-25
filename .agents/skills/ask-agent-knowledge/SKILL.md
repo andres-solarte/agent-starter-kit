@@ -2,8 +2,8 @@
 name: ask-agent-knowledge
 description: >-
   Thin pointer to ask-memory/AGENTS.md (work-log, deltas, consolidation).
-  Protocol SoT is that repo — not this skill file.
-disable-model-invocation: true
+  Protocol SoT is that repo — not this skill file. Use at every block
+  close-out and when recalling why something was done.
 ---
 
 # ask-memory (Cursor pack pointer)

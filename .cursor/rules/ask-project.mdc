@@ -1,3 +1,8 @@
+---
+description: Project identity, technical language, documentation pointers and kit paths
+alwaysApply: true
+---
+
 # {{PROJECT_NAME}}
 
 {{Short description of the product and its current scope (MVP, modules, etc.)}}. Code in {{sibling repos, if multi-repo}}.

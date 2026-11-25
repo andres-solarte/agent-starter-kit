@@ -1,3 +1,8 @@
+---
+description: Park out-of-scope requests instead of executing them; keep the current task in focus
+alwaysApply: true
+---
+
 # Session focus — out of scope
 
 If the user asks for or mentions something **outside the scope** of the current task, **do not execute it**. Park it and continue with what is in progress.

@@ -1,3 +1,8 @@
+---
+description: Use when writing, moving or deciding where documentation lives — editor rules vs ask-memory vs product docs
+alwaysApply: false
+---
+
 # Memory: editor rules vs ask-memory
 
 Container workspace: `{{workspace-name}}/`.
